@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Installs jsolee-kit plus the core skills it points to, globally for Claude Code.
-# Comment out any line you don't want. Already-installed skills are left as they are.
+# Comment out any line you don't want.
 set -euo pipefail
 
 add() { npx -y skills@latest add "$@" -g -a claude-code -y; }

@@ -1,0 +1,19 @@
+{
+  "name": "jsolee-kit",
+  "owner": { "name": "Joan Solé" },
+  "metadata": {
+    "description": "Joan Solé's Claude Code kit: the jsolee-kit skill and the comunitat mod."
+  },
+  "plugins": [
+    {
+      "name": "jsolee-kit",
+      "source": "./",
+      "description": "Skill: workflow, house rules against the AI-made look, inspiration galleries and a map of which skill to use when."
+    },
+    {
+      "name": "comunitat",
+      "source": "./plugins/comunitat",
+      "description": "Mod: a live panel of running subagents drawn as costumed Claude crabs (/comunitat) and a repo map with branches, PRs, CI and team (/projecte)."
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "comunitat",
+  "version": "0.3.1",
+  "description": "Els subagents en marxa, cadascun dibuixat segons el que fa (/comunitat), i el mapa del projecte: branques, equip, PR i els agents de cada branca (/projecte).",
+  "author": {
+    "name": "Joan Solé"
+  },
+  "types": "./types/index.d.ts"
+}
