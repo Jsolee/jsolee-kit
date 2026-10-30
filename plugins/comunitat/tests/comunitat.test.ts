@@ -73,26 +73,26 @@ test('segueix un subagent de l’inici al final i el dibuixa a cada superfície'
 
   await $.session.start({ cwd: '/w', surface: 'desktop', isInteractive: true } as any)
   await $.agent.spawn({ prompt: 'Revisa', description: 'Revisa la PR', subagentType: 'Explore' } as any)
-  expect(await draw('desktop')).toContain('pensant')
+  expect(await draw('desktop')).toContain('thinking')
 
   const call = $.tool.call({ tool: 'Read', file_path: '/w/apps/web/src/auth.ts', agentId: 'a1' } as any)
   await inside
   for (const surface of ['terminal', 'desktop', 'vscode'] as const) {
     const drawn = await draw(surface)
     expect(drawn).toContain('Revisa la PR')
-    expect(drawn).toContain('llegint')
+    expect(drawn).toContain('reading')
     expect(drawn).toContain('…/src/auth.ts')
-    expect(drawn).toContain('1 agent treballant')
+    expect(drawn).toContain('1 agent working')
   }
   release()
   await call
   await clock.advance(4_000)
-  expect(await draw('terminal')).toContain('pensant')
+  expect(await draw('terminal')).toContain('thinking')
 
   await $.turn.complete({ agentId: 'a1', reason: 'answer', answer: 'ok', durationMs: 4_000, isAborted: false, turnId: 't1' } as any)
   for (const surface of ['terminal', 'desktop', 'vscode'] as const) {
     const drawn = await draw(surface)
-    expect(drawn).toContain('Cap agent en marxa')
-    expect(drawn).toContain('Acabats · 1')
+    expect(drawn).toContain('No agents running')
+    expect(drawn).toContain('Finished · 1')
   }
 })

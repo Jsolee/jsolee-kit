@@ -1,81 +1,81 @@
 # comunitat
 
-Un mod de Claude Code que mostra en un panell els subagents que treballen, i el que fa cadascun en aquell moment.
+A Claude Code mod that shows the subagents at work in a panel, and what each one is doing right now.
 
-- **S'obre sol** quan arrenca el primer subagent, i es tanca 10 segons després que acabi l'últim. Si l'obres tu amb `/comunitat`, no es tanca sol.
-- **Cada agent és el cranc de Claude**, vestit segons l'eina que fa servir en aquell moment:
+- **Opens by itself** when the first subagent starts, and closes 10 seconds after the last one ends. If you open it yourself with `/comunitat`, it stays open.
+- **Each agent is the Claude crab**, dressed for the tool it is using at that moment:
 
-| Activitat | Eines | Disfressa |
+| Activity | Tools | Costume |
 |---|---|---|
-| llegint | `Read` | detectiu amb lupa |
-| cercant | `Grep`, `Glob` | pirata amb sabre |
-| escrivint | `Edit`, `Write` | llapis a la pinça |
-| terminal | `Bash` | enginyer amb clau anglesa |
-| a la web | `WebSearch`, `WebFetch`, navegador | astronauta |
-| delegant | `Agent`, `SendMessage` | pilot amb bandera |
-| una altra eina | MCP, skills… | xef |
-| pensant | cap eina | bombolla |
-| esperant | — | rellotge de sorra |
+| reading | `Read` | detective with a magnifying glass |
+| searching | `Grep`, `Glob` | pirate with a sabre |
+| writing | `Edit`, `Write` | pencil in the claw |
+| terminal | `Bash` | engineer with a wrench |
+| on the web | `WebSearch`, `WebFetch`, browser | astronaut |
+| delegating | `Agent`, `SendMessage` | pilot with a flag |
+| tool | MCP, skills… | chef |
+| thinking | no tool | thought bubble |
+| waiting | — | hourglass |
 
-- **Al costat de cada cranc** hi ha la tasca, el fitxer, l'ordre, la cerca o la URL que fa servir, el tipus d'agent, el model, el temps que porta i quantes eines ha fet servir.
-- Els agents acabats es queden en una llista plegable amb ✓, ✗ o ■, segons si han acabat bé, han fallat o s'han aturat. El botó «Neteja» els esborra.
-- A l'app d'escriptori es veuen els crancs animats. A la terminal i a VS Code, una versió en text.
-- Les animacions s'aturen si el sistema demana reduir el moviment.
+- **Next to each crab**: the task, the file, command, search or URL it is working on, the agent type, the model, how long it has been running and how many tools it has used.
+- Finished agents move to a collapsible list with ✓, ✗ or ■ for done, failed or stopped. **Clear** removes them.
+- The desktop app shows the animated crabs. The terminal and VS Code get a text version.
+- Animations stop when the system asks for reduced motion.
 
-## Mapa del projecte: `/projecte`
+## Project map: `/projecte`
 
-Per defecte llegeix el repositori de la carpeta on ha començat la sessió. Amb `/projecte <ruta>` (per exemple, `/projecte ~/codi/app`) canvia a un altre repositori.
+By default it reads the repository of the folder the session started in. `/projecte <path>` (for example `/projecte ~/code/app`) switches to another one.
 
-Un segon panell amb l'estat del repositori i dues vistes: **Ara** i **Història**.
+A second panel with the state of the repository, in two views: **Now** and **History**.
 
-**Ara** comença pel que cal fer, cada cosa amb el seu enllaç a GitHub:
+**Now** starts with what needs doing, each item linked to GitHub:
 
-| Avís | Quan surt |
+| Notice | When it shows |
 |---|---|
-| Per fusionar | PR aprovades amb la CI en verd |
-| La CI falla | PR amb la CI en vermell |
-| Canvis demanats | PR que l'autor ha de corregir |
-| Per revisar | PR obertes, amb el temps que porten esperant |
-| Release pendent | la branca base té commits que no han baixat |
-| Desfasada | branques a més de 20 commits per darrere de la base |
-| Per esborrar | branques que ja estan fusionades |
+| Ready to merge | approved PRs with green CI |
+| CI failing | PRs with red CI |
+| Changes requested | PRs the author has to fix |
+| Needs review | open PRs, with how long they have been waiting |
+| Release pending | the base branch has commits that haven't been promoted |
+| Behind | branches more than 20 commits behind the base |
+| To delete | branches that are already merged |
 
-**Història** posa tota la vida del projecte sobre la branca base. Cada branca és un arc, del color de qui l'ha feta, que va del seu primer commit fins al moment de la fusió. Les branques obertes arriben fins a «avui», amb els crancs dels agents que hi treballen. A sota hi ha les releases a `stable` i `prod`, els dies i la llegenda. Cada dia ocupa més o menys espai segons l'activitat que hi ha hagut, perquè els dies amb més feina no quedin apinyats. Sota el dibuix hi ha les últimes fusions, amb l'enllaç a cada PR.
+**History** lays the whole life of the project over the base branch. Each branch is an arc, in the color of whoever made it, from its first commit to its merge. Open branches reach "today", with the crabs of the agents working on them. Below are the releases to `stable` and `prod`, the days and the legend. Each day takes more or less room depending on how much happened, so busy days don't get crammed. Under the drawing are the latest merges, linked to their PRs.
 
-La vista **Ara** també mostra:
+**Now** also shows:
 
-- **Les branques permanents** (`prod`, `stable`, `snapshot`, o `main` i `develop`), amb els commits que encara han de passar d'una a l'altra.
-- **L'equip**: qui té feina pròpia en una branca aquestes dues setmanes, o ha fusionat feina a la branca base aquesta setmana. Cada persona té un color propi. Si algú té diverses identitats a git (`anna.puig` i `Anna Puig Serra`, o un login com `lsoler` i `Laia Soler`), compta com una sola persona.
-- **Cada branca**:
-  - la tasca de Taiga (`TG-83`) i qui hi treballa;
-  - els commits per davant i per darrere de la base;
-  - l'últim commit;
-  - la PR, amb el seu estat i la CI;
-  - si està aturada, o si ja està fusionada i es pot esborrar.
-- **Els agents a la seva branca**, amb el cranc vestit segons el que fan. A cada agent li toca branca per aquest ordre:
-  1. el worktree on treballa;
-  2. la tasca o la PR que diu la seva descripció (`TG-83`, `#35`);
-  3. si no, la branca on és la sessió.
+- **The long-lived branches** (`prod`, `stable`, `snapshot`, or `main` and `develop`), with the commits still waiting to move from one to the next.
+- **The team**: who has work of their own on a branch in the last two weeks, or merged work into the base this week. Each person gets their own color. Someone with several git identities (`anna.puig` and `Anna Puig Serra`, or a login like `lsoler` and `Laia Soler`) counts as one person.
+- **Each branch**:
+  - its ticket (`TG-83`) and who works on it;
+  - commits ahead of and behind the base;
+  - the last commit;
+  - the PR, with its state and CI;
+  - whether it is stale, or already merged and safe to delete.
+- **The agents on their branch**, each crab dressed for what it is doing. An agent is placed on a branch in this order:
+  1. the worktree it works in;
+  2. the ticket or PR its description mentions (`TG-83`, `#35`);
+  3. otherwise, the session's branch.
 
-Es torna a llegir cada 2 minuts mentre està obert, i cada 10 minuts també consulta GitHub (`git fetch`). El botó «Actualitza» ho fa a l'instant. Les PR necessiten tenir [`gh`](https://cli.github.com) instal·lat i amb la sessió iniciada; sense `gh`, el panell mostra igualment les branques.
+It reads the repository again every 2 minutes while open, and every 10 minutes it also asks GitHub (`git fetch`). **Refresh** does it right away. PRs need [`gh`](https://cli.github.com) installed and signed in; without `gh` the panel still shows the branches.
 
-## Instal·lació
+## Install
 
 ```
 /plugin install comunitat --marketplace Jsolee/jsolee-kit
 ```
 
-Respon `y` per afegir el marketplace i tria on l'instal·les (per a tu, o només per a aquest projecte).
+Answer `y` to add the marketplace and choose where to install it (for you, or only for this project).
 
-A l'app d'escriptori de Claude, fes clic al **+** del costat del quadre del missatge, i després a **Plugins** → **Add marketplace**, amb `Jsolee/jsolee-kit`, → **Add plugin**.
+In the Claude desktop app, click **+** next to the message box, then **Plugins** → **Add marketplace** with `Jsolee/jsolee-kit` → **Add plugin**.
 
-## Desenvolupament
+## Development
 
 ```
 claude plugin validate .
 claude plugin test .
 ```
 
-## Crèdits
+## Credits
 
-El cranc de píxels i les disfresses del detectiu, el pirata, l'enginyer, l'astronauta, el pilot i el xef són del mod [savvy-progress](https://github.com/JohnnyVizz/claude-kit) de johnnyvizz, amb llicència MIT. L'avís de llicència és a `hooks/crab.ts`.
+The pixel crab and the detective, pirate, engineer, astronaut, pilot and chef costumes come from johnnyvizz's [savvy-progress](https://github.com/JohnnyVizz/claude-kit) mod, MIT licensed. The license notice is in `hooks/crab.ts`.

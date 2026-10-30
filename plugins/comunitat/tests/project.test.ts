@@ -91,10 +91,10 @@ describe('llegir el repositori', () => {
   })
 
   test('paraules', () => {
-    expect(relTime(30_000)).toBe('ara')
-    expect(relTime(5 * 60_000)).toBe('fa 5 min')
-    expect(relTime(3 * H)).toBe('fa 3 h')
-    expect(relTime(50 * H)).toBe('fa 2 dies')
+    expect(relTime(30_000)).toBe('just now')
+    expect(relTime(5 * 60_000)).toBe('5 min ago')
+    expect(relTime(3 * H)).toBe('3 h ago')
+    expect(relTime(50 * H)).toBe('2 days ago')
     expect(initials('Anna Puig Serra')).toBe('AP')
     expect(initials('jordi-roca')).toBe('JR')
   })
@@ -117,7 +117,7 @@ test('el panell del projecte es dibuixa a cada superfície', async ($, on) => {
     const drawn = JSON.stringify(await ui.drawn())
     expect(drawn).toContain('acme/app')
     expect(drawn).toContain('TG-107')
-    expect(drawn).toContain('canvis demanats')
+    expect(drawn).toContain('changes requested')
     await ui.unmount()
   }
 })
@@ -143,7 +143,7 @@ describe('la història i el que hi ha pendent', () => {
     const drawn = historySvg(800, view, new Map(), NOW)
     expect(drawn).toContain('TG-65')
     expect(drawn).toContain('stroke-dasharray="4 3"')
-    expect(drawn).toContain('avui')
+    expect(drawn).toContain('today')
     expect(historyHeight(800, view, NOW)).toBeGreaterThan(90)
     // Every person a color of their own.
     expect(new Set(Object.values(view.colors)).size).toBe(Object.keys(view.colors).length)
@@ -152,10 +152,10 @@ describe('la història i el que hi ha pendent', () => {
   test('el pendent, amb enllaços a GitHub', async () => {
     const view = await collect(fakeRun(), NOW, false)
     const todo = attentionOf(view, NOW).join('\n')
-    expect(todo).toContain('**La CI falla** · [#32](https://github.com/acme/app/pull/32)')
-    expect(todo).toContain('**Canvis demanats** · [#34](https://github.com/acme/app/pull/34)')
-    expect(todo).toContain('**Release pendent** · snapshot té 130 commits')
-    expect(todo).toContain('**Per esborrar** · una branca ja fusionada: [TG-65 gitflow](https://github.com/acme/app/tree/feature/TG-65-gitflow)')
+    expect(todo).toContain('**CI failing** · [#32](https://github.com/acme/app/pull/32)')
+    expect(todo).toContain('**Changes requested** · [#34](https://github.com/acme/app/pull/34)')
+    expect(todo).toContain('**Release pending** · snapshot has 130 commits')
+    expect(todo).toContain('**To delete** · one merged branch: [TG-65 gitflow](https://github.com/acme/app/tree/feature/TG-65-gitflow)')
     expect(mergesMarkdown(view)).toContain('[#35](https://github.com/acme/app/pull/35) **TG-83 sessio** · Anna · 2 commits')
   })
 })

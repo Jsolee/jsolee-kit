@@ -51,7 +51,7 @@ const project = atom({ plugin: 'comunitat', key: 'project' } as const, null as P
 const sessionCwd = atom({ plugin: 'comunitat', key: 'cwd' } as const, '')
 
 const PROJECT_PANE = 'comunitat-projecte'
-const PROJECT_TITLE = 'Projecte'
+const PROJECT_TITLE = 'Project'
 const PROJECT_EVERY_MS = 120_000
 
 // A failure here must never get in the way of a tool call or a spawn.
@@ -143,13 +143,13 @@ export const register: Register = on => {
     const started = await next(e)
     await $.command.register({
       name: 'comunitat',
-      description: 'Mostra o amaga el panell dels subagents i del que fa cadascun',
+      description: 'Show or hide the panel of running subagents and what each one is doing',
     })
     await update($, sessionCwd, () => e.cwd ?? '')
     await $.command.register({
       name: 'projecte',
-      description: 'Mostra o amaga el mapa del projecte: branques, equip, PR i els agents a cada branca',
-      argumentHint: '[ruta del repositori]',
+      description: 'Show or hide the project map: branches, team, PRs and the agents on each branch',
+      argumentHint: '[repository path]',
     })
     // The map reads git again every two minutes while it is open, and asks the remote every ten.
     let rounds = 0
@@ -175,38 +175,38 @@ export const register: Register = on => {
   on('command.run', { command: 'comunitat' }, async $ => {
     if (await isOpen($)) {
       await $.ui.close({ id: PANE })
-      return { text: 'Panell dels agents tancat.' }
+      return { text: 'Agents panel closed.' }
     }
     const at = await $.clock.now()
     await update($, now, () => at)
     await update($, panel, p => ({ ...p, autoOpened: false }))
     await $.ui.open({ id: PANE, title: TITLE })
-    return { text: 'Panell dels agents obert.' }
+    return { text: 'Agents panel opened.' }
   })
 
   on('command.run', { command: 'projecte' }, async ($, e) => {
-    // `/projecte <ruta>` canvia de repositori: el de la sessió no sempre és el del projecte.
+    // `/projecte <path>` switches repository: the session's folder is not always the project's.
     const arg = e.args.trim()
     if (arg) {
       const path = expandHome(arg, (await $.env.get('HOME')) ?? '')
       const top = await $.process.run(['git', '-C', path, 'rev-parse', '--show-toplevel'], { timeoutMs: 10_000 }).catch(() => null)
-      if (!top || top.exitCode !== 0) return { text: `${arg} no és dins de cap repositori git.` }
+      if (!top || top.exitCode !== 0) return { text: `${arg} is not inside a git repository.` }
       const root = top.stdout.trim()
       await update($, sessionCwd, () => root)
       await update($, project, () => null)
       if (!(await isOpen($, PROJECT_PANE))) await $.ui.open({ id: PROJECT_PANE, title: PROJECT_TITLE })
       void refreshProject($, true)
-      return { text: `Mapa del projecte: ${root}` }
+      return { text: `Project map: ${root}` }
     }
     if (await isOpen($, PROJECT_PANE)) {
       await $.ui.close({ id: PROJECT_PANE })
-      return { text: 'Mapa del projecte tancat.' }
+      return { text: 'Project map closed.' }
     }
     const at = await $.clock.now()
     await update($, now, () => at)
     await $.ui.open({ id: PROJECT_PANE, title: PROJECT_TITLE })
     void refreshProject($, true)
-    return { text: 'Mapa del projecte obert.' }
+    return { text: 'Project map opened.' }
   })
 
   on('agent.spawn', async ($, e, next) => {
@@ -314,12 +314,12 @@ export const register: Register = on => {
     const header = (
       <Box flexDirection="row" justifyContent="space-between">
         <Text bold>
-          {running.length === 0 ? 'Cap agent en marxa' : running.length === 1 ? '1 agent treballant' : `${running.length} agents treballant`}
+          {running.length === 0 ? 'No agents running' : running.length === 1 ? '1 agent working' : `${running.length} agents working`}
         </Text>
         {finished.length > 0 ? (
           <Button
             key="clear"
-            label="Neteja"
+            label="Clear"
             plain
             onPress={() => update($, agents, l => l.filter(isRunning))}
           />
@@ -330,13 +330,13 @@ export const register: Register = on => {
       finished.length > 0 ? (
         <Button
           key="done"
-          label={`${p.showDone ? '▾' : '▸'} Acabats · ${finished.length}`}
+          label={`${p.showDone ? '▾' : '▸'} Finished · ${finished.length}`}
           plain
           onPress={() => update($, panel, x => ({ ...x, showDone: !x.showDone }))}
         />
       ) : null
     const empty =
-      list.length === 0 ? <Text dimColor>El panell s'obre sol quan arrenca un subagent.</Text> : null
+      list.length === 0 ? <Text dimColor>The panel opens by itself when a subagent starts.</Text> : null
 
     // The crabs on the desktop app; elsewhere (the terminal, VS Code, whose pane drops the SVG) text rows.
     if (e.surface === 'desktop' && 'Svg' in ui) {
@@ -417,12 +417,12 @@ export const register: Register = on => {
     const list = await read($, agents)
     const at = Math.max(await read($, now), view?.fetchedAt ?? 0)
     const refresh = (
-      <Button key="refresh" label="Actualitza" plain onPress={() => refreshProject($, true)} />
+      <Button key="refresh" label="Refresh" plain onPress={() => refreshProject($, true)} />
     )
     if (!view) {
       return (
         <Box flexDirection="column" gap={1}>
-          <Text dimColor>Llegint el repositori…</Text>
+          <Text dimColor>Reading the repository…</Text>
           {refresh}
         </Box>
       )
@@ -432,8 +432,8 @@ export const register: Register = on => {
         <Box flexDirection="column" gap={1}>
           <Text>
             {view.error === 'no-git'
-              ? 'Aquesta sessió no és dins d’un repositori git: obre Claude Code a la carpeta del projecte.'
-              : 'El repositori no té cap branca a origin.'}
+              ? 'This session is not inside a git repository: open Claude Code in the project folder, or run /projecte <path>.'
+              : 'The repository has no branches on origin.'}
           </Text>
           {refresh}
         </Box>
@@ -455,8 +455,8 @@ export const register: Register = on => {
     const footer = (
       <Box flexDirection="row" justifyContent="space-between">
         <Text dimColor>
-          {`${branches.length} branques · ${prs} PR obertes · ${running.length} agents · llegit ${relTime(at - view.fetchedAt)}`}
-          {view.hasGh ? '' : ' · sense gh, no hi ha PR'}
+          {`${branches.length} branches · ${prs} open PRs · ${running.length} agents · read ${relTime(at - view.fetchedAt)}`}
+          {view.hasGh ? '' : ' · no gh, so no PRs'}
         </Text>
         {refresh}
       </Box>
@@ -472,20 +472,20 @@ export const register: Register = on => {
     )
     const tabs = (
       <Box flexDirection="row" gap={2}>
-        {tab('now', 'Ara')}
-        {tab('history', 'Història')}
+        {tab('now', 'Now')}
+        {tab('history', 'History')}
       </Box>
     )
     const todo = attentionOf(view, at)
     const attention =
       todo.length > 0 ? (
-        <Markdown key="todo" text={`**Pendent**\n\n${todo.join('\n')}`} />
+        <Markdown key="todo" text={`**To do**\n\n${todo.join('\n')}`} />
       ) : (
-        <Text dimColor>Res pendent: tot està al dia.</Text>
+        <Text dimColor>Nothing pending: everything is up to date.</Text>
       )
     const recent =
       view.history.merges.length > 0 ? (
-        <Markdown key="merges" text={`**Últimes fusions**\n\n${mergesMarkdown(view)}`} />
+        <Markdown key="merges" text={`**Latest merges**\n\n${mergesMarkdown(view)}`} />
       ) : null
 
     if (e.surface === 'desktop' && 'Svg' in ui) {
@@ -498,7 +498,7 @@ export const register: Register = on => {
             <Svg
               key="history"
               source={historySvg(W, view, onBranch, at)}
-              alt={`${view.history.merges.length} branques fusionades a ${view.base}`}
+              alt={`${view.history.merges.length} branches merged into ${view.base}`}
               width={W}
               height={historyHeight(W, view, at)}
             />
@@ -514,12 +514,12 @@ export const register: Register = on => {
           <Svg
             key="lines"
             source={linesSvg(W, view, at)}
-            alt={view.lines.map(l => `${l.name}: ${l.ahead} commits per baixar`).join(', ')}
+            alt={view.lines.map(l => `${l.name}: ${l.ahead} commits to promote`).join(', ')}
             width={W}
             height={LINES_H(view.lines.length)}
           />
           {onLines.length > 0 ? (
-            <Text dimColor>{`A ${view.lines.map(l => l.name).join('/')}: ${onLines.map(agentLine).join(' · ')}`}</Text>
+            <Text dimColor>{`On ${view.lines.map(l => l.name).join('/')}: ${onLines.map(agentLine).join(' · ')}`}</Text>
           ) : null}
           {view.members.length > 0 ? (
             <Svg
@@ -553,7 +553,7 @@ export const register: Register = on => {
       return (
         <Box flexDirection="column" gap={1}>
           {tabs}
-          <Text bold>{`${view.base}: ${view.history.merges.length} branques fusionades`}</Text>
+          <Text bold>{`${view.base}: ${view.history.merges.length} branches merged`}</Text>
           {recent}
           {footer}
         </Box>
@@ -567,12 +567,12 @@ export const register: Register = on => {
         {[...view.lines].reverse().map(l => (
           <Text key={l.name} wrap="truncate-end">
             <Text color="blue">━━ {l.name}</Text>
-            <Text dimColor>{` ${relTime(at - l.lastAt)}${l.ahead ? ` · ${l.ahead} commits per baixar` : ''}`}</Text>
+            <Text dimColor>{` ${relTime(at - l.lastAt)}${l.ahead ? ` · ${l.ahead} commits to promote` : ''}`}</Text>
           </Text>
         ))}
         {view.members.length > 0 ? (
           <Text wrap="truncate-end" dimColor>
-            {view.members.map(m => `${firstName(m.name)} (${m.branches.length > 0 ? m.branches.length : `${m.landed} a la base`})`).join(' · ')}
+            {view.members.map(m => `${firstName(m.name)} (${m.branches.length > 0 ? m.branches.length : `${m.landed} on base`})`).join(' · ')}
           </Text>
         ) : null}
         {branches.map(b => (
