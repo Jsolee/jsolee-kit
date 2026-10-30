@@ -339,7 +339,7 @@ It refreshes every two minutes while open, and fetches from GitHub every ten. An
 ```
 
 > [!NOTE]
-> The mod's labels are in Catalan («Neteja», «Actualitza»). PR data needs [`gh`](https://cli.github.com) signed in; without it the panel still shows branches.
+> PR data needs [`gh`](https://cli.github.com) signed in; without it the panel still shows branches.
 
 ### Mods I run
 
@@ -445,7 +445,7 @@ The skill is under 70 lines and only loads for UI work. The catalogs in `referen
 
 ## Contributing
 
-PRs welcome, especially:
+PRs welcome. For a quick idea, [open a suggestion](https://github.com/Jsolee/jsolee-kit/issues/new?template=suggest-reference.yml) instead. Especially wanted:
 
 - **A reference site**, with one line on what to take from it.
 - **A house rule**, with the tell and the fix, ideally as a `diff`.
