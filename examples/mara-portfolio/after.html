@@ -1,1286 +1,683 @@
 <!doctype html>
+<!--
+  Direction: "The name software can't spell."
+  Kept because of a true thing only Mara has: the ć in her surname, which software breaks,
+  and which is the whole argument for hiring a designer who starts with the cases a brief leaves out.
+  Thrown away: serif name on paper with a project list (the default), and a Figma-canvas portfolio
+  (any product designer could wear it).
+
+  Register: brand page. Color: #ff00ff with black, the color game engines paint when a texture is missing.
+  Type: Sofia Sans and Sofia Sans Extra Condensed, drawn by Lettersoup in Sofia, with a proper ć and ћ.
+  Move: her name fills the page and breaks on command. Working thing: the spelling control and the checklist.
+
+  References:
+  - Awwwards, "Ascension": condensed letters as the image, filling the frame. Used for the hero name.
+  - Awwwards, pixel icons tile: stickers stuck on the corners of a loud field. Used for the brief tags.
+  - Awwwards, Brandon Yasin: panels of unequal width. Used for the work layout.
+  - One Page Love, mappy: one saturated field with nothing competing. Used for hero and contact.
+  - One Page Love, Felix Haas: first-person prose as the design. Used for the about section.
+
+  Placeholder copy for Mara to replace: project names and stories, availability, the address
+  (mara@ilic.example uses a reserved domain on purpose). All figures inside the mockups are sample UI data.
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mara Ilić, product designer</title>
-<meta name="description" content="Mara Ilić is an independent product designer in Belgrade who designs software for people who use it all day: dispatch boards, clinic calendars, inspection apps and design systems.">
-<meta name="theme-color" content="#f5f7f2">
+<title>Mara Ilić, independent product designer</title>
+<meta name="description" content="Mara Ilić is an independent product designer who starts with the cases the brief left out.">
+<meta name="theme-color" content="#ff00ff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f0f'/%3E%3Cpath d='M12 26 18 6h7l-8 20z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@400;700&family=Sofia+Sans:wght@400;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --paper: oklch(0.972 0.007 125);
-  --paper-sunk: oklch(0.948 0.009 125);
-  --ink: oklch(0.235 0.018 165);
-  --ink-2: oklch(0.44 0.016 165);
-  --ink-3: oklch(0.52 0.014 165);
-  --hair: oklch(0.235 0.018 165 / 0.09);
-  --hair-2: oklch(0.235 0.018 165 / 0.16);
-
-  --mat: oklch(0.45 0.082 166);
-  --mat-line: oklch(0.97 0.03 150 / 0.09);
-  --mat-line-2: oklch(0.97 0.03 150 / 0.17);
-  --on-mat: oklch(0.975 0.01 140);
-  --on-mat-2: oklch(0.89 0.035 155);
-  --on-mat-hair: oklch(0.975 0.01 140 / 0.18);
-
-  --accent: var(--mat);
-  --accent-press: oklch(0.4 0.08 166);
-
-  --ui-bg: oklch(0.993 0.002 120);
-  --ui-sunk: oklch(0.966 0.004 120);
-  --ui-line: oklch(0.25 0.012 165 / 0.09);
-  --ui-ink: oklch(0.25 0.012 165);
-  --ui-ink-2: oklch(0.48 0.01 165);
-  --ui-ink-3: oklch(0.62 0.008 165);
-  --tomato: oklch(0.63 0.17 33);
-  --blue: oklch(0.54 0.11 250);
-  --ochre: oklch(0.74 0.13 78);
-  --red: oklch(0.57 0.18 27);
-
-  --ease-smooth: cubic-bezier(0.25, 0.4, 0.25, 1);
-  --ease-expo: cubic-bezier(0.22, 1, 0.36, 1);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.03);
-  --shadow-lift: 0 8px 40px rgba(0, 0, 0, 0.08);
-
-  --gutter: clamp(16px, 5vw, 72px);
-  --mat-inset: clamp(0px, 1.7vw, 24px);
-  --wrap: 1296px;
+:root{
+  --miss:#ff00ff;
+  --pad:clamp(16px,2.25vw,32px);
+  --display:'Sofia Sans Extra Condensed',Impact,'Arial Narrow',sans-serif;
+  --text:'Sofia Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --out:cubic-bezier(.22,1,.36,1);
+  --name-k:.4375;
+  --mail-k:.186;
+  color-scheme:light;
 }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#000;font:400 20px/1.4 var(--text)}
+h1,h2,h3,p,figure,fieldset,dl,dd{margin:0;padding:0;border:0}
+h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:.92;text-wrap:balance}
+p{text-wrap:pretty}
+a{color:inherit;text-underline-offset:.16em;text-decoration-thickness:.08em}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.hero :focus-visible,.skip:focus-visible{outline-color:#000}
+.list :focus-visible{outline-color:#fff}
+::selection{background:#000;color:var(--miss)}
+section[id],article[id],footer[id]{scroll-margin-top:24px}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--pad);top:8px;z-index:9;padding:10px 14px;background:#000;color:var(--miss);transform:translateY(-200%);transition:transform .2s var(--out)}
+.skip:focus{transform:none}
+.lift{display:inline-block;transition:transform .25s var(--out)}
+.lift:active{transform:scale(.97)}
+@media (hover:hover){.lift:hover{transform:translateY(-2px)}}
+.btn{padding:12px 20px;min-height:48px;font-weight:700;text-decoration:none;touch-action:manipulation;background:#000;color:var(--miss)}
 
-*, *::before, *::after { box-sizing: border-box; }
-html {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-size-adjust: 100%;
-}
-body {
-  margin: 0;
-  background: var(--paper);
-  color: var(--ink);
-  font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-  font-size: 17px;
-  line-height: 1.55;
-  font-weight: 400;
-  overflow-x: clip;
-}
-h1, h2, h3, p, dl, dd, ol, ul { margin: 0; }
-ol, ul { padding: 0; list-style: none; }
-h1, h2, h3 { font-weight: 500; text-wrap: balance; }
-p { text-wrap: pretty; }
-a { color: inherit; }
-kbd { font: inherit; }
-::selection { background: oklch(0.85 0.07 166); color: var(--ink); }
-
-.wrap { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
-.mat .wrap { width: min(100% - 2 * (var(--gutter) - var(--mat-inset)), var(--wrap)); }
-[hidden] { display: none !important; }
-.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
-.tnum { font-variant-numeric: tabular-nums; }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
-
-[id] { scroll-margin-top: 24px; }
-
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-.mat :focus-visible { outline-color: var(--on-mat); }
-
-.skip {
-  position: absolute; left: 16px; top: -100px; z-index: 10;
-  background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 10px;
-  text-decoration: none; font-weight: 500;
-}
-.skip:focus-visible { top: 16px; }
-
-/* Links and buttons */
-.link {
-  color: var(--ink);
-  text-decoration: underline;
-  text-decoration-color: var(--hair-2);
-  text-underline-offset: 0.22em;
-  text-decoration-thickness: 1px;
-  transition: text-decoration-color 200ms ease;
-}
-@media (hover: hover) and (pointer: fine) {
-  .link:hover { text-decoration-color: currentColor; }
-}
-
-.btn {
-  display: inline-flex; align-items: center; gap: 10px;
-  height: 46px; padding: 0 20px;
-  border-radius: 10px; border: 0;
-  font: inherit; font-size: 16px; font-weight: 500; line-height: 1;
-  text-decoration: none; cursor: pointer;
-  transition-property: transform, background-color, border-color;
-  transition-duration: 200ms;
-  transition-timing-function: var(--ease-expo);
-  touch-action: manipulation;
-}
-.btn svg { flex: none; }
-.btn-primary { background: var(--accent); color: var(--on-mat); }
-.btn-mat {
-  height: 40px; padding: 0 16px; font-size: 15px;
-  background: transparent; color: var(--on-mat);
-  border: 1px solid var(--on-mat-hair);
-}
-@media (hover: hover) and (pointer: fine) {
-  .btn:hover { transform: translateY(-2px); }
-  .btn-mat:hover { border-color: oklch(0.975 0.01 140 / 0.4); }
-}
-.btn:active { transform: translateY(0) scale(0.97); transition-duration: 120ms; }
-.btn-primary:active { background: var(--accent-press); }
-
-/* Header */
-.site-head { padding-top: 28px; }
-.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; }
-.wordmark { font-weight: 500; font-size: 18px; letter-spacing: -0.015em; text-decoration: none; }
-.site-nav ul { display: flex; gap: 4px; }
-.site-nav a {
-  display: inline-flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px;
-  color: var(--ink-2); text-decoration: none; font-size: 16px;
-  transition: color 200ms ease, background-color 200ms ease;
-}
-@media (hover: hover) and (pointer: fine) {
-  .site-nav a:hover { color: var(--ink); background: var(--paper-sunk); }
-}
+.cy{-webkit-locale:'ru';font-language-override:'RUS'}
 
 /* Hero */
-.hero { padding: clamp(56px, 7vw, 104px) 0 clamp(40px, 4.4vw, 64px); }
-.hero .grid { align-items: end; row-gap: 32px; }
-.hero h1 {
-  grid-column: 1 / 9;
-  font-size: clamp(44px, 5.5vw, 79px);
-  line-height: 1.02;
-  letter-spacing: -0.038em;
-}
-.hero-aside { grid-column: 9 / 13; padding-bottom: 6px; }
-.status { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink-2); margin-bottom: 14px; }
-.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px oklch(0.45 0.082 166 / 0.14); }
-.hero-aside p.lede { font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 42ch; }
-.hero-aside p.lede strong { font-weight: 500; color: var(--ink); }
-.hero-cta { display: flex; align-items: center; gap: 22px; margin-top: 26px; flex-wrap: wrap; }
-
-/* Cutting mat */
-.mat {
-  position: relative;
-  margin-inline: var(--mat-inset);
-  border-radius: 18px;
-  background-color: var(--mat);
-  background-image:
-    linear-gradient(to right, var(--mat-line-2) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--mat-line-2) 1px, transparent 1px),
-    linear-gradient(to right, var(--mat-line) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--mat-line) 1px, transparent 1px);
-  background-size: 240px 240px, 240px 240px, 48px 48px, 48px 48px;
-  background-position: calc(50% - 528px) 47px, calc(50% - 528px) 47px, 50% 47px, 50% 47px;
-  color: var(--on-mat);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
-  overflow: hidden;
-}
-.ruler {
-  position: relative; height: 47px;
-  border-bottom: 1px solid var(--mat-line-2);
-  background-image:
-    linear-gradient(to right, oklch(0.97 0.03 150 / 0.55) 1px, transparent 1px),
-    linear-gradient(to right, oklch(0.97 0.03 150 / 0.4) 1px, transparent 1px),
-    linear-gradient(to right, oklch(0.97 0.03 150 / 0.28) 1px, transparent 1px);
-  background-size: 48px 14px, 24px 9px, 6px 5px;
-  background-position: 50% 100%, 50% 100%, 50% 100%;
-  background-repeat: repeat-x;
-}
-.ruler .wrap { position: relative; height: 100%; }
-.ruler span {
-  position: absolute; bottom: 15px; left: calc(var(--i) * 48px);
-  transform: translateX(-50%);
-  font-size: 11px; line-height: 1; color: oklch(0.97 0.03 150 / 0.62);
-  font-variant-numeric: tabular-nums;
-}
-.angles { position: absolute; pointer-events: none; color: oklch(0.97 0.03 150 / 0.22); }
-.angles text { fill: oklch(0.97 0.03 150 / 0.5); }
-.angles.br { right: 0; bottom: 0; -webkit-mask-image: radial-gradient(circle 220px at 100% 100%, #000 45%, transparent); mask-image: radial-gradient(circle 220px at 100% 100%, #000 45%, transparent); }
-.angles.tr { right: 0; top: 0; -webkit-mask-image: radial-gradient(circle 320px at 100% 0, #000 45%, transparent); mask-image: radial-gradient(circle 320px at 100% 0, #000 45%, transparent); }
+.hero{background:var(--miss);padding:0 var(--pad) 22px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:10px 0}
+.top ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.top a{display:inline-block;padding:10px 0;text-decoration:none}
+.name{margin:8px 0 6px;height:.72em;display:flex;align-items:flex-end;font:700 calc((100vw - 2*var(--pad))*var(--name-k))/.72 var(--display);letter-spacing:-.02em;white-space:nowrap}
+#name{display:inline-block;margin-left:-.034em}
+#name .roll{display:inline-block;animation:roll .55s var(--out) both}
+@keyframes roll{from{opacity:0;transform:translateY(.16em)}to{opacity:1;transform:none}}
+.breaker-top{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:10px}
+.try{display:flex;align-items:center;gap:14px}
+.try label{font-weight:700}
+.try input{width:300px;min-height:44px;padding:8px 12px;border:0;border-radius:0;background:#fff;color:#000;font:inherit;touch-action:manipulation}
+.try input::placeholder{color:#55555c}
+.try input:focus-visible{outline-color:#000}
+.note{font-size:18px}
+.spell{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
+.spell button{appearance:none;border:0;border-radius:0;background:rgba(0,0,0,.09);color:#000;padding:10px 12px 12px;min-height:76px;text-align:left;font:inherit;cursor:pointer;touch-action:manipulation;transition:transform .25s var(--out)}
+.spell button:active{transform:scale(.97)}
+@media (hover:hover){.spell button:hover{transform:translateY(-2px)}}
+.spell button[aria-pressed=true]{background:#000;color:var(--miss)}
+.spell small{display:block;font-size:15px;line-height:1.2;margin-bottom:5px}
+.spell span{display:block;font:700 30px/1 var(--display);overflow-wrap:anywhere}
+.pitch{display:grid;grid-template-columns:7fr 5fr;gap:48px;padding-top:24px;align-items:start}
+.pitch h2{font-size:clamp(40px,4.1vw,60px)}
+.pitch p{max-width:34em;font-size:19px;line-height:1.34}
+.pitch-go{display:flex;align-items:center;gap:24px;margin-top:12px;flex-wrap:wrap}
+.pitch-go a:not(.btn){padding:10px 0}
+.check{height:64px;background:repeating-conic-gradient(#000 0 25%,var(--miss) 0 50%) 0 0/64px 64px}
 
 /* Work */
-.work-intro { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 40px 0 36px; }
-.work-intro h2 { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
-.work-intro p { font-size: 15px; color: var(--on-mat-2); }
+.work{padding:112px var(--pad) 128px}
+.work>h2{font-size:clamp(44px,6.1vw,88px);margin-bottom:104px}
+mark{display:inline-block;background:var(--miss);color:#000;line-height:.92;padding:.05em .12em .09em;margin-top:.04em}
+.project{margin-bottom:120px}
+.p-head{display:grid;grid-template-columns:1fr minmax(0,460px);align-items:end;gap:32px;margin-bottom:26px}
+.p-head h3,.side h3{font-size:clamp(72px,11.2vw,160px);line-height:.86;padding-bottom:.1em}
+.p-case{max-width:38em;margin-top:24px}
+.panel{padding:52px 40px 40px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+figure{position:relative;min-width:0}
+.tag{position:absolute;z-index:2;top:-24px;left:-12px;padding:5px 10px;background:#fff;color:#000;font:700 17px/1.2 var(--text)}
+.tag.miss{background:var(--miss);transform:rotate(-1.5deg)}
+.ui{font:400 14px/1.3 var(--text);font-variant-numeric:tabular-nums}
+.ui b{font-weight:700}
+.mark{outline:2px solid var(--miss);outline-offset:3px}
 
-.proj-feature { align-items: end; }
-.proj-feature .shot { grid-column: 1 / 10; }
-.proj-feature .proj-cap { grid-column: 10 / 13; padding-bottom: 4px; }
+/* Smena */
+.dark{background:#0a0d11}
+.smena{display:grid;grid-template-columns:238px minmax(0,1fr);height:456px;background:#171c23;color:#e7ebef;border-radius:8px;overflow:hidden}
+.drivers{padding:16px 0 14px;display:flex;flex-direction:column;gap:2px}
+.drivers footer{margin-top:auto;padding:10px 16px 0;font-size:13px;color:#8e99a5}
+.drivers footer b{color:#e7ebef;font-weight:400}
+.drivers header{display:flex;justify-content:space-between;padding:0 16px 10px;font-size:15px}
+.drivers header span{color:#8e99a5}
+.drv{display:grid;grid-template-columns:10px 1fr;gap:10px;padding:9px 16px}
+.drv i{width:10px;height:10px;margin-top:4px;border-radius:50%;background:#4cdd9c}
+.drv small{display:block;font-size:13px;color:#8e99a5}
+.drv.lost{margin:6px 8px;padding:10px 8px;background:#242b34}
+.drv.lost i{background:none;border:2px dashed #ffb84d}
+.drv.lost small{color:#ffb84d}
+.drv.lost .more{color:#c6ced6;margin-top:6px;font-size:13px}
+.drv.lost .acts{display:flex;gap:6px;margin-top:9px}
+.drv.lost .acts span{padding:5px 9px;border-radius:5px;background:#e7ebef;color:#171c23;font-size:13px;font-weight:700;white-space:nowrap}
+.drv.lost .acts span+span{background:none;color:#e7ebef;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.map{display:block;width:100%;height:100%;background:#10151a}
 
-.proj-row { margin-top: 128px; align-items: start; }
-.stack { display: flex; flex-direction: column; gap: 128px; min-width: 0; }
-.stack-l { grid-column: 1 / 8; }
-.stack-r { grid-column: 8 / 13; padding-top: 80px; }
+/* Recept and Plata */
+.twin{display:grid;grid-template-columns:5fr 7fr;gap:32px;margin-bottom:120px}
+.twin .p-head{grid-template-columns:1fr;align-items:start;gap:0;align-content:start}
+.twin .project{margin:0;display:flex;flex-direction:column;min-width:0}
+.twin .panel{flex:1}
+.green{background:#0d4f3e;padding-left:28px;padding-right:28px}
+.phones{gap:14px}
+.phone{height:100%;padding:18px 16px;background:#fff;border-radius:22px;color:#10231d;box-shadow:0 8px 40px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.phone .top-line{display:flex;justify-content:space-between;font-size:13px;color:#5a6d66;margin-bottom:20px}
+.phone h4{margin:0 0 6px;font:700 25px/1.05 var(--text);letter-spacing:-.02em}
+.phone p{color:#46574f;margin-bottom:14px}
+.meds{display:grid;gap:0;margin-bottom:14px}
+.meds div{display:flex;justify-content:space-between;gap:8px;padding:9px 0;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08)}
+.meds em{font-style:normal;color:#0c7a5e;white-space:nowrap}
+.meds em.out{color:#b3430f}
+.code{margin:2px 0 14px}
+.code span{display:block;color:#46574f}
+.code b{display:block;font:700 44px/1.05 var(--text);letter-spacing:.04em}
+.cta{margin-top:auto;padding:12px;border-radius:10px;background:#0d4f3e;color:#fff;text-align:center;font-weight:700}
+.choices{display:grid;gap:7px;margin:0 -4px 12px;padding:4px}
+.choices b{display:block;margin-bottom:1px}
+.choices div{display:grid;grid-template-columns:14px 1fr;gap:8px;line-height:1.22}
+.choices i{width:14px;height:14px;margin-top:1px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #7a8a84}
+.choices i.on{box-shadow:inset 0 0 0 4px #0d4f3e}
+.ice{background:#d9e3ec;display:flex;flex-direction:column;gap:48px}
+.ice figure{flex:1}
+.pay{height:100%;padding:8px 18px 10px;background:#fff;border-radius:8px;color:#17212b;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.pay .r{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,2.2fr) 66px 66px 72px;gap:12px;padding:13px 0;align-items:start;box-shadow:inset 0 -1px 0 rgba(0,0,0,.07)}
+.pay .r:last-child{box-shadow:none}
+.pay .h{color:#62707e;font-size:13px;padding:8px 0}
+.pay .n{text-align:right}
+.pay em{font-style:normal;color:#147a4b}
+.pay em.ask{color:#b3430f;font-weight:700}
+.pay .lead{color:#62707e}
 
-.proj-cap .num { display: block; font-size: 14px; color: var(--on-mat-2); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
-.proj-cap h3 { font-size: 30px; line-height: 1.1; letter-spacing: -0.028em; }
-.proj-cap .what { font-size: 17px; line-height: 1.4; margin-top: 6px; color: var(--on-mat); }
-.proj-cap .meta { font-size: 14px; color: var(--on-mat-2); margin-top: 10px; }
-.proj-cap .desc { font-size: 15px; line-height: 1.6; color: var(--on-mat-2); margin-top: 18px; max-width: 48ch; }
-.proj-cap .demo-note { font-size: 14px; line-height: 1.5; color: var(--on-mat-2); margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--on-mat-hair); }
-.proj-cap .btn-mat { margin-top: 14px; }
+/* Knjiga */
+.solo{display:grid;grid-template-columns:4fr 8fr;gap:32px;margin:0}
+.side{display:flex;flex-direction:column}
 
-.cap-below { margin-top: 26px; display: grid; grid-template-columns: auto 1fr; column-gap: 18px; }
-.cap-below .num { margin: 7px 0 0; }
-.cap-below h3 { font-size: 24px; }
-.cap-below .desc { margin-top: 12px; }
+.side .p-case{margin-top:auto;padding-top:24px}
+.tang{background:#ff6a13}
+.knj{height:100%;min-height:400px;padding:16px 18px 18px;background:#fff;border-radius:8px;color:#1a1d33;box-shadow:0 8px 40px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.knj nav{display:flex;gap:14px;color:#6a6d82;margin-bottom:18px}
+.knj nav b{color:#1a1d33;margin-right:auto}
+.knj h4{margin:0;font:700 26px/1.1 var(--text);letter-spacing:-.02em}
+.knj .sub{color:#6a6d82}
+.bars{display:flex;align-items:flex-end;gap:5px;height:104px;margin:14px 0}
+.bars i{flex:1;background:#1a1d33;border-radius:2px 2px 0 0}
+.bars.ghost i{height:18px;background:none;box-shadow:inset 0 0 0 1px rgba(26,29,51,.22)}
+.inv div{display:flex;justify-content:space-between;padding:7px 0;box-shadow:inset 0 -1px 0 rgba(0,0,0,.07)}
+.inv div:last-child{box-shadow:none}
+.first{margin-top:auto}
+.first p{margin-bottom:10px;color:#3e415a}
+.first .go{display:grid;gap:7px}
+.first .go span{padding:10px 12px;border-radius:7px;background:#1a1d33;color:#fff;font-weight:700;text-align:center}
+.first .go span+span{background:none;color:#1a1d33;box-shadow:inset 0 0 0 1px rgba(26,29,51,.25)}
 
-.others h3 { font-size: 24px; line-height: 1.1; letter-spacing: -0.024em; }
-.others .sub { font-size: 15px; color: var(--on-mat-2); margin-top: 8px; }
-.others ol { margin-top: 28px; border-top: 1px solid var(--on-mat-hair); }
-.others li {
-  display: grid; grid-template-columns: 56px 76px 1fr; gap: 14px;
-  padding: 16px 0 17px; border-bottom: 1px solid var(--on-mat-hair);
-  font-size: 15px; line-height: 1.5;
-}
-.others li .y { color: var(--on-mat-2); font-variant-numeric: tabular-nums; }
-.others li .n { font-weight: 500; }
-.others li .d { color: var(--on-mat-2); }
-
-.work-end { height: 136px; }
-
-/* Drawn interfaces (shared) */
-.fit { width: var(--w); transform-origin: 0 0; }
-.ui {
-  position: relative;
-  width: var(--w);
-  background: var(--ui-bg);
-  color: var(--ui-ink);
-  border-radius: 12px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), var(--shadow-lift);
-  font-size: 12px; line-height: 1.35;
-  overflow: hidden;
-  user-select: none;
-}
-.ui p { text-wrap: nowrap; }
-.ui b { font-weight: 500; }
-.ui-top {
-  height: 46px; display: flex; align-items: center; gap: 14px;
-  padding: 0 14px; border-bottom: 1px solid var(--ui-line);
-}
-.ui-top > * { flex: none; white-space: nowrap; }
-.ui-brand { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 13px; letter-spacing: -0.01em; }
-.ui-crumbs { color: var(--ui-ink-2); display: flex; gap: 6px; }
-.ui-crumbs span { color: var(--ui-ink-3); }
-.ui-search {
-  margin-left: auto; width: 268px; height: 30px; border-radius: 8px; background: var(--ui-sunk);
-  display: flex; align-items: center; gap: 8px; padding: 0 6px 0 10px; color: var(--ui-ink-3);
-}
-.ui-search kbd, .ui kbd.k {
-  margin-left: auto; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 5px;
-  background: var(--ui-bg); box-shadow: 0 0 0 1px var(--ui-line), 0 1px 0 var(--ui-line);
-  display: inline-grid; place-items: center; font-size: 11px; color: var(--ui-ink-2);
-}
-.ui-avatar {
-  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
-  background: oklch(0.9 0.04 33); color: oklch(0.42 0.1 33); font-size: 11px; font-weight: 500;
-}
-.ui-seg { display: flex; padding: 2px; border-radius: 8px; background: var(--ui-sunk); }
-.ui-seg span { height: 26px; padding: 0 12px; display: grid; place-items: center; border-radius: 6px; color: var(--ui-ink-2); }
-.ui-seg span.on { background: var(--ui-bg); color: var(--ui-ink); box-shadow: 0 0 0 1px var(--ui-line), 0 1px 2px rgba(0,0,0,.05); }
-
-/* Ruta */
-.ruta-body { display: grid; grid-template-columns: 52px 1fr; }
-.ui-rail { border-right: 1px solid var(--ui-line); padding: 12px 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--ui-ink-2); }
-.ui-rail span { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; }
-.ui-rail span.on { background: var(--ui-sunk); color: var(--ui-ink); }
-.ui-rail span.sp { margin-top: auto; }
-.ruta-main { padding: 14px 16px 16px; }
-.ruta-head { display: flex; align-items: center; gap: 18px; margin-bottom: 14px; }
-.ui-sub { color: var(--ui-ink-2); font-size: 11.5px; }
-.ui-title { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; margin-top: 1px; }
-.ruta-stats { display: flex; gap: 6px; margin-left: auto; }
-.ruta-stats > span {
-  height: 28px; padding: 0 10px; border-radius: 7px; display: inline-flex; align-items: center; gap: 5px;
-  box-shadow: inset 0 0 0 1px var(--ui-line); color: var(--ui-ink-2);
-}
-.ruta-stats b { color: var(--ui-ink); font-variant-numeric: tabular-nums; }
-.ruta-stats .warn i { width: 6px; height: 6px; border-radius: 50%; background: var(--tomato); }
-.swap { display: inline-grid; }
-.swap em { grid-area: 1 / 1; font-style: normal; }
-.swap .b { opacity: 0; }
-
-.ruta-lanes { position: relative; display: grid; grid-template-columns: repeat(4, 150px) 1fr; gap: 12px; height: 404px; }
-.lane { background: var(--ui-sunk); border-radius: 9px; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
-.lane-h { height: 46px; padding: 3px 3px 0; }
-.lane-n { display: flex; align-items: center; gap: 6px; font-weight: 500; font-size: 12.5px; }
-.lane-n i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
-.lane-n .count {
-  margin-left: auto; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; font-size: 11px;
-  display: inline-grid; place-items: center; background: oklch(0.63 0.17 33 / 0.14); color: oklch(0.5 0.15 33);
-}
-.lane-v { color: var(--ui-ink-2); font-size: 11.5px; margin-top: 2px; }
-.capbar { height: 4px; border-radius: 2px; background: oklch(0.25 0.012 165 / 0.08); margin-top: 7px; overflow: hidden; }
-.capbar b { display: block; height: 100%; border-radius: 2px; background: var(--c); transform-origin: 0 50%; transform: scaleX(var(--f)); }
-.lane-cards { display: flex; flex-direction: column; gap: 6px; }
-.card {
-  position: relative; height: 62px; border-radius: 7px; background: var(--ui-bg);
-  box-shadow: 0 0 0 1px var(--ui-line), 0 1px 2px rgba(0, 0, 0, 0.03);
-  padding: 8px 9px;
-}
-.card .c1 { display: flex; justify-content: space-between; }
-.card .c1 b { font-size: 12px; }
-.card .c1 span { color: var(--ui-ink-3); font-size: 11px; }
-.card .c2 { margin-top: 3px; overflow: hidden; text-overflow: ellipsis; }
-.card .c3 { margin-top: 2px; color: var(--ui-ink-2); font-size: 11px; }
-.card .due { color: oklch(0.52 0.16 33); }
-.slot {
-  height: 62px; border-radius: 7px; border: 1.5px dashed oklch(0.25 0.012 165 / 0.2);
-  display: grid; place-items: center; color: var(--ui-ink-3); font-size: 11px;
-}
-.slot.target { border-color: oklch(0.63 0.17 33 / 0.55); color: oklch(0.52 0.16 33); background: oklch(0.63 0.17 33 / 0.05); }
-.ghost-wrap { position: relative; }
-.ghost-wrap .slot { position: absolute; inset: 0; }
-.mapbox { position: relative; border-radius: 9px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--ui-line); }
-.mapbox svg { display: block; }
-.map-zoom { position: absolute; right: 8px; top: 8px; display: grid; border-radius: 7px; background: var(--ui-bg); box-shadow: 0 0 0 1px var(--ui-line), 0 1px 3px rgba(0,0,0,.06); }
-.map-zoom span { width: 26px; height: 26px; display: grid; place-items: center; color: var(--ui-ink-2); font-size: 14px; }
-.map-zoom span + span { border-top: 1px solid var(--ui-line); }
-.map-key {
-  position: absolute; left: 8px; right: 8px; bottom: 8px; padding: 8px 10px; border-radius: 8px;
-  background: var(--ui-bg); box-shadow: 0 0 0 1px var(--ui-line), 0 2px 8px rgba(0,0,0,.06);
-  display: grid; gap: 4px; font-size: 11px;
-}
-.map-key p { display: flex; align-items: center; gap: 6px; }
-.map-key i { width: 10px; height: 3px; border-radius: 2px; background: var(--c); }
-.map-key span { margin-left: auto; color: var(--ui-ink-2); }
-
-.cursor { position: absolute; left: 92px; top: 156px; width: 20px; height: 22px; z-index: 3; transform: translate(706px, 144px); }
-.drag { z-index: 2; }
-.drag::after {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.06);
-}
-
-.demo .drag { animation: drag 10s var(--ease-smooth) infinite; }
-.demo .drag::after { animation: lift 10s var(--ease-smooth) infinite; }
-.demo .cursor { animation: cursor 10s var(--ease-smooth) infinite; }
-.demo .ghost-wrap .slot { opacity: 0; animation: ghost 10s var(--ease-smooth) infinite; }
-.demo .slot.target { opacity: 0; animation: target 10s var(--ease-smooth) infinite; }
-.demo .swap .a { animation: swap-a 10s var(--ease-smooth) infinite; }
-.demo .swap .b { animation: swap-b 10s var(--ease-smooth) infinite; }
-.demo .capbar .grow { animation: grow 10s var(--ease-expo) infinite; }
-.demo .newstop { opacity: 0; animation: newstop 10s var(--ease-smooth) infinite; }
-.demo.paused *, .demo.paused *::after { animation-play-state: paused !important; }
-
-@keyframes drag {
-  0%, 22% { transform: translate(0, 0) rotate(0) scale(1); opacity: 1; }
-  26% { transform: translate(0, -3px) rotate(-1.5deg) scale(1.03); }
-  44% { transform: translate(486px, 133px) rotate(-1.5deg) scale(1.03); }
-  47%, 86% { transform: translate(486px, 136px) rotate(0) scale(1); opacity: 1; }
-  89% { transform: translate(486px, 136px); opacity: 0; }
-  90% { transform: translate(0, 0); opacity: 0; }
-  95%, 100% { transform: translate(0, 0); opacity: 1; }
-}
-@keyframes lift {
-  0%, 22% { opacity: 0; }
-  26%, 44% { opacity: 1; }
-  48%, 100% { opacity: 0; }
-}
-@keyframes cursor {
-  0%, 8% { transform: translate(706px, 144px) scale(1); }
-  22% { transform: translate(0, 0) scale(1); }
-  25% { transform: translate(0, 0) scale(0.9); }
-  44% { transform: translate(486px, 136px) scale(0.9); }
-  47% { transform: translate(486px, 136px) scale(1); }
-  58%, 100% { transform: translate(706px, 144px) scale(1); }
-}
-@keyframes ghost {
-  0%, 23% { opacity: 0; }
-  27%, 45% { opacity: 1; }
-  49%, 100% { opacity: 0; }
-}
-@keyframes target {
-  0%, 25% { opacity: 0; }
-  30%, 44% { opacity: 1; }
-  47%, 100% { opacity: 0; }
-}
-@keyframes swap-a {
-  0%, 46% { opacity: 1; }
-  48%, 89% { opacity: 0; }
-  91%, 100% { opacity: 1; }
-}
-@keyframes swap-b {
-  0%, 46% { opacity: 0; }
-  48%, 89% { opacity: 1; }
-  91%, 100% { opacity: 0; }
-}
-@keyframes grow {
-  0%, 46% { transform: scaleX(0.38); }
-  54%, 88% { transform: scaleX(0.57); }
-  92%, 100% { transform: scaleX(0.38); }
-}
-@keyframes newstop {
-  0%, 48% { opacity: 0; }
-  54%, 87% { opacity: 1; }
-  90%, 100% { opacity: 0; }
-}
-
-/* Halden */
-.hal-top .ui-brand i { width: 18px; height: 18px; border-radius: 5px; background: var(--blue); display: grid; place-items: center; color: white; font-style: normal; font-size: 10px; }
-.hal-loc { height: 28px; padding: 0 10px; border-radius: 7px; box-shadow: inset 0 0 0 1px var(--ui-line); display: inline-flex; align-items: center; gap: 6px; color: var(--ui-ink-2); }
-.hal-date { display: flex; align-items: center; gap: 4px; margin-left: 10px; }
-.hal-date span.arr { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 6px; color: var(--ui-ink-2); }
-.hal-date b { font-size: 13px; padding: 0 4px; }
-.hal-today { height: 26px; padding: 0 9px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--ui-line); display: grid; place-items: center; color: var(--ui-ink-2); margin-left: 4px; }
-.hal-new { margin-left: auto; height: 30px; padding: 0 6px 0 11px; border-radius: 8px; background: var(--blue); color: white; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
-.hal-new kbd { width: 18px; height: 18px; border-radius: 4px; background: oklch(1 0 0 / 0.18); display: grid; place-items: center; font-size: 10.5px; }
-
-.hal-cols { display: grid; grid-template-columns: 54px repeat(4, 1fr); }
-.hal-head { height: 42px; border-bottom: 1px solid var(--ui-line); display: flex; align-items: center; gap: 8px; padding: 0 10px; border-left: 1px solid var(--ui-line); }
-.hal-head:first-child { border-left: 0; }
-.hal-head .av { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 10px; font-weight: 500; background: var(--bg); color: var(--fg); }
-.hal-head span.load { margin-left: auto; color: var(--ui-ink-3); font-size: 11px; font-variant-numeric: tabular-nums; }
-.hal-body { position: relative; height: 336px; }
-.hal-times { position: relative; }
-.hal-times span { position: absolute; right: 8px; transform: translateY(-50%); color: var(--ui-ink-3); font-size: 10.5px; }
-.hal-col {
-  position: relative; border-left: 1px solid var(--ui-line);
-  background-image: linear-gradient(to bottom, var(--ui-line) 1px, transparent 1px);
-  background-size: 100% 56px;
-}
-.ev {
-  position: absolute; left: 4px; right: 4px;
-  top: calc(var(--s) * 56px / 60 + 2px);
-  height: calc(var(--d) * 56px / 60 - 3px);
-  border-radius: 6px; padding: 5px 7px;
-  background: oklch(0.94 0.03 250); box-shadow: inset 0 0 0 1px oklch(0.54 0.11 250 / 0.22);
-  color: oklch(0.32 0.06 250); font-size: 11px; line-height: 1.3; overflow: hidden;
-}
-.ev b { display: block; font-size: 11.5px; }
-.ev span { color: oklch(0.45 0.06 250); }
-.ev.first { background: var(--ui-bg); box-shadow: inset 0 0 0 1px oklch(0.54 0.11 250 / 0.45); }
-.ev.sel { background: var(--blue); color: white; box-shadow: 0 0 0 2px var(--ui-bg), 0 0 0 4px oklch(0.54 0.11 250 / 0.35); }
-.ev.sel span { color: oklch(1 0 0 / 0.8); }
-.ev.off {
-  background: repeating-linear-gradient(135deg, oklch(0.25 0.012 165 / 0.05) 0 6px, transparent 6px 12px);
-  box-shadow: inset 0 0 0 1px var(--ui-line); color: var(--ui-ink-3);
-}
-.ev.prop { background: oklch(0.54 0.11 250 / 0.06); box-shadow: none; outline: 1.5px dashed oklch(0.54 0.11 250 / 0.7); outline-offset: -1.5px; }
-.ev.s span { display: none; }
-.hal-now { position: absolute; left: 54px; right: 0; top: calc(160 * 56px / 60); height: 0; border-top: 1.5px solid var(--red); }
-.hal-now::before { content: ""; position: absolute; left: -4px; top: -4.75px; width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
-.hal-now span { position: absolute; left: -50px; top: -8px; background: var(--red); color: white; font-size: 10px; padding: 1px 4px; border-radius: 4px; }
-.hal-pop {
-  position: absolute; right: 12px; top: 8px; width: 262px; border-radius: 10px; background: var(--ui-bg);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 12px 32px rgba(0, 0, 0, 0.12); overflow: hidden;
-}
-.hal-pop .in { height: 38px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-bottom: 1px solid var(--ui-line); font-size: 12.5px; }
-.hal-pop .in .caret { width: 1.5px; height: 15px; background: var(--blue); margin-left: -6px; }
-.hal-pop li { display: flex; align-items: center; gap: 8px; padding: 7px 10px; }
-.hal-pop li.on { background: oklch(0.54 0.11 250 / 0.08); }
-.hal-pop li small { display: block; color: var(--ui-ink-2); font-size: 10.5px; }
-.hal-pop li .tag { margin-left: auto; font-size: 10.5px; color: var(--ui-ink-3); }
-.hal-pop ul { padding: 4px 0; }
-.hal-pop .foot { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--ui-line); background: var(--ui-sunk); color: var(--ui-ink-2); font-size: 11px; }
-.hal-pop .foot kbd.k { margin-left: 0; }
-.hal-keys { height: 38px; border-top: 1px solid var(--ui-line); background: var(--ui-sunk); display: flex; align-items: center; gap: 18px; padding: 0 14px; color: var(--ui-ink-2); font-size: 11px; }
-.hal-keys > span { display: inline-flex; align-items: center; gap: 6px; }
-.hal-keys kbd.k { margin-left: 0; }
-
-/* Okvir phones */
-.phones { display: flex; gap: 24px; align-items: flex-start; }
-.phone {
-  width: 238px; height: 488px; border-radius: 40px; padding: 7px; flex: none;
-  background: oklch(0.22 0.012 165);
-  box-shadow: 0 0 0 1px rgba(0,0,0,.2), inset 0 0 0 1px oklch(1 0 0 / 0.08), var(--shadow-lift);
-}
-.phone + .phone { margin-top: 56px; }
-.screen {
-  position: relative; height: 100%; border-radius: 33px; background: var(--ui-bg); overflow: hidden;
-  color: var(--ui-ink); font-size: 12px; line-height: 1.35;
-}
-.screen p { text-wrap: nowrap; }
-.screen b { font-weight: 500; }
-.sbar { height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px 0 26px; font-size: 12px; font-weight: 500; }
-.sbar .isl { position: absolute; left: 50%; top: 9px; width: 70px; height: 21px; border-radius: 11px; background: oklch(0.22 0.012 165); transform: translateX(-50%); }
-.sbar .sig { display: inline-flex; align-items: center; gap: 4px; color: var(--ui-ink-2); font-weight: 400; font-size: 10.5px; }
-.pnav { display: flex; justify-content: space-between; align-items: center; padding: 4px 16px 0; color: var(--ui-ink-2); font-size: 12px; }
-.pnav .back { display: inline-flex; align-items: center; gap: 2px; color: oklch(0.52 0.12 70); font-weight: 500; }
-.ptitle { padding: 8px 16px 0; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; }
-.offline { margin: 10px 12px 6px; padding: 8px 10px; border-radius: 10px; background: oklch(0.74 0.13 78 / 0.16); color: oklch(0.42 0.08 70); display: flex; align-items: center; gap: 7px; font-size: 11px; }
-.offline i { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre); }
-.checks li { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 43px; margin: 0 16px; border-bottom: 1px solid var(--ui-line); }
-.checks li small { display: block; color: var(--ui-ink-3); font-size: 10.5px; }
-.chip { height: 22px; padding: 0 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 500; flex: none; }
-.chip.pass { background: oklch(0.45 0.082 166 / 0.1); color: oklch(0.38 0.07 166); }
-.chip.fail { background: oklch(0.57 0.18 27 / 0.12); color: oklch(0.48 0.16 27); }
-.chip.todo { box-shadow: inset 0 0 0 1px var(--ui-line); color: var(--ui-ink-3); font-weight: 400; }
-.checks li.cur { margin: 0 8px; padding: 0 8px; border-radius: 10px; background: var(--ui-sunk); border-bottom-color: transparent; }
-.pbtn { position: absolute; left: 12px; right: 12px; bottom: 26px; height: 42px; border-radius: 13px; background: var(--ui-ink); color: var(--ui-bg); display: grid; place-items: center; font-weight: 500; font-size: 12.5px; }
-.pbtn.alt { background: var(--ochre); color: oklch(0.25 0.04 70); }
-.home { position: absolute; left: 50%; bottom: 8px; width: 84px; height: 4px; border-radius: 2px; background: var(--ui-ink); transform: translateX(-50%); opacity: 0.85; }
-.photo { margin: 10px 12px 0; border-radius: 12px; overflow: hidden; }
-.photo svg { display: block; }
-.pfield { margin: 12px 12px 0; }
-.pfield label { display: block; font-size: 10.5px; color: var(--ui-ink-2); margin-bottom: 5px; }
-.pfield .box { border-radius: 10px; box-shadow: inset 0 0 0 1px var(--ui-line); padding: 8px 10px; font-size: 11.5px; line-height: 1.4; white-space: normal; }
-.ptags { display: flex; gap: 6px; margin: 10px 12px 0; }
-.ptags span { height: 22px; padding: 0 8px; border-radius: 6px; background: var(--ui-sunk); display: grid; place-items: center; font-size: 10.5px; color: var(--ui-ink-2); }
-
-/* Tessel */
-.tes-top .ui-brand i { width: 18px; height: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
-.tes-top .ui-brand i b { background: var(--ui-ink); border-radius: 2px; }
-.tes-top .ui-brand i b:nth-child(2), .tes-top .ui-brand i b:nth-child(3) { opacity: 0.35; }
-.tes-tabs { display: flex; gap: 2px; margin-left: 12px; }
-.tes-tabs span { height: 28px; padding: 0 10px; display: grid; place-items: center; color: var(--ui-ink-2); border-radius: 7px; }
-.tes-tabs span.on { color: var(--ui-ink); background: var(--ui-sunk); }
-.tes-ver { margin-left: auto; color: var(--ui-ink-3); }
-.tes-body { display: grid; grid-template-columns: 1fr 1fr; }
-.tes-sec { padding: 14px 16px 16px; }
-.tes-sec + .tes-sec { border-left: 1px solid var(--ui-line); }
-.tes-label { font-size: 10.5px; color: var(--ui-ink-3); margin-bottom: 10px; display: flex; justify-content: space-between; }
-.sw { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 8px; }
-.sw div i { display: block; height: 40px; border-radius: 8px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
-.sw div p { font-size: 10.5px; margin-top: 5px; }
-.sw div small { display: block; color: var(--ui-ink-3); font-size: 10px; font-variant-numeric: tabular-nums; }
-.typescale { margin-top: 18px; border-top: 1px solid var(--ui-line); padding-top: 14px; }
-.typescale .aa { font-size: 46px; line-height: 1; letter-spacing: -0.04em; font-weight: 500; }
-.typescale ul { margin-top: 12px; display: grid; gap: 7px; }
-.typescale li { display: flex; justify-content: space-between; align-items: baseline; }
-.typescale li span { color: var(--ui-ink-3); font-size: 10.5px; font-variant-numeric: tabular-nums; }
-.tbtns { display: flex; gap: 6px; flex-wrap: wrap; }
-.tbtn { height: 30px; padding: 0 11px; border-radius: 8px; display: grid; place-items: center; font-weight: 500; font-size: 11.5px; }
-.tbtn.p { background: var(--ui-ink); color: var(--ui-bg); }
-.tbtn.s { box-shadow: inset 0 0 0 1px oklch(0.25 0.012 165 / 0.16); }
-.tbtn.d { background: var(--ui-sunk); color: var(--ui-ink-3); }
-.tfield { margin-top: 16px; }
-.tfield label { display: block; font-size: 11px; font-weight: 500; margin-bottom: 5px; }
-.tfield .in { height: 32px; border-radius: 8px; box-shadow: inset 0 0 0 1.5px var(--red); padding: 0 10px; display: flex; align-items: center; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
-.tfield .err { color: oklch(0.5 0.17 27); font-size: 10.5px; margin-top: 5px; display: flex; align-items: center; gap: 5px; }
-.tbadges { margin-top: 16px; display: grid; gap: 0; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--ui-line); overflow: hidden; }
-.tbadges p { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; }
-.tbadges p + p { border-top: 1px solid var(--ui-line); }
-.tbadges p span.amt { margin-left: auto; }
-.badge { height: 20px; padding: 0 7px; border-radius: 5px; display: inline-grid; place-items: center; font-size: 10.5px; font-weight: 500; }
-.badge.paid { background: oklch(0.45 0.082 166 / 0.12); color: oklch(0.38 0.07 166); }
-.badge.due { background: var(--ui-sunk); color: var(--ui-ink-2); }
-.badge.late { background: oklch(0.57 0.18 27 / 0.12); color: oklch(0.48 0.16 27); }
-.tswitch { margin-top: 16px; display: flex; align-items: center; gap: 8px; font-size: 11.5px; }
-.tswitch i { width: 30px; height: 18px; border-radius: 9px; background: var(--ui-ink); position: relative; }
-.tswitch i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--ui-bg); }
-
-/* Approach */
-.approach { padding: clamp(96px, 10vw, 152px) 0 clamp(88px, 9vw, 136px); }
-.approach-head { align-items: end; row-gap: 20px; }
-.approach-head h2 { grid-column: 1 / 7; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.032em; }
-.approach-head p { grid-column: 8 / 12; color: var(--ink-2); max-width: 46ch; }
-.plan { margin-top: 64px; }
-.plan-row { align-items: center; border-top: 1px solid var(--hair); }
-.plan-row:last-child { border-bottom: 1px solid var(--hair); }
-.plan-label { grid-column: 1 / 5; padding: 22px 0 24px; }
-.plan-label h3 { font-size: 19px; letter-spacing: -0.012em; display: flex; align-items: baseline; gap: 12px; }
-.plan-label h3 span { font-size: 14px; font-weight: 400; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-.plan-label p { font-size: 15px; color: var(--ink-2); margin-top: 6px; max-width: 44ch; line-height: 1.5; }
-.track {
-  grid-column: 5 / 13; align-self: stretch;
-  display: grid; grid-template-columns: repeat(12, 1fr); align-items: center;
-  background-image: linear-gradient(to right, var(--hair) 1px, transparent 1px);
-  background-size: calc(100% / 12) 100%;
-  box-shadow: inset -1px 0 0 var(--hair);
-}
-.bar { grid-row: 1; height: 30px; border-radius: 7px; background: var(--accent); margin: 0 3px; }
-.bar.slices { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; background: none; }
-.bar.slices i { background: var(--accent); border-radius: 6px; }
-.bar.out { background: transparent; box-shadow: inset 0 0 0 1.5px var(--accent); }
-.plan-ruler { align-items: end; }
-.plan-ruler .plan-label { padding: 0 0 12px; font-size: 14px; color: var(--ink-2); display: flex; align-items: center; gap: 10px; }
-.diamond { width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg); flex: none; }
-.plan-ruler .track {
-  position: relative; height: 44px; align-items: end; background-image: none; box-shadow: none;
-}
-.plan-ruler .track span { grid-row: 1; padding: 0 0 12px 8px; font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-.plan-ruler .track span:first-child::before { content: "Week "; }
-.plan-ruler .track .d { position: absolute; bottom: -4px; transform: translateX(-50%) rotate(45deg); left: calc(var(--i) * 100% / 12); width: 8px; height: 8px; background: var(--accent); z-index: 1; }
+/* Checklist */
+.list{background:#000;color:#fff;padding:64px var(--pad) 72px}
+.list-top{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:32px}
+.list-top h2{font:400 clamp(24px,2.5vw,36px)/1.1 var(--text);letter-spacing:-.02em}
+.wall{display:flex;flex-wrap:wrap;column-gap:.34em;row-gap:.06em;font:700 clamp(52px,8.75vw,126px)/.98 var(--display);letter-spacing:-.02em}
+.wall label{cursor:pointer;touch-action:manipulation;position:relative;display:block;transition:transform .25s var(--out)}
+.wall label:active{transform:scale(.985)}
+@media (hover:hover){.wall label:hover{transform:translateY(-3px)}}
+.wall input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.wall span{display:inline-block}
+.wall span::before{content:'';display:inline-block;width:.2em;height:.2em;margin-right:.09em;vertical-align:.46em;box-shadow:inset 0 0 0 .028em currentColor}
+.wall input:checked+span{color:var(--miss);text-decoration:line-through;text-decoration-thickness:.055em}
+.wall input:checked+span::before{background:currentColor}
+.wall input:focus-visible+span{outline:3px solid currentColor;outline-offset:2px}
+.tally{display:flex;justify-content:space-between;align-items:center;gap:32px;margin-top:44px;flex-wrap:wrap}
+.tally p{font:400 clamp(24px,2.5vw,36px)/1.15 var(--text);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tally .btn{background:var(--miss);color:#000}
 
 /* About */
-.about { padding: 0 0 clamp(96px, 10vw, 152px); }
-.about .grid { row-gap: 24px; }
-.about-label { grid-column: 1 / 3; font-size: 15px; color: var(--ink-3); padding-top: 9px; }
-.about-text { grid-column: 3 / 11; }
-.about-text p.big { font-size: clamp(24px, 2.25vw, 32px); line-height: 1.35; letter-spacing: -0.018em; }
-.about-text p.small { margin-top: 24px; color: var(--ink-2); max-width: 60ch; }
-.facts { grid-column: 3 / 13; margin-top: 56px; border-top: 1px solid var(--hair); }
-.facts div { display: grid; grid-template-columns: 2fr 8fr; column-gap: 24px; padding: 18px 0 19px; border-bottom: 1px solid var(--hair); }
-.facts dt { color: var(--ink-3); font-size: 15px; padding-top: 2px; }
-.facts dd { font-size: 17px; }
+.about{padding:128px var(--pad) 136px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:56px 32px;align-items:end}
+.about h2{font-size:clamp(84px,14.4vw,208px);line-height:.86;white-space:nowrap}
+.about .say{max-width:24em;padding-bottom:.9em}
+.prose{grid-column:1 / -1;display:grid;grid-template-columns:7fr 5fr;gap:32px;align-items:start}
+.prose>p{font-size:clamp(24px,2.5vw,36px);line-height:1.18;letter-spacing:-.02em;max-width:24em}
+dl{display:grid;gap:22px}
+dt{font-weight:700}
 
 /* Contact */
-.contact { padding: 104px 0 96px; }
-.contact .grid { row-gap: 32px; align-items: end; }
-.contact h2 { grid-column: 1 / 9; font-size: 19px; font-weight: 400; color: var(--on-mat-2); letter-spacing: -0.005em; }
-.mail-row { grid-column: 1 / 13; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-.mail {
-  font-size: clamp(40px, 6.6vw, 96px); line-height: 1; letter-spacing: -0.045em; font-weight: 500;
-  color: var(--on-mat); text-decoration: none; display: inline-block;
-  transition: transform 250ms var(--ease-expo);
-}
-@media (hover: hover) and (pointer: fine) {
-  .mail:hover { transform: translateY(-2px); }
-}
-.contact-foot { grid-column: 1 / 13; display: flex; justify-content: space-between; gap: 24px 48px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--on-mat-hair); }
-.contact-foot p { color: var(--on-mat-2); font-size: 16px; max-width: 54ch; }
-.contact-foot p.time { color: var(--on-mat); }
+.contact{background:var(--miss);padding:44px var(--pad) 36px}
+.contact .lead{font-size:clamp(24px,2.5vw,36px);line-height:1.18;letter-spacing:-.02em;margin-bottom:10px}
+.mail{display:block;font:700 calc((100vw - 2*var(--pad))*var(--mail-k))/.86 var(--display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.foot{display:grid;grid-template-columns:7fr 5fr;gap:32px;margin-top:28px;font-size:18px}
+.foot p{max-width:34em}
 
-/* Footer */
-.site-foot { padding: 28px 0 36px; font-size: 14px; color: var(--ink-3); }
-.site-foot .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-.site-foot a { color: var(--ink-2); }
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .hero h1 { grid-column: 1 / 13; }
-  .hero-aside { grid-column: 1 / 9; }
-  .proj-feature .shot { grid-column: 1 / 13; }
-  .proj-feature .proj-cap { grid-column: 1 / 9; margin-top: 28px; }
-  .proj-row { margin-top: 96px; row-gap: 96px; }
-  .stack { gap: 96px; }
-  .stack-l, .stack-r { grid-column: 1 / 13; padding-top: 0; }
-  .approach-head h2, .approach-head p { grid-column: 1 / 13; }
-  .plan-label { grid-column: 1 / 13; padding-bottom: 12px; }
-  .track { grid-column: 1 / 13; height: 44px; }
-  .plan-ruler .plan-label { padding-bottom: 8px; }
-  .about-label, .about-text, .facts { grid-column: 1 / 13; }
+@media (max-width:1000px){
+  .spell{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pitch,.pair,.twin,.solo,.about,.prose,.foot,.p-head{grid-template-columns:minmax(0,1fr)}
+  .about h2{white-space:normal}
+  .about .say{padding-bottom:0}
+  .work>h2 br{display:none}
+  .twin .p-head{min-height:0}
+  .twin .project+.project{margin-top:88px}
+  .breaker-top{flex-direction:column;align-items:flex-start}
+  .top{flex-direction:column;align-items:flex-start;gap:0}
+  .panel{padding:40px 20px 24px}
+  .pair{gap:40px}
+  .smena{grid-template-columns:minmax(0,1fr);height:auto}
+  .smena .map{height:280px}
+  .pay .r{grid-template-columns:minmax(0,1.5fr) minmax(0,1.4fr) 58px}
+  .pay .r>:nth-child(4),.pay .r>:nth-child(5){display:none}
+  .work>h2{margin-bottom:72px}
 }
-@media (max-width: 720px) {
-  body { font-size: 16px; }
-  .grid { column-gap: 16px; }
-  .site-nav { display: none; }
-  .hero-aside { grid-column: 1 / 13; }
-  .proj-feature .proj-cap { grid-column: 1 / 13; }
-  .work-intro { flex-direction: column; gap: 4px; }
-  .phones { gap: 14px; }
-  .others li { grid-template-columns: 48px 1fr; }
-  .others li .d { grid-column: 2; }
-  .facts div { grid-template-columns: 1fr; row-gap: 4px; }
-  :root { --mat-inset: 0px; }
-  .mat { border-radius: 0; }
-  .plan-ruler .track span:first-child::before { content: none; }
+@media (max-width:560px){
+  .spell{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .try{flex-direction:column;align-items:flex-start;gap:6px;width:100%}
+  .try input{width:100%}
+  .top ul{gap:18px;flex-wrap:wrap}
+  .phone{min-height:0}
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .demo *, .demo *::after { animation: none !important; }
-  .demo .cursor { display: none; }
-  .demo .ghost-wrap .slot, .demo .slot.target { opacity: 0; }
-  .pause { display: none; }
-  .btn, .mail { transition: none; }
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .lift,.spell button,.wall label,.skip{transition:none}
 }
 </style>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#work">Skip to the work</a>
 
-<header class="site-head">
-  <div class="wrap">
-    <a class="wordmark" href="#top" translate="no" id="top">Mara Ilić</a>
-    <nav class="site-nav" aria-label="Main">
-      <ul>
-        <li><a href="#work">Work</a></li>
-        <li><a href="#approach">Approach</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="city" viewBox="0 0 440 400">
+    <path d="M-20 60C80 110 120 180 190 232S330 330 470 352" fill="none" stroke="#1b2c3a" stroke-width="30"/>
+    <g fill="none" stroke="#2a333d" stroke-width="2.5">
+      <path d="M0 40 440 120M0 130 440 190M0 244 440 304M40 0l70 400M160 0l50 400M290 0l20 400M380 0l-20 400M0 340l200-60M220 110 440 30M100 200l200-40M60 70l90 80M330 290l70-20M250 400l40-110"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="hero">
+  <nav class="top" aria-label="Main">
+    <span>Independent product designer, free from January</span>
+    <ul>
+      <li><a class="lift" href="#work">Work</a></li>
+      <li><a class="lift" href="#checklist">Checklist</a></li>
+      <li><a class="lift" href="#about">About</a></li>
+      <li><a class="lift" href="#contact">Write to me</a></li>
+    </ul>
+  </nav>
+
+  <h1 class="name" translate="no" aria-label="Mara Ilić"><span id="name" aria-hidden="true">Mara Ilić</span></h1>
+
+  <div class="breaker">
+    <div class="breaker-top">
+      <p class="note" id="note" aria-live="polite">How software has spelled it. Press one, or see what it does to yours.</p>
+      <form class="try" id="try" autocomplete="off">
+        <label for="yours">Try your own name</label>
+        <input id="yours" type="text" placeholder="Stays in this tab" spellcheck="false" autocapitalize="words" maxlength="60">
+      </form>
+    </div>
+    <div class="spell" role="group" aria-label="Ways software has spelled the name">
+      <button type="button" data-kind="right" aria-pressed="true"><small>Spelled right</small><span translate="no">Mara Ilić</span></button>
+      <button type="button" data-kind="strip" aria-pressed="false"><small>Accent dropped</small><span translate="no">Mara Ilic</span></button>
+      <button type="button" data-kind="encoding" aria-pressed="false"><small>Wrong encoding</small><span translate="no">Mara IliÄ‡</span></button>
+      <button type="button" data-kind="unknown" aria-pressed="false"><small>Unknown character</small><span translate="no">Mara Ili?</span></button>
+      <button type="button" data-kind="escaped" aria-pressed="false"><small>Escaped twice</small><span translate="no">Mara Ili&amp;#263;</span></button>
+      <button type="button" data-kind="ticket" aria-pressed="false"><small>Airline ticket</small><span translate="no">ILIC/MARA</span></button>
+      <button type="button" data-kind="short" aria-pressed="false"><small>Field too short</small><span translate="no">Mara Il</span></button>
+      <button type="button" data-kind="cyrillic" aria-pressed="false"><small>Also right</small><span lang="sr-Cyrl" class="cy" translate="no">Мара Илић</span></button>
+    </div>
+    <p class="sr" role="status" id="status"></p>
+  </div>
+
+  <div class="pitch">
+    <h2>Most software can’t spell my name. I’m a product designer, so I take it personally.</h2>
+    <div>
+      <p>I work with one team at a time, and I start with what the brief left out: the driver who drops off the map, the half-filled prescription, the surname that won’t fit the column.</p>
+      <div class="pitch-go">
+        <a class="btn lift" href="#work">See the work</a>
+        <a class="lift" href="mailto:mara@ilic.example">Write to me</a>
+      </div>
+    </div>
   </div>
 </header>
+<div class="check" aria-hidden="true"></div>
 
-<main id="main">
-  <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap grid">
-      <h1 id="hero-title">I design software for people who use it all day.</h1>
-      <div class="hero-aside">
-        <p class="status"><i aria-hidden="true"></i>Booking projects from January&nbsp;2027</p>
-        <p class="lede">I’m <strong translate="no">Mara Ilić</strong>, an independent product designer in Belgrade. I work on the tools that run a business: dispatch boards, clinic calendars, inspection apps and the design systems under them.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="mailto:hello@marailic.com?subject=New%20project">
-            Start a project
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </a>
-          <a class="link" href="#work">See the work</a>
+<main>
+<section class="work" id="work" aria-labelledby="work-title">
+  <h2 id="work-title">Four products, each shown twice:<br> the screen in the brief, and <mark>the one that wasn’t.</mark></h2>
+
+  <article class="project" id="smena">
+    <header class="p-head">
+      <h3 translate="no">Smena</h3>
+      <p>Control room software for a regional parcel courier. Research on the night shift, flows, interface, design system.</p>
+    </header>
+    <div class="panel dark pair">
+      <figure>
+        <figcaption class="tag">In the brief</figcaption>
+        <div class="ui smena" role="img" aria-label="Dispatch board with four vans on the map, all on time.">
+          <div class="drivers">
+            <header><b>Night shift</b><span>4 vans</span></header>
+            <div class="drv"><i></i><div>Jelena M.<small>7 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Stefan R.<small>9 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Nikola J.<small>6 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Ivana K.<small>5 stops, on time</small></div></div>
+            <footer><b>27&nbsp;parcels out</b>, all accounted for</footer>
+          </div>
+          <svg class="map" viewBox="0 0 440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <use href="#city"/>
+            <g fill="none" stroke="#4cdd9c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M60 70l70 15 20 65 85-10 65-20"/>
+              <path d="M320 40l-5 90 25 70-40 70-90 20"/>
+              <path d="M90 370l30-70 70-30 10-70-60-30"/>
+              <path d="M400 360l-60-20-10-50 70-20"/>
+            </g>
+            <g fill="#4cdd9c" stroke="#10151a" stroke-width="3">
+              <circle cx="235" cy="140" r="8"/><circle cx="340" cy="200" r="8"/><circle cx="190" cy="270" r="8"/><circle cx="330" cy="290" r="8"/>
+            </g>
+          </svg>
         </div>
-      </div>
+      </figure>
+      <figure>
+        <figcaption class="tag miss">Not in the brief</figcaption>
+        <div class="ui smena" role="img" aria-label="The same board when one driver's phone has lost signal. His position is drawn as a dashed circle labelled as a guess, and the list shows what he carries and two actions.">
+          <div class="drivers">
+            <header><b>Night shift</b><span>4 vans</span></header>
+            <div class="drv"><i></i><div>Jelena M.<small>7 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Stefan R.<small>9 stops, on time</small></div></div>
+            <div class="drv lost mark"><i></i><div>Nikola J.<small>No signal for 14&nbsp;min</small>
+              <div class="more">Last seen at Autokomanda, 01:12. 6&nbsp;parcels aboard, 2&nbsp;urgent.</div>
+              <div class="acts"><span>Call Nikola</span><span>Move 2</span></div>
+            </div></div>
+            <div class="drv"><i></i><div>Ivana K.<small>5 stops, on time</small></div></div>
+            <footer><b>27&nbsp;parcels out</b>, 6 unaccounted for</footer>
+          </div>
+          <svg class="map" viewBox="0 0 440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <use href="#city"/>
+            <g fill="none" stroke="#4cdd9c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M60 70l70 15 20 65 85-10 65-20"/>
+              <path d="M320 40l-5 90 25 70-40 70-90 20"/>
+              <path d="M400 360l-60-20-10-50 70-20"/>
+            </g>
+            <path d="M90 370l30-70 70-30" fill="none" stroke="#6f7a85" stroke-width="3" stroke-linecap="round"/>
+            <path d="M190 270l10-70-60-30" fill="none" stroke="#6f7a85" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/>
+            <g fill="#4cdd9c" stroke="#10151a" stroke-width="3">
+              <circle cx="235" cy="140" r="8"/><circle cx="340" cy="200" r="8"/><circle cx="330" cy="290" r="8"/>
+            </g>
+            <circle cx="190" cy="270" r="50" fill="#ffb84d" fill-opacity=".1" stroke="#ffb84d" stroke-width="2" stroke-dasharray="6 6"/>
+            <circle cx="190" cy="270" r="6" fill="#10151a" stroke="#ffb84d" stroke-width="2"/>
+            <text x="190" y="340" text-anchor="middle" fill="#ffb84d" font-family="Sofia Sans,sans-serif" font-size="15" font-weight="700">Position is a guess</text>
+          </svg>
+        </div>
+      </figure>
     </div>
-  </section>
+    <p class="p-case">When a driver’s phone went dark, the old board kept a confident green dot at the last known position. Now it says the position is a guess, shows what’s aboard, and puts the two things a dispatcher can do right next to it.</p>
+  </article>
 
-  <section class="mat" id="work" aria-labelledby="work-title">
-    <div class="ruler" aria-hidden="true">
-      <div class="wrap">
-        <span style="--i:0">0</span><span style="--i:1">1</span><span style="--i:2">2</span><span style="--i:3">3</span><span style="--i:4">4</span><span style="--i:5">5</span><span style="--i:6">6</span><span style="--i:7">7</span><span style="--i:8">8</span><span style="--i:9">9</span><span style="--i:10">10</span><span style="--i:11">11</span><span style="--i:12">12</span><span style="--i:13">13</span><span style="--i:14">14</span><span style="--i:15">15</span><span style="--i:16">16</span><span style="--i:17">17</span><span style="--i:18">18</span><span style="--i:19">19</span><span style="--i:20">20</span><span style="--i:21">21</span><span style="--i:22">22</span><span style="--i:23">23</span><span style="--i:24">24</span><span style="--i:25">25</span><span style="--i:26">26</span><span style="--i:27">27</span>
+  <div class="twin">
+    <article class="project" id="recept">
+      <header class="p-head">
+        <h3 translate="no">Recept</h3>
+        <p>Repeat prescriptions for a pharmacy chain. Research, app design, prototype.</p>
+      </header>
+      <div class="panel green pair phones">
+        <figure>
+          <figcaption class="tag">In the brief</figcaption>
+          <div class="ui phone" role="img" aria-label="Phone screen saying all three medicines are ready to collect, with a collection code.">
+            <div class="top-line"><span>Recept</span><span>18:40</span></div>
+            <h4>Ready to collect</h4>
+            <p>All three are waiting at Cara Dušana&nbsp;12.</p>
+            <div class="meds">
+              <div><span>Metformin</span><em>Ready</em></div>
+              <div><span>Ramipril</span><em>Ready</em></div>
+              <div><span>Atorvastatin</span><em>Ready</em></div>
+            </div>
+            <div class="code"><span>Collection code</span><b>4719</b></div>
+            <div class="cta">Open until 20:00</div>
+          </div>
+        </figure>
+        <figure>
+          <figcaption class="tag miss">Not in the brief</figcaption>
+          <div class="ui phone" role="img" aria-label="Phone screen saying two of three medicines are ready, with three choices for what to do about the one that is out of stock.">
+            <div class="top-line"><span>Recept</span><span>18:40</span></div>
+            <h4>Two of three are ready</h4>
+            <p>Atorvastatin ran out at Cara Dušana&nbsp;12.</p>
+            <div class="meds">
+              <div><span>Metformin</span><em>Ready</em></div>
+              <div><span>Ramipril</span><em>Ready</em></div>
+              <div><span>Atorvastatin</span><em class="out">Out here</em></div>
+            </div>
+            <div class="choices mark">
+              <div><i class="on"></i><span>Take two now, one on Thursday</span></div>
+              <div><i></i><span>All three at Vračar, 900&nbsp;m away</span></div>
+              <div><i></i><span>Wait and take all on Thursday</span></div>
+            </div>
+            <div class="cta">Confirm</div>
+          </div>
+        </figure>
       </div>
+      <p class="p-case">The brief had two states, ready and not ready. Someone on daily medication needs a third: what can I collect tonight?</p>
+    </article>
+
+    <article class="project" id="plata">
+      <header class="p-head">
+        <h3 translate="no">Plata</h3>
+        <p>Payroll for small firms. Interface, design system, handoff to engineering.</p>
+      </header>
+      <div class="panel ice">
+        <figure>
+          <figcaption class="tag">In the brief</figcaption>
+          <div class="ui pay" role="img" aria-label="Payroll table with three people and short names, all ready.">
+            <div class="r h"><span>Name</span><span>Role</span><span class="n">Gross</span><span class="n">Net</span><span class="n">Status</span></div>
+            <div class="r"><span>Ana Petrović</span><span>Developer</span><span class="n">€2,400</span><span class="n">€1,720</span><span class="n"><em>Ready</em></span></div>
+            <div class="r"><span>Luka Ristić</span><span>Support</span><span class="n">€1,650</span><span class="n">€1,210</span><span class="n"><em>Ready</em></span></div>
+            <div class="r"><span>Mina Savić</span><span>Designer</span><span class="n">€2,100</span><span class="n">€1,520</span><span class="n"><em>Ready</em></span></div>
+          </div>
+        </figure>
+        <figure>
+          <figcaption class="tag miss">Not in the brief</figcaption>
+          <div class="ui pay" role="img" aria-label="The same table with a long double-barrelled surname shown in full, someone who left mid-month, and an advance to repay, with the last two flagged for a check.">
+            <div class="r h"><span>Name</span><span>Role</span><span class="n">Gross</span><span class="n">Net</span><span class="n">Status</span></div>
+            <div class="r"><span class="mark">Aleksandra Stojanović-Vukčević</span><span>Head of operations</span><span class="n">€3,150</span><span class="n">€2,240</span><span class="n"><em>Ready</em></span></div>
+            <div class="r"><span>Luka Ristić</span><span class="lead">Left on the 12th, paid 12 of 31&nbsp;days</span><span class="n">€640</span><span class="n">€470</span><span class="n"><em class="ask">Check</em></span></div>
+            <div class="r"><span>Mina Savić</span><span class="lead">Advance to repay, €200</span><span class="n">€2,100</span><span class="n">€1,320</span><span class="n"><em class="ask">Check</em></span></div>
+          </div>
+        </figure>
+      </div>
+      <p class="p-case">Real payrolls hold double-barrelled surnames and people who left on the 12th. The table never cuts a name off, and it stops to ask about whatever it can’t work out alone.</p>
+    </article>
+  </div>
+
+  <article class="project solo" id="knjiga">
+    <div class="side">
+      <h3 translate="no">Knjiga</h3>
+      <p>Bookkeeping for freelancers. Onboarding and first run.</p>
+      <p class="p-case">Day one is the only screen every customer sees, and the brief didn’t have it. Instead of sample data that looks like someone else’s business, the empty account offers two ways in.</p>
     </div>
-
-    <div class="wrap">
-      <div class="work-intro">
-        <h2 id="work-title">Selected work, 2021 to 2026</h2>
-        <p>Every screen below is redrawn from the shipped product, with client data swapped out.</p>
-      </div>
-
-      <!-- 01 Ruta -->
-      <article class="grid proj-feature" aria-labelledby="ruta-title">
-        <div class="shot">
-          <div class="fit" data-fit style="--w:960px">
-            <div class="ui demo" id="ruta-demo" style="--w:960px" role="img" aria-label="Ruta dispatch board. Four lanes of delivery orders, one for unassigned orders and one for each driver, next to a map of Novi Sad with each driver's route. An order is dragged from Unassigned onto Ana K.'s cargo bike lane and her capacity bar fills.">
-              <div class="ui-top">
-                <div class="ui-brand" translate="no">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="4" cy="13.5" r="2.5" fill="currentColor"/><circle cx="14" cy="4.5" r="2.5" fill="var(--tomato)"/><path d="M4 11C4 6 14 12 14 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                  Ruta
-                </div>
-                <div class="ui-crumbs">Dispatch <span>/</span> Novi Sad</div>
-                <div class="ui-search">
-                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.8" stroke="currentColor" stroke-width="1.6"/><path d="m10.6 10.6 3.4 3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-                  Find an order, street or driver <kbd>/</kbd>
-                </div>
-                <div class="ui-avatar">DJ</div>
-              </div>
-              <div class="ruta-body">
-                <div class="ui-rail">
-                  <span class="on"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="3" width="3.5" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="7.25" y="3" width="3.5" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="3" width="3.5" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/></svg></span>
-                  <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 4.5 6.5 3l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 3v10.5M11.5 4.5V15" stroke="currentColor" stroke-width="1.5"/></svg></span>
-                  <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 15.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                  <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.25" stroke="currentColor" stroke-width="1.5"/><path d="M9 5.5V9l2.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
-                  <span class="sp"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="5" r="1.6" fill="var(--ui-bg)" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9" r="1.6" fill="var(--ui-bg)" stroke="currentColor" stroke-width="1.5"/><circle cx="7.5" cy="13" r="1.6" fill="var(--ui-bg)" stroke="currentColor" stroke-width="1.5"/></svg></span>
-                </div>
-                <div class="ruta-main">
-                  <div class="ruta-head">
-                    <div>
-                      <p class="ui-sub">Thursday 14 November</p>
-                      <p class="ui-title">Morning wave</p>
-                    </div>
-                    <div class="ruta-stats">
-                      <span><b>84</b> orders</span>
-                      <span><b>9</b> drivers</span>
-                      <span class="warn"><i></i><b class="swap"><em class="a">2</em><em class="b">1</em></b> unassigned</span>
-                    </div>
-                    <div class="ui-seg"><span class="on">Board</span><span>Map</span></div>
-                  </div>
-                  <div class="ruta-lanes">
-                    <div class="lane">
-                      <div class="lane-h">
-                        <p class="lane-n">Unassigned <span class="count swap"><em class="a">2</em><em class="b">1</em></span></p>
-                        <p class="lane-v">Sorted by due time</p>
-                      </div>
-                      <div class="lane-cards">
-                        <div class="card"><p class="c1"><b class="due">Due 10:30</b><span>#4476</span></p><p class="c2">Zmaj Jovina 12</p><p class="c3">2 bags</p></div>
-                        <div class="ghost-wrap">
-                          <div class="slot"></div>
-                          <div class="card drag"><p class="c1"><b class="due">Due 10:15</b><span>#4478</span></p><p class="c2">Bul. cara Lazara 88</p><p class="c3">5 bags, 1 chilled</p></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="lane" style="--c:var(--blue)">
-                      <div class="lane-h">
-                        <p class="lane-n"><i></i>Jelena P.</p>
-                        <p class="lane-v">Van 4 · 5 stops</p>
-                        <div class="capbar"><b style="--f:.82"></b></div>
-                      </div>
-                      <div class="lane-cards">
-                        <div class="card"><p class="c1"><b>09:20</b><span>#4452</span></p><p class="c2">Futoška 33</p><p class="c3">3 bags</p></div>
-                        <div class="card"><p class="c1"><b>09:35</b><span>#4455</span></p><p class="c2">Laze Telečkog 5</p><p class="c3">1 bag</p></div>
-                        <div class="card"><p class="c1"><b>09:50</b><span>#4459</span></p><p class="c2">Dunavska 17</p><p class="c3">4 bags</p></div>
-                        <div class="card"><p class="c1"><b>10:05</b><span>#4461</span></p><p class="c2">Njegoševa 2</p><p class="c3">2 bags</p></div>
-                        <div class="card"><p class="c1"><b>10:20</b><span>#4463</span></p><p class="c2">Jevrejska 21</p><p class="c3">6 bags, 2 chilled</p></div>
-                      </div>
-                    </div>
-                    <div class="lane" style="--c:var(--ochre)">
-                      <div class="lane-h">
-                        <p class="lane-n"><i></i>Marko S.</p>
-                        <p class="lane-v">Van 2 · 4 stops</p>
-                        <div class="capbar"><b style="--f:.64"></b></div>
-                      </div>
-                      <div class="lane-cards">
-                        <div class="card"><p class="c1"><b>09:25</b><span>#4453</span></p><p class="c2">Kisačka 40</p><p class="c3">2 bags</p></div>
-                        <div class="card"><p class="c1"><b>09:45</b><span>#4457</span></p><p class="c2">Temerinska 9</p><p class="c3">3 bags</p></div>
-                        <div class="card"><p class="c1"><b>10:10</b><span>#4462</span></p><p class="c2">Rumenačka 118</p><p class="c3">5 bags</p></div>
-                        <div class="card"><p class="c1"><b>10:35</b><span>#4468</span></p><p class="c2">Sentandrejski put 3</p><p class="c3">1 bag</p></div>
-                      </div>
-                    </div>
-                    <div class="lane" style="--c:var(--tomato)">
-                      <div class="lane-h">
-                        <p class="lane-n"><i></i>Ana K.</p>
-                        <p class="lane-v">Cargo bike 7 · <span class="swap"><em class="a">3</em><em class="b">4</em></span> stops</p>
-                        <div class="capbar"><b class="grow" style="--f:.38"></b></div>
-                      </div>
-                      <div class="lane-cards">
-                        <div class="card"><p class="c1"><b>09:30</b><span>#4454</span></p><p class="c2">Bul. oslobođenja 46</p><p class="c3">2 bags</p></div>
-                        <div class="card"><p class="c1"><b>09:55</b><span>#4460</span></p><p class="c2">Narodnog fronta 12</p><p class="c3">1 bag</p></div>
-                        <div class="card"><p class="c1"><b>10:15</b><span>#4466</span></p><p class="c2">Šafarikova 7</p><p class="c3">3 bags</p></div>
-                        <div class="slot target">Drop to assign</div>
-                      </div>
-                    </div>
-                    <div class="mapbox">
-                      <svg width="224" height="404" viewBox="0 0 224 404" fill="none">
-                        <rect width="224" height="404" fill="oklch(0.958 0.012 125)"/>
-                        <rect x="16" y="54" width="58" height="42" rx="7" fill="oklch(0.92 0.045 145)"/>
-                        <rect x="150" y="150" width="54" height="34" rx="7" fill="oklch(0.92 0.045 145)"/>
-                        <path d="M-20 352 C 40 316, 110 372, 244 318" stroke="oklch(0.87 0.045 230)" stroke-width="40" stroke-linecap="round"/>
-                        <g stroke="white" stroke-linecap="round">
-                          <path d="M-4 128 L228 100" stroke-width="6"/>
-                          <path d="M-4 236 L228 214" stroke-width="6"/>
-                          <path d="M92 -4 L112 330" stroke-width="6"/>
-                          <path d="M176 -4 L150 300" stroke-width="4"/>
-                          <path d="M-4 40 L228 22 M-4 178 L228 156 M40 -4 L56 330 M-4 286 L130 274" stroke-width="2.5"/>
-                        </g>
-                        <path d="M40 250 L70 204 L60 156 L102 132 L124 86 L150 60" stroke="var(--blue)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-                        <path d="M40 250 L112 238 L152 192 L192 170 L200 118" stroke="var(--ochre)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-                        <path d="M40 250 L86 278 L128 268 L164 246" stroke="var(--tomato)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-                        <g fill="white" stroke-width="2">
-                          <circle cx="70" cy="204" r="3.5" stroke="var(--blue)"/><circle cx="60" cy="156" r="3.5" stroke="var(--blue)"/><circle cx="102" cy="132" r="3.5" stroke="var(--blue)"/><circle cx="124" cy="86" r="3.5" stroke="var(--blue)"/><circle cx="150" cy="60" r="3.5" stroke="var(--blue)"/>
-                          <circle cx="112" cy="238" r="3.5" stroke="var(--ochre)"/><circle cx="152" cy="192" r="3.5" stroke="var(--ochre)"/><circle cx="192" cy="170" r="3.5" stroke="var(--ochre)"/><circle cx="200" cy="118" r="3.5" stroke="var(--ochre)"/>
-                          <circle cx="86" cy="278" r="3.5" stroke="var(--tomato)"/><circle cx="128" cy="268" r="3.5" stroke="var(--tomato)"/><circle cx="164" cy="246" r="3.5" stroke="var(--tomato)"/>
-                        </g>
-                        <g class="newstop">
-                          <path d="M164 246 L196 226" stroke="var(--tomato)" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round"/>
-                          <circle cx="196" cy="226" r="5.5" fill="var(--tomato)" stroke="white" stroke-width="2"/>
-                        </g>
-                        <rect x="34" y="244" width="12" height="12" rx="3" fill="var(--ui-ink)"/>
-                        <text x="44" y="70" font-size="9" fill="oklch(0.5 0.04 145)" font-family="inherit" transform="translate(-14 10)">Liman park</text>
-                        <text x="150" y="350" font-size="9.5" fill="oklch(0.5 0.05 230)" font-family="inherit" font-style="italic">Dunav</text>
-                        <text x="30" y="248" font-size="9" fill="var(--ui-ink-2)" font-family="inherit" text-anchor="end">Depot</text>
-                      </svg>
-                      <div class="map-zoom"><span>+</span><span>−</span></div>
-                      <div class="map-key">
-                        <p style="--c:var(--blue)"><i></i>Jelena <span>58 min</span></p>
-                        <p style="--c:var(--ochre)"><i></i>Marko <span>71 min</span></p>
-                        <p style="--c:var(--tomato)"><i></i>Ana <span class="swap"><em class="a">34 min</em><em class="b">46 min</em></span></p>
-                      </div>
-                    </div>
-                    <svg class="cursor" viewBox="0 0 20 22" aria-hidden="true"><path d="M2 1.5v16.2l4.3-4.1 3 6.7 2.9-1.3-3-6.6h6z" fill="var(--ui-ink)" stroke="white" stroke-width="1.4" stroke-linejoin="round"/></svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+    <div class="panel tang pair">
+      <figure>
+        <figcaption class="tag">In the brief</figcaption>
+        <div class="ui knj" role="img" aria-label="Bookkeeping dashboard for a busy year with a bar chart and a list of invoices.">
+          <nav><b>Knjiga</b><span>Invoices</span><span>Expenses</span></nav>
+          <h4>€48,210</h4>
+          <div class="sub">Invoiced this year</div>
+          <div class="bars"><i style="height:42%"></i><i style="height:58%"></i><i style="height:36%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:88%"></i><i style="height:52%"></i><i style="height:76%"></i><i style="height:100%"></i><i style="height:61%"></i><i style="height:82%"></i><i style="height:47%"></i></div>
+          <div class="inv">
+            <div><span>Studio Kalem</span><span>€3,200</span></div>
+            <div><span>Dunav Tours</span><span>€1,450</span></div>
+            <div><span>Pekara 21</span><span>€680</span></div>
           </div>
         </div>
-        <div class="proj-cap">
-          <span class="num">01</span>
-          <h3 id="ruta-title" translate="no">Ruta</h3>
-          <p class="what">Dispatch board for a grocery delivery fleet</p>
-          <p class="meta">Novi Sad, 2025 · Lead designer, 5&nbsp;months</p>
-          <p class="desc">Dispatchers ran the morning wave from three browser tabs and a whiteboard. I rebuilt the board around drivers instead of orders, so moving a delivery is one drag and the vehicle’s load updates while you do it.</p>
-          <p class="demo-note">The board replays one assignment: an urgent order goes to Ana’s cargo bike, her load bar fills and her route grows on the map.</p>
-          <button class="btn btn-mat pause" type="button" aria-controls="ruta-demo">
-            <svg class="i-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="8.4" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>
-            <svg class="i-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" hidden><path d="M4.5 2.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L5.4 2.3a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>
-            <span>Pause the loop</span>
-          </button>
+      </figure>
+      <figure>
+        <figcaption class="tag miss">Not in the brief</figcaption>
+        <div class="ui knj" role="img" aria-label="The same dashboard on day one, with empty outlined bars and two actions: bring last year's spreadsheet or send a first invoice.">
+          <nav><b>Knjiga</b><span>Invoices</span><span>Expenses</span></nav>
+          <h4>Nothing yet</h4>
+          <div class="sub">Invoiced this year</div>
+          <div class="bars ghost"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="first">
+            <p>This chart will be drawn from your own numbers. Where would you like to start?</p>
+            <div class="go mark"><span>Bring last year’s spreadsheet</span><span>Send a first invoice</span></div>
+          </div>
         </div>
-      </article>
-
-      <div class="grid proj-row">
-       <div class="stack stack-l">
-        <!-- 02 Halden -->
-        <article class="halden" aria-labelledby="halden-title">
-          <div class="fit" data-fit style="--w:744px">
-            <div class="ui" style="--w:744px" role="img" aria-label="Halden Fysio booking calendar for one clinic day. Four therapists in columns, appointments from 08:00 to 15:00, a current-time line at 10:40, and a keyboard patient search proposing a 12:00 slot with Mira.">
-              <div class="ui-top hal-top">
-                <div class="ui-brand" translate="no"><i>H</i>Halden Fysio</div>
-                <span class="hal-loc">Grünerløkka <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="m2.5 4 2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <div class="hal-date">
-                  <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2.5 4 6l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <b>Tuesday 12 November</b>
-                  <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2.5 8 6 4.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                  <span class="hal-today">Today</span>
-                </div>
-                <span class="hal-new">New booking <kbd>N</kbd></span>
-              </div>
-              <div class="hal-cols">
-                <div class="hal-head"></div>
-                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.04 250);--fg:oklch(0.42 0.1 250)">IH</span>Ingrid H.<span class="load">6</span></div>
-                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.05 78);--fg:oklch(0.45 0.09 70)">SV</span>Sander V.<span class="load">5</span></div>
-                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.04 166);--fg:oklch(0.4 0.08 166)">ML</span>Mira L.<span class="load">5</span></div>
-                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.04 33);--fg:oklch(0.45 0.12 33)">TR</span>Tobias R.<span class="load">4</span></div>
-              </div>
-              <div class="hal-cols hal-body">
-                <div class="hal-times">
-                  <span style="top:56px">09:00</span><span style="top:112px">10:00</span><span style="top:168px">11:00</span><span style="top:224px">12:00</span><span style="top:280px">13:00</span>
-                </div>
-                <div class="hal-col">
-                  <div class="ev" style="--s:0;--d:45"><b>S. Dahl</b><span>Ankle · 45 min</span></div>
-                  <div class="ev first" style="--s:60;--d:60"><b>O. Lund</b><span>First visit · 60 min</span></div>
-                  <div class="ev" style="--s:135;--d:45"><b>M. Haugen</b><span>Shoulder</span></div>
-                  <div class="ev off" style="--s:195;--d:30"><b>Lunch</b></div>
-                  <div class="ev" style="--s:240;--d:45"><b>E. Moe</b><span>Lower back</span></div>
-                  <div class="ev" style="--s:300;--d:45"><b>R. Aas</b><span>Knee rehab</span></div>
-                </div>
-                <div class="hal-col">
-                  <div class="ev" style="--s:30;--d:60"><b>A. Strand</b><span>Post-op knee · 60 min</span></div>
-                  <div class="ev sel" style="--s:105;--d:45"><b>J. Vik</b><span>Neck · checked in</span></div>
-                  <div class="ev" style="--s:180;--d:45"><b>I. Holm</b><span>Running gait</span></div>
-                  <div class="ev off" style="--s:240;--d:30"><b>Lunch</b></div>
-                  <div class="ev" style="--s:285;--d:50"><b>Back class</b><span>Group of 6</span></div>
-                </div>
-                <div class="hal-col">
-                  <div class="ev s" style="--s:0;--d:30"><b>L. Bakke</b><span>Follow-up</span></div>
-                  <div class="ev" style="--s:45;--d:45"><b>H. Ruud</b><span>Hip</span></div>
-                  <div class="ev" style="--s:120;--d:60"><b>P. Eide</b><span>Shoulder · 60 min</span></div>
-                  <div class="ev off" style="--s:195;--d:30"><b>Lunch</b></div>
-                  <div class="ev prop" style="--s:240;--d:45"><b>K. Berg</b><span>Knee rehab · new</span></div>
-                  <div class="ev first" style="--s:300;--d:45"><b>N. Lie</b><span>First visit</span></div>
-                </div>
-                <div class="hal-col">
-                  <div class="ev" style="--s:60;--d:45"><b>B. Foss</b><span>Ankle</span></div>
-                  <div class="ev" style="--s:120;--d:60"><b>G. Lunde</b><span>Sports injury</span></div>
-                  <div class="ev" style="--s:240;--d:45"><b>S. Hauge</b><span>Knee</span></div>
-                  <div class="ev" style="--s:300;--d:45"><b>F. Myhre</b><span>Back</span></div>
-                </div>
-                <div class="hal-now"><span>10:40</span></div>
-                <div class="hal-pop">
-                  <div class="in">
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.8" stroke="var(--ui-ink-2)" stroke-width="1.6"/><path d="m10.6 10.6 3.4 3.4" stroke="var(--ui-ink-2)" stroke-width="1.6" stroke-linecap="round"/></svg>
-                    berg<i class="caret"></i>
-                  </div>
-                  <ul>
-                    <li class="on"><div><b>Kari Berg</b><small>Born 1961 · Knee rehab</small></div><span class="tag">12:00 Mira</span></li>
-                    <li><div><b>Kristian Bergene</b><small>Born 1988 · Shoulder</small></div><span class="tag">13:15 Ingrid</span></li>
-                    <li><div><b>Sofie Berglund</b><small>Born 2003 · First visit</small></div><span class="tag">14:00 Tobias</span></li>
-                  </ul>
-                  <div class="foot"><kbd class="k">↵</kbd> Book first free slot <kbd class="k" style="margin-left:auto">Tab</kbd> Next</div>
-                </div>
-              </div>
-              <div class="hal-keys">
-                <span><kbd class="k">N</kbd> New booking</span>
-                <span><kbd class="k">/</kbd> Find patient</span>
-                <span><kbd class="k">←</kbd><kbd class="k">→</kbd> Change day</span>
-                <span><kbd class="k">Space</kbd> Check in</span>
-                <span style="margin-left:auto">Ingrid has a gap at 13:15</span>
-              </div>
-            </div>
-          </div>
-          <div class="proj-cap cap-below">
-            <span class="num">02</span>
-            <div>
-              <h3 id="halden-title" translate="no">Halden Fysio</h3>
-              <p class="what">Booking calendar for physiotherapy clinics</p>
-              <p class="meta">Oslo, 2024 · Sole designer</p>
-              <p class="desc">Receptionists book patients while they are still on the phone. The new calendar runs from the keyboard: find the patient, take the first free slot, confirm, and never reach for the mouse.</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- 04 Tessel -->
-        <article class="tessel" aria-labelledby="tessel-title">
-          <div class="fit" data-fit style="--w:526px">
-            <div class="ui" style="--w:526px" role="img" aria-label="Tessel design system foundations page with colour tokens, a type scale, buttons in three states, an IBAN field showing an error, and invoice status badges.">
-              <div class="ui-top tes-top">
-                <div class="ui-brand" translate="no"><i><b></b><b></b><b></b><b></b></i>Tessel</div>
-                <div class="tes-tabs"><span class="on">Foundations</span><span>Components</span><span>Patterns</span></div>
-                <span class="tes-ver">v2.3</span>
-              </div>
-              <div class="tes-body">
-                <div class="tes-sec">
-                  <p class="tes-label"><span>Colour</span><span>6 of 18</span></p>
-                  <div class="sw">
-                    <div><i style="--c:oklch(0.25 0.012 165)"></i><p>ink</p><small>#1F2523</small></div>
-                    <div><i style="--c:oklch(0.48 0.01 165)"></i><p>ink-muted</p><small>#5E6662</small></div>
-                    <div><i style="--c:oklch(0.966 0.004 120)"></i><p>surface</p><small>#F2F3EF</small></div>
-                    <div><i style="--c:oklch(0.45 0.082 166)"></i><p>paid</p><small>#1E6B54</small></div>
-                    <div><i style="--c:oklch(0.74 0.13 78)"></i><p>pending</p><small>#D9A441</small></div>
-                    <div><i style="--c:oklch(0.57 0.18 27)"></i><p>overdue</p><small>#C8432F</small></div>
-                  </div>
-                  <div class="typescale">
-                    <p class="tes-label"><span>Type</span><span>Size / line</span></p>
-                    <p class="aa">Aa</p>
-                    <ul>
-                      <li><b style="font-size:15px">Display</b><span>32 / 36</span></li>
-                      <li><b style="font-size:13px">Title</b><span>20 / 28</span></li>
-                      <li><span style="color:var(--ui-ink);font-size:12px">Body</span><span>15 / 22</span></li>
-                      <li><span style="color:var(--ui-ink-2);font-size:11px">Caption</span><span>13 / 18</span></li>
-                    </ul>
-                  </div>
-                </div>
-                <div class="tes-sec">
-                  <p class="tes-label"><span>Buttons</span><span>Default, secondary, disabled</span></p>
-                  <div class="tbtns"><span class="tbtn p">Send invoice</span><span class="tbtn s">Save draft</span><span class="tbtn d">Send</span></div>
-                  <div class="tfield">
-                    <label>IBAN</label>
-                    <p class="in">RS35 2600 0560 1001</p>
-                    <p class="err"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.2" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.4v3.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="6" cy="8.5" r=".8" fill="currentColor"/></svg>Serbian IBANs have 22 characters. This one has 18.</p>
-                  </div>
-                  <div class="tbadges">
-                    <p><span class="badge paid">Paid</span>INV-0412<span class="amt">€1,240.00</span></p>
-                    <p><span class="badge due">Due in 3 days</span>INV-0419<span class="amt">€386.50</span></p>
-                    <p><span class="badge late">Overdue</span>INV-0397<span class="amt">€2,075.00</span></p>
-                  </div>
-                  <p class="tswitch"><i></i>Remind client automatically</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-cap cap-below">
-            <span class="num">04</span>
-            <div>
-              <h3 id="tessel-title" translate="no">Tessel</h3>
-              <p class="what">Design system for an invoicing product</p>
-              <p class="meta">Remote, 2022 to 2023 · Design system lead</p>
-              <p class="desc">A small set of components the engineers could use without asking me. Every one shipped with its empty, loading and error states already drawn.</p>
-            </div>
-          </div>
-        </article>
-       </div>
-       <div class="stack stack-r">
-        <!-- 03 Okvir -->
-        <article class="okvir" aria-labelledby="okvir-title">
-          <div class="fit" data-fit style="--w:500px">
-            <div class="phones" style="width:500px" role="img" aria-label="Okvir inspection app on two phones. The first shows a stairwell checklist working offline with pass and fail results. The second shows a photo of the stairwell with the broken emergency light circled and a note attached to the checklist item.">
-              <div class="phone">
-                <div class="screen">
-                  <div class="sbar"><span>10:52</span><i class="isl"></i><span class="sig">No signal</span></div>
-                  <div class="pnav"><span class="back"><svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M7 1.5 2.5 6 7 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Block C</span><span class="tnum">14 of 22</span></div>
-                  <p class="ptitle">Stair 3, level −1</p>
-                  <p class="offline"><i></i>Offline. Saved on this phone.</p>
-                  <ul class="checks">
-                    <li><p>Handrail height<small>900 to 1000 mm</small></p><span class="chip pass">Pass</span></li>
-                    <li><p>Tread depth<small>At least 280 mm</small></p><span class="chip pass">Pass</span></li>
-                    <li><p>Riser height</p><span class="chip pass">Pass</span></li>
-                    <li><p>Emergency lighting<small>1 photo, 1 note</small></p><span class="chip fail">Fail</span></li>
-                    <li class="cur"><p><b>Fire door closes</b><small>Release and watch it latch</small></p><span class="chip todo">To check</span></li>
-                    <li><p>Exit signage</p><span class="chip todo">To check</span></li>
-                  </ul>
-                  <div class="pbtn">Mark fire door</div>
-                  <i class="home"></i>
-                </div>
-              </div>
-              <div class="phone">
-                <div class="screen">
-                  <div class="sbar"><span>10:49</span><i class="isl"></i><span class="sig">No signal</span></div>
-                  <div class="pnav"><span class="back"><svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M7 1.5 2.5 6 7 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Item 4</span><span>Retake</span></div>
-                  <div class="photo">
-                    <svg width="200" height="186" viewBox="0 0 200 186" fill="none">
-                      <defs>
-                        <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5d625f"/><stop offset="1" stop-color="#2f3331"/></linearGradient>
-                        <radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient>
-                      </defs>
-                      <rect width="200" height="186" fill="url(#wall)"/>
-                      <path d="M0 186V160h36v-26h34v-26h34V82h34V56h34V30h28v156z" fill="#7b817d"/>
-                      <path d="M0 160h36M36 134h34M70 108h34M104 82h34M138 56h34M172 30h28" stroke="#a3a9a5" stroke-width="2.5"/>
-                      <path d="M36 160v26M70 134v52M104 108v78M138 82v104M172 56v130" stroke="#5f6561" stroke-width="1"/>
-                      <path d="M-4 118 L204 -40" stroke="#b9bfbb" stroke-width="3"/>
-                      <path d="M30 96v16M80 58v16M130 20v16" stroke="#9aa09c" stroke-width="2"/>
-                      <rect x="20" y="22" width="40" height="17" rx="4" fill="#8e9490"/>
-                      <rect x="25" y="26" width="30" height="9" rx="2.5" fill="#6b716d"/>
-                      <rect width="200" height="186" fill="url(#vig)"/>
-                      <circle cx="40" cy="30.5" r="25" stroke="var(--ochre)" stroke-width="2.5"/>
-                      <circle cx="63" cy="12" r="9" fill="var(--ochre)"/>
-                      <text x="63" y="15.5" text-anchor="middle" font-size="10" font-weight="500" fill="oklch(0.25 0.04 70)" font-family="inherit">1</text>
-                    </svg>
-                  </div>
-                  <div class="pfield">
-                    <label>Note for item 4, emergency lighting</label>
-                    <p class="box">Light at the landing does not come on. Test button pressed twice, no response.</p>
-                  </div>
-                  <div class="ptags"><span>Electrical</span><span>Before handover</span></div>
-                  <div class="pbtn alt">Attach to item 4</div>
-                  <i class="home"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proj-cap cap-below">
-            <span class="num">03</span>
-            <div>
-              <h3 id="okvir-title" translate="no">Okvir</h3>
-              <p class="what">Inspection app for building surveyors</p>
-              <p class="meta">Ljubljana, 2023 · Product and interaction design</p>
-              <p class="desc">Surveyors work in basements and stairwells with no signal. Everything saves to the phone first, and every photo attaches to the checklist item it proves.</p>
-            </div>
-          </div>
-        </article>
-        <section class="others" aria-labelledby="others-title">
-          <h3 id="others-title">Smaller projects</h3>
-          <p class="sub">Audits, single features and things that took a few weeks.</p>
-          <ol>
-            <li><span class="y">2024</span><span class="n" translate="no">Trg</span><span class="d">Stock counts for a café group, done one-handed in the walk-in fridge.</span></li>
-            <li><span class="y">2023</span><span class="n" translate="no">Pazi</span><span class="d">Onboarding for a payroll app in Zagreb. Fewer fields, asked in a better order.</span></li>
-            <li><span class="y">2022</span><span class="n" translate="no">Hvat</span><span class="d">Booking and memberships for three climbing gyms that share members.</span></li>
-            <li><span class="y">2021</span><span class="n" translate="no">Slog</span><span class="d">A two-week audit of the internal tools at a freight forwarder.</span></li>
-            <li><span class="y">Spring</span><span class="n">Teaching</span><span class="d">An interface design workshop for final-year students in Belgrade.</span></li>
-          </ol>
-        </section>
-       </div>
-      </div>
+      </figure>
     </div>
-    <svg class="angles br" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
-      <g stroke="currentColor" stroke-width="1">
-        <path d="M900 900 L0 380.4"/>
-        <path d="M900 900 L0 0"/>
-        <path d="M900 900 L380.4 0"/>
-      </g>
-      <g fill="currentColor" font-size="10" font-family="inherit">
-        <text x="788.9" y="832.4" transform="rotate(30 788.9 832.4)">30°</text>
-        <text x="810.2" y="805.9" transform="rotate(45 810.2 805.9)">45°</text>
-        <text x="837.6" y="785.9" transform="rotate(60 837.6 785.9)">60°</text>
-      </g>
-    </svg>
-    <div class="work-end"></div>
-  </section>
+  </article>
+</section>
 
-  <section class="approach" id="approach" aria-labelledby="approach-title">
-    <div class="wrap">
-      <div class="grid approach-head">
-        <h2 id="approach-title">How a project usually runs</h2>
-        <p>Most projects take ten to fourteen weeks. I work inside your tools, and there is something you can click every Friday, so nobody waits a month to see where it’s going.</p>
-      </div>
+<section class="list" id="checklist" aria-labelledby="list-title">
+  <div class="list-top">
+    <h2 id="list-title">What I ask of every screen.</h2>
+    <p>Tick what your product already handles.</p>
+  </div>
+  <fieldset class="wall">
+    <legend class="sr">Cases your product handles</legend>
+    <label><input type="checkbox" checked><span>Happy path</span></label>
+    <label><input type="checkbox"><span>Empty</span></label>
+    <label><input type="checkbox"><span>First time</span></label>
+    <label><input type="checkbox"><span>Thousandth time</span></label>
+    <label><input type="checkbox"><span>Loading</span></label>
+    <label><input type="checkbox"><span>Slow</span></label>
+    <label><input type="checkbox"><span>Offline</span></label>
+    <label><input type="checkbox"><span>Failed</span></label>
+    <label><input type="checkbox"><span>Half done</span></label>
+    <label><input type="checkbox"><span>Too long</span></label>
+    <label><input type="checkbox"><span>Too many</span></label>
+    <label><input type="checkbox"><span>Just one</span></label>
+    <label><input type="checkbox"><span>Expired</span></label>
+    <label><input type="checkbox"><span>Undo</span></label>
+    <label><input type="checkbox"><span>Someone else changed it</span></label>
+    <label><input type="checkbox"><span>Not in English</span></label>
+    <label><input type="checkbox"><span>Keyboard only</span></label>
+    <label><input type="checkbox"><span>Screen reader</span></label>
+    <label><input type="checkbox"><span>Big text</span></label>
+  </fieldset>
+  <div class="tally">
+    <p id="tally" role="status">1 of 19 handled. The other 18 are where I’d start.</p>
+    <a class="btn lift" id="send" href="mailto:mara@ilic.example">Send me the 18</a>
+  </div>
+</section>
 
-      <div class="plan" role="list">
-        <div class="grid plan-ruler" aria-hidden="true">
-          <p class="plan-label"><i class="diamond"></i>A clickable build every Friday</p>
-          <div class="track">
-            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
-            <i class="d" style="--i:2"></i><i class="d" style="--i:3"></i><i class="d" style="--i:4"></i><i class="d" style="--i:5"></i><i class="d" style="--i:6"></i><i class="d" style="--i:7"></i><i class="d" style="--i:8"></i><i class="d" style="--i:9"></i><i class="d" style="--i:10"></i><i class="d" style="--i:11"></i><i class="d" style="--i:12"></i>
-          </div>
-        </div>
-        <div class="grid plan-row" role="listitem">
-          <div class="plan-label">
-            <h3>Sit in <span>Weeks 1 to 2</span></h3>
-            <p>I watch the people who use the tool do their actual work, on calls or on site, and write down every workaround.</p>
-          </div>
-          <div class="track" aria-hidden="true"><i class="bar" style="grid-column:1 / 3"></i></div>
-        </div>
-        <div class="grid plan-row" role="listitem">
-          <div class="plan-label">
-            <h3>Map <span>Weeks 2 to 3</span></h3>
-            <p>One page with every screen, state and handoff. Disagreements come up here, while they are still cheap.</p>
-          </div>
-          <div class="track" aria-hidden="true"><i class="bar" style="grid-column:2 / 4"></i></div>
-        </div>
-        <div class="grid plan-row" role="listitem">
-          <div class="plan-label">
-            <h3>Prototype <span>Weeks 3 to 6</span></h3>
-            <p>Clickable prototypes with real data, tested with the same people from week one.</p>
-          </div>
-          <div class="track" aria-hidden="true"><i class="bar" style="grid-column:3 / 7"></i></div>
-        </div>
-        <div class="grid plan-row" role="listitem">
-          <div class="plan-label">
-            <h3>Ship in slices <span>Weeks 6 to 12</span></h3>
-            <p>I pair with your engineers and review builds, not files. Something reaches real users every week.</p>
-          </div>
-          <div class="track" aria-hidden="true"><i class="bar slices" style="grid-column:6 / 13"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></i></div>
-        </div>
-        <div class="grid plan-row" role="listitem">
-          <div class="plan-label">
-            <h3>Hand over <span>Weeks 11 to 12</span></h3>
-            <p>Components, states and the reasons behind each decision, written down so the next change doesn’t need me.</p>
-          </div>
-          <div class="track" aria-hidden="true"><i class="bar out" style="grid-column:11 / 13"></i></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="about" id="about" aria-labelledby="about-title">
-    <div class="wrap grid">
-      <h2 class="about-label" id="about-title">About</h2>
-      <div class="about-text">
-        <p class="big">Before going independent in 2019 I spent six years in‑house, first at a logistics software company in Novi Sad, then at a payments startup in Berlin. Both taught me the same thing: the people who use a product all day know exactly where it hurts, and they are rarely in the room when it gets designed.</p>
-        <p class="small">So I bring them in. I sit with dispatchers, receptionists and surveyors before I open a design file, and I keep showing them work until it ships.</p>
-      </div>
-      <dl class="facts">
-        <div><dt>Based in</dt><dd>Belgrade, on Central European Time. Mornings overlap with London, afternoons with New York.</dd></div>
-        <div><dt>Languages</dt><dd>Serbian, English, German</dd></div>
-        <div><dt>Works with</dt><dd>Founders, product leads and engineering teams of 3 to 40&nbsp;people</dd></div>
-        <div><dt>Engagements</dt><dd>A fixed-scope project, or two to four days a week on retainer</dd></div>
-        <div><dt>Not a fit for</dt><dd>Brand identity, marketing sites and logos. I’ll gladly point you to people who do them well.</dd></div>
-      </dl>
-    </div>
-  </section>
-
-  <section class="mat contact" id="contact" aria-labelledby="contact-title">
-    <div class="wrap grid">
-      <h2 id="contact-title">Taking on one new project from January&nbsp;2027.</h2>
-      <div class="mail-row">
-        <a class="mail" href="mailto:hello@marailic.com" translate="no">hello@marailic.com</a>
-        <button class="btn btn-mat copy" type="button" data-email="hello@marailic.com">
-          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.25" y="5.25" width="8.5" height="8.5" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 3.25A1.5 1.5 0 0 0 9 2.25H4A1.75 1.75 0 0 0 2.25 4v5c0 .7.4 1.2 1 1.45" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-          <span>Copy address</span>
-        </button>
-        <span class="sr-only" aria-live="polite" id="copy-status"></span>
-      </div>
-      <div class="contact-foot">
-        <p>Tell me what the product does, who uses it and what isn’t working. I reply within two working days.</p>
-        <p class="time" id="local-time">Belgrade, Central European Time</p>
-      </div>
-    </div>
-    <svg class="angles tr" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
-      <g stroke="currentColor" stroke-width="1">
-        <path d="M900 0 L0 900"/>
-        <path d="M900 0 L380.4 900"/>
-      </g>
-      <g fill="currentColor" font-size="10" font-family="inherit">
-        <text x="805.9" y="89.9" transform="rotate(-45 805.9 89.9)">45°</text>
-        <text x="832.4" y="111.1" transform="rotate(-60 832.4 111.1)">60°</text>
-      </g>
-    </svg>
-  </section>
+<section class="about" id="about" aria-labelledby="about-title">
+  <h2 id="about-title">Say it EE-litch.</h2>
+  <p class="say">The ć is a soft ch. I can also write my name as <span lang="sr-Cyrl" class="cy" translate="no">Мара&nbsp;Илић</span>, which no form has accepted either.</p>
+  <div class="prose">
+    <p>I’ve spent my working life inside product teams and went independent to stay close to the work. I take one client at a time, join your standup and your Slack, and work in whatever your engineers already open. You get the same person from the first messy doc to the last handoff note.</p>
+    <dl>
+      <div><dt>Good fit</dt><dd>A product people use every day and a team that ships often. Or one neglected corner of something bigger.</dd></div>
+      <div><dt>What I do</dt><dd>User research, flows, interface design, design systems, prototypes in code.</dd></div>
+      <div><dt>What I don’t</dt><dd>Logos, pitch decks, or redesigns where I can’t talk to a single user.</dd></div>
+    </dl>
+  </div>
+</section>
 </main>
 
-<footer class="site-foot">
-  <div class="wrap">
-    <p>© 2026 <span translate="no">Mara Ilić</span>. Belgrade, Serbia.</p>
-    <a href="#top">Back to top</a>
+<div class="check" aria-hidden="true"></div>
+<footer class="contact" id="contact">
+  <p class="lead">Free from January. Tell me the case your product handles worst.</p>
+  <a class="mail lift" href="mailto:mara@ilic.example" translate="no">mara@ilic.example</a>
+  <div class="foot">
+    <p>There’s no ć in the address. Email still can’t be trusted with it.</p>
+    <p>Set in Sofia Sans, drawn by Lettersoup in Sofia, with a proper ć and ћ. The pink and black check is what game engines paint when a texture goes missing.</p>
   </div>
 </footer>
 
 <script>
 (() => {
-  // Scale drawn interfaces down to fit narrow containers; never up.
-  const fits = [...document.querySelectorAll('[data-fit]')];
-  const fit = () => fits.forEach((el) => {
-    const w = parseFloat(el.style.getPropertyValue('--w'));
-    const avail = el.parentElement.clientWidth;
-    el.style.zoom = avail < w ? (avail / w).toFixed(4) : '';
+  const MARA = 'Mara Ilić';
+  const NAME_K = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--name-k'));
+  const SIDE_BEARINGS = .044;
+  const h1 = document.querySelector('.name');
+  const out = document.getElementById('name');
+  const buttons = [...document.querySelectorAll('.spell button')];
+  const status = document.getElementById('status');
+  const note = document.getElementById('note');
+  const field = document.getElementById('yours');
+  const noteDefault = note.textContent;
+
+  const folded = {đ:'d',Đ:'D',ł:'l',Ł:'L',ø:'o',Ø:'O',ß:'ss',æ:'ae',Æ:'AE',œ:'oe',Œ:'OE',ı:'i',þ:'th',Þ:'Th',ð:'d',Ð:'D'};
+  const strip = s => s.normalize('NFD').replace(/\p{M}/gu, '').replace(/[đĐłŁøØßæÆœŒıþÞðÐ]/g, c => folded[c]);
+  const cyr = {a:'а',b:'б',c:'ц',č:'ч',ć:'ћ',d:'д',dž:'џ',đ:'ђ',e:'е',f:'ф',g:'г',h:'х',i:'и',j:'ј',k:'к',l:'л',lj:'љ',m:'м',n:'н',nj:'њ',o:'о',p:'п',q:'к',r:'р',s:'с',š:'ш',t:'т',u:'у',v:'в',w:'в',x:'кс',y:'и',z:'з',ž:'ж'};
+  const spellings = {
+    right: s => s,
+    strip,
+    encoding: s => new TextDecoder('windows-1252').decode(new TextEncoder().encode(s)),
+    unknown: s => s.replace(/[^\x00-\x7f]/gu, '?'),
+    escaped: s => s.replace(/[^\x00-\x7f]/gu, c => `&#${c.codePointAt(0)};`),
+    ticket: s => {
+      const parts = strip(s).trim().split(/\s+/);
+      const last = parts.pop();
+      return (parts.length ? `${last}/${parts.join(' ')}` : last).toUpperCase();
+    },
+    short: s => [...s].slice(0, 7).join(''),
+    cyrillic: s => [...s].map(c => /[čćđšžČĆĐŠŽ]/.test(c) ? c : strip(c)).join('').replace(/dž|lj|nj|./gisu, m => {
+      const c = cyr[m.toLowerCase()];
+      if (!c) return m;
+      return m[0] !== m[0].toLowerCase() ? c[0].toUpperCase() + c.slice(1) : c;
+    }),
+  };
+
+  const ruler = document.createElement('canvas').getContext('2d');
+  let source = MARA;
+  let kind = 'right';
+  let shown = MARA;
+
+  // Keeps any spelling inside the name's box: wide ones shrink, and ones with descenders (р, ‡) lift off the row below.
+  function fit() {
+    const size = h1.clientWidth * NAME_K;
+    h1.style.fontSize = size + 'px';
+    out.style.fontSize = '1em';
+    ruler.font = `700 100px ${getComputedStyle(h1).fontFamily}`;
+    const ink = ruler.measureText(shown);
+    const rise = ink.actualBoundingBoxAscent / 100;
+    const drop = Math.max(0, ink.actualBoundingBoxDescent / 100 - .02);
+    const ratio = Math.min(
+      1,
+      h1.clientWidth * (1 + SIDE_BEARINGS * NAME_K) / out.getBoundingClientRect().width,
+      h1.clientHeight / ((rise + drop) * size),
+    );
+    out.style.fontSize = ratio + 'em';
+    out.style.transform = drop ? `translateY(${-drop * size * ratio}px)` : '';
+  }
+
+  function paint(next, animate) {
+    const before = [...shown];
+    const after = [...next];
+    let same = 0;
+    while (same < before.length && same < after.length && before[same] === after[same]) same++;
+    shown = next;
+    out.textContent = next;
+    out.classList.toggle('cy', kind === 'cyrillic');
+    fit();
+    if (!animate || same === after.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Only the letters that changed roll in. Whole text comes back afterwards so kerning is restored.
+    out.textContent = after.slice(0, same).join('');
+    const glyphs = after.slice(same).map((c, i) => {
+      const glyph = document.createElement('span');
+      glyph.className = 'roll';
+      glyph.textContent = c === ' ' ? '\u00a0' : c;
+      glyph.style.animationDelay = i * 26 + 'ms';
+      return glyph;
+    });
+    out.append(...glyphs);
+    glyphs.at(-1).addEventListener('animationend', () => { if (shown === next) out.textContent = next; }, { once: true });
+  }
+
+  function refreshCells() {
+    buttons.forEach(b => {
+      b.querySelector('span').textContent = spellings[b.dataset.kind](source);
+    });
+    buttons.find(b => b.dataset.kind === 'cyrillic').querySelector('small').textContent = source === MARA ? 'Also right' : 'In Cyrillic';
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => {
+    kind = b.dataset.kind;
+    buttons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const text = spellings[kind](source);
+    paint(text, true);
+    status.textContent = `${b.querySelector('small').textContent}: ${text}`;
+  }));
+
+  field.addEventListener('input', () => {
+    source = field.value.trim() || MARA;
+    refreshCells();
+    paint(spellings[kind](source), false);
+    note.textContent = source !== MARA && !/[^\x00-\x7f]/.test(source)
+      ? 'Your name has had an easy life. Try a friend’s.'
+      : noteDefault;
   });
-  if ('ResizeObserver' in window) {
-    const ro = new ResizeObserver(fit);
-    fits.forEach((el) => ro.observe(el.parentElement));
-  }
+  document.getElementById('try').addEventListener('submit', e => e.preventDefault());
+
   fit();
+  addEventListener('resize', fit);
+  document.fonts?.ready.then(fit);
 
-  // Pause control for the looping demo (WCAG 2.2.2).
-  const demo = document.getElementById('ruta-demo');
-  const pause = document.querySelector('.pause');
-  if (demo && pause) {
-    pause.addEventListener('click', () => {
-      const paused = demo.classList.toggle('paused');
-      pause.querySelector('span').textContent = paused ? 'Play the loop' : 'Pause the loop';
-      pause.querySelector('.i-pause').toggleAttribute('hidden', paused);
-      pause.querySelector('.i-play').toggleAttribute('hidden', !paused);
-    });
+  const boxes = [...document.querySelectorAll('.wall input')];
+  const tally = document.getElementById('tally');
+  const send = document.getElementById('send');
+  function count() {
+    const left = boxes.filter(b => !b.checked).map(b => b.nextElementSibling.textContent);
+    const done = boxes.length - left.length;
+    const n = left.length;
+    tally.textContent = n === 0
+      ? `${done} of ${done} handled. You don’t need me. Write anyway?`
+      : `${done} of ${boxes.length} handled. ${n === 1 ? 'The other one is' : `The other ${n} are`} where I’d start.`;
+    send.textContent = n === 0 ? 'Say hello' : `Send me the ${n === 1 ? 'one' : n}`;
+    const body = n ? `Hi Mara,\n\nOur product doesn't handle these yet:\n\n${left.map(x => `- ${x}`).join('\n')}\n` : 'Hi Mara,\n';
+    send.href = `mailto:mara@ilic.example?subject=${encodeURIComponent('What our product doesn\'t handle yet')}&body=${encodeURIComponent(body)}`;
   }
-
-  // Copy email.
-  const copy = document.querySelector('.copy');
-  const status = document.getElementById('copy-status');
-  if (copy) {
-    let t;
-    copy.addEventListener('click', async () => {
-      const label = copy.querySelector('span');
-      try {
-        await navigator.clipboard.writeText(copy.dataset.email);
-        label.textContent = 'Copied';
-        status.textContent = 'Email address copied';
-      } catch {
-        label.textContent = 'Address selected';
-        const r = document.createRange();
-        r.selectNodeContents(document.querySelector('.mail'));
-        const s = getSelection(); s.removeAllRanges(); s.addRange(r);
-      }
-      clearTimeout(t);
-      t = setTimeout(() => { label.textContent = 'Copy address'; status.textContent = ''; }, 2200);
-    });
-  }
-
-  // Local time in Belgrade.
-  const time = document.getElementById('local-time');
-  if (time) {
-    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Belgrade', hour: '2-digit', minute: '2-digit' });
-    const tick = () => { time.textContent = `It’s ${fmt.format(new Date())} in Belgrade right now`; };
-    tick();
-    setInterval(tick, 30000);
-  }
+  boxes.forEach(b => b.addEventListener('change', count));
+  count();
 })();
 </script>
 </body>

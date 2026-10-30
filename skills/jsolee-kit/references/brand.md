@@ -13,7 +13,8 @@ From a name to a mark and a one-page system people can apply without asking.
 
 ## Rules
 
-- The mark comes from an idea about the product. No swooshes, orbits, hexagons, sparkles or a letter in a rounded square by default.
+- The mark comes from an idea about the product. No swooshes, orbits, hexagons, sparkles, a letter in a rounded square, or an initial with a colored dot.
+- The sheet has a point of view too: not the cream page with a serif and mono captions, not yellow and black.
 - It works in one color first. No gradients, shadows or strokes that vanish at 16 px.
 - The final file is a clean vector with outlined type, never a generated raster.
 - Align by eye: geometry that is mathematically centered often looks off.

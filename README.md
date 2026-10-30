@@ -29,9 +29,9 @@
 
 <br>
 
-Models got good at landing pages. They still drift to the same tells: a pill that says "New" above the headline, two buttons where one would do, four accent colors, em dashes all over the copy, nothing you'd remember. Each one is small. Together they're why a page feels generated.
+Ask Claude Code for six different things and you get one look: a warm off-white page, a serif headline with a phrase in italics, tiny mono captions, a vermilion accent, Geist. It's good. It's also what everyone else's agent shipped this morning.
 
-**jsolee-kit is how I catch them.** It's the skill I load for frontend work in Claude Code: a six-step workflow, eleven house rules, a ship checklist, 23 reference sites sorted by the section you're designing, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work. [Here's the difference it makes](#does-it-make-a-difference) on the same prompt.
+**jsolee-kit is how I get out of it.** It's the skill I load for design work in Claude Code: a workflow that throws away the first idea, rules against today's default look, a ship checklist, 23 reference sites sorted by section, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work.
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
@@ -39,9 +39,9 @@ It's opinionated on purpose. Fork it and make the rules yours.
 <p align="center"><sub>Silent preview. <a href="https://github.com/Jsolee/jsolee-kit/raw/main/assets/demo.mp4">Download the video with sound</a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
-  <img alt="Six things Claude built with the kit: a landing, a pricing page, a dashboard, a portfolio, an email and a brand sheet" src="assets/gallery.png" width="100%">
+  <img alt="The same six prompts: without skills, six cream pages with serif headlines; with jsolee-kit, six pages that look nothing alike" src="assets/six-looks.png" width="100%">
 </a>
-<p align="center"><sub>Six things Claude built with the kit, one prompt each. <a href="#does-it-make-a-difference">See them next to the same prompt without it.</a></sub></p>
+<p align="center"><sub>Same six prompts, same model, one run per side. <a href="#does-it-make-a-difference">See each pair, and how it was run.</a></sub></p>
 
 <br>
 
@@ -93,96 +93,97 @@ Everyone who clones the repo gets the same rules, without installing anything.
 
 ## Does it make a difference?
 
-Six prompts, same model (Claude Opus 5.5), one run each, nothing cherry-picked. The results on the left are good: today's models don't ship the indigo gradient anymore. What the kit changes is what a page leads with and what it leaves out. Every page is in [`examples/`](examples), so open them and judge for yourself.
+Six prompts, same model (Claude Opus 5.5), one run per side, every result published. Every page is in [`examples/`](examples): open them, they work.
+
+**Look at the left column first.** Nobody asked for this look, and it keeps showing up: Geist in four of the five pages, a warm off-white in four, a serif headline in four, mono captions in all five. Each page is good. Together they're a uniform.
 
 ### A landing page
 
 <p align="center">
-  <img alt="Fieldnote landing page built without skills on the left and with jsolee-kit on the right" src="assets/before-after.png" width="100%">
+  <img alt="Fieldnote landing page without skills on the left, a cream page with a serif headline; with jsolee-kit on the right, a salmon page with huge condensed capitals" src="assets/before-after.png" width="100%">
 </p>
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Above the headline | a "NEW" pill | nothing |
-| Hero actions | two buttons | one button and a text link |
-| Color | red underline, green, yellow and pink tags | one committed yellow |
+| Headline | "The meeting ends. The follow-up is already written." | "While you were talking, we wrote the follow-up." |
+| The move | a serif on cream, with a hand-drawn underline | a salmon field and capitals as wide as the screen |
+| The product | a picture of the app | a recording you can scrub, and the email writes itself as it plays |
+| Type | Geist, Newsreader | League Gothic, Libre Franklin |
 | Em dashes in the copy | 6 | 0 |
-| Something to remember | a polished app mockup | the same mockup, with each transcript line wired to the email point it became |
 
 ### A pricing page
 
 <p align="center">
-  <img alt="Relay pricing page built without skills on the left and with jsolee-kit on the right" src="assets/compare-pricing.png" width="100%">
+  <img alt="Relay pricing page without skills on the left, a light page with three plan cards; with jsolee-kit on the right, a mint page drawn as a phone's LCD screen" src="assets/compare-pricing.png" width="100%">
 </p>
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Leads with | "Pay for the texts that arrive" and a request log | "Know the price before you send" and a working calculator: type a message, see its segments and what it costs per plan |
-| Proof | a row of numbers the page can't back up (99.99% uptime, 190+ countries) | no proof row |
-| Plan badge | a "Best for production" pill | no badge |
+| Headline | "Pay for the texts that arrive." | "What this text costs." |
+| The move | a request log in a card | the page is a phone's LCD: prices in dot matrix |
+| The product | a static example | type on the screen or drag the volume, and every price on the page follows |
+| Proof | numbers the page can't back up (99.99% uptime) | none |
 | Em dashes in the copy | 12 | 0 |
 
 ### A dashboard
 
 <p align="center">
-  <img alt="Ledger dashboard built without skills on the left and with jsolee-kit on the right" src="assets/compare-dashboard.png" width="100%">
+  <img alt="Ledger dashboard without skills on the left, KPI cards on off-white; with jsolee-kit on the right, a black and red screen with a giant revenue figure" src="assets/compare-dashboard.png" width="100%">
 </p>
-
-Close: both are clean, and neither has an em dash.
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Top of the screen | four KPI cards with sparklines | one sum: gross sales − refunds = net sales |
-| What to do next | three refund requests, in a card | a "Needs you" panel: 7 orders to pack, 2 refund requests, 4 mugs running out, each with its button |
-| Status | colored pills | dots, in one accent plus red |
+| Top of the screen | four KPI cards with sparklines | one giant revenue figure |
+| The move | green and rust bars on off-white | black for money in, red for money out, split on the same axis |
+| What to do next | three refund requests, in a card | "Waiting on you": each refund with its own button |
+
+This is the loudest of the six, and the one I'd turn down first: someone has to look at it all day.
 
 ### A portfolio
 
 <p align="center">
-  <img alt="Mara Ilić portfolio built without skills on the left and with jsolee-kit on the right" src="assets/compare-portfolio.png" width="100%">
+  <img alt="Mara Ilić portfolio without skills on the left, serif and italics on cream; with jsolee-kit on the right, a magenta page with the name filling the screen" src="assets/compare-portfolio.png" width="100%">
 </p>
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Headline | serif and italics, with two decorated underlines | one plain sentence |
-| Above the fold | three stats and a row of client logos | the work itself: the first project's dispatch board |
+| Headline | "I design calm software for complicated work." | "Most software can't spell my name. I'm a product designer, so I take it personally." |
+| The move | serif and italics, two decorated underlines | her name, as big as the screen, on magenta |
+| The product | three stats and a row of client logos | type your own name and watch software mangle it (`Joan SolÃ©`) |
 | Em dashes in the copy | 25 | 0 |
 
 ### An email
 
 <p align="center">
-  <img alt="Ledger weekly email built without skills on the left and with jsolee-kit on the right" src="assets/compare-email.png" width="100%">
+  <img alt="Ledger weekly email without skills on the left, a cream card with a serif; with jsolee-kit on the right, a mint receipt in monospace" src="assets/compare-email.png" width="100%">
 </p>
-
-Technically they tie: both use tables, a preheader, dark mode and Outlook fallbacks. That's what the default already gets right. The kit changes the editing.
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Opens with | a greeting, then the number | the number, then what changed |
-| Actions | a button and a second link to the report | one button |
-| Color | green and red figures, a red callout box | one green |
-| Length | 1,865 px | 1,297 px |
+| Opens with | a greeting, then the number | sales minus refunds, then the total, like a receipt |
+| The move | a cream card and a serif | mint and monospace: it reads like a ledger |
+| Actions | a button and a second link | one button |
+| Length | 1,865 px | 1,258 px |
+
+Under the surface they tie: both use tables, a preheader, dark mode and Outlook fallbacks. That's what the default already gets right.
 
 ### A logo and brand
 
 <p align="center">
-  <img alt="Fieldnote brand sheet built without skills on the left and with jsolee-kit on the right" src="assets/compare-brand.png" width="100%">
+  <img alt="Fieldnote brand sheet without skills on the left, a yellow and navy F with a red dot; with jsolee-kit on the right, a black F that is also a flag on hot pink" src="assets/compare-brand.png" width="100%">
 </p>
-
-The left one is a strong sheet, and it does what the prompt asked: everything on one screen. The right one runs past four screens, because it shows the work.
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| The mark | an F with a red dot | four lines of sound that read as an F, ending on the record light |
-| Ideas shown | one | three in black, with why two were dropped |
-| Tested | a rule for small sizes | on a pixel grid at 60, 30 and 15 px, and in one color on three backgrounds |
-| Do and don't | what to say and not say | the same, plus five drawn misuses of the mark |
-| Limits | not stated | says the trademark search hasn't been run |
-
-**What it costs:** across the six pairs, the runs with the kit used about 1.7× the tokens and 1.9× the time: they read the rules, load design skills and take more passes (41 to 75 tool calls against 2 to 10).
+| The mark | an F with a red dot | an F that is also a flag on a stake: mail apps flag what needs a reply, surveyors stake what to remember |
+| Ideas shown | one | three, in black |
+| Limits | not stated | says no trademark search has been run |
+| Length | one screen, as the prompt asked | more than five screens, so it misses the "one page" |
 
 <details>
-<summary><b>The prompts</b></summary>
+<summary><b>How this was run, and what to be skeptical about</b></summary>
+
+<br>
 
 ```text
 Build a landing page for Fieldnote, an app that records your meetings and writes the follow-up email for you.
@@ -193,7 +194,13 @@ Build a weekly summary email for Ledger, an app where a small online shop owner 
 Design a logo and a one-page brand sheet for Fieldnote, an app that records your meetings and writes the follow-up email for you.
 ```
 
-Every run got the same constraints: one self-contained HTML file, no raster images, and for the pages, Tailwind and Google Fonts from a CDN with everything visible on load. The runs on the left were told not to use skills. The runs on the right were told to read the jsolee-kit skill and its references and follow its workflow, house rules and checklist, and could load the design skills it maps. All of them were told not to browse the web.
+- **Same constraints on both sides:** one self-contained HTML file, no raster images, and for the pages, Tailwind and Google Fonts from a CDN with everything visible on load.
+- **Left:** told not to use skills, read files or browse. Never re-run.
+- **Right:** told to read the kit and follow it, could load the skills it maps, and could look at screenshots of its reference galleries. No live browsing.
+- **These prompts trained the rules.** I wrote the default-look rules after seeing the left column, so the kit has seen these six before. Try your own prompt.
+- **The first version of the kit was much subtler.** It removed tells and kept the look. Those pages are in this repo's history.
+- **Louder isn't always better.** The kit asks for one big move. On a real project you may want a smaller one: see the [FAQ](#faq).
+- **It costs more.** The kit runs used about 1.8× the tokens and 2.1× the time: 36 to 75 tool calls against 2 to 10.
 
 </details>
 
@@ -216,7 +223,7 @@ jsolee-kit/
 └── .claude-plugin/              the marketplace behind /plugin install
 ```
 
-`SKILL.md` stays around 70 lines on purpose. Claude reads it whole on every UI task, and the long lists sit in `references/` until a step needs them.
+`SKILL.md` stays under 100 lines on purpose. Claude reads it whole on every UI task, and the long lists sit in `references/` until a step needs them.
 
 <br>
 
@@ -229,7 +236,7 @@ jsolee-kit/
 
 | Step | What happens | Reach for |
 |---|---|---|
-| **01 Direction** | Read `PRODUCT.md` / `DESIGN.md` if the repo has them. Decide the register (brand page or product UI), one committed accent per surface, a type pair. No code yet. | `impeccable`, `design-taste-frontend` |
+| **01 Direction** | Read `PRODUCT.md` / `DESIGN.md` if the repo has them. Write three directions from something true about the product, throw away the first one you thought of, and keep the one a competitor couldn't wear. Then fix the register, one committed color and a type pair. No code yet. | `impeccable`, `design-taste-frontend` |
 | **02 References** | Two or three sites per section from the [reference library](#reference-library). Write one line per site about what you're taking: layout, rhythm, type or motion. Never copy a page. | `jsolee-kit` references |
 | **03 Build** | Real product, real data, real copy. Stack skills for the code. | `react-patterns`, `prisma-patterns`, `react-native-patterns` |
 | **04 Motion** | One signature moment, not everything moving. GSAP for scroll and timelines, Motion for component state. | `gsap-scrolltrigger`, `motion-patterns` |
@@ -240,7 +247,22 @@ jsolee-kit/
 
 ## House rules
 
-Each rule is an AI tell I've caught in my own projects, followed by what we do instead.
+**First, the default look.** Left alone, today's models converge on it. If your work could wear it, start over, unless the brand truly calls for it:
+
+- A warm off-white background (`#f5f3ee` and friends), ruled lines or paper grain.
+- A serif headline with one phrase in italics or underlined by hand.
+- Tiny mono captions, numbered eyebrows, hairline rules, one vermilion dot or underline.
+- Nav, headline left, blurb right, an app mockup in a card below.
+- Geist, Geist Mono, Inter, Newsreader, Fraunces, Instrument Serif, DM Mono, Schibsted Grotesk, Space Grotesk.
+- The usual escape is a default too: a flat yellow field with a black grotesk.
+
+**Then, commit.** Make it obvious from across the room:
+
+- One move you can say in five words, big enough to carry the page.
+- One working thing, not a picture of it: a calculator, a live demo, a control that changes the page.
+- Type from a specific place: a foundry, an era, a sign, a manual.
+
+**And the older tells,** each one caught in my own projects, with what we do instead.
 
 | The tell | What we do instead |
 |---|---|
@@ -572,6 +594,14 @@ Licenses, and freshness. Each skill installs from its author's repo, keeps its l
 </details>
 
 <details>
+<summary><b>This is too loud for my project.</b></summary>
+<br>
+
+Then say so. The kit asks for one move you can see from across the room, and it doesn't have to be a color: it can be a layout, a type choice or a working demo. "Make it quieter" works too, through `impeccable`. Product screens people use all day usually want the smaller move.
+
+</details>
+
+<details>
 <summary><b>Some rules are too strict for my brand.</b></summary>
 <br>
 
@@ -583,7 +613,7 @@ They're mine, built from the tells I kept catching in my own projects. Fork the 
 <summary><b>Will it slow Claude down or eat my context?</b></summary>
 <br>
 
-The skill is around 70 lines and only loads for design work. The catalogs in `references/` load only when a step needs them.
+The skill is under 100 lines and only loads for design work. The catalogs in `references/` load only when a step needs them.
 
 </details>
 

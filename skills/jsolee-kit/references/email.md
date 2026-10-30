@@ -10,6 +10,10 @@ Transactional, lifecycle and launch emails. Email clients are not browsers, so t
 4. **Check deliverability and compliance** with `email-best-practices`, and send with `resend`.
 5. **Test** in Gmail, Apple Mail and Outlook for Windows, in light and dark mode, with images off.
 
+## Direction
+
+An email can have a point of view inside the constraints. Not a cream card with a serif headline and a table. Commit to one move: a full-width color band, a huge number in the system font, a reply-style plain note from a person. Say in one line why this email could only come from this product.
+
 ## Rules
 
 - One column, 600 px wide at most. Lay out with tables: classic Outlook renders with Word, so no flex or grid.

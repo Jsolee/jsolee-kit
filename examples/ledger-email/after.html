@@ -1,213 +1,244 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr" xmlns:o="urn:schemas-microsoft-com:office:office">
+<!doctype html>
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" style="color-scheme:light dark;supported-color-schemes:light dark">
 <head>
-<!--
-  Ledger weekly summary.
-  Subject: Your week: $6,882 net, up 7%
-  Preheader: Orders barely moved. Refunds went from 3 to 7, and 5 of them were one mug.
-  One job: tell the owner how the week closed. One action: review the refunds.
-
-  Before sending: Oatfield Ceramics, every figure, the ledger.example links and the postal address are
-  sample values, swap them at send time. Set the List-Unsubscribe headers, send the plain-text part at
-  the bottom of this file as the text alternative, then delete these notes.
-
-  Checked in Chromium only, at 600, 375 and 320 px, light and dark. Still to test in Gmail, Apple Mail
-  and Outlook for Windows. No reallygoodemails.com references were pulled: this was built without web access.
--->
 <meta charset="utf-8">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="x-apple-disable-message-reformatting">
 <meta name="format-detection" content="telephone=no,date=no,address=no,email=no,url=no">
 <meta name="color-scheme" content="light dark">
 <meta name="supported-color-schemes" content="light dark">
-<title>Your week: $6,882 net, up 7%</title>
+<title>Last week closed at €6,268.10</title>
+<!--
+Ledger weekly summary.
+Subject: Last week closed at €6,268.10
+Preheader: €672.40 above the week before. 5 of the 7 refunds landed on Tuesday.
+Plain-text part: at the end of this file, send it as text/plain.
+
+Direction: green-bar printout, the green bars are the data. Accounting reports came off line printers on
+green-striped fanfold, totals sit on a double rule, negatives go in parentheses. Only a product that keeps
+the shop's books reads like this.
+
+Replace before a real send. All of this is sample data, none of it is real:
+the shop name, every figure and date, the Tuesday finding, the postal address, and the ledger.example links.
+The figures add up, and each bar width is that day's net as a share of the best day.
+Set List-Unsubscribe and List-Unsubscribe-Post headers at the sender.
+
+Checked in Chromium only, at widths from 320 to 1000 px, in light and dark. Not yet tested in Gmail, Apple Mail or
+Outlook for Windows, which step 5 of the kit's email workflow asks for.
+-->
 <!--[if mso]><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]-->
 <style>
-:root { color-scheme: light dark; supported-color-schemes: light dark; }
-@media (prefers-color-scheme: dark) {
-  .d-paper { background-color: #0F1512 !important; }
-  .d-ink { color: #E9F0EA !important; }
-  .d-muted { color: #A5B4AA !important; }
-  .d-bar { background-color: #3F5245 !important; }
-  .d-peak { background-color: #8FAD9A !important; }
-  .d-link { color: #6AD3AC !important; }
-  .d-btn { background-color: #6AD3AC !important; }
-  .d-btn-a { color: #08130E !important; }
-  .d-rl { border-left-color: #2A372F !important; }
-  .d-rb { border-bottom-color: #2A372F !important; }
-  .d-rt { border-top-color: #2A372F !important; }
-  .d-it { border-top-color: #E9F0EA !important; }
-  .d-ib { border-bottom-color: #E9F0EA !important; }
+@media (max-width: 600px) {
+  .total { font-size: 84px !important; line-height: 94px !important; letter-spacing: -3px !important; }
+}
+@media (max-width: 480px) {
+  .pad { padding-left: 16px !important; padding-right: 16px !important; }
+  .pr { padding-right: 16px !important; }
+  .sumtop { padding-top: 40px !important; }
+  .total { font-size: 66px !important; line-height: 76px !important; letter-spacing: -2.6px !important; }
+  .daycol { width: 40% !important; }
+  .barpad { padding-left: 16px !important; font-size: 13px !important; }
+  .barfill { padding-right: 2px !important; }
+  .num { padding-left: 8px !important; font-size: 13px !important; }
+}
+@media (max-width: 370px) {
+  .total { font-size: 62px !important; line-height: 72px !important; letter-spacing: -2.5px !important; }
+}
+@media (max-width: 350px) {
+  .total { font-size: 56px !important; line-height: 66px !important; letter-spacing: -2.2px !important; }
+  .barpad { font-size: 12px !important; }
+  .num { padding-left: 6px !important; font-size: 12px !important; }
+  .cta-text { font-size: 15px !important; padding-left: 8px !important; padding-right: 8px !important; }
 }
 </style>
 <style>
-@media (max-width: 480px) {
-  .pad { padding-left: 20px !important; padding-right: 20px !important; }
-  .hero { font-size: 56px !important; line-height: 64px !important; }
-  .stmt { font-size: 14px !important; }
-  .bar-gap { padding-left: 3px !important; padding-right: 3px !important; }
-  .day-fig { font-size: 12px !important; }
-  .btn-t { width: 100% !important; }
-  .btn-a { display: block !important; text-align: center !important; }
+@media screen {
+  a[x-apple-data-detectors] { color: inherit !important; text-decoration: none !important; }
 }
+@media (prefers-color-scheme: dark) {
+  body, .paper { background-color: #06140e !important; }
+  .bar { background-color: #17503a !important; }
+  .ink { color: #e2f8e8 !important; }
+  .rule { border-color: #e2f8e8 !important; }
+  .flag, .cta { background-color: #b8ecc6 !important; }
+  .flag, .cta-text { color: #06291a !important; }
+}
+[data-ogsb] .paper { background-color: #06140e !important; }
+[data-ogsb] .bar { background-color: #17503a !important; }
+[data-ogsb] .flag, [data-ogsb] .cta { background-color: #b8ecc6 !important; }
+[data-ogsc] .ink { color: #e2f8e8 !important; }
+[data-ogsc] .rule { border-color: #e2f8e8 !important; }
+[data-ogsc] .flag, [data-ogsc] .cta-text { color: #06291a !important; }
 </style>
 </head>
-<body class="d-paper" style="margin:0;padding:0;width:100%;background-color:#EFF4EC;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;">
-<div lang="en" dir="ltr" style="display:none;max-height:0;overflow:hidden;mso-hide:all;font-size:1px;line-height:1px;color:transparent;opacity:0;">Orders barely moved. Refunds went from 3 to 7, and 5 of them were one mug.&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;</div>
-<table lang="en" dir="ltr" role="presentation" class="d-paper" width="100%" bgcolor="#EFF4EC" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;background-color:#EFF4EC;">
-<tr><td align="center" style="padding:0;">
-<!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" align="center"><tr><td><![endif]-->
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;max-width:600px;margin:0 auto;">
-
-<tr><td class="pad" style="padding:28px 32px 0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
-<tr><td class="d-ib" style="padding:0 0 12px;border-bottom:1px solid #14201A;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
+<body class="paper" bgcolor="#ffffff" style="margin:0;padding:0;background-color:#ffffff;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%">
+<div lang="en" dir="ltr" style="margin:0;padding:0">
+<div style="display:none;max-height:0;max-width:0;overflow:hidden;opacity:0;font-size:1px;line-height:1px;color:transparent;mso-hide:all">€672.40 above the week before. 5 of the 7 refunds landed on Tuesday.&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;&#8199;&#847;</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr><td class="bar" align="center" bgcolor="#b8ecc6" style="background-color:#b8ecc6;padding:0">
+<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+<div style="max-width:600px;margin:0 auto">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr><td class="pad" style="padding:22px 24px 0">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr>
+<td valign="top" class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:22px;line-height:26px;font-weight:700;letter-spacing:-1px"><span translate="no">Ledger</span></td>
+<td valign="top" align="right" class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:14px;line-height:20px;text-align:right"><span translate="no">Ostra&nbsp;Ceramics</span><br>19&nbsp;to&nbsp;25&nbsp;Oct&nbsp;2026</td>
+</tr></table>
+</td></tr>
+<tr><td class="pad sumtop" style="padding:52px 24px 0">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:separate;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt"><tr>
+<th scope="row" align="left" class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:16px;line-height:24px;font-weight:400;text-align:left;padding:0 0 2px">Sales, 143&nbsp;orders</th>
+<td align="right" class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:16px;line-height:24px;text-align:right;white-space:nowrap;padding:0 0 2px">&euro;6,482.40&nbsp;</td>
+</tr><tr>
+<th scope="row" align="left" class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:16px;line-height:24px;font-weight:400;text-align:left;padding:0 0 10px">Refunds, 7&nbsp;orders</th>
+<td align="right" class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:16px;line-height:24px;text-align:right;white-space:nowrap;padding:0 0 10px">(&euro;214.30)</td>
+</tr></table>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="rule" height="2" style="height:2px;font-size:1px;line-height:1px;border-top:2px solid #06291a;mso-line-height-rule:exactly">&nbsp;</td></tr></table>
+</td></tr>
+<tr><td class="pad" style="padding:12px 24px 0">
+<h1 align="right" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;margin:0;font-weight:700;text-align:right">
+<span class="ink" style="display:block;text-align:left;font-size:16px;line-height:24px;font-weight:700">Last week closed at</span><!--[if mso]><br><![endif]-->
+<span class="ink total" style="display:block;font-size:108px;line-height:118px;letter-spacing:-4px;white-space:nowrap;mso-line-height-rule:exactly">&euro;6,268.10</span>
+</h1>
+</td></tr>
+<tr><td class="pad" style="padding:0 24px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="rule" height="9" style="height:9px;font-size:1px;line-height:1px;border-top:9px double #06291a;mso-line-height-rule:exactly">&nbsp;</td></tr></table>
+</td></tr>
+<tr><td class="pad ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:16px;line-height:24px;padding:6px 24px 32px">That&rsquo;s &euro;672.40 more than the week before.</td></tr>
+</table>
+</div>
+<!--[if mso]></td></tr></table><![endif]-->
+</td></tr>
+<tr><td class="paper" align="center" bgcolor="#ffffff" style="background-color:#ffffff;padding:0">
+<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+<div style="max-width:600px;margin:0 auto">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr><td class="pad" style="padding:30px 24px 14px"><h2 class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;margin:0;font-size:16px;line-height:24px;font-weight:700">The week, in&nbsp;euros</h2></td></tr>
+<tr><td class="pr" style="padding:0 24px 34px 0">
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:separate;border-spacing:0;mso-table-lspace:0pt;mso-table-rspace:0pt">
+<tr><th scope="col" align="left" class="ink barpad" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:left;white-space:nowrap;padding:0 0 10px 24px">Day</th><th scope="col" align="right" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:right;white-space:nowrap;padding:0 0 10px 10px">Orders</th><th scope="col" align="right" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:right;white-space:nowrap;padding:0 0 10px 10px">Refunds</th><th scope="col" align="right" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:right;white-space:nowrap;padding:0 0 10px 10px">Net</th></tr>
 <tr>
-<td valign="bottom" class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:0;font-size:19px;line-height:24px;font-weight:600;letter-spacing:-0.4px;color:#14201A;"><span translate="no">Ledger</span></td>
-<td valign="bottom" align="right" class="d-muted" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:0;font-size:14px;line-height:24px;color:#4E5E55;text-align:right;"><span translate="no">Oatfield Ceramics</span></td>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="69%" class="bar ink barpad barfill" bgcolor="#b8ecc6" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#06291a;background-color:#b8ecc6;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;">Mon&nbsp;19</td><td width="31%" style="font-size:1px;line-height:1px">&nbsp;</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">18</td>
+<td align="right" valign="middle" class="ink num" aria-label="None" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;">-&nbsp;&nbsp;</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">812.40</td>
+</tr><tr>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="47%" class="flag barpad barfill" bgcolor="#0a5f3a" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#ffffff;background-color:#0a5f3a;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;font-weight:700;">Tue&nbsp;20</td><td width="53%" style="font-size:1px;line-height:1px">&nbsp;</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">16</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;font-weight:700;">(148.60)<span aria-hidden="true">*</span></td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">555.90</td>
+</tr><tr>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="79%" class="bar ink barpad barfill" bgcolor="#b8ecc6" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#06291a;background-color:#b8ecc6;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;">Wed&nbsp;21</td><td width="21%" style="font-size:1px;line-height:1px">&nbsp;</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">21</td>
+<td align="right" valign="middle" class="ink num" aria-label="None" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;">-&nbsp;&nbsp;</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">936.20</td>
+</tr><tr>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="89%" class="bar ink barpad barfill" bgcolor="#b8ecc6" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#06291a;background-color:#b8ecc6;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;">Thu&nbsp;22</td><td width="11%" style="font-size:1px;line-height:1px">&nbsp;</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">24</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;">(32.50)&nbsp;</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">1,056.40</td>
+</tr><tr>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="100%" class="bar ink barpad barfill" bgcolor="#b8ecc6" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#06291a;background-color:#b8ecc6;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;">Fri&nbsp;23</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">27</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;">(33.20)&nbsp;</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">1,185.80</td>
+</tr><tr>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="85%" class="bar ink barpad barfill" bgcolor="#b8ecc6" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#06291a;background-color:#b8ecc6;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;">Sat&nbsp;24</td><td width="15%" style="font-size:1px;line-height:1px">&nbsp;</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">22</td>
+<td align="right" valign="middle" class="ink num" aria-label="None" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;">-&nbsp;&nbsp;</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">1,011.30</td>
+</tr><tr>
+<th scope="row" align="left" width="52%" class="daycol" style="padding:0;font-weight:400;text-align:left">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td width="60%" class="bar ink barpad barfill" bgcolor="#b8ecc6" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;color:#06291a;background-color:#b8ecc6;font-size:15px;line-height:20px;padding:11px 8px 11px 24px;white-space:nowrap;">Sun&nbsp;25</td><td width="40%" style="font-size:1px;line-height:1px">&nbsp;</td></tr></table>
+</th>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">15</td>
+<td align="right" valign="middle" class="ink num" aria-label="None" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap;">-&nbsp;&nbsp;</td>
+<td align="right" valign="middle" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;text-align:right;padding:0 0 0 10px;white-space:nowrap">710.10</td>
 </tr>
+<tr aria-hidden="true"><td colspan="4" class="rule" height="2" style="height:2px;font-size:1px;line-height:1px;border-top:2px solid #06291a;mso-line-height-rule:exactly">&nbsp;</td></tr>
+<tr><th scope="row" align="left" class="ink barpad" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:left;white-space:nowrap;padding:10px 0 10px 24px">Week</th><td align="right" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:right;white-space:nowrap;padding:10px 0 10px 10px">143</td><td align="right" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:right;white-space:nowrap;padding:10px 0 10px 10px">(214.30)&nbsp;</td><td align="right" class="ink num" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:15px;line-height:20px;font-weight:700;text-align:right;white-space:nowrap;padding:10px 0 10px 10px">6,268.10</td></tr>
+<tr aria-hidden="true"><td colspan="4" class="rule" height="6" style="height:6px;font-size:1px;line-height:1px;border-top:6px double #06291a;mso-line-height-rule:exactly">&nbsp;</td></tr>
 </table>
 </td></tr>
 </table>
+</div>
+<!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
-
-<tr><td class="pad" style="padding:44px 32px 0;">
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="d-ib" style="padding:0 0 12px;border-bottom:6px double #14201A;">
-<h1 class="d-muted" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0;font-size:15px;line-height:22px;font-weight:400;color:#4E5E55;">Net revenue, Oct&nbsp;19 to&nbsp;25<br><span class="hero d-ink" style="font-size:72px;line-height:80px;font-weight:600;letter-spacing:-2.5px;color:#14201A;white-space:nowrap;">$6,882</span></h1>
-</td></tr>
-</table>
-<p class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:22px 0 0;font-size:21px;line-height:29px;letter-spacing:-0.3px;color:#14201A;">$477 more than the week before, up&nbsp;7%.</p>
-<p class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:8px 0 0;font-size:16px;line-height:25px;color:#14201A;">Orders barely moved, 112 against 109. Refunds went from 3 to 7, and 5 of the 7 were the&nbsp;same&nbsp;mug.</p>
-</td></tr>
-
-<tr><td class="pad" style="padding:44px 32px 0;">
-<h2 class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0 0 16px;font-size:16px;line-height:22px;font-weight:600;letter-spacing:-0.3px;color:#14201A;">Net revenue by day, in dollars</h2>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;table-layout:fixed;">
-<tr>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-bar" height="68" bgcolor="#A9BBAD" style="height:68px;background-color:#A9BBAD;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;">Mon</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:400;white-space:nowrap;">918</td></tr>
-</table>
-</td>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-peak" height="104" bgcolor="#5F7B69" style="height:104px;background-color:#5F7B69;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:600;">Tue</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:600;white-space:nowrap;">1,412</td></tr>
-</table>
-</td>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-bar" height="80" bgcolor="#A9BBAD" style="height:80px;background-color:#A9BBAD;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;">Wed</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:400;white-space:nowrap;">1,086</td></tr>
-</table>
-</td>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-bar" height="52" bgcolor="#A9BBAD" style="height:52px;background-color:#A9BBAD;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;">Thu</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:400;white-space:nowrap;">703</td></tr>
-</table>
-</td>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-bar" height="64" bgcolor="#A9BBAD" style="height:64px;background-color:#A9BBAD;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;">Fri</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:400;white-space:nowrap;">874</td></tr>
-</table>
-</td>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-bar" height="82" bgcolor="#A9BBAD" style="height:82px;background-color:#A9BBAD;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;">Sat</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:400;white-space:nowrap;">1,118</td></tr>
-</table>
-</td>
-<td width="14.28%" valign="bottom" style="width:14.28%;vertical-align:bottom;padding:0;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="bar-gap" style="padding:0 7px;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="d-bar" height="57" bgcolor="#A9BBAD" style="height:57px;background-color:#A9BBAD;font-size:1px;line-height:1px;mso-line-height-rule:exactly;">&nbsp;</td></tr></table></td></tr>
-<tr><td align="center" class="d-muted d-it" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:8px 0 0;border-top:1px solid #14201A;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;">Sun</td></tr>
-<tr><td align="center" class="d-ink day-fig" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:1px 0 0;font-size:13px;line-height:18px;color:#14201A;font-weight:400;white-space:nowrap;">771</td></tr>
-</table>
-</td>
-</tr>
-</table>
-</td></tr>
-
-<tr><td class="pad" style="padding:44px 32px 0;">
-<h2 class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0 0 16px;font-size:16px;line-height:22px;font-weight:600;letter-spacing:-0.3px;color:#14201A;">Against the week before</h2>
-<table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
-<tr><td width="36%" class="d-rb" style="width:36%;padding:0;border-bottom:1px solid #D5DFD2;font-size:1px;line-height:1px;">&nbsp;</td><th scope="col" width="33%" align="right" class="d-muted d-rl d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;width:33%;padding:0 17px 9px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #D5DFD2;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;text-align:right;white-space:nowrap;">Oct&nbsp;19 to&nbsp;25</th><th scope="col" width="31%" align="right" class="d-muted d-rl d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;width:31%;padding:0 5px 9px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #D5DFD2;font-size:13px;line-height:18px;color:#4E5E55;font-weight:400;text-align:right;white-space:nowrap;">Oct&nbsp;12 to&nbsp;18</th></tr>
-<tr><th scope="row" align="left" class="d-ink stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:11px 8px 11px 0;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#14201A;font-weight:400;text-align:left;">Orders</th><td align="right" class="d-ink d-rl stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 17px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#14201A;font-weight:400;white-space:nowrap;">112</td><td align="right" class="d-muted d-rl stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 5px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#4E5E55;font-weight:400;white-space:nowrap;">109</td></tr>
-<tr><th scope="row" align="left" class="d-ink stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:11px 8px 11px 0;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#14201A;font-weight:400;text-align:left;">Gross sales</th><td align="right" class="d-ink d-rl stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 17px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#14201A;font-weight:400;white-space:nowrap;">$7,276.75</td><td align="right" class="d-muted d-rl stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 5px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#4E5E55;font-weight:400;white-space:nowrap;">$6,551.25</td></tr>
-<tr><th scope="row" align="left" class="d-ink stmt d-rb" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:11px 8px 11px 0;border-bottom:1px solid #D5DFD2;font-size:15px;line-height:22px;color:#14201A;font-weight:400;text-align:left;">Refunds</th><td align="right" class="d-ink d-rl stmt d-ib" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 12px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #14201A;font-size:15px;line-height:22px;color:#14201A;font-weight:400;white-space:nowrap;">(394.50)</td><td align="right" class="d-muted d-rl stmt d-ib" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 0px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:1px solid #14201A;font-size:15px;line-height:22px;color:#4E5E55;font-weight:400;white-space:nowrap;">(146.00)</td></tr>
-<tr><th scope="row" align="left" class="d-ink stmt " style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:11px 8px 11px 0;font-size:15px;line-height:22px;color:#14201A;font-weight:600;text-align:left;">Net revenue</th><td align="right" class="d-ink d-rl stmt d-ib" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 17px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:3px double #14201A;font-size:15px;line-height:22px;color:#14201A;font-weight:600;white-space:nowrap;">$6,882.25</td><td align="right" class="d-muted d-rl stmt d-ib" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;font-variant-numeric:tabular-nums;padding:11px 5px 11px 8px;border-left:1px solid #D5DFD2;border-bottom:3px double #14201A;font-size:15px;line-height:22px;color:#4E5E55;font-weight:400;white-space:nowrap;">$6,405.25</td></tr>
-</table>
-</td></tr>
-
-<tr><td class="pad" style="padding:44px 32px 0;">
-<h2 class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0 0 16px;font-size:16px;line-height:22px;font-weight:600;letter-spacing:-0.3px;color:#14201A;margin-bottom:8px;">Worth a look: the Stoneware Mug</h2>
-<p class="d-ink" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0 0 22px;font-size:16px;line-height:25px;color:#14201A;">Its 5 refunds all give the same reason, arrived chipped, and add up to $192.50 of the $394.50 refunded. It had none the week&nbsp;before.</p>
-<table role="presentation" class="btn-t" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
-<tr><td class="d-btn" align="center" bgcolor="#0B5D45" style="background-color:#0B5D45;border-radius:5px;mso-padding-alt:14px 26px;"><a class="d-btn-a btn-a" href="https://ledger.example/oatfield-ceramics/refunds?from=2026-10-19&amp;to=2026-10-25" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;display:inline-block;padding:14px 26px;font-size:16px;line-height:22px;font-weight:600;letter-spacing:-0.1px;color:#FFFFFF;text-decoration:none;border-radius:5px;">Review the 7 refunds</a></td></tr>
-</table>
-</td></tr>
-
-<tr><td class="pad" style="padding:52px 32px 40px;">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;width:100%;">
-<tr><td class="d-muted d-rt" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;padding:18px 0 0;border-top:1px solid #D5DFD2;font-size:13px;line-height:20px;color:#4E5E55;">
-<p class="d-muted" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0 0 10px;font-size:13px;line-height:20px;color:#4E5E55;">Ledger sends this summary every Monday for Oatfield Ceramics. Totals run Monday to Sunday in your shop's time zone. Net revenue is gross sales minus refunds, before fees.</p>
-<p class="d-muted" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0 0 10px;font-size:13px;line-height:24px;color:#4E5E55;"><a class="d-link" href="https://ledger.example/oatfield-ceramics/settings/email" style="color:#0B5D45;text-decoration:underline;">Change email settings</a><br><a class="d-link" href="https://ledger.example/oatfield-ceramics/unsubscribe/weekly-summary" style="color:#0B5D45;text-decoration:underline;">Unsubscribe from weekly summaries</a></p>
-<p class="d-muted" style="font-family:'Segoe UI',-apple-system,BlinkMacSystemFont,Roboto,'Helvetica Neue',Arial,sans-serif;margin:0;font-size:13px;line-height:20px;color:#4E5E55;">Ledger, 100 Main Street, Anytown, USA</p>
+<tr><td class="bar" align="center" bgcolor="#b8ecc6" style="background-color:#b8ecc6;padding:0">
+<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+<div style="max-width:600px;margin:0 auto">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr><td class="pad" style="padding:30px 24px 0"><h2 class="ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;margin:0;font-size:24px;line-height:30px;font-weight:700;letter-spacing:-1px"><span aria-hidden="true">* </span>Tuesday is the dip</h2></td></tr>
+<tr><td class="pad ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:16px;line-height:24px;padding:8px 24px 22px">5 of the week&rsquo;s 7 refunds landed that day, &euro;148.60 in all. No other day had more than one.</td></tr>
+<tr><td class="pad" style="padding:0 24px 34px">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;"><tr><td class="cta" align="center" bgcolor="#0a5f3a" style="background-color:#0a5f3a;mso-padding-alt:16px 20px">
+<a class="cta-text" href="https://ledger.example/refunds?date=2026-10-20" style="display:block;font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;font-size:17px;line-height:22px;font-weight:700;color:#ffffff;text-decoration:none;text-align:center;padding:16px 20px;mso-line-height-rule:exactly">Review Tuesday&rsquo;s 5&nbsp;refunds</a>
+</td></tr></table>
 </td></tr>
 </table>
+</div>
+<!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
-
+<tr><td class="paper" align="center" bgcolor="#ffffff" style="background-color:#ffffff;padding:0">
+<!--[if mso]><table role="presentation" width="600" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+<div style="max-width:600px;margin:0 auto">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%;border-collapse:collapse;mso-table-lspace:0pt;mso-table-rspace:0pt;">
+<tr><td class="pad ink" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;mso-line-height-rule:exactly;font-size:14px;line-height:21px;padding:24px 24px 30px">
+You get this every Monday because weekly summaries are on for <span translate="no">Ostra&nbsp;Ceramics</span>.
+<a class="ink" href="https://ledger.example/unsubscribe/weekly-summary" style="font-family:Consolas,Menlo,Monaco,'Liberation Mono',monospace;color:#06291a;text-decoration:underline">Unsubscribe from weekly summaries</a><br><br>
+<span translate="no">Ledger</span>, 100 Example Street, 08001 Barcelona
+</td></tr>
 </table>
+</div>
 <!--[if mso]></td></tr></table><![endif]-->
 </td></tr>
 </table>
-<!--
-PLAIN-TEXT PART
+</div>
+<!-- text/plain part
+Ledger weekly summary
+Ostra Ceramics, 19 to 25 Oct 2026
 
-Your week: $6,882 net, up 7%
-Oatfield Ceramics, Oct 19 to 25
+Sales, 143 orders     €6,482.40
+Refunds, 7 orders     (€214.30)
+Last week closed at   €6,268.10
 
-Net revenue: $6,882
-$477 more than the week before, up 7%.
-Orders barely moved, 112 against 109. Refunds went from 3 to 7, and 5 of the 7 were the same mug.
+That's €672.40 more than the week before.
 
-NET REVENUE BY DAY, IN DOLLARS
-Mon  918
-Tue  1,412
-Wed  1,086
-Thu  703
-Fri  874
-Sat  1,118
-Sun  771
+The week, in euros
 
-AGAINST THE WEEK BEFORE
-                 Oct 19 to 25   Oct 12 to 18
-Orders                    112            109
-Gross sales         $7,276.75      $6,551.25
-Refunds              (394.50)       (146.00)
-Net revenue         $6,882.25      $6,405.25
+Day     Orders    Refunds        Net
+Mon 19      18          -     812.40
+Tue 20      16   (148.60)*    555.90
+Wed 21      21          -     936.20
+Thu 22      24    (32.50)   1,056.40
+Fri 23      27    (33.20)   1,185.80
+Sat 24      22          -   1,011.30
+Sun 25      15          -     710.10
+Week       143   (214.30)   6,268.10
 
-WORTH A LOOK: THE STONEWARE MUG
-Its 5 refunds all give the same reason, arrived chipped, and add up to $192.50 of the $394.50 refunded. It had none the week before.
+* Tuesday is the dip
+5 of the week's 7 refunds landed that day, €148.60 in all.
+No other day had more than one.
 
-Review the 7 refunds: https://ledger.example/oatfield-ceramics/refunds?from=2026-10-19&to=2026-10-25
+Review Tuesday's 5 refunds:
+https://ledger.example/refunds?date=2026-10-20
 
-Ledger sends this summary every Monday for Oatfield Ceramics. Totals run Monday to Sunday in your shop's time zone. Net revenue is gross sales minus refunds, before fees.
-Change email settings: https://ledger.example/oatfield-ceramics/settings/email
-Unsubscribe from weekly summaries: https://ledger.example/oatfield-ceramics/unsubscribe/weekly-summary
-Ledger, 100 Main Street, Anytown, USA
+You get this every Monday because weekly summaries are on for Ostra Ceramics.
+Unsubscribe from weekly summaries: https://ledger.example/unsubscribe/weekly-summary
+
+Ledger, 100 Example Street, 08001 Barcelona
 -->
 </body>
 </html>

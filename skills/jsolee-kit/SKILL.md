@@ -9,7 +9,7 @@ How we build interfaces: direction first, real references, one signature moment,
 
 ## Workflow
 
-1. **Direction before code.** Read `PRODUCT.md` / `DESIGN.md` if the repo has them. Fix the register (brand page vs product UI), one committed accent color per surface, a type pair. Use `impeccable` (shape, critique) or `design-taste-frontend` (variance / motion / density dials).
+1. **Direction before code.** Read `PRODUCT.md` / `DESIGN.md` if the repo has them. Write three directions that differ in type, color and layout, each from something true about this product. Throw away the first one you thought of: it's the default. Keep the one a competitor couldn't wear and name it in one line. Then fix the register (brand page vs product UI), one committed color, a type pair. Use `impeccable` (shape, critique) or `design-taste-frontend` (variance / motion / density dials).
 2. **Pull 2-3 references per section** from [references/inspiration.md](references/inspiration.md). Say what you take from each one (layout, rhythm, type, motion). Never copy a page.
 3. **Build** with the stack skills (see map below).
 4. **One signature motion moment**, not everything moving. GSAP for scroll and timelines, Motion for component state. Honor `prefers-reduced-motion`; anything looping more than 5 s gets a pause control (WCAG 2.2.2).
@@ -37,6 +37,25 @@ How we build interfaces: direction first, real references, one signature moment,
 | Plan, debug, verify | `brainstorming`, `systematic-debugging`, `verification-before-completion` |
 
 Full catalog with source repos: [references/skills.md](references/skills.md).
+
+## The default look
+
+Left alone, today's models converge on one look. If your work could wear it, start over, unless the brand truly calls for it:
+
+- A warm off-white background (`#f5f3ee` and friends), ruled lines or paper grain.
+- A serif headline with one phrase in italics or underlined by hand.
+- Tiny mono captions, numbered eyebrows, hairline rules, one vermilion dot or underline.
+- Nav, headline left, blurb right, an app mockup in a card below.
+- Geist, Geist Mono, Inter, Newsreader, Fraunces, Instrument Serif, DM Mono, Schibsted Grotesk, Space Grotesk.
+- The usual escape is a default too: a flat yellow field with a black grotesk.
+
+## Commit
+
+Make it obvious from across the room:
+
+- One move you can say in five words, big enough to carry the page: a full-bleed color field, display type above 120 px, a layout that breaks nav-hero-cards, the product filling the first screen.
+- One working thing, not a picture of it: a calculator, a live demo, a control that changes the page.
+- Type from a specific place: a foundry, an era, a sign, a manual. Not the first font that comes to mind.
 
 ## House rules (the anti AI look)
 
