@@ -35,10 +35,8 @@ Models got good at landing pages. They still drift to the same tells: a pill tha
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
-<a href="assets/demo.mp4">
-  <img alt="24-second demo: the same prompt built with and without the kit, then the comunitat crabs" src="assets/demo.jpg" width="100%">
-</a>
-<p align="center"><sub>▶ <a href="assets/demo.mp4">Watch the 24-second demo</a>, with sound</sub></p>
+<img alt="24-second demo: the same prompt built with and without the kit, then the comunitat crabs" src="assets/demo.gif" width="100%">
+<p align="center"><sub>Silent preview. <a href="https://github.com/Jsolee/jsolee-kit/raw/main/assets/demo.mp4">Download the video with sound</a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
   <img alt="Four pages Claude built with the kit: a landing, a pricing page, a dashboard and a portfolio" src="assets/gallery.png" width="100%">
