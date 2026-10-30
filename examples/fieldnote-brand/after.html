@@ -1,0 +1,546 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnote brand sheet</title>
+<meta name="description" content="Logo and one-page brand system for Fieldnote, an app that records your meetings and writes the follow-up email.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cstyle%3Erect%7Bfill:%2314160F%7D@media(prefers-color-scheme:dark)%7Brect%7Bfill:%23F2F3EC%7D%7D%3C/style%3E%3Crect x='8' y='4' width='48' height='12'/%3E%3Crect x='8' y='20' width='20' height='12'/%3E%3Crect x='8' y='36' width='36' height='12'/%3E%3Crect x='8' y='52' width='20' height='12'/%3E%3Ccircle cx='38' cy='58' r='6.5' fill='%23F0400A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Schibsted+Grotesk:wght@400;500&display=swap">
+<style>
+/* Fieldnote tokens. Copy this block to DESIGN.md when the repo exists. */
+:root{
+  --paper:#F2F3EC;
+  --survey:#E6E9DD;
+  --graphite:#5B6054;
+  --ink:#14160F;
+  --blaze:#F0400A;
+  --paper-dim:#B6BAAB;
+  --line:rgba(20,22,15,.1);
+  --line-on-ink:rgba(242,243,236,.16);
+  --sans:"Schibsted Grotesk","Helvetica Neue",Arial,sans-serif;
+  --mono:"Fragment Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --system:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --ease-out:cubic-bezier(.22,1,.36,1);
+  --m:96px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper);-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font:400 15px/1.5 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+ul,ol{list-style:none}
+svg{display:block;overflow:visible}
+.wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--m)}
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+.c2{grid-column:span 2}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}
+
+h1{font:500 64px/68px var(--sans);letter-spacing:-.035em}
+h2{font:500 24px/1.2 var(--sans);letter-spacing:-.02em}
+h3{font:500 15px/1.35 var(--sans);letter-spacing:-.005em}
+.note{color:var(--graphite);font-size:14px;line-height:1.5;text-wrap:pretty}
+.data{font:400 12.5px/1.5 var(--mono);color:var(--graphite)}
+
+.mark{height:var(--h,60px);aspect-ratio:48/60;width:auto;color:var(--mark-ink,var(--ink))}
+.word{height:var(--h,60px);aspect-ratio:3906/720;width:auto;color:var(--mark-ink,var(--ink))}
+.lockup{display:inline-flex;align-items:flex-end;gap:calc(var(--h,60px)*16/60)}
+.dot-blaze{--dot:var(--blaze)}
+
+/* Hero */
+.hero{background:var(--ink);color:var(--paper);--mark-ink:var(--paper)}
+.hero-top{height:96px;display:flex;align-items:center;justify-content:space-between}
+.hero-top .data{color:var(--paper-dim)}
+.hero-grid{display:grid;grid-template-columns:384px minmax(0,1fr);column-gap:146px;padding-block:96px}
+.hero-mark{width:384px;height:480px}
+.hero-mark .bars{fill:var(--paper)}
+.hero-copy{display:flex;flex-direction:column;justify-content:space-between;min-height:480px;gap:32px}
+.lede{font-size:20px;line-height:1.5;color:var(--paper-dim);max-width:680px;margin-top:28px;text-wrap:pretty}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.steps li{border-top:1px solid var(--line-on-ink);padding-top:16px;display:flex;flex-direction:column;gap:12px}
+.steps .art{height:60px;display:flex;align-items:flex-end;--mark-ink:var(--paper)}
+.steps svg{height:60px}
+.steps .meter{height:48px;fill:var(--paper)}
+.steps .data{color:var(--paper-dim)}
+.pulse{fill:none;stroke:var(--blaze);stroke-width:.6;opacity:0;transform-box:fill-box;transform-origin:center;animation:pulse 1.2s var(--ease-out) .4s 3}
+.meter rect{transform-box:fill-box;transform-origin:bottom;animation:level 1.2s var(--ease-out) .4s 3}
+.meter rect:nth-child(2){animation-delay:.55s}
+.meter rect:nth-child(3){animation-delay:.47s}
+.meter rect:nth-child(4){animation-delay:.62s}
+@keyframes pulse{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(2.4)}}
+@keyframes level{from{transform:scaleY(.4)}to{transform:scaleY(1)}}
+@media (prefers-reduced-motion:reduce){.pulse,.meter rect{animation:none}}
+
+/* Rows */
+.row{padding-block:48px;border-top:1px solid var(--line)}
+.row:first-of-type{border-top:0}
+.head{display:flex;flex-direction:column;gap:6px;margin-bottom:24px;max-width:612px}
+
+/* Ideas */
+.ideas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.idea .art{height:80px;display:flex;align-items:flex-end;margin-bottom:16px;color:var(--ink)}
+.idea p{font-size:14px;line-height:1.45;margin-top:6px;text-wrap:pretty}
+.idea p.why{color:var(--graphite)}
+.idea .verdict{display:block;color:var(--ink);font-weight:500}
+
+/* Tests */
+.t-top{display:grid;grid-template-columns:128px minmax(0,1fr);gap:40px;margin-bottom:28px}
+.sizes{display:flex;align-items:flex-end;gap:32px;height:88px}
+.sizes figure{display:flex;flex-direction:column;justify-content:flex-end;gap:8px}
+.t-top .data{margin-top:8px}
+.t-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.tile{height:112px;display:flex;align-items:center;justify-content:space-between;padding:0 22px;border-radius:4px}
+.tile.on-paper{box-shadow:inset 0 0 0 1px var(--line)}
+.tile.on-ink{background:var(--ink);--mark-ink:var(--paper)}
+.tile.on-blaze{background:var(--blaze)}
+.tile+.data,figure>.data{margin-top:8px}
+
+/* Logo */
+.construct text{font:400 3px var(--mono);fill:var(--graphite)}
+.construct .in{fill:var(--paper)}
+.construct .on-dot{fill:var(--ink);font-size:2.9px}
+.wordmark-big{width:100%;height:auto;aspect-ratio:4086/729;color:var(--ink);--dot:var(--blaze);margin-bottom:24px}
+.logo-sub{display:grid;grid-template-columns:5fr 3fr;gap:24px;margin-top:32px}
+.clear{position:relative;display:inline-block;background:var(--survey);padding:12.8px;--h:64px;line-height:0}
+.clear i{position:absolute;width:12.8px;height:12.8px;background:var(--graphite)}
+.clear i:nth-of-type(1){left:0;top:0}.clear i:nth-of-type(2){right:0;top:0}.clear i:nth-of-type(3){left:0;bottom:0}.clear i:nth-of-type(4){right:0;bottom:0}
+.clear .lockup{background:var(--paper)}
+.mins{display:grid;gap:14px}
+.mins li{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:12px}
+
+/* Color */
+.swatches{display:flex;height:172px;border-radius:4px;overflow:hidden}
+.swatch{padding:18px 20px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.swatch h3{font-size:16px}
+.swatch .data{color:inherit}
+.s-paper{flex:34;background:var(--paper);box-shadow:inset 0 0 0 1px var(--line)}
+.s-survey{flex:18;background:var(--survey)}
+.s-graphite{flex:15;background:var(--graphite);color:var(--paper)}
+.s-ink{flex:23;background:var(--ink);color:var(--paper)}
+.s-blaze{flex:12;background:var(--blaze);color:var(--ink)}
+.pairs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px;margin-top:16px}
+.pairs b{font-weight:400;color:var(--ink);display:block}
+
+/* Type */
+.spec-word{font:500 42px/1.05 var(--sans);letter-spacing:-.035em;margin:12px 0 8px}
+.spec-body{font-size:16px;line-height:1.5;max-width:44ch}
+.type-block{border-top:1px solid var(--line);padding-top:12px}
+.type-block+.type-block{margin-top:20px}
+.tb-head{display:flex;justify-content:space-between;gap:16px;align-items:baseline}
+.transcript{margin-top:12px;font:400 13px/1.7 var(--mono);display:grid;grid-template-columns:auto auto 1fr;column-gap:14px}
+.transcript span:nth-child(3n+1){color:var(--graphite)}
+.transcript span:nth-child(3n+2){color:var(--graphite)}
+
+/* Voice */
+.voice{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1fr);column-gap:24px}
+.voice>*{padding-block:12px;border-top:1px solid var(--line);font-size:14px;line-height:1.45;text-wrap:pretty}
+.voice .vh{border-top:0;padding-block:0 8px}
+.voice .pr{font-size:15px;font-weight:500;letter-spacing:-.005em}
+.voice .not{color:var(--graphite)}
+.banned{margin-top:8px;border-top:1px solid var(--line);padding-top:12px}
+
+/* Do and don't */
+.dos li{padding-block:10px;border-top:1px solid var(--line);font-size:14px;line-height:1.45;text-wrap:pretty}
+.donts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.donts .art{height:76px;display:flex;align-items:center;margin-bottom:12px;--h:60px;--dot:var(--blaze)}
+.donts p{font-size:13.5px;line-height:1.4;color:var(--graphite);text-wrap:pretty}
+.donts b{font-weight:500;color:var(--ink);display:block}
+
+/* In use */
+.use{background:var(--survey);padding-block:48px}
+.use-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;align-items:start}
+.email{background:#fff;border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.03);font-family:var(--system);color:var(--ink);font-size:15px;line-height:1.5;max-width:600px}
+.email-meta{padding:16px 28px;border-bottom:1px solid var(--line)}
+.email-meta b{font-weight:500;display:block;font-size:15px}
+.email-meta span{color:var(--graphite);font-size:13px}
+.email-body{padding:24px 28px 26px}
+.email .fact{margin-top:20px;font-weight:500}
+.email .fact span{display:block;color:var(--graphite);font-weight:400;font-size:14px}
+.draft{margin-top:16px;padding-block:14px;border-block:1px solid var(--line)}
+.draft p+p,.draft ul+p,.draft p+ul{margin-top:8px}
+.draft li{padding-left:14px;position:relative}
+.draft li::before{content:"";position:absolute;left:0;top:11px;width:6px;height:2px;background:var(--ink)}
+.btn{display:inline-flex;align-items:center;height:44px;padding:0 18px;border-radius:6px;background:var(--blaze);color:var(--ink);font-weight:500;font-size:15px;margin-top:18px}
+.fine{color:var(--graphite);font-size:13px;margin-top:10px}
+.slide{background:var(--ink);color:var(--paper);--mark-ink:var(--paper);aspect-ratio:16/9;padding:28px 32px;border-radius:4px;display:flex;flex-direction:column;justify-content:space-between}
+.slide p.t{font:500 38px/1.08 var(--sans);letter-spacing:-.03em;text-wrap:balance;max-width:14em}
+.slide-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.slide .data{color:var(--paper-dim)}
+.use-low{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.05fr);gap:24px;margin-top:28px}
+.tabs{display:grid;gap:8px}
+.tabbar{padding:6px 6px 0;border-radius:6px 6px 0 0;background:#D5D9CB}
+.tabbar.dark{background:#2A2D24}
+.tab{display:flex;align-items:center;gap:8px;height:32px;padding:0 10px;border-radius:6px 6px 0 0;background:var(--paper);font:400 12.5px/1 var(--system);color:var(--ink);white-space:nowrap;overflow:hidden}
+.tabbar.dark .tab{background:#14160F;color:var(--paper)}
+.tab svg{width:16px;height:16px;flex:none}
+.icons{display:flex;align-items:flex-end;gap:14px}
+.avatars{display:flex;align-items:center;gap:10px}
+.cap{margin-top:10px}
+
+/* Foot */
+.foot{background:var(--ink);color:var(--paper);--mark-ink:var(--paper);padding-block:44px}
+.foot h3{margin-bottom:6px}
+.foot p{font-size:14px;line-height:1.5;color:var(--paper-dim);text-wrap:pretty}
+.foot .sign{display:flex;justify-content:flex-end;align-items:flex-end;height:100%}
+.br{display:inline}
+
+@media (max-width:1180px){
+  :root{--m:40px}
+  h1{font-size:48px;line-height:52px}
+  .hero-grid{grid-template-columns:1fr;row-gap:64px;padding-block:40px 64px}
+  .hero-copy{min-height:0}
+  .hero-mark{width:240px;height:300px}
+  .c2,.c4,.c5,.c6,.c7,.c8{grid-column:span 12}
+  .grid>*+*,.use-grid>*+*{margin-top:48px}
+  .use-grid>*{grid-column:span 12!important}
+}
+@media (max-width:720px){
+  :root{--m:16px}
+  h1{font-size:38px;line-height:42px}
+  .br{display:none}
+  .sizes{flex-wrap:wrap;height:auto}
+  .steps,.ideas,.t-tiles,.pairs,.logo-sub,.use-low{grid-template-columns:1fr}
+  .donts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .voice{grid-template-columns:1fr}.voice .vh{display:none}
+  .swatches{flex-direction:column;height:auto}.swatch{gap:20px}
+  .clear{--h:44px;padding:8.8px}.clear i{width:8.8px;height:8.8px}
+  .slide p.t{font-size:26px}
+  .hero-top .data{display:none}
+  .t-top{grid-template-columns:1fr}
+  .transcript{grid-template-columns:auto 1fr}.transcript span:nth-child(3n+2){grid-column:2}.transcript span:nth-child(3n+3){grid-column:1/-1;margin-bottom:6px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <g id="b"><rect width="48" height="12"/><rect y="16" width="20" height="12"/><rect y="32" width="36" height="12"/><rect y="48" width="20" height="12"/></g>
+    <g id="m"><g fill="currentColor"><use href="#b"/></g><circle cx="30" cy="54" r="6.5" style="fill:var(--dot,currentColor)"/></g>
+    <g id="w" fill="currentColor"><path fill-rule="evenodd" d="M74 176C74 70.4 152.4 0 270 0H280V84H270C213.8 84 174 122.2 174 176Z"/><path fill-rule="evenodd" d="M74 172H174V720H74Z"/><path fill-rule="evenodd" d="M0 192H258V276H0Z"/><path fill-rule="evenodd" d="M314 192H414V720H314Z"/><path fill-rule="evenodd" d="M314 0H414V104H314Z"/><path fill-rule="evenodd" d="M1018.4 490C1019.5 479 1020 467.6 1020 456C1020 292.2 912.8 183 752 183C591.2 183 484 292.2 484 456C484 619.8 591.2 729 752 729C857.2 729 939.5 682.2 983.8 604L861 604C832.4 630 794.9 645 752 645C653.7 645 584 566.6 584 456C584 345.4 653.7 267 752 267C850.3 267 920 345.4 920 456Z"/><path fill-rule="evenodd" d="M534 412L1017.3 412L1018.4 490L534 490Z"/><path fill-rule="evenodd" d="M1086 0H1186V720H1086Z"/><path fill-rule="evenodd" d="M1796 456C1796 292.2 1689.2 183 1529 183C1368.8 183 1262 292.2 1262 456C1262 619.8 1368.8 729 1529 729C1689.2 729 1796 619.8 1796 456ZM1696 456C1696 566.6 1626.7 645 1529 645C1431.3 645 1362 566.6 1362 456C1362 345.4 1431.3 267 1529 267C1626.7 267 1696 345.4 1696 456Z"/><path fill-rule="evenodd" d="M1698 0H1798V720H1698Z"/><path fill-rule="evenodd" d="M1916 192H2016V720H1916Z"/><path fill-rule="evenodd" d="M2396 419C2396 277.4 2300 183 2156 183C2074.3 183 2008 213.4 1966 265.6L1966 419L2016 419C2016 330.1 2074.1 267 2156 267C2237.9 267 2296 330.1 2296 419Z"/><path fill-rule="evenodd" d="M2296 415H2396V720H2296Z"/><path fill-rule="evenodd" d="M3006 456C3006 292.2 2898.8 183 2738 183C2577.2 183 2470 292.2 2470 456C2470 619.8 2577.2 729 2738 729C2898.8 729 3006 619.8 3006 456ZM2906 456C2906 566.6 2836.3 645 2738 645C2639.7 645 2570 566.6 2570 456C2570 345.4 2639.7 267 2738 267C2836.3 267 2906 345.4 2906 456Z"/><path fill-rule="evenodd" d="M3110 559C3110 661 3186 729 3300 729H3344V645H3300C3247.3 645 3210 609.3 3210 559Z"/><path fill-rule="evenodd" d="M3110 58H3210V563H3110Z"/><path fill-rule="evenodd" d="M3036 192H3310V276H3036Z"/><path fill-rule="evenodd" d="M3904.4 490C3905.5 479 3906 467.6 3906 456C3906 292.2 3798.8 183 3638 183C3477.2 183 3370 292.2 3370 456C3370 619.8 3477.2 729 3638 729C3743.2 729 3825.5 682.2 3869.8 604L3747 604C3718.4 630 3680.9 645 3638 645C3539.7 645 3470 566.6 3470 456C3470 345.4 3539.7 267 3638 267C3736.3 267 3806 345.4 3806 456Z"/><path fill-rule="evenodd" d="M3420 412L3903.3 412L3904.4 490L3420 490Z"/></g>
+    <g id="ws"><use href="#w"/><circle cx="4024" cy="662" r="62" style="fill:var(--dot,currentColor)"/></g>
+    <g id="fav"><g fill="currentColor"><rect x="8" y="4" width="48" height="12"/><rect x="8" y="20" width="20" height="12"/><rect x="8" y="36" width="36" height="12"/><rect x="8" y="52" width="20" height="12"/></g><circle cx="38" cy="58" r="6.5" fill="#F0400A"/></g>
+  </defs>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="lockup dot-blaze" style="--h:22px" role="img" aria-label="Fieldnote" translate="no"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="word" viewBox="0 0 3906 720" aria-hidden="true"><use href="#w"/></svg></span>
+      <p class="data">Brand sheet, first edition, October 2026</p>
+    </div>
+    <div class="hero-grid">
+      <svg class="hero-mark" viewBox="0 0 48 60" role="img" aria-label="The Fieldnote mark: four flush-left lines cut to the outline of an F, the last one ending in a round orange stop">
+        <use href="#b" class="bars"/>
+        <circle class="pulse" cx="30" cy="54" r="6.5"/>
+        <circle cx="30" cy="54" r="6.5" fill="var(--blaze)"/>
+      </svg>
+      <div class="hero-copy">
+        <div>
+          <h1>A level meter on its side <br class="br">is a paragraph.</h1>
+          <p class="lede"><span translate="no">Fieldnote</span> records the meeting and writes the follow-up email. The mark is that one move: four lines of sound, set flush left and cut to an F. The last line ends on the record light, which stays on the page as a full stop.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <div class="art"><svg class="meter" viewBox="0 0 60 48" aria-hidden="true"><rect width="12" height="48"/><rect x="16" y="28" width="12" height="20"/><rect x="32" y="12" width="12" height="36"/><rect x="48" y="28" width="12" height="20"/></svg></div>
+            <p class="data">A level meter. The meeting as sound, read left to right.</p>
+          </li>
+          <li>
+            <div class="art"><svg viewBox="0 0 48 60" aria-hidden="true"><g fill="currentColor"><use href="#b"/></g></svg></div>
+            <p class="data">Turned 90° clockwise. Now it reads top to bottom, as lines of text.</p>
+          </li>
+          <li>
+            <div class="art dot-blaze"><svg viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg></div>
+            <p class="data">The light that said recording ends the note as a full stop.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="row">
+    <div class="wrap grid">
+      <div class="c6">
+        <div class="head">
+          <h2>Three ideas, in black</h2>
+          <p class="note">Form first, color after. Each one starts from something the product does.</p>
+        </div>
+        <div class="ideas">
+          <figure class="idea">
+            <div class="art"><svg viewBox="0 0 96 64" style="height:64px" aria-hidden="true"><path d="M0 32Q6-6 12 32 17 66 22 32 27 4 32 32 36 54 40 32 43 18 46 32 48 42 50 32H96" fill="none" stroke="currentColor" stroke-width="6"/></svg></div>
+            <h3>Settle</h3>
+            <p class="why">A voice calming down into one ruled line.</p>
+            <p><span class="verdict">Dropped.</span> <span class="why">Reads as a heart monitor, and the peaks are gone at 16&nbsp;px.</span></p>
+          </figure>
+          <figure class="idea">
+            <div class="art"><svg viewBox="0 0 96 64" style="height:64px" aria-hidden="true"><path d="M84 4V34H16M36 12 14 34 36 56" fill="none" stroke="currentColor" stroke-width="12"/></svg></div>
+            <h3>Return</h3>
+            <p class="why">The return key and the reply arrow are one shape: next line, next step.</p>
+            <p><span class="verdict">Dropped.</span> <span class="why">It already means undo in every toolbar it would sit beside.</span></p>
+          </figure>
+          <figure class="idea">
+            <div class="art"><svg class="mark" style="--h:80px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg></div>
+            <h3>Rag</h3>
+            <p class="why">The ragged edge of a paragraph is the outline of a level meter.</p>
+            <p><span class="verdict">Kept.</span> <span class="why">One silhouette, three readings: F, text, sound. Holds at 16&nbsp;px.</span></p>
+          </figure>
+        </div>
+      </div>
+      <div class="c6">
+        <div class="head">
+          <h2>The winner, tested</h2>
+          <p class="note">Every bar sits on a 4-unit grid, so the mark lands on whole pixels at 60, 30 and 15&nbsp;px tall.</p>
+        </div>
+        <div class="t-top">
+          <figure>
+            <svg viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="The 16 pixel favicon enlarged eight times, showing bars aligned to whole pixels" style="background:#fff"><rect x="16" y="8" width="96" height="24" fill="var(--ink)"/><rect x="16" y="40" width="40" height="24" fill="var(--ink)"/><rect x="16" y="72" width="72" height="24" fill="var(--ink)"/><rect x="16" y="104" width="40" height="24" fill="var(--ink)"/><rect x="72" y="96" width="8" height="8" fill="var(--blaze)" opacity="0.1"/><rect x="64" y="104" width="8" height="8" fill="var(--blaze)" opacity="0.72"/><rect x="72" y="104" width="8" height="8" fill="var(--blaze)"/><rect x="80" y="104" width="8" height="8" fill="var(--blaze)" opacity="0.72"/><rect x="56" y="112" width="8" height="8" fill="var(--blaze)" opacity="0.1"/><rect x="64" y="112" width="8" height="8" fill="var(--blaze)"/><rect x="72" y="112" width="8" height="8" fill="var(--blaze)"/><rect x="80" y="112" width="8" height="8" fill="var(--blaze)"/><rect x="88" y="112" width="8" height="8" fill="var(--blaze)" opacity="0.1"/><rect x="64" y="120" width="8" height="8" fill="var(--blaze)" opacity="0.72"/><rect x="72" y="120" width="8" height="8" fill="var(--blaze)"/><rect x="80" y="120" width="8" height="8" fill="var(--blaze)" opacity="0.72"/><g stroke="rgba(20,22,15,.1)" stroke-width="1" fill="none"><path d="M8 0V128M0 8H128"/><path d="M16 0V128M0 16H128"/><path d="M24 0V128M0 24H128"/><path d="M32 0V128M0 32H128"/><path d="M40 0V128M0 40H128"/><path d="M48 0V128M0 48H128"/><path d="M56 0V128M0 56H128"/><path d="M64 0V128M0 64H128"/><path d="M72 0V128M0 72H128"/><path d="M80 0V128M0 80H128"/><path d="M88 0V128M0 88H128"/><path d="M96 0V128M0 96H128"/><path d="M104 0V128M0 104H128"/><path d="M112 0V128M0 112H128"/><path d="M120 0V128M0 120H128"/><rect x=".5" y=".5" width="127" height="127"/></g></svg>
+            <figcaption class="data">Favicon at 8×</figcaption>
+          </figure>
+          <div>
+            <div class="sizes dot-blaze">
+              <figure><svg class="mark" style="--h:60px" viewBox="0 0 48 60" role="img" aria-label="Mark, 60 pixels tall"><use href="#m"/></svg></figure>
+              <figure><svg class="mark" style="--h:30px" viewBox="0 0 48 60" role="img" aria-label="Mark, 30 pixels tall"><use href="#m"/></svg></figure>
+              <figure><svg class="mark" style="--h:15px" viewBox="0 0 48 60" role="img" aria-label="Mark, 15 pixels tall"><use href="#m"/></svg></figure>
+              <span class="lockup" style="--h:30px;margin-left:8px" role="img" aria-label="Fieldnote lockup, 30 pixels tall" translate="no"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="word" viewBox="0 0 3906 720" aria-hidden="true"><use href="#w"/></svg></span>
+            </div>
+            <p class="data">True size: 60, 30, 15&nbsp;px tall, then beside the wordmark.</p>
+          </div>
+        </div>
+        <div class="t-tiles">
+          <figure>
+            <div class="tile on-paper"><svg class="mark" style="--h:64px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="mark" style="--h:15px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg></div>
+            <figcaption class="data">One color on Paper</figcaption>
+          </figure>
+          <figure>
+            <div class="tile on-ink"><svg class="mark" style="--h:64px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="mark" style="--h:15px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg></div>
+            <figcaption class="data">One color on Ink</figcaption>
+          </figure>
+          <figure>
+            <div class="tile on-blaze"><svg class="mark" style="--h:64px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="mark" style="--h:15px" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg></div>
+            <figcaption class="data">One color on Blaze</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="wrap grid">
+      <div class="c4">
+        <div class="head">
+          <h2>Mark</h2>
+          <p class="note">Four lines of 48, 20, 36 and 20 units. The stop is 13 across, one more than a bar, because a circle has to be larger to look the same size. Its gap to the stem is 3.5, not 4, for the same reason.</p>
+        </div>
+        <svg class="construct dot-blaze" viewBox="-4 -4 86 68" style="width:100%;height:auto" role="img" aria-label="Construction drawing of the mark on a 4-unit grid">
+          <g stroke="rgba(20,22,15,.1)" stroke-width=".14" fill="none"><path d="M-4 -4V64"/><path d="M0 -4V64"/><path d="M4 -4V64"/><path d="M8 -4V64"/><path d="M12 -4V64"/><path d="M16 -4V64"/><path d="M20 -4V64"/><path d="M24 -4V64"/><path d="M28 -4V64"/><path d="M32 -4V64"/><path d="M36 -4V64"/><path d="M40 -4V64"/><path d="M44 -4V64"/><path d="M48 -4V64"/><path d="M52 -4V64"/><path d="M-4 -4H52"/><path d="M-4 0H52"/><path d="M-4 4H52"/><path d="M-4 8H52"/><path d="M-4 12H52"/><path d="M-4 16H52"/><path d="M-4 20H52"/><path d="M-4 24H52"/><path d="M-4 28H52"/><path d="M-4 32H52"/><path d="M-4 36H52"/><path d="M-4 40H52"/><path d="M-4 44H52"/><path d="M-4 48H52"/><path d="M-4 52H52"/><path d="M-4 56H52"/><path d="M-4 60H52"/><path d="M-4 64H52"/></g>
+          <use href="#m" style="color:var(--ink)"/>
+          <text class="in" x="1.6" y="7.1">48</text>
+          <text class="in" x="1.6" y="23.1">20</text>
+          <text class="in" x="1.6" y="39.1">36</text>
+          <text class="in" x="1.6" y="55.1">20</text>
+          <text class="on-dot" x="30" y="55" text-anchor="middle">13</text>
+          <g stroke="var(--graphite)" stroke-width=".22" fill="none"><path d="M54 .1V11.9M53 .1h2M53 11.9h2"/><path d="M54 12.1V15.9M53 12.1h2M53 15.9h2"/><path d="M54 16.1V31.9M53 16.1h2M53 31.9h2"/></g>
+          <text x="57" y="7">12 bar</text>
+          <text x="57" y="15.1">4 gap</text>
+          <text x="57" y="25">16 line</text>
+          <text x="57" y="55.1">3.5 to stem</text>
+        </svg>
+      </div>
+      <div class="c8">
+        <div class="head" style="max-width:none;flex-direction:row;justify-content:space-between;gap:48px">
+          <h2 style="flex:none;width:140px">Wordmark</h2>
+          <p class="note" style="max-width:560px">Drawn, not typed. Its x-height lands on the top of the mark's second bar and the crossbars of f and t line up with it. The tittle on the i is square, so the stop is the only round dot in the name.</p>
+        </div>
+        <svg class="wordmark-big" viewBox="0 0 4086 729" role="img" aria-label="fieldnote, lowercase, ending in an orange full stop" translate="no"><use href="#ws"/></svg>
+        <div class="logo-sub">
+          <figure>
+            <div class="clear" role="img" aria-label="Lockup with clear space of one bar on every side">
+              <i></i><i></i><i></i><i></i>
+              <span class="lockup dot-blaze" translate="no"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="word" viewBox="0 0 3906 720" aria-hidden="true"><use href="#w"/></svg></span>
+            </div>
+            <figcaption style="margin-top:12px">
+              <h3>Lockup and clear space</h3>
+              <p class="note">Same height as the mark, one line of space between them, one bar clear on every side. The stop appears once: in a lockup the mark carries it and the wordmark drops it.</p>
+            </figcaption>
+          </figure>
+          <div>
+            <h3 style="margin-bottom:10px">Minimum size</h3>
+            <ul class="mins dot-blaze">
+              <li><svg class="mark" style="--h:15px" viewBox="0 0 48 60" role="img" aria-label="Mark at minimum size"><use href="#m"/></svg><span class="data">Mark, 15&nbsp;px tall</span></li>
+              <li><span class="lockup" style="--h:14px" role="img" aria-label="Lockup at minimum size" translate="no"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="word" viewBox="0 0 3906 720" aria-hidden="true"><use href="#w"/></svg></span><span class="data">Lockup, 14&nbsp;px tall</span></li>
+              <li><svg class="word" style="--h:14px;aspect-ratio:4086/720" viewBox="0 0 4086 720" role="img" aria-label="Wordmark at minimum size" translate="no"><use href="#ws"/></svg><span class="data">Wordmark, 14&nbsp;px tall</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="wrap">
+      <div class="head" style="max-width:none;flex-direction:row;justify-content:space-between;gap:48px;align-items:baseline">
+        <h2>One accent, four neutrals</h2>
+        <p class="note" style="max-width:720px">Widths show roughly how much of each to use. Blaze comes from surveyors' flagging tape and does two jobs: the record light, and the one primary action on a screen. Everything else is neutral.</p>
+      </div>
+      <div class="swatches">
+        <div class="swatch s-paper"><h3>Paper</h3><p class="data">#F2F3EC<br>242 243 236<br>Page ground</p></div>
+        <div class="swatch s-survey"><h3>Survey</h3><p class="data">#E6E9DD<br>230 233 221<br>Bands, quiet fills</p></div>
+        <div class="swatch s-graphite"><h3>Graphite</h3><p class="data">#5B6054<br>91 96 84<br>Secondary text</p></div>
+        <div class="swatch s-ink"><h3>Ink</h3><p class="data">#14160F<br>20 22 15<br>Text, bars, dark ground</p></div>
+        <div class="swatch s-blaze"><h3>Blaze</h3><p class="data">#F0400A<br>240 64 10<br>Light, action</p></div>
+      </div>
+      <div class="pairs data">
+        <p><b>Ink on Paper</b>16.3:1</p>
+        <p><b>Graphite on Paper</b>5.8:1</p>
+        <p><b>Graphite on Survey</b>5.3:1</p>
+        <p><b>Ink on Blaze</b>4.7:1, the only text on Blaze</p>
+        <p><b>Blaze on Paper</b>3.5:1, marks only, never text</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="wrap grid">
+      <div class="c5">
+        <div class="head"><h2>Type pair</h2></div>
+        <div class="type-block">
+          <div class="tb-head"><h3>Schibsted Grotesk</h3><span class="data">400, 500</span></div>
+          <p class="spec-word">Here is what we agreed.</p>
+          <p class="spec-body">Headings at 500, tracked −0.02 to −0.035&nbsp;em. Body at 400. Never heavier, and never for the name itself: the wordmark is a drawing.</p>
+        </div>
+        <div class="type-block">
+          <div class="tb-head"><h3>Fragment Mono</h3><span class="data">400, data only</span></div>
+          <div class="transcript">
+            <span>00:14:32</span><span>Priya</span><span>I can send the signed scope by Monday.</span>
+            <span>00:14:41</span><span>Marc</span><span>Then you get the timeline by Wednesday.</span>
+          </div>
+          <p class="note" style="margin-top:8px">Timestamps, values, file names: whatever a field book keeps in columns.</p>
+        </div>
+      </div>
+      <div class="c7">
+        <div class="head"><h2>Three lines of voice</h2></div>
+        <div class="voice">
+          <span class="data vh"></span><span class="data vh">Say</span><span class="data vh">Not</span>
+          <p class="pr">Write like someone who was in the room.</p>
+          <p>You send the signed scope by Monday.</p>
+          <p class="not">Per our productive discussion, next steps were aligned.</p>
+          <p class="pr">Commitments first, pleasantries last.</p>
+          <p>Two things are on you, one is on me.</p>
+          <p class="not">It was so great connecting with you today!</p>
+          <p class="pr">Never claim more than was said.</p>
+          <p>Budget did not come up, so I left it out.</p>
+          <p class="not">Everyone is happy with the budget.</p>
+        </div>
+        <p class="note banned">Say recording, out loud, every time it is happening. Leave out AI-powered, seamless, effortless, supercharge and unlock.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="row">
+    <div class="wrap grid">
+      <div class="c4">
+        <div class="head" style="margin-bottom:14px"><h2>Do</h2></div>
+        <ul class="dos">
+          <li>Use the mark alone where the name is already in view: tab, dock, avatar.</li>
+          <li>Show Blaze once per surface. If an action needs it, the mark goes one color.</li>
+          <li>Treat the dot as a promise. It pulses only while recording: 1.2&nbsp;s, ease-out. With reduced motion it holds still and the word Recording does the work. This sheet plays it once on load, as a demo.</li>
+        </ul>
+      </div>
+      <div class="c8">
+        <div class="head" style="margin-bottom:14px"><h2>Don't</h2></div>
+        <div class="donts">
+          <figure><div class="art"><svg viewBox="0 0 48 60" preserveAspectRatio="none" style="width:92px;height:46px;color:var(--ink)" aria-hidden="true"><use href="#m"/></svg></div><p><b>Stretch it.</b>The bars stop being lines.</p></figure>
+          <figure><div class="art"><svg class="mark" viewBox="0 0 48 60" style="transform:rotate(-12deg)" aria-hidden="true"><use href="#m"/></svg></div><p><b>Tilt it.</b>Lines of text sit level.</p></figure>
+          <figure><div class="art"><svg class="mark" viewBox="0 0 48 60" style="color:var(--blaze);--dot:var(--ink)" aria-hidden="true"><use href="#m"/></svg></div><p><b>Color the lines.</b>Only the light is lit.</p></figure>
+          <figure><div class="art"><svg class="mark" viewBox="0 0 48 60" style="--dot:var(--ink)" aria-hidden="true"><use href="#m"/><circle cx="47" cy="4" r="9.5" fill="var(--blaze)"/><text x="47" y="7.4" text-anchor="middle" font-size="10" font-family="var(--sans)" font-weight="500" fill="var(--ink)">3</text></svg></div><p><b>Use the dot as a badge.</b>It is the record light, not a counter.</p></figure>
+          <figure><div class="art"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><g fill="var(--ink)"><rect width="48" height="12" rx="6"/><rect y="16" width="20" height="12" rx="6"/><rect y="32" width="36" height="12" rx="6"/><rect y="48" width="20" height="12" rx="6"/></g><circle cx="30" cy="54" r="6.5" fill="var(--blaze)"/></svg></div><p><b>Round the ends.</b>It turns into a menu icon.</p></figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="use">
+    <div class="wrap">
+      <div class="head" style="max-width:none"><h2>Where it lives</h2></div>
+      <div class="use-grid">
+        <figure style="grid-column:span 6">
+          <article class="email" aria-label="Example notification email">
+            <div class="email-meta"><b>Your follow-up to Priya is ready</b><span>Nothing has been sent. Three commitments, one open question.</span></div>
+            <div class="email-body">
+              <span class="lockup" style="--h:20px" role="img" aria-label="Fieldnote" translate="no"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="word" viewBox="0 0 3906 720" aria-hidden="true"><use href="#w"/></svg></span>
+              <p class="fact">Scope review with Priya Nair<span>Thursday 29 October, 14:00. 38 minutes.</span></p>
+              <div class="draft">
+                <p>Hi Priya,</p>
+                <p>Thanks for the time today. Here is what we agreed:</p>
+                <ul>
+                  <li>You send the signed scope by Monday.</li>
+                  <li>I send the revised timeline by Wednesday.</li>
+                  <li>We both check the data clause with legal.</li>
+                </ul>
+                <p>Budget did not come up, so I left it out. Tell me if it should be on the list.</p>
+                <p>Marc</p>
+              </div>
+              <span class="btn">Review and send</span>
+              <p class="fine">Nothing goes out until you send it.</p>
+            </div>
+          </article>
+          <figcaption class="data cap">Email header, sample content. System fonts. The action gets the Blaze.</figcaption>
+        </figure>
+        <div style="grid-column:span 6">
+          <figure>
+            <div class="slide">
+              <span class="lockup dot-blaze" style="--h:20px" role="img" aria-label="Fieldnote" translate="no"><svg class="mark" viewBox="0 0 48 60" aria-hidden="true"><use href="#m"/></svg><svg class="word" viewBox="0 0 3906 720" aria-hidden="true"><use href="#w"/></svg></span>
+              <div class="slide-foot"><p class="t">Records the meeting. Writes the follow-up.</p><span class="data">1</span></div>
+            </div>
+            <figcaption class="data cap">Slide. Ink ground, lockup top left, one sentence.</figcaption>
+          </figure>
+          <div class="use-low">
+            <figure>
+              <div class="tabs">
+                <div class="tabbar"><div class="tab"><svg viewBox="0 0 64 64" aria-hidden="true" style="color:var(--ink)"><use href="#fav"/></svg>Scope review</div></div>
+                <div class="tabbar dark"><div class="tab"><svg viewBox="0 0 64 64" aria-hidden="true" style="color:var(--paper)"><use href="#fav"/></svg>Scope review</div></div>
+              </div>
+              <figcaption class="data cap">Favicon, true 16&nbsp;px, light and dark tab.</figcaption>
+            </figure>
+            <figure>
+              <div class="icons">
+                <svg viewBox="0 0 100 100" style="width:96px;height:96px" role="img" aria-label="App icon, large"><rect width="100" height="100" rx="22.4" fill="var(--ink)"/><g transform="translate(31 24.5) scale(.88)" style="color:var(--paper);--dot:var(--blaze)"><use href="#m"/></g></svg>
+                <svg viewBox="0 0 100 100" style="width:48px;height:48px" role="img" aria-label="App icon, small"><rect width="100" height="100" rx="22.4" fill="var(--ink)"/><g transform="translate(31 24.5) scale(.88)" style="color:var(--paper);--dot:var(--blaze)"><use href="#m"/></g></svg>
+              </div>
+              <figcaption class="data cap">App icon. Set 2 units right of center to balance its mass.</figcaption>
+            </figure>
+            <figure>
+              <div class="avatars">
+                <svg viewBox="0 0 100 100" style="width:64px;height:64px" role="img" aria-label="Avatar, large"><circle cx="50" cy="50" r="50" fill="var(--ink)"/><g transform="translate(34.5 29) scale(.72)" style="color:var(--paper);--dot:var(--blaze)"><use href="#m"/></g></svg>
+                <svg viewBox="0 0 100 100" style="width:40px;height:40px" role="img" aria-label="Avatar, medium"><circle cx="50" cy="50" r="50" fill="var(--ink)"/><g transform="translate(34.5 29) scale(.72)" style="color:var(--paper);--dot:var(--blaze)"><use href="#m"/></g></svg>
+                <svg viewBox="0 0 100 100" style="width:24px;height:24px" role="img" aria-label="Avatar, small"><circle cx="50" cy="50" r="50" fill="var(--ink)"/><g transform="translate(34.5 29) scale(.72)" style="color:var(--paper);--dot:var(--blaze)"><use href="#m"/></g></svg>
+              </div>
+              <p class="note" style="margin-top:12px;color:var(--ink)"><span translate="no">Fieldnote</span> is recording this call. Everyone here can see that.</p>
+              <figcaption class="data cap">Avatar in a call.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap grid">
+    <div class="c5">
+      <h3>Before this ships</h3>
+      <p>Mark and trademark search has not been run: this sheet was made without web access. Field Notes, the memo-book brand, is the first name to clear, and it is why nothing here uses kraft paper or a memo-book layout.</p>
+    </div>
+    <div class="c5">
+      <h3>References, from memory</h3>
+      <p>Logo System and Logobook for judging marks in black at one size. Brand New for judging a mark in use, not alone. Branding Style Guides for rules short enough to apply. Surveyors' field books for flagging-tape orange and ruled columns.</p>
+    </div>
+    <div class="c2">
+      <div class="sign"><svg class="mark dot-blaze" style="--h:60px" viewBox="0 0 48 60" role="img" aria-label="Fieldnote mark"><use href="#m"/></svg></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

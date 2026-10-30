@@ -8,8 +8,8 @@
 <p align="center">
   <a href="https://github.com/Jsolee/jsolee-kit/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Jsolee/jsolee-kit?style=flat-square&labelColor=0E0E0E&color=E5482D"></a>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-skill_%2B_mods-F2EEE6?style=flat-square&labelColor=0E0E0E">
-  <img alt="31 skills" src="https://img.shields.io/badge/skills-31-F2EEE6?style=flat-square&labelColor=0E0E0E">
-  <img alt="19 references" src="https://img.shields.io/badge/references-19-F2EEE6?style=flat-square&labelColor=0E0E0E">
+  <img alt="38 skills" src="https://img.shields.io/badge/skills-38-F2EEE6?style=flat-square&labelColor=0E0E0E">
+  <img alt="23 references" src="https://img.shields.io/badge/references-23-F2EEE6?style=flat-square&labelColor=0E0E0E">
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-F2EEE6?style=flat-square&labelColor=0E0E0E"></a>
   <a href="#contributing"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-F2EEE6?style=flat-square&labelColor=0E0E0E"></a>
 </p>
@@ -31,7 +31,7 @@
 
 Models got good at landing pages. They still drift to the same tells: a pill that says "New" above the headline, two buttons where one would do, four accent colors, em dashes all over the copy, nothing you'd remember. Each one is small. Together they're why a page feels generated.
 
-**jsolee-kit is how I catch them.** It's the skill I load for frontend work in Claude Code: a six-step workflow, eleven house rules, a ship checklist, 19 reference sites sorted by the section you're designing, and a map of the 31 skills I actually use, each linked to its source. It also ships the mod I built to watch Claude's subagents work. [Here's the difference it makes](#does-it-make-a-difference) on the same prompt.
+**jsolee-kit is how I catch them.** It's the skill I load for frontend work in Claude Code: a six-step workflow, eleven house rules, a ship checklist, 23 reference sites sorted by the section you're designing, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work. [Here's the difference it makes](#does-it-make-a-difference) on the same prompt.
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
@@ -39,9 +39,9 @@ It's opinionated on purpose. Fork it and make the rules yours.
 <p align="center"><sub>Silent preview. <a href="https://github.com/Jsolee/jsolee-kit/raw/main/assets/demo.mp4">Download the video with sound</a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
-  <img alt="Four pages Claude built with the kit: a landing, a pricing page, a dashboard and a portfolio" src="assets/gallery.png" width="100%">
+  <img alt="Six things Claude built with the kit: a landing, a pricing page, a dashboard, a portfolio, an email and a brand sheet" src="assets/gallery.png" width="100%">
 </a>
-<p align="center"><sub>Four pages Claude built with the kit, one prompt each. <a href="#does-it-make-a-difference">See them next to the same prompt without it.</a></sub></p>
+<p align="center"><sub>Six things Claude built with the kit, one prompt each. <a href="#does-it-make-a-difference">See them next to the same prompt without it.</a></sub></p>
 
 <br>
 
@@ -55,7 +55,7 @@ Pick one. All three take under a minute.
 npx skills add Jsolee/jsolee-kit --skill jsolee-kit -g -a claude-code
 ```
 
-**2 · The skill plus the 31 skills it points to**: impeccable, taste, Emil Kowalski's design engineering, the official GSAP skills, Vercel's guidelines, React / Prisma / Expo patterns from ECC, superpowers…
+**2 · The skill plus the 38 skills it points to**: impeccable, taste, Emil Kowalski's design engineering, the official GSAP skills, Vercel's guidelines, Resend's email skills, logo and brand skills, React / Prisma / Expo patterns from ECC, superpowers…
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Jsolee/jsolee-kit/main/install.sh | bash
@@ -93,7 +93,7 @@ Everyone who clones the repo gets the same rules, without installing anything.
 
 ## Does it make a difference?
 
-Four prompts, same model (Claude Opus 5.5), one run each, nothing cherry-picked. The pages on the left are good: today's models don't ship the indigo gradient anymore. What the kit changes is what a page leads with and what it leaves out. Every page is in [`examples/`](examples), so open them and judge for yourself.
+Six prompts, same model (Claude Opus 5.5), one run each, nothing cherry-picked. The results on the left are good: today's models don't ship the indigo gradient anymore. What the kit changes is what a page leads with and what it leaves out. Every page is in [`examples/`](examples), so open them and judge for yourself.
 
 ### A landing page
 
@@ -128,7 +128,7 @@ Four prompts, same model (Claude Opus 5.5), one run each, nothing cherry-picked.
   <img alt="Ledger dashboard built without skills on the left and with jsolee-kit on the right" src="assets/compare-dashboard.png" width="100%">
 </p>
 
-The closest of the four: both are clean, and neither has an em dash.
+Close: both are clean, and neither has an em dash.
 
 | | No skills | With jsolee-kit |
 |---|---|---|
@@ -148,7 +148,38 @@ The closest of the four: both are clean, and neither has an em dash.
 | Above the fold | three stats and a row of client logos | the work itself: the first project's dispatch board |
 | Em dashes in the copy | 25 | 0 |
 
-**What it costs:** across the four pairs, the runs with the kit used about 1.7× the tokens and 1.8× the time: they read the rules, load design skills and take more passes (41 to 75 tool calls against 2 to 10).
+### An email
+
+<p align="center">
+  <img alt="Ledger weekly email built without skills on the left and with jsolee-kit on the right" src="assets/compare-email.png" width="100%">
+</p>
+
+Technically they tie: both use tables, a preheader, dark mode and Outlook fallbacks. That's what the default already gets right. The kit changes the editing.
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| Opens with | a greeting, then the number | the number, then what changed |
+| Actions | a button and a second link to the report | one button |
+| Color | green and red figures, a red callout box | one green |
+| Length | 1,865 px | 1,297 px |
+
+### A logo and brand
+
+<p align="center">
+  <img alt="Fieldnote brand sheet built without skills on the left and with jsolee-kit on the right" src="assets/compare-brand.png" width="100%">
+</p>
+
+The left one is a strong sheet, and it does what the prompt asked: everything on one screen. The right one runs past four screens, because it shows the work.
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| The mark | an F with a red dot | four lines of sound that read as an F, ending on the record light |
+| Ideas shown | one | three in black, with why two were dropped |
+| Tested | a rule for small sizes | on a pixel grid at 60, 30 and 15 px, and in one color on three backgrounds |
+| Do and don't | what to say and not say | the same, plus five drawn misuses of the mark |
+| Limits | not stated | says the trademark search hasn't been run |
+
+**What it costs:** across the six pairs, the runs with the kit used about 1.7× the tokens and 1.9× the time: they read the rules, load design skills and take more passes (41 to 75 tool calls against 2 to 10).
 
 <details>
 <summary><b>The prompts</b></summary>
@@ -158,9 +189,11 @@ Build a landing page for Fieldnote, an app that records your meetings and writes
 Build a pricing page for Relay, an API for sending transactional SMS. Three plans.
 Build the main dashboard screen for Ledger, an app where a small online shop owner sees revenue, orders and refunds.
 Build a personal portfolio site for Mara Ilić, an independent product designer.
+Build a weekly summary email for Ledger, an app where a small online shop owner sees revenue, orders and refunds.
+Design a logo and a one-page brand sheet for Fieldnote, an app that records your meetings and writes the follow-up email for you.
 ```
 
-Every run got the same constraints: one self-contained HTML file, Tailwind and Google Fonts from a CDN, no images, everything visible on load. The runs on the left were told not to use skills. The runs on the right were told to read the jsolee-kit skill and its references and follow its workflow, house rules and checklist, and could load the design skills it maps. All of them were told not to browse the web.
+Every run got the same constraints: one self-contained HTML file, no raster images, and for the pages, Tailwind and Google Fonts from a CDN with everything visible on load. The runs on the left were told not to use skills. The runs on the right were told to read the jsolee-kit skill and its references and follow its workflow, house rules and checklist, and could load the design skills it maps. All of them were told not to browse the web.
 
 </details>
 
@@ -173,15 +206,17 @@ jsolee-kit/
 ├── skills/jsolee-kit/
 │   ├── SKILL.md                 workflow, skill map, house rules, ship checklist, motion tokens
 │   └── references/
-│       ├── inspiration.md       19 reference sites, sorted by section
-│       └── skills.md            every skill and plugin I use, with its source repo
+│       ├── inspiration.md       23 reference sites, sorted by section
+│       ├── email.md             how to build emails that survive real inboxes
+│       ├── brand.md             from a name to a logo and a one-page brand system
+│       └── skills.md            every skill and plugin it points to, with its source repo
 ├── plugins/comunitat/           the mod: subagents drawn as crabs, plus a map of the repo
-├── examples/                    four pages, each built with and without the kit
-├── install.sh                   the kit and the 31 skills, in one go
+├── examples/                    six projects, each built with and without the kit
+├── install.sh                   the kit and the 38 skills, in one go
 └── .claude-plugin/              the marketplace behind /plugin install
 ```
 
-`SKILL.md` stays under 70 lines on purpose. Claude reads it whole on every UI task, and the long lists sit in `references/` until a step needs them.
+`SKILL.md` stays around 70 lines on purpose. Claude reads it whole on every UI task, and the long lists sit in `references/` until a step needs them.
 
 <br>
 
@@ -300,7 +335,9 @@ Pick by the section you're designing. Open two or three, write down what you're 
 | Social proof | [socialproofexamples.com](https://socialproofexamples.com) | Real quotes with faces, roles and numbers |
 | Pricing | [pricingpages.design](https://pricingpages.design) | Plan naming, the comparison table, the annual toggle |
 | Share images | [ogimage.gallery](https://www.ogimage.gallery) | OG cards that still read at 600 px |
-| Email | [reallygoodemails.com](https://reallygoodemails.com) | Transactional and lifecycle emails |
+| Email | [reallygoodemails.com](https://reallygoodemails.com) | Transactional and lifecycle emails, filtered by type |
+| Logos | [Logo System](https://www.logosystem.co) · [Logobook](https://logobook.com) | Marks by shape and idea, in one color |
+| Brand systems | [Brand New](https://www.underconsideration.com/brandnew) · [Branding Style Guides](https://brandingstyleguides.com) | Rebrands explained, and how real guidelines are organized |
 | Decks | [deck.gallery](https://www.deck.gallery) | One idea per slide |
 | Social posts | [posts.design](https://posts.design) | Carousel and post layouts |
 | Ads | [adfolio.design](https://adfolio.design) | Ad layouts and hooks |
@@ -338,10 +375,12 @@ When you need something, this is the skill to reach for.
 | Expo and React Native | `react-native-patterns` ([ECC](https://github.com/affaan-m/ECC)) |
 | A launch video from HTML | [`hyperframes`](https://github.com/heygen-com/hyperframes) |
 | A slide deck in the browser | [`frontend-slides`](https://github.com/zarazhangrui/frontend-slides) |
+| An email: transactional, lifecycle, launch | [`email.md`](skills/jsolee-kit/references/email.md), then [`react-email`, `email-best-practices`, `resend`](https://github.com/resend/resend-skills) |
+| A logo and a brand identity | [`brand.md`](skills/jsolee-kit/references/brand.md), then [`brand`, `design`, `banner-design`](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), `ios-icon-gen` ([ECC](https://github.com/affaan-m/ECC)) |
 | Plan, debug, prove it works | [`brainstorming`, `systematic-debugging`, `verification-before-completion`](https://github.com/obra/superpowers) |
 
 <details>
-<summary><b>The full catalog</b>: everything I have installed, by category</summary>
+<summary><b>The full catalog</b>: every skill the kit points to, by category</summary>
 <br>
 
 ★ means `install.sh` installs it. Anything else: `npx skills add <repo> --skill <name> -g -a claude-code`.
@@ -354,12 +393,24 @@ When you need something, this is the skill to reach for.
 | ★ design-taste-frontend | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | Anti-slop art direction with variance, motion and density dials |
 | ★ emil-design-eng | [emilkowalski/skills](https://github.com/emilkowalski/skills) | UI polish and animation decisions |
 | ★ ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Styles, palettes and font pairings per product type |
-| design, brand, ui-styling, design-system, slides, banner-design | same repo | Brand identity, tokens, banners, HTML slides |
+| ★ brand | same repo | Brand voice, visual identity, messaging, style guides |
+| ★ design | same repo | Logo generation (needs `GEMINI_API_KEY`), corporate identity, icons, social images |
+| ★ banner-design | same repo | Social covers, ads and hero banners |
+| ui-styling, design-system, slides | same repo | Tokens, component styling, HTML slides |
+| ★ ios-icon-gen | affaan-m/ECC | iOS app icons from SF Symbols or Iconify |
 | ★ web-design-guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Vercel's interface checklist |
 | ★ make-interfaces-feel-better | [affaan-m/ECC](https://github.com/affaan-m/ECC) | Concrete design-engineering details |
 | ★ frontend-a11y · accessibility | affaan-m/ECC | WCAG 2.2 for React, Next.js and native |
 | liquid-glass-design | affaan-m/ECC | iOS 26 Liquid Glass in SwiftUI |
 | ★ frontend-slides | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) | Slide decks as web pages |
+
+**Email**
+
+| Skill | Repo | Use |
+|---|---|---|
+| ★ react-email | [resend/resend-skills](https://github.com/resend/resend-skills) | Build email templates with React components |
+| ★ email-best-practices | same repo | Deliverability, compliance, transactional and marketing patterns |
+| ★ resend | same repo | Send, receive and manage email through the Resend API |
 
 **Motion and video**
 
@@ -479,6 +530,16 @@ Honor prefers-reduced-motion and keep everything else still.
 ```
 
 ```text
+Use jsolee-kit to build our order-shipped email. Pull references from reallygoodemails,
+tell me what you take from each, and make it work in Outlook, in dark mode and with images off.
+```
+
+```text
+Use jsolee-kit to design a logo for this product. Three ideas in black first, test the best
+one at 16 px, then write the one-page brand system into DESIGN.md.
+```
+
+```text
 I'm about to build an onboarding flow in Expo. Which skills from jsolee-kit should I use, and in what order?
 ```
 
@@ -495,7 +556,7 @@ The skill does: `SKILL.md` is plain Markdown, and the `skills` CLI installs it i
 </details>
 
 <details>
-<summary><b>Why not copy the 31 skills into this repo?</b></summary>
+<summary><b>Why not copy the 38 skills into this repo?</b></summary>
 <br>
 
 Licenses, and freshness. Each skill installs from its author's repo, keeps its license, and stays current with `npx skills update`. This repo only holds what's mine.
@@ -522,7 +583,7 @@ They're mine, built from the tells I kept catching in my own projects. Fork the 
 <summary><b>Will it slow Claude down or eat my context?</b></summary>
 <br>
 
-The skill is under 70 lines and only loads for UI work. The catalogs in `references/` load only when a step needs them.
+The skill is around 70 lines and only loads for design work. The catalogs in `references/` load only when a step needs them.
 
 </details>
 
@@ -542,7 +603,7 @@ Keep `SKILL.md` short: if it grows past 100 lines, the extra goes into `referenc
 
 ## Credits
 
-The skills this kit points to belong to their authors: [Paul Bakaus](https://github.com/pbakaus/impeccable), [Leonxlnx](https://github.com/Leonxlnx/taste-skill), [Emil Kowalski](https://github.com/emilkowalski/skills), [nextlevelbuilder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [GreenSock](https://github.com/greensock/gsap-skills), [HeyGen](https://github.com/heygen-com/hyperframes), [Vercel](https://github.com/vercel-labs/agent-skills), [affaan-m](https://github.com/affaan-m/ECC), [obra](https://github.com/obra/superpowers), [zarazhangrui](https://github.com/zarazhangrui/frontend-slides), [Jeffallan](https://github.com/Jeffallan/claude-skills), [glittercowboy](https://github.com/glittercowboy/taches-cc-resources), [kepano](https://github.com/kepano/obsidian-skills) and [Anthropic](https://github.com/anthropics/skills). comunitat's pixel crab and its costumes come from [savvy-progress](https://github.com/JohnnyVizz/claude-kit) by johnnyvizz (MIT; the notice is in [`crab.ts`](plugins/comunitat/hooks/crab.ts)).
+The skills this kit points to belong to their authors: [Paul Bakaus](https://github.com/pbakaus/impeccable), [Leonxlnx](https://github.com/Leonxlnx/taste-skill), [Emil Kowalski](https://github.com/emilkowalski/skills), [nextlevelbuilder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [GreenSock](https://github.com/greensock/gsap-skills), [HeyGen](https://github.com/heygen-com/hyperframes), [Vercel](https://github.com/vercel-labs/agent-skills), [Resend](https://github.com/resend/resend-skills), [affaan-m](https://github.com/affaan-m/ECC), [obra](https://github.com/obra/superpowers), [zarazhangrui](https://github.com/zarazhangrui/frontend-slides), [Jeffallan](https://github.com/Jeffallan/claude-skills), [glittercowboy](https://github.com/glittercowboy/taches-cc-resources), [kepano](https://github.com/kepano/obsidian-skills) and [Anthropic](https://github.com/anthropics/skills). comunitat's pixel crab and its costumes come from [savvy-progress](https://github.com/JohnnyVizz/claude-kit) by johnnyvizz (MIT; the notice is in [`crab.ts`](plugins/comunitat/hooks/crab.ts)).
 
 <br>
 

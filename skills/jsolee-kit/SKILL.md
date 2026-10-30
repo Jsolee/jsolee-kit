@@ -1,6 +1,6 @@
 ---
 name: jsolee-kit
-description: Joan's frontend and fullstack working kit. Which skill to reach for at each step of UI work, where to pull visual references (section galleries, motion and 3D sites), and the house rules that keep interfaces from looking AI-generated. Use when starting or redesigning a landing page, app screen or component; when asked for inspiration, references, "wow factor" or "make it not look AI-made"; or when choosing between design, animation and stack skills.
+description: Joan's frontend and fullstack working kit. Which skill to reach for at each step of UI work, where to pull visual references (section galleries, motion and 3D sites), and the house rules that keep interfaces from looking AI-generated. Use when starting or redesigning a landing page, app screen or component; when asked for inspiration, references, "wow factor" or "make it not look AI-made"; when designing an email, a logo or a brand identity; or when choosing between design, animation and stack skills.
 ---
 
 # jsolee-kit
@@ -32,6 +32,8 @@ How we build interfaces: direction first, real references, one signature moment,
 | Expo / React Native | `react-native-patterns` |
 | Launch video or motion piece from HTML | `hyperframes` |
 | Slide deck in the browser | `frontend-slides` |
+| Emails: transactional, lifecycle, launches | [references/email.md](references/email.md), then `react-email`, `email-best-practices`, `resend` |
+| Logo and brand identity | [references/brand.md](references/brand.md), then `brand`, `design`, `banner-design`, `ios-icon-gen` |
 | Plan, debug, verify | `brainstorming`, `systematic-debugging`, `verification-before-completion` |
 
 Full catalog with source repos: [references/skills.md](references/skills.md).
