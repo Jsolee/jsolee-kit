@@ -165,7 +165,7 @@ Same one-line prompt, same model (Claude Opus 5.5), one run each, nothing cherry
 | Hero actions | two buttons | one button and a text link |
 | Color | red underline, green, yellow and pink tags | one committed yellow |
 | Em dashes in the copy | 7 | 0 |
-| Something to remember | a generic app mockup | each transcript line wired to the email point it became |
+| Something to remember | a polished app mockup | the same mockup, with each transcript line wired to the email point it became |
 
 Both pages are in [`examples/fieldnote/`](examples/fieldnote). Open them and judge for yourself.
 
