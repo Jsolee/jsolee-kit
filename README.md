@@ -28,9 +28,9 @@
 
 <br>
 
-Ask any coding agent for a landing page and you get the same one. Indigo gradient. Glass cards. A pill that says "✨ New". A headline in gradient text. Four five-star testimonials from companies that don't exist. Anyone can tell AI made it.
+Models got good at landing pages. They still drift to the same tells: a pill that says "New" above the headline, two buttons where one would do, four accent colors, em dashes in every other line, nothing you'd remember. Each one is small. Together they're why a page feels generated.
 
-**jsolee-kit is how I stop that.** It's the skill I load for frontend work in Claude Code: a six-step workflow, eleven house rules, a ship checklist, 19 reference sites sorted by the section you're designing, and a map of the 31 skills I actually use, each linked to its source. It also ships the mod I built to watch Claude's subagents work.
+**jsolee-kit is how I catch them.** It's the skill I load for frontend work in Claude Code: a six-step workflow, eleven house rules, a ship checklist, 19 reference sites sorted by the section you're designing, and a map of the 31 skills I actually use, each linked to its source. It also ships the mod I built to watch Claude's subagents work. [Here's the difference it makes](#does-it-make-a-difference) on the same prompt.
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
@@ -92,6 +92,7 @@ jsolee-kit/
 │       ├── inspiration.md       19 reference sites, sorted by section
 │       └── skills.md            every skill and plugin I use, with its source repo
 ├── plugins/comunitat/           the mod: subagents drawn as crabs, plus a map of the repo
+├── examples/fieldnote/          the same landing built with and without the kit
 ├── install.sh                   the kit and the 31 skills, in one go
 └── .claude-plugin/              the marketplace behind /plugin install
 ```
@@ -149,6 +150,37 @@ In practice:
 +   Your invoices, sent before lunch</h1>
 + <div className="rounded-2xl border border-black/[0.04] bg-white shadow-[0_1px_3px_rgba(0,0,0,.03)]">
 ```
+
+### Does it make a difference?
+
+<p align="center">
+  <img alt="The same Fieldnote landing page built twice: without skills on the left, with jsolee-kit on the right" src="assets/before-after.png" width="100%">
+</p>
+
+Same one-line prompt, same model (Claude Opus 5.5), one run each, nothing cherry-picked. The left page is good: today's models don't ship the indigo gradient anymore. What the kit changes are the details people feel without naming:
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| Above the headline | a "NEW" pill | nothing |
+| Hero actions | two buttons | one button and a text link |
+| Color | red underline, green, yellow and pink tags | one committed yellow |
+| Em dashes in the copy | 7 | 0 |
+| Something to remember | a generic app mockup | each transcript line wired to the email point it became |
+
+Both pages are in [`examples/fieldnote/`](examples/fieldnote). Open them and judge for yourself.
+
+<details>
+<summary><b>The prompt</b></summary>
+
+```text
+Build a landing page for Fieldnote, an app that records your meetings and writes
+the follow-up email for you. One self-contained HTML file. You may load Tailwind
+and Google Fonts from a CDN; no other external assets and no images.
+```
+
+The kit run also got: "Before designing, read the jsolee-kit skill and its references, and follow its workflow, house rules and pre-ship checklist."
+
+</details>
 
 <br>
 

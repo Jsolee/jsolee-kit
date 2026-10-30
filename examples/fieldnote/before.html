@@ -1,0 +1,889 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnote — The follow-up is already written</title>
+<meta name="description" content="Fieldnote records your meetings, pulls out decisions and action items, and drafts the follow-up email in your voice.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&display=swap">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          paper: '#F4F0E8',
+          paper2: '#ECE6D9',
+          card: '#FBF9F4',
+          ink: '#17160F',
+          ink2: '#3B382F',
+          muted: '#6F695B',
+          rule: '#DCD4C3',
+          rec: '#D8461B',
+          moss: '#2F5D45',
+        },
+        fontFamily: {
+          sans: ['Geist', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          serif: ['Newsreader', 'Georgia', 'serif'],
+          mono: ['"Geist Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { background: #F4F0E8; color: #17160F; overflow-x: hidden; }
+  h1, h2, h3 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+
+  /* notebook paper */
+  .ruled {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: repeating-linear-gradient(to bottom, transparent 0 35px, rgba(23,22,15,.055) 35px 36px);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 28%, transparent 72%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 28%, transparent 72%);
+  }
+  .margin-rule {
+    position: absolute; top: 0; bottom: 0; width: 1px; pointer-events: none;
+    left: max(28px, calc(50% - 664px));
+    background: rgba(216,70,27,.32);
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 72%);
+            mask-image: linear-gradient(to bottom, #000 0%, #000 30%, transparent 72%);
+  }
+
+  .eyebrow { display: flex; align-items: center; gap: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #6F695B; }
+  .eyebrow::before { content: ""; width: 18px; height: 1px; background: #D8461B; }
+  .on-ink .eyebrow { color: rgba(244,240,232,.55); }
+
+  .btn { display: inline-flex; align-items: center; gap: .5rem; height: 46px; padding: 0 22px; border-radius: 999px; font-weight: 500; font-size: 15px; white-space: nowrap; transition: background-color .15s ease, border-color .15s ease, transform .12s ease; }
+  .btn:active { transform: scale(.98); }
+  .btn-ink { background: #17160F; color: #F4F0E8; box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 1px 2px rgba(23,22,15,.25); }
+  .btn-ink:hover { background: #2C2A22; }
+  .btn-ghost { background: rgba(251,249,244,.6); color: #17160F; border: 1px solid #D3CAB6; }
+  .btn-ghost:hover { border-color: #17160F; }
+  .btn-paper { background: #F4F0E8; color: #17160F; }
+  .btn-paper:hover { background: #fff; }
+
+  .window {
+    box-shadow:
+      0 0 0 1px rgba(23,22,15,.05),
+      0 2px 4px rgba(23,22,15,.04),
+      0 24px 48px -18px rgba(70,52,20,.22),
+      0 70px 120px -50px rgba(70,52,20,.30);
+  }
+
+  /* highlighter marks */
+  .hl { padding: 1px 3px; margin: 0 -1px; border-radius: 3px; -webkit-box-decoration-break: clone; box-decoration-break: clone; color: #17160F; }
+  .hl-decision { background: linear-gradient(100deg, rgba(215,230,214,0) 0%, #D7E6D6 3%, #D7E6D6 97%, rgba(215,230,214,0) 100%); }
+  .hl-action   { background: linear-gradient(100deg, rgba(246,224,143,0) 0%, #F6E08F 3%, #F6E08F 97%, rgba(246,224,143,0) 100%); }
+  .hl-date     { background: linear-gradient(100deg, rgba(245,207,191,0) 0%, #F5CFBF 3%, #F5CFBF 97%, rgba(245,207,191,0) 100%); }
+
+  .mk { display: inline-grid; place-items: center; flex: none; width: 18px; height: 18px; border-radius: 5px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10.5px; font-weight: 500; line-height: 1; color: #17160F; }
+  .mk-decision { background: #D7E6D6; box-shadow: inset 0 0 0 1px rgba(47,93,69,.35); }
+  .mk-action   { background: #F6E08F; box-shadow: inset 0 0 0 1px rgba(140,110,20,.35); }
+  .mk-date     { background: #F5CFBF; box-shadow: inset 0 0 0 1px rgba(216,70,27,.35); }
+
+  .tag { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 10px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; padding: 4px 6px; border-radius: 4px; line-height: 1; flex: none; }
+  .tag-decision { background: #D7E6D6; color: #22442F; }
+  .tag-action   { background: #F6E08F; color: #5A4708; }
+  .tag-date     { background: #F5CFBF; color: #8A2E10; }
+
+  .av { width: 28px; height: 28px; border-radius: 999px; display: grid; place-items: center; flex: none; font-size: 10.5px; font-weight: 600; letter-spacing: .02em; color: #17160F; }
+
+  .wave { display: flex; align-items: center; gap: 2px; height: 46px; }
+  .wave i { flex: 1; border-radius: 2px; background: #17160F; min-height: 3px; }
+  .wave i.u { background: #D3CAB6; }
+
+  .flag { position: absolute; top: 0; transform: translateX(-50%); }
+
+  .rec-dot { width: 7px; height: 7px; border-radius: 999px; background: #D8461B; display: inline-block; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 0 0 rgba(216,70,27,.5); } 50% { box-shadow: 0 0 0 5px rgba(216,70,27,0); } }
+
+  .squiggle { text-decoration: underline wavy rgba(216,70,27,.75); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .good { background: linear-gradient(transparent 60%, rgba(47,93,69,.17) 60%); padding: 0 1px; }
+
+  .note-bad, .note-good { font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 16px; line-height: 1.3; padding-left: 14px; position: relative; }
+  .note-bad  { color: #B33A14; }
+  .note-good { color: #2F5D45; }
+  .note-bad::before, .note-good::before { content: ""; position: absolute; left: 0; top: 9px; width: 8px; height: 1px; background: currentColor; opacity: .7; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rec-dot { animation: none; }
+    .btn { transition: none; }
+  }
+</style>
+</head>
+<body class="font-sans">
+
+<!-- ============ HERO ============ -->
+<div class="relative overflow-hidden">
+  <div class="ruled" aria-hidden="true"></div>
+  <div class="margin-rule" aria-hidden="true"></div>
+
+  <header class="relative z-10">
+    <nav class="max-w-[1200px] mx-auto px-6 h-[76px] flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2.5" aria-label="Fieldnote home">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="24" height="24" rx="6.5" fill="#17160F"/>
+          <path d="M7 10h7M7 14h11M7 18h6" stroke="#F4F0E8" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="18.5" cy="9.5" r="2.6" fill="#D8461B"/>
+        </svg>
+        <span class="font-serif text-[24px] leading-none tracking-[-0.01em]">Fieldnote</span>
+      </a>
+      <div class="hidden md:flex items-center gap-9 text-[14.5px] text-ink2">
+        <a href="#how" class="hover:text-ink transition-colors">How it works</a>
+        <a href="#voice" class="hover:text-ink transition-colors">Your voice</a>
+        <a href="#features" class="hover:text-ink transition-colors">Features</a>
+        <a href="#privacy" class="hover:text-ink transition-colors">Privacy</a>
+        <a href="#pricing" class="hover:text-ink transition-colors">Pricing</a>
+      </div>
+      <div class="flex items-center gap-5">
+        <a href="#" class="hidden sm:inline text-[14.5px] text-ink2 hover:text-ink transition-colors">Sign in</a>
+        <a href="#pricing" class="btn btn-ink !h-10 !px-[18px] !text-[14.5px]">Start free</a>
+      </div>
+    </nav>
+  </header>
+
+  <section class="relative max-w-[1200px] mx-auto px-6 pt-14 pb-6">
+    <a href="#" class="inline-flex items-center gap-2.5 rounded-full border border-rule bg-card/80 py-1 pl-1 pr-3.5 text-[13px] text-ink2 hover:border-ink/30 transition-colors">
+      <span class="rounded-full bg-ink text-paper px-2 py-[4px] font-mono text-[10px] uppercase tracking-[0.1em] leading-none">New</span>
+      Record in-person meetings from your iPhone
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <div class="mt-9 grid lg:grid-cols-12 gap-x-10 gap-y-10 items-end">
+      <h1 class="lg:col-span-8 font-serif font-normal text-[60px] sm:text-[76px] lg:text-[94px] leading-[0.94] tracking-[-0.032em]">
+        The meeting ends.<br>
+        <em class="font-normal">The follow-up is<br>
+          <span class="relative inline-block">already written.
+            <svg class="absolute left-0 -bottom-[10px] w-full h-[16px]" viewBox="0 0 300 16" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M4 11C62 5 124 4 184 6.5S268 12 296 7" stroke="#D8461B" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+          </span>
+        </em>
+      </h1>
+      <div class="lg:col-span-4 lg:pb-4">
+        <p class="text-[18px] leading-[1.55] text-ink2">Fieldnote records your calls, works out what was decided and who owes what by when, and drafts the recap email in your voice. You read it, change a word if you like, and send.</p>
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a href="#pricing" class="btn btn-ink">Start free
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#how" class="btn btn-ghost">See how it works</a>
+        </div>
+        <p class="mt-4 font-mono text-[11.5px] tracking-[0.02em] text-muted">10 free meetings a month · No card needed</p>
+      </div>
+    </div>
+
+    <!-- Product window -->
+    <div class="mt-16 window rounded-[18px] bg-card overflow-hidden">
+      <div class="h-11 flex items-center px-4 border-b border-rule bg-paper2/60">
+        <div class="flex gap-1.5 w-[60px]" aria-hidden="true">
+          <span class="w-3 h-3 rounded-full bg-[#DDD4C2]"></span>
+          <span class="w-3 h-3 rounded-full bg-[#DDD4C2]"></span>
+          <span class="w-3 h-3 rounded-full bg-[#DDD4C2]"></span>
+        </div>
+        <div class="flex-1 text-center font-mono text-[11.5px] text-muted">Fieldnote — Q3 renewal · Halden Freight</div>
+        <div class="w-[60px] flex justify-end text-muted" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="3.5" cy="8" r="1.2" fill="currentColor"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="12.5" cy="8" r="1.2" fill="currentColor"/></svg>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-[280px_minmax(0,1fr)_410px]">
+
+        <!-- Col 1: recording -->
+        <aside class="p-5 border-b lg:border-b-0 lg:border-r border-rule bg-paper2/30 flex flex-col gap-6">
+          <div>
+            <div class="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted">
+              <span class="w-1.5 h-1.5 rounded-full bg-moss"></span>Call ended · 14:42
+            </div>
+            <div class="mt-2.5 font-serif text-[27px] leading-[1.05] tracking-[-0.01em]">Q3 renewal</div>
+            <div class="mt-1.5 text-[13px] text-muted">Halden Freight · Google Meet · Wed 15 Jul</div>
+          </div>
+
+          <div class="rounded-xl border border-rule bg-card p-3.5">
+            <div class="relative h-[24px]">
+              <span class="flag" style="left:19.4%"><span class="mk mk-decision">1</span></span>
+              <span class="flag" style="left:41.6%"><span class="mk mk-action">2</span></span>
+              <span class="flag" style="left:74.9%"><span class="mk mk-action">3</span></span>
+              <span class="flag" style="left:95.2%"><span class="mk mk-date">4</span></span>
+            </div>
+            <div class="relative">
+              <div class="wave" aria-hidden="true">
+                <i style="height:18%"></i><i style="height:30%"></i><i style="height:44%"></i><i style="height:26%"></i><i style="height:52%"></i><i style="height:64%"></i><i style="height:36%"></i><i style="height:24%"></i><i style="height:48%"></i><i class="u" style="height:70%"></i><i class="u" style="height:58%"></i><i class="u" style="height:34%"></i><i class="u" style="height:22%"></i><i class="u" style="height:40%"></i><i class="u" style="height:56%"></i><i class="u" style="height:78%"></i><i class="u" style="height:62%"></i><i class="u" style="height:44%"></i><i class="u" style="height:28%"></i><i class="u" style="height:18%"></i><i class="u" style="height:34%"></i><i class="u" style="height:50%"></i><i class="u" style="height:68%"></i><i class="u" style="height:54%"></i><i class="u" style="height:36%"></i><i class="u" style="height:24%"></i><i class="u" style="height:42%"></i><i class="u" style="height:60%"></i><i class="u" style="height:74%"></i><i class="u" style="height:66%"></i><i class="u" style="height:48%"></i><i class="u" style="height:30%"></i><i class="u" style="height:20%"></i><i class="u" style="height:36%"></i><i class="u" style="height:54%"></i><i class="u" style="height:72%"></i><i class="u" style="height:80%"></i><i class="u" style="height:58%"></i><i class="u" style="height:38%"></i><i class="u" style="height:26%"></i><i class="u" style="height:44%"></i><i class="u" style="height:62%"></i><i class="u" style="height:50%"></i><i class="u" style="height:32%"></i><i class="u" style="height:24%"></i><i class="u" style="height:18%"></i><i class="u" style="height:30%"></i><i class="u" style="height:22%"></i>
+              </div>
+              <span class="absolute -top-1 -bottom-1 w-[2px] rounded bg-rec" style="left:19.4%" aria-hidden="true"></span>
+            </div>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="w-7 h-7 rounded-full bg-ink grid place-items-center" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 10 10"><path d="M2.5 1.5v7l6-3.5z" fill="#F4F0E8"/></svg>
+              </span>
+              <span class="font-mono text-[11px] text-muted"><span class="text-ink">08:12</span> / 42:17</span>
+              <span class="font-mono text-[11px] text-muted rounded border border-rule px-1.5 py-0.5">1.5×</span>
+            </div>
+          </div>
+
+          <div>
+            <div class="font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted mb-3">Speakers</div>
+            <ul class="space-y-3.5">
+              <li class="flex items-center gap-3">
+                <span class="av bg-[#E8D3BC]">MO</span>
+                <div class="flex-1">
+                  <div class="flex justify-between text-[13px]"><span class="font-medium">Maria Okafor</span><span class="font-mono text-[11px] text-muted">41%</span></div>
+                  <div class="mt-1.5 h-1 rounded-full bg-rule/70"><div class="h-full rounded-full bg-ink" style="width:41%"></div></div>
+                </div>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="av bg-[#D9E0E8]">SL</span>
+                <div class="flex-1">
+                  <div class="flex justify-between text-[13px]"><span class="font-medium">Sam Lindqvist <span class="text-muted font-normal">(you)</span></span><span class="font-mono text-[11px] text-muted">38%</span></div>
+                  <div class="mt-1.5 h-1 rounded-full bg-rule/70"><div class="h-full rounded-full bg-ink" style="width:38%"></div></div>
+                </div>
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="av bg-[#DCE5D4]">DP</span>
+                <div class="flex-1">
+                  <div class="flex justify-between text-[13px]"><span class="font-medium">Dev Patel</span><span class="font-mono text-[11px] text-muted">21%</span></div>
+                  <div class="mt-1.5 h-1 rounded-full bg-rule/70"><div class="h-full rounded-full bg-ink" style="width:21%"></div></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-auto rounded-lg bg-moss/[0.07] border border-moss/20 px-3 py-2.5 text-[12.5px] leading-snug text-moss flex gap-2">
+            <svg class="mt-[1px] flex-none" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l5 2v4c0 3.2-2.2 5.6-5 7-2.8-1.4-5-3.8-5-7v-4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.6 8.2l1.7 1.7 3.2-3.4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            All 3 participants were notified when recording started.
+          </div>
+        </aside>
+
+        <!-- Col 2: transcript -->
+        <div class="border-b lg:border-b-0 lg:border-r border-rule flex flex-col min-w-0">
+          <div class="flex items-center justify-between px-5 h-12 border-b border-rule">
+            <div class="flex items-center gap-1 text-[13px]">
+              <span class="px-2.5 py-1 rounded-md bg-ink text-paper font-medium">Transcript</span>
+              <span class="px-2.5 py-1 rounded-md text-muted">Notes</span>
+              <span class="px-2.5 py-1 rounded-md text-muted">Ask</span>
+            </div>
+            <div class="hidden xl:flex items-center gap-3 font-mono text-[10.5px] text-muted">
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-sm bg-[#D7E6D6] ring-1 ring-moss/30"></span>Decision</span>
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-sm bg-[#F6E08F] ring-1 ring-[#8C6E14]/30"></span>Action</span>
+              <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-sm bg-[#F5CFBF] ring-1 ring-rec/30"></span>Date</span>
+            </div>
+          </div>
+
+          <div class="px-5 py-5 space-y-4 text-[14px] leading-[1.6]">
+            <div class="grid grid-cols-[44px_minmax(0,1fr)] gap-2">
+              <span class="font-mono text-[11px] text-muted pt-[2px]">08:02</span>
+              <div>
+                <div class="text-[12.5px] font-medium">Maria Okafor</div>
+                <p class="text-ink2">Monthly made sense when our volumes were all over the place. They really aren't anymore.</p>
+              </div>
+            </div>
+
+            <div class="relative grid grid-cols-[44px_minmax(0,1fr)] gap-2 rounded-lg bg-[#F1ECE0] -mx-3 px-3 py-2.5">
+              <span class="absolute left-0 top-3 bottom-3 w-[2px] rounded bg-rec" aria-hidden="true"></span>
+              <span class="font-mono text-[11px] text-ink pt-[2px]">08:12</span>
+              <div>
+                <div class="text-[12.5px] font-medium">Sam Lindqvist</div>
+                <p class="text-ink2">Then let's <span class="hl hl-decision">move you to annual from August 1st</span> and hold the rate we talked about. <span class="mk mk-decision align-[1px] ml-0.5">1</span></p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 font-mono text-[10.5px] text-muted py-0.5">
+              <span class="h-px flex-1 bg-rule"></span>9 min on lane pricing · summarized in notes<span class="h-px flex-1 bg-rule"></span>
+            </div>
+
+            <div class="grid grid-cols-[44px_minmax(0,1fr)] gap-2">
+              <span class="font-mono text-[11px] text-muted pt-[2px]">17:36</span>
+              <div>
+                <div class="text-[12.5px] font-medium">Maria Okafor</div>
+                <p class="text-ink2">Dev, can you get them the updated volume forecast?</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-[44px_minmax(0,1fr)] gap-2">
+              <span class="font-mono text-[11px] text-muted pt-[2px]">17:39</span>
+              <div>
+                <div class="text-[12.5px] font-medium">Dev Patel</div>
+                <p class="text-ink2">Yep, <span class="hl hl-action">I'll send that over by Thursday</span>. <span class="mk mk-action align-[1px] ml-0.5">2</span></p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-3 font-mono text-[10.5px] text-muted py-0.5">
+              <span class="h-px flex-1 bg-rule"></span>14 min on the Rotterdam depot · summarized in notes<span class="h-px flex-1 bg-rule"></span>
+            </div>
+
+            <div class="grid grid-cols-[44px_minmax(0,1fr)] gap-2">
+              <span class="font-mono text-[11px] text-muted pt-[2px]">31:40</span>
+              <div>
+                <div class="text-[12.5px] font-medium">Sam Lindqvist</div>
+                <p class="text-ink2">And on our side, <span class="hl hl-action">I'll get you a revised contract draft by end of day Friday</span>. <span class="mk mk-action align-[1px] ml-0.5">3</span></p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-[44px_minmax(0,1fr)] gap-2">
+              <span class="font-mono text-[11px] text-muted pt-[2px]">40:15</span>
+              <div>
+                <div class="text-[12.5px] font-medium">Maria Okafor</div>
+                <p class="text-ink2">Perfect. <span class="hl hl-date">Same time on the 22nd</span> to sign it off? <span class="mk mk-date align-[1px] ml-0.5">4</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 3: email -->
+        <div class="p-5 bg-paper2/30 flex flex-col">
+          <div class="flex items-center justify-between">
+            <div class="font-mono text-[10.5px] uppercase tracking-[0.1em] text-muted">Follow-up draft</div>
+            <span class="inline-flex items-center gap-1.5 rounded-full bg-moss/10 text-moss px-2.5 py-1 text-[12px] font-medium">
+              <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              Ready 38s after the call
+            </span>
+          </div>
+
+          <div class="mt-4 rounded-xl border border-rule bg-white/85 shadow-[0_1px_2px_rgba(23,22,15,.06)]">
+            <div class="flex items-center gap-3 px-4 h-11 border-b border-rule text-[13px]">
+              <span class="w-[52px] text-muted">To</span>
+              <span class="rounded-md bg-paper2 px-2 py-0.5">Maria Okafor</span>
+              <span class="rounded-md bg-paper2 px-2 py-0.5">Dev Patel</span>
+            </div>
+            <div class="flex items-center gap-3 px-4 h-11 border-b border-rule text-[13px]">
+              <span class="w-[52px] text-muted">Subject</span>
+              <span class="font-medium">Renewal: recap + next steps</span>
+            </div>
+            <div class="px-4 py-4 text-[14px] leading-[1.6] text-ink2 space-y-3">
+              <p>Maria, Dev —</p>
+              <p>Thanks for today. Short version, so we're all looking at the same thing:</p>
+              <ol class="space-y-2.5">
+                <li class="flex gap-2.5"><span class="mk mk-decision mt-[2px]">1</span><span>Halden moves to the annual plan on <span class="text-ink font-medium">Aug 1</span>, at the rate we discussed.</span></li>
+                <li class="flex gap-2.5"><span class="mk mk-action mt-[2px]">2</span><span><span class="text-ink font-medium">Dev</span> sends the updated volume forecast by <span class="text-ink font-medium">Thursday</span>.</span></li>
+                <li class="flex gap-2.5"><span class="mk mk-action mt-[2px]">3</span><span>I'll have a revised contract draft to you by <span class="text-ink font-medium">Friday EOD</span>.</span></li>
+                <li class="flex gap-2.5"><span class="mk mk-date mt-[2px]">4</span><span>We regroup <span class="text-ink font-medium">Wed 22 Jul, 14:00</span> to sign off. Invite's on its way.</span></li>
+              </ol>
+              <p>Shout if I missed anything.</p>
+              <p>Sam</p>
+            </div>
+          </div>
+
+          <div class="mt-4 flex items-center justify-between gap-3">
+            <span class="text-[12px] leading-snug text-muted flex items-center gap-1.5">
+              <svg class="flex-none" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l1.6 4.9 4.9 1.6-4.9 1.6L8 14.5l-1.6-4.9L1.5 8l4.9-1.6z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              Tone matched to your emails with Maria
+            </span>
+            <div class="flex gap-2 flex-none">
+              <span class="h-9 px-3.5 rounded-lg border border-rule bg-card text-[13px] inline-flex items-center">Edit</span>
+              <span class="h-9 px-3.5 rounded-lg bg-ink text-paper text-[13px] font-medium inline-flex items-center gap-2">Send <span class="font-mono text-[10.5px] text-paper/60">⌘↵</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Captions under the window -->
+    <div class="mt-6 hidden lg:grid grid-cols-[280px_minmax(0,1fr)_410px] text-[13.5px] leading-[1.5] text-muted">
+      <div class="px-5"><span class="block font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink mb-1">Listens</span>Records the call, and tells everyone it's there.</div>
+      <div class="px-5"><span class="block font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink mb-1">Sorts</span>Pulls decisions, owners and dates out of 42 minutes of talk.</div>
+      <div class="px-5"><span class="block font-mono text-[10.5px] uppercase tracking-[0.12em] text-ink mb-1">Writes</span>Drafts the email. Every numbered line traces back to the moment it was said.</div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ STATS ============ -->
+<section class="max-w-[1200px] mx-auto px-6 pt-20" aria-label="Results">
+  <div class="grid grid-cols-2 lg:grid-cols-4 border-y border-rule">
+    <div class="py-9 pr-8 lg:border-r border-rule">
+      <div class="font-serif text-[58px] leading-none tracking-[-0.03em]">38<span class="text-[26px] text-muted tracking-normal ml-1">sec</span></div>
+      <p class="mt-3 text-[14.5px] leading-snug text-muted max-w-[220px]">median time from hang-up to a ready draft</p>
+    </div>
+    <div class="py-9 px-8 lg:border-r border-rule">
+      <div class="font-serif text-[58px] leading-none tracking-[-0.03em]">4.1<span class="text-[26px] text-muted tracking-normal ml-1">hrs</span></div>
+      <p class="mt-3 text-[14.5px] leading-snug text-muted max-w-[220px]">of recap writing saved per person, every week</p>
+    </div>
+    <div class="py-9 px-8 lg:border-r border-rule">
+      <div class="font-serif text-[58px] leading-none tracking-[-0.03em]">87<span class="text-[26px] text-muted tracking-normal ml-1">%</span></div>
+      <p class="mt-3 text-[14.5px] leading-snug text-muted max-w-[220px]">of drafts are sent with one edit or none</p>
+    </div>
+    <div class="py-9 pl-8">
+      <div class="font-serif text-[58px] leading-none tracking-[-0.03em]">30<span class="text-[26px] text-muted tracking-normal ml-1">+</span></div>
+      <p class="mt-3 text-[14.5px] leading-snug text-muted max-w-[220px]">languages, including calls that switch halfway</p>
+    </div>
+  </div>
+  <div class="mt-8 flex flex-wrap items-center justify-center gap-x-9 gap-y-3">
+    <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">Joins the call on</span>
+    <span class="text-[18px] font-semibold tracking-[-0.02em] text-ink2">Zoom</span>
+    <span class="text-[18px] font-semibold tracking-[-0.02em] text-ink2">Google Meet</span>
+    <span class="text-[18px] font-semibold tracking-[-0.02em] text-ink2">Microsoft Teams</span>
+    <span class="text-[18px] font-semibold tracking-[-0.02em] text-ink2">Webex</span>
+    <span class="font-serif italic text-[19px] text-ink2">or the room you're standing in</span>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how" class="max-w-[1200px] mx-auto px-6 pt-32">
+  <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-end">
+    <div class="lg:col-span-7">
+      <div class="eyebrow">How it works</div>
+      <h2 class="mt-5 font-serif font-normal text-[46px] lg:text-[62px] leading-[1.0] tracking-[-0.028em]">Three steps. You only<br>do the last one.</h2>
+    </div>
+    <p class="lg:col-span-4 lg:col-start-9 text-[17px] leading-[1.6] text-ink2">No templates to fill in and no notes to tidy up. Fieldnote does the listening and the writing; you do the reading and the sending.</p>
+  </div>
+
+  <div class="mt-14 grid lg:grid-cols-3 gap-6">
+    <!-- Step 1 -->
+    <article class="rounded-2xl border border-rule bg-card overflow-hidden flex flex-col">
+      <div class="h-[232px] bg-paper2/60 border-b border-rule p-6" aria-hidden="true">
+        <div class="grid grid-cols-2 grid-rows-2 gap-2 h-full">
+          <div class="relative rounded-lg bg-[#2B2922] grid place-items-center">
+            <span class="w-10 h-10 rounded-full bg-[#E8D3BC] grid place-items-center text-[12px] font-semibold">MO</span>
+            <span class="absolute left-2 bottom-1.5 font-mono text-[9.5px] text-paper/70">Maria</span>
+          </div>
+          <div class="relative rounded-lg bg-[#2B2922] grid place-items-center">
+            <span class="w-10 h-10 rounded-full bg-[#DCE5D4] grid place-items-center text-[12px] font-semibold">DP</span>
+            <span class="absolute left-2 bottom-1.5 font-mono text-[9.5px] text-paper/70">Dev</span>
+          </div>
+          <div class="relative rounded-lg bg-[#2B2922] grid place-items-center">
+            <span class="w-10 h-10 rounded-full bg-[#D9E0E8] grid place-items-center text-[12px] font-semibold">SL</span>
+            <span class="absolute left-2 bottom-1.5 font-mono text-[9.5px] text-paper/70">Sam (you)</span>
+          </div>
+          <div class="relative rounded-lg bg-[#1D1B15] ring-1 ring-rec/50 flex flex-col items-center justify-center gap-1.5">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <rect x="1" y="1" width="24" height="24" rx="6.5" fill="#F4F0E8"/>
+              <path d="M7 10h7M7 14h11M7 18h6" stroke="#17160F" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="18.5" cy="9.5" r="2.6" fill="#D8461B"/>
+            </svg>
+            <span class="flex items-center gap-1.5 font-mono text-[9.5px] text-paper/80"><span class="rec-dot"></span>Taking notes for Sam</span>
+          </div>
+        </div>
+      </div>
+      <div class="p-7">
+        <div class="flex items-baseline gap-3"><span class="font-mono text-[12px] text-rec">01</span><h3 class="font-serif font-normal text-[30px] leading-none tracking-[-0.01em]">Record</h3></div>
+        <p class="mt-4 text-[15.5px] leading-[1.6] text-ink2">Fieldnote joins the call as a named notetaker, or listens from the phone on the table. Everyone is told it's there, every time.</p>
+      </div>
+    </article>
+
+    <!-- Step 2 -->
+    <article class="rounded-2xl border border-rule bg-card overflow-hidden flex flex-col">
+      <div class="h-[232px] bg-paper2/60 border-b border-rule p-6 flex flex-col justify-center gap-2" aria-hidden="true">
+        <div class="flex items-center gap-2.5 rounded-lg bg-white/85 border border-rule px-3 h-[38px] text-[13px]"><span class="tag tag-decision">Decision</span><span class="truncate">Annual plan from Aug 1</span></div>
+        <div class="flex items-center gap-2.5 rounded-lg bg-white/85 border border-rule px-3 h-[38px] text-[13px]"><span class="tag tag-action">Action</span><span class="truncate">Volume forecast</span><span class="ml-auto font-mono text-[11px] text-muted whitespace-nowrap">Dev · Thu</span></div>
+        <div class="flex items-center gap-2.5 rounded-lg bg-white/85 border border-rule px-3 h-[38px] text-[13px]"><span class="tag tag-action">Action</span><span class="truncate">Revised contract</span><span class="ml-auto font-mono text-[11px] text-muted whitespace-nowrap">Sam · Fri</span></div>
+        <div class="flex items-center gap-2.5 rounded-lg bg-white/85 border border-rule px-3 h-[38px] text-[13px]"><span class="tag tag-date">Date</span><span class="truncate">Sign-off call</span><span class="ml-auto font-mono text-[11px] text-muted whitespace-nowrap">Wed 22 Jul</span></div>
+        <div class="flex items-center gap-2.5 rounded-lg border border-dashed border-rule px-3 h-[30px] text-[12.5px] text-muted/80"><span class="line-through">Weather in Rotterdam, weekend plans</span><span class="ml-auto font-mono text-[10.5px]">left out</span></div>
+      </div>
+      <div class="p-7">
+        <div class="flex items-baseline gap-3"><span class="font-mono text-[12px] text-rec">02</span><h3 class="font-serif font-normal text-[30px] leading-none tracking-[-0.01em]">Distill</h3></div>
+        <p class="mt-4 text-[15.5px] leading-[1.6] text-ink2">It separates what was decided from what was merely discussed, and pins every action to a person and a date. Small talk stays out.</p>
+      </div>
+    </article>
+
+    <!-- Step 3 -->
+    <article class="rounded-2xl border border-rule bg-card overflow-hidden flex flex-col">
+      <div class="h-[232px] bg-paper2/60 border-b border-rule p-6" aria-hidden="true">
+        <div class="relative h-full rounded-lg bg-white border border-rule shadow-[0_1px_2px_rgba(23,22,15,.06)] p-4">
+          <div class="flex items-center justify-between text-[12px]">
+            <span class="text-muted">To <span class="text-ink">Maria, Dev</span></span>
+            <span class="font-mono text-[10px] uppercase tracking-[0.08em] text-muted">Draft</span>
+          </div>
+          <div class="mt-2 text-[13.5px] font-medium">Renewal: recap + next steps</div>
+          <div class="mt-3.5 space-y-2">
+            <div class="h-[6px] rounded-full bg-paper2 w-[92%]"></div>
+            <div class="h-[6px] rounded-full bg-paper2 w-[78%]"></div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-sm bg-[#F6E08F]"></span><div class="h-[6px] rounded-full bg-paper2 w-[70%]"></div></div>
+            <div class="flex items-center gap-2"><span class="w-2 h-2 rounded-sm bg-[#F6E08F]"></span><div class="h-[6px] rounded-full bg-paper2 w-[62%]"></div></div>
+            <div class="h-[6px] rounded-full bg-paper2 w-[34%]"></div>
+          </div>
+          <span class="absolute right-4 bottom-4 h-9 px-4 rounded-lg bg-ink text-paper text-[13px] font-medium inline-flex items-center gap-2">Send
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M2 8l12-5.5L9.5 14l-2-4.5z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          </span>
+          <svg class="absolute right-[22px] bottom-[2px]" width="22" height="24" viewBox="0 0 22 24" fill="none">
+            <path d="M4 2v16.5l4.4-4.1 2.9 6.6 2.9-1.3-2.9-6.5 6.2-.3z" fill="#17160F" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="p-7">
+        <div class="flex items-baseline gap-3"><span class="font-mono text-[12px] text-rec">03</span><h3 class="font-serif font-normal text-[30px] leading-none tracking-[-0.01em]">Send</h3></div>
+        <p class="mt-4 text-[15.5px] leading-[1.6] text-ink2">A draft lands in your inbox, addressed to the people who were actually there. Read it, tweak it, send it — usually before your next call starts.</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ============ YOUR VOICE ============ -->
+<section id="voice" class="max-w-[1200px] mx-auto px-6 pt-32">
+  <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-end">
+    <div class="lg:col-span-7">
+      <div class="eyebrow">Your voice</div>
+      <h2 class="mt-5 font-serif font-normal text-[46px] lg:text-[62px] leading-[1.0] tracking-[-0.028em]">It writes like you<br><em>on a good day.</em></h2>
+    </div>
+    <p class="lg:col-span-4 lg:col-start-9 text-[17px] leading-[1.6] text-ink2">Most meeting tools hand you a summary. Fieldnote hands you an email you'd actually send. It learns how you open, how long you write and how you sign off, person by person.</p>
+  </div>
+
+  <div class="mt-14 grid lg:grid-cols-2 gap-6">
+    <figure class="rounded-2xl border border-rule bg-paper2/50 p-8">
+      <figcaption class="flex items-center justify-between pb-5 border-b border-rule">
+        <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">A typical AI meeting summary</span>
+        <span class="w-6 h-6 rounded-full border border-rule grid place-items-center text-muted" aria-hidden="true">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 2l6 6M8 2l-6 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </span>
+      </figcaption>
+      <div class="mt-6 grid grid-cols-[minmax(0,1fr)_150px] gap-x-6 gap-y-5 text-[15px] leading-[1.6] text-muted">
+        <p><span class="text-ink2 font-medium">Subject:</span> <span class="squiggle">Meeting Summary – Q3 Renewal Discussion</span></p>
+        <p class="note-bad">Could be any meeting</p>
+
+        <p><span class="squiggle">Dear All, I hope this email finds you well.</span> Please find below a summary of the key points discussed during today's meeting:</p>
+        <p class="note-bad">Nobody writes to Maria like this</p>
+
+        <p>• The team <span class="squiggle">discussed</span> a potential transition to an annual plan.</p>
+        <p class="note-bad">Discussed? It was decided.</p>
+
+        <p>• Volume forecasting was <span class="squiggle">identified as a next step</span>.<br>• Contract revisions were also discussed.</p>
+        <p class="note-bad">Who? By when?</p>
+
+        <p>Please do not hesitate to reach out should you have any questions. <span class="squiggle">Best regards</span></p>
+        <p class="note-bad">Not your sign-off</p>
+      </div>
+    </figure>
+
+    <figure class="rounded-2xl border border-ink/15 bg-card p-8 shadow-[0_1px_2px_rgba(23,22,15,.05),0_20px_40px_-24px_rgba(70,52,20,.25)]">
+      <figcaption class="flex items-center justify-between pb-5 border-b border-rule">
+        <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-ink">Drafted by Fieldnote</span>
+        <span class="w-6 h-6 rounded-full bg-moss grid place-items-center text-paper" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </figcaption>
+      <div class="mt-6 grid grid-cols-[minmax(0,1fr)_150px] gap-x-6 gap-y-5 text-[15px] leading-[1.6] text-ink2">
+        <p><span class="text-ink font-medium">Subject:</span> <span class="good">Renewal: recap + next steps</span></p>
+        <p class="note-good">Says what it is</p>
+
+        <p><span class="good">Maria, Dev — thanks for today.</span> Short version:</p>
+        <p class="note-good">How you open with Maria</p>
+
+        <p>1. <span class="good">Annual plan from Aug 1</span>, same rate.</p>
+        <p class="note-good">Decided, so it says so</p>
+
+        <p>2. <span class="good">Dev → volume forecast by Thu.</span><br>3. <span class="good">Me → revised contract by Fri EOD.</span></p>
+        <p class="note-good">An owner and a date on every action</p>
+
+        <p>Same time on the 22nd to sign off. Shout if I missed anything. <span class="good">— Sam</span></p>
+        <p class="note-good">Your sign-off, your length</p>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ FEATURES ============ -->
+<section id="features" class="max-w-[1200px] mx-auto px-6 pt-32">
+  <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-end">
+    <div class="lg:col-span-7">
+      <div class="eyebrow">Features</div>
+      <h2 class="mt-5 font-serif font-normal text-[46px] lg:text-[62px] leading-[1.0] tracking-[-0.028em]">Built for the email,<br>not the transcript.</h2>
+    </div>
+    <p class="lg:col-span-4 lg:col-start-9 text-[17px] leading-[1.6] text-ink2">A transcript is a means to an end. Everything in Fieldnote exists to get a correct, specific follow-up out the door.</p>
+  </div>
+
+  <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-px rounded-2xl border border-rule bg-rule overflow-hidden">
+    <div class="bg-card p-8">
+      <span class="w-10 h-10 rounded-xl bg-paper2 border border-rule grid place-items-center text-ink" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h2M7 8v8M11 4v16M15 9v6M19 7v10" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-[17px] font-medium tracking-[-0.01em]">Receipts on every line</h3>
+      <p class="mt-2 text-[15px] leading-[1.6] text-ink2">Click any sentence in a draft to hear the exact moment it came from. If nobody said it, it isn't in the email.</p>
+    </div>
+    <div class="bg-card p-8">
+      <span class="w-10 h-10 rounded-xl bg-paper2 border border-rule grid place-items-center text-ink" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="5" width="17" height="15" rx="3" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 10h17M8 3v4M16 3v4M9 14.5l2 2 4-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-[17px] font-medium tracking-[-0.01em]">Owners and due dates</h3>
+      <p class="mt-2 text-[15px] leading-[1.6] text-ink2">Action items sync to Linear, Asana or Todoist with the person and the date already filled in.</p>
+    </div>
+    <div class="bg-card p-8">
+      <span class="w-10 h-10 rounded-xl bg-paper2 border border-rule grid place-items-center text-ink" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 14L4 9l5-5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 9h10a6 6 0 016 6v5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-[17px] font-medium tracking-[-0.01em]">Lands in the right thread</h3>
+      <p class="mt-2 text-[15px] leading-[1.6] text-ink2">Drafts reply in the existing email thread, in Gmail or Outlook, and leave off anyone who wasn't on the call.</p>
+    </div>
+    <div class="bg-card p-8">
+      <span class="w-10 h-10 rounded-xl bg-paper2 border border-rule grid place-items-center text-ink" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-[17px] font-medium tracking-[-0.01em]">Ask your meetings</h3>
+      <p class="mt-2 text-[15px] leading-[1.6] text-ink2">“What did we promise Halden in March?” gets a straight answer, with the clip attached.</p>
+    </div>
+    <div class="bg-card p-8">
+      <span class="w-10 h-10 rounded-xl bg-paper2 border border-rule grid place-items-center text-ink" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.4 2.4 3.5 5.2 3.5 8.5s-1.1 6.1-3.5 8.5c-2.4-2.4-3.5-5.2-3.5-8.5s1.1-6.1 3.5-8.5z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+      </span>
+      <h3 class="mt-6 text-[17px] font-medium tracking-[-0.01em]">30+ languages</h3>
+      <p class="mt-2 text-[15px] leading-[1.6] text-ink2">Handles calls that switch languages halfway through, and writes the follow-up in the language of the thread.</p>
+    </div>
+    <div class="bg-card p-8">
+      <span class="w-10 h-10 rounded-xl bg-paper2 border border-rule grid place-items-center text-ink" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2.5" y="7" width="19" height="10" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="16.5" cy="12" r="2.6" fill="currentColor"/></svg>
+      </span>
+      <h3 class="mt-6 text-[17px] font-medium tracking-[-0.01em]">Send rules</h3>
+      <p class="mt-2 text-[15px] leading-[1.6] text-ink2">Let internal stand-ups go out on their own. Keep client calls waiting for your nod. You decide, per calendar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRIVACY ============ -->
+<section id="privacy" class="on-ink mt-32 bg-ink text-paper">
+  <div class="max-w-[1200px] mx-auto px-6 py-28 grid lg:grid-cols-12 gap-x-10 gap-y-14">
+    <div class="lg:col-span-6">
+      <div class="eyebrow">Privacy</div>
+      <h2 class="mt-5 font-serif font-normal text-[46px] lg:text-[58px] leading-[1.02] tracking-[-0.028em]">Recording people takes trust. <em class="text-paper/70">We built it to earn some.</em></h2>
+      <p class="mt-6 text-[17px] leading-[1.6] text-paper/70 max-w-[480px]">A notetaker that hides is a liability. Fieldnote is loud about being there and quiet about everything else.</p>
+
+      <dl class="mt-12 grid sm:grid-cols-2 gap-x-10 gap-y-9">
+        <div class="border-t border-white/15 pt-5">
+          <dt class="text-[16px] font-medium">Always announced</dt>
+          <dd class="mt-2 text-[14.5px] leading-[1.6] text-paper/65">It introduces itself in every call and emails attendees a notice. There is no silent mode.</dd>
+        </div>
+        <div class="border-t border-white/15 pt-5">
+          <dt class="text-[16px] font-medium">Never used for training</dt>
+          <dd class="mt-2 text-[14.5px] leading-[1.6] text-paper/65">Your audio, transcripts and emails don't train any model, ours or anyone else's.</dd>
+        </div>
+        <div class="border-t border-white/15 pt-5">
+          <dt class="text-[16px] font-medium">You choose retention</dt>
+          <dd class="mt-2 text-[14.5px] leading-[1.6] text-paper/65">Keep audio for 24 hours, 30 days, or not at all. Transcripts follow the same rule.</dd>
+        </div>
+        <div class="border-t border-white/15 pt-5">
+          <dt class="text-[16px] font-medium">Ready for security review</dt>
+          <dd class="mt-2 text-[14.5px] leading-[1.6] text-paper/65">SOC 2 Type II, SSO and SAML, and EU or US data residency on the Team plan.</dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="lg:col-span-5 lg:col-start-8 flex flex-col gap-4 lg:pt-12">
+      <div class="rounded-2xl border border-white/10 bg-[#22201A] overflow-hidden">
+        <div class="flex items-center justify-between px-5 h-11 border-b border-white/10">
+          <span class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-paper/50">Meeting chat</span>
+          <span class="flex items-center gap-2 font-mono text-[10.5px] uppercase tracking-[0.1em] text-paper/70"><span class="rec-dot"></span>Recording</span>
+        </div>
+        <div class="p-5 space-y-5">
+          <div class="flex gap-3">
+            <svg class="flex-none" width="30" height="30" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+              <rect x="1" y="1" width="24" height="24" rx="6.5" fill="#F4F0E8"/>
+              <path d="M7 10h7M7 14h11M7 18h6" stroke="#17160F" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="18.5" cy="9.5" r="2.6" fill="#D8461B"/>
+            </svg>
+            <div>
+              <div class="text-[13px]"><span class="font-medium">Fieldnote</span> <span class="text-paper/50">· Sam's notetaker · 14:00</span></div>
+              <p class="mt-1 text-[14.5px] leading-[1.55] text-paper/85">Hi all — I'm taking notes for Sam so he can focus on the conversation. Audio is deleted after 30 days. Type <span class="font-mono text-[12.5px] bg-white/10 rounded px-1.5 py-0.5">stop</span> and I'll leave the call.</p>
+            </div>
+          </div>
+          <div class="flex gap-3">
+            <span class="av !w-[30px] !h-[30px] bg-[#E8D3BC]">MO</span>
+            <div>
+              <div class="text-[13px]"><span class="font-medium">Maria Okafor</span> <span class="text-paper/50">· 14:01</span></div>
+              <p class="mt-1 text-[14.5px] leading-[1.55] text-paper/85">All good, go ahead.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rounded-2xl border border-white/10 bg-[#22201A] p-5">
+        <div class="flex items-center justify-between">
+          <span class="text-[14px] font-medium">Keep meeting audio for</span>
+          <span class="font-mono text-[10.5px] uppercase tracking-[0.1em] text-paper/45">Workspace</span>
+        </div>
+        <div class="mt-4 grid grid-cols-3 rounded-lg bg-black/30 p-1 text-[13px] text-center">
+          <span class="py-2 text-paper/60">24 hours</span>
+          <span class="py-2 rounded-md bg-paper text-ink font-medium">30 days</span>
+          <span class="py-2 text-paper/60">Don't keep</span>
+        </div>
+        <div class="mt-5 pt-5 border-t border-white/10 flex items-center justify-between gap-4">
+          <div>
+            <div class="text-[14px] font-medium">Train AI models on my meetings</div>
+            <div class="mt-0.5 text-[13px] text-paper/55">Not a setting. We just don't.</div>
+          </div>
+          <div class="flex items-center gap-2 text-paper/40" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M5.5 7V5a2.5 2.5 0 015 0v2" stroke="currentColor" stroke-width="1.4"/></svg>
+            <span class="relative w-10 h-6 rounded-full bg-white/10"><span class="absolute left-1 top-1 w-4 h-4 rounded-full bg-paper/40"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section class="max-w-[1200px] mx-auto px-6 pt-32">
+  <figure class="grid lg:grid-cols-12 gap-x-10 gap-y-8">
+    <div class="lg:col-span-1 font-serif text-[120px] leading-[0.75] text-rec select-none" aria-hidden="true">“</div>
+    <div class="lg:col-span-10">
+      <blockquote class="font-serif font-normal text-[34px] lg:text-[46px] leading-[1.16] tracking-[-0.018em]">I used to lose the twenty minutes after every client call to writing the recap. Now I read Fieldnote's draft in the elevator, fix one word, and it's sent <em>before the doors open.</em></blockquote>
+      <figcaption class="mt-10 flex items-center gap-4">
+        <span class="w-11 h-11 rounded-full bg-[#E3D6E6] grid place-items-center text-[13px] font-semibold">PR</span>
+        <div>
+          <div class="text-[15px] font-medium">Priya Raman</div>
+          <div class="text-[14px] text-muted">Account Director, Ostrava Studio</div>
+        </div>
+      </figcaption>
+    </div>
+  </figure>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing" class="max-w-[1200px] mx-auto px-6 pt-32">
+  <div class="grid lg:grid-cols-12 gap-x-10 gap-y-6 items-end">
+    <div class="lg:col-span-8">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="mt-5 font-serif font-normal text-[46px] lg:text-[62px] leading-[1.0] tracking-[-0.028em]">Cheaper than the hour<br>you'd spend on recaps.</h2>
+    </div>
+    <div class="lg:col-span-4 flex lg:justify-end">
+      <div class="inline-flex rounded-full border border-rule bg-card p-1 text-[13.5px]">
+        <span class="px-4 py-1.5 text-muted">Monthly</span>
+        <span class="px-4 py-1.5 rounded-full bg-ink text-paper font-medium">Annually <span class="font-mono text-[11px] text-paper/70 ml-1">−20%</span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-14 grid lg:grid-cols-3 gap-6">
+    <div class="rounded-2xl border border-rule bg-card p-8 flex flex-col">
+      <h3 class="font-serif font-normal text-[30px] leading-none">Free</h3>
+      <p class="mt-3 text-[14.5px] text-muted">For trying it on your own calls.</p>
+      <div class="mt-8 flex items-baseline gap-2"><span class="font-serif text-[60px] leading-none tracking-[-0.03em]">$0</span><span class="text-[14px] text-muted">forever</span></div>
+      <a href="#" class="btn btn-ghost mt-8 w-full justify-center">Start free</a>
+      <ul class="mt-8 pt-8 border-t border-rule space-y-3.5 text-[14.5px] text-ink2">
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>10 meetings a month</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>A follow-up draft for every one</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Zoom, Meet, Teams and in person</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Audio kept for 7 days</li>
+      </ul>
+    </div>
+
+    <div class="relative rounded-2xl bg-ink text-paper p-8 flex flex-col shadow-[0_30px_60px_-30px_rgba(23,22,15,.6)]">
+      <div class="flex items-center justify-between">
+        <h3 class="font-serif font-normal text-[30px] leading-none">Pro</h3>
+        <span class="rounded-full bg-rec text-white px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] leading-none">Most picked</span>
+      </div>
+      <p class="mt-3 text-[14.5px] text-paper/60">For people who live in meetings.</p>
+      <div class="mt-8 flex items-baseline gap-2"><span class="font-serif text-[60px] leading-none tracking-[-0.03em]">$16</span><span class="text-[14px] text-paper/60">per month</span></div>
+      <a href="#" class="btn btn-paper mt-8 w-full justify-center">Try Pro free for 14 days</a>
+      <ul class="mt-8 pt-8 border-t border-white/15 space-y-3.5 text-[14.5px] text-paper/85">
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-rec" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Unlimited meetings</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-rec" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Drafts in your voice, per recipient</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-rec" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Ask your meetings</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-rec" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Sync to Linear, Asana and Todoist</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-rec" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Choose your own retention</li>
+      </ul>
+    </div>
+
+    <div class="rounded-2xl border border-rule bg-card p-8 flex flex-col">
+      <h3 class="font-serif font-normal text-[30px] leading-none">Team</h3>
+      <p class="mt-3 text-[14.5px] text-muted">For teams that share clients.</p>
+      <div class="mt-8 flex items-baseline gap-2"><span class="font-serif text-[60px] leading-none tracking-[-0.03em]">$28</span><span class="text-[14px] text-muted">per seat / month</span></div>
+      <a href="#" class="btn btn-ghost mt-8 w-full justify-center">Talk to us</a>
+      <ul class="mt-8 pt-8 border-t border-rule space-y-3.5 text-[14.5px] text-ink2">
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Everything in Pro</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Shared client meeting library</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>Send rules and approvals</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>SSO, SCIM and audit log</li>
+        <li class="flex gap-3"><svg class="mt-[3px] flex-none text-moss" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3.5 8.5l3 3 6-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>EU or US data residency</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="max-w-[1200px] mx-auto px-6 pt-32">
+  <div class="grid lg:grid-cols-12 gap-x-10 gap-y-12">
+    <div class="lg:col-span-4">
+      <div class="eyebrow">Questions</div>
+      <h2 class="mt-5 font-serif font-normal text-[40px] lg:text-[46px] leading-[1.04] tracking-[-0.025em]">The ones we hear on every demo.</h2>
+    </div>
+    <div class="lg:col-span-8 grid sm:grid-cols-2 gap-x-10 gap-y-10">
+      <div class="border-t border-rule pt-6">
+        <h3 class="text-[17px] font-medium tracking-[-0.01em]">Does everyone know they're being recorded?</h3>
+        <p class="mt-3 text-[15px] leading-[1.6] text-ink2">Yes. Fieldnote joins under a visible name, posts a notice in the meeting chat and leaves if anyone types “stop”. In person, your phone shows a recording banner the whole time.</p>
+      </div>
+      <div class="border-t border-rule pt-6">
+        <h3 class="text-[17px] font-medium tracking-[-0.01em]">Can I record without a bot joining?</h3>
+        <p class="mt-3 text-[15px] leading-[1.6] text-ink2">Yes. The desktop app can capture call audio directly, and the iPhone app records the room. Attendees still get the disclosure email.</p>
+      </div>
+      <div class="border-t border-rule pt-6">
+        <h3 class="text-[17px] font-medium tracking-[-0.01em]">Will it send anything without asking me?</h3>
+        <p class="mt-3 text-[15px] leading-[1.6] text-ink2">Not unless you set a rule. By default every draft waits for you. Most teams auto-send internal stand-ups and keep client calls on manual.</p>
+      </div>
+      <div class="border-t border-rule pt-6">
+        <h3 class="text-[17px] font-medium tracking-[-0.01em]">Which email does it work with?</h3>
+        <p class="mt-3 text-[15px] leading-[1.6] text-ink2">Gmail and Outlook, shared inboxes included. Drafts show up in your normal Drafts folder, threaded with the right conversation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="max-w-[1200px] mx-auto px-6 pt-32 pb-24">
+  <div class="relative overflow-hidden rounded-[28px] border border-rule bg-paper2 px-8 py-16 lg:px-16 lg:py-20">
+    <div class="absolute inset-0 pointer-events-none" style="background-image:repeating-linear-gradient(to bottom, transparent 0 35px, rgba(23,22,15,.06) 35px 36px);" aria-hidden="true"></div>
+    <div class="absolute top-0 bottom-0 left-8 lg:left-10 w-px bg-rec/40" aria-hidden="true"></div>
+    <div class="relative grid lg:grid-cols-12 gap-x-10 gap-y-10 items-end">
+      <h2 class="lg:col-span-8 font-serif font-normal text-[48px] lg:text-[78px] leading-[0.98] tracking-[-0.032em]">Your next meeting is<br><em>already on the calendar.</em></h2>
+      <div class="lg:col-span-4 lg:pb-2">
+        <p class="text-[17px] leading-[1.6] text-ink2">Connect your calendar in two minutes. When that meeting ends, the follow-up will be waiting for you.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a href="#" class="btn btn-ink">Start free
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="#" class="btn btn-ghost">Download for Mac</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="border-t border-rule">
+  <div class="max-w-[1200px] mx-auto px-6 py-14 grid grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-10">
+    <div class="col-span-2 lg:col-span-4">
+      <a href="#" class="flex items-center gap-2.5" aria-label="Fieldnote home">
+        <svg width="24" height="24" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+          <rect x="1" y="1" width="24" height="24" rx="6.5" fill="#17160F"/>
+          <path d="M7 10h7M7 14h11M7 18h6" stroke="#F4F0E8" stroke-width="1.8" stroke-linecap="round"/>
+          <circle cx="18.5" cy="9.5" r="2.6" fill="#D8461B"/>
+        </svg>
+        <span class="font-serif text-[22px] leading-none">Fieldnote</span>
+      </a>
+      <p class="mt-4 text-[14.5px] leading-[1.6] text-muted max-w-[300px]">Records your meetings and writes the follow-up, so you can get on with the next one.</p>
+    </div>
+    <div class="lg:col-span-2 lg:col-start-7">
+      <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">Product</div>
+      <ul class="mt-4 space-y-2.5 text-[14.5px] text-ink2">
+        <li><a href="#how" class="hover:text-ink">How it works</a></li>
+        <li><a href="#pricing" class="hover:text-ink">Pricing</a></li>
+        <li><a href="#privacy" class="hover:text-ink">Security</a></li>
+        <li><a href="#" class="hover:text-ink">Changelog</a></li>
+      </ul>
+    </div>
+    <div class="lg:col-span-2">
+      <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">Get the app</div>
+      <ul class="mt-4 space-y-2.5 text-[14.5px] text-ink2">
+        <li><a href="#" class="hover:text-ink">Mac</a></li>
+        <li><a href="#" class="hover:text-ink">Windows</a></li>
+        <li><a href="#" class="hover:text-ink">iPhone</a></li>
+        <li><a href="#" class="hover:text-ink">Chrome extension</a></li>
+      </ul>
+    </div>
+    <div class="lg:col-span-2">
+      <div class="font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">Company</div>
+      <ul class="mt-4 space-y-2.5 text-[14.5px] text-ink2">
+        <li><a href="#" class="hover:text-ink">About</a></li>
+        <li><a href="#" class="hover:text-ink">Careers</a></li>
+        <li><a href="#" class="hover:text-ink">Help center</a></li>
+        <li><a href="#" class="hover:text-ink">Status</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-rule">
+    <div class="max-w-[1200px] mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-4 text-[13px] text-muted">
+      <span>© 2026 Fieldnote Labs, Inc.</span>
+      <span class="flex gap-6"><a href="#" class="hover:text-ink">Privacy</a><a href="#" class="hover:text-ink">Terms</a><a href="#" class="hover:text-ink">DPA</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

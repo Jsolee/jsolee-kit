@@ -1,0 +1,858 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnote: the follow-up email, already written</title>
+<meta name="description" content="Fieldnote records your calls, keeps track of what everyone agreed to, and drafts the follow-up email the way you would write it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: oklch(0.87 0.165 95);
+    --mark: oklch(0.935 0.1 96);
+    --mark-strong: oklch(0.875 0.16 95);
+    --ink: oklch(0.21 0.015 85);
+    --ink-2: oklch(0.37 0.02 85);
+    --ink-3: oklch(0.47 0.015 85);
+    --paper: oklch(0.982 0.006 95);
+    --paper-2: oklch(0.96 0.009 95);
+    --sheet: oklch(0.995 0.003 95);
+    --line: oklch(0.21 0.015 85 / 0.08);
+    --line-2: oklch(0.21 0.015 85 / 0.12);
+    --on-ink: oklch(0.975 0.006 95);
+    --on-ink-2: oklch(0.8 0.012 95);
+    --on-ink-line: oklch(0.975 0.006 95 / 0.14);
+    --rec: oklch(0.6 0.19 28);
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-smooth: cubic-bezier(0.25, 0.4, 0.25, 1);
+    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.03);
+    --shadow-lift: 0 8px 40px rgba(0, 0, 0, 0.08);
+    --gutter: clamp(16px, 4.5vw, 64px);
+    --max: 1312px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html {
+    color-scheme: light;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 400;
+    overflow-x: clip;
+  }
+  h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
+  ol, ul { padding: 0; list-style: none; }
+  a { color: inherit; }
+  h1, h2, h3 { font-weight: 600; text-wrap: balance; }
+  p, li, dd { text-wrap: pretty; }
+
+  .wrap { max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+
+  .skip {
+    position: absolute; left: 16px; top: 16px; z-index: 10;
+    padding: 10px 16px; border-radius: 8px;
+    background: var(--ink); color: var(--on-ink);
+    font-weight: 600; text-decoration: none;
+    transform: translateY(-160%);
+    transition: transform 160ms var(--ease-out);
+  }
+  .skip:focus-visible { transform: translateY(0); }
+
+  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+  .privacy :focus-visible { outline-color: var(--on-ink); }
+
+  section[id] { scroll-margin-top: 24px; }
+
+  /* Buttons and links */
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    min-height: 48px; padding: 0 22px; border-radius: 10px;
+    background: var(--ink); color: var(--on-ink);
+    font: inherit; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
+    text-decoration: none; white-space: nowrap;
+    box-shadow: var(--shadow-card);
+    transition-property: transform, box-shadow;
+    transition-duration: 160ms;
+    transition-timing-function: var(--ease-out);
+    touch-action: manipulation;
+  }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+  .btn-sm { min-height: 40px; padding: 0 16px; font-size: 15px; border-radius: 9px; }
+  .btn:active { transform: scale(0.97); }
+
+  .textlink {
+    display: inline-flex; align-items: center; min-height: 40px;
+    font-weight: 600; font-size: 16px; text-decoration: underline;
+    text-decoration-thickness: 1px; text-underline-offset: 5px;
+    text-decoration-color: var(--line-2);
+    transition: text-underline-offset 160ms var(--ease-out), text-decoration-color 160ms ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+    .btn:hover:active { transform: translateY(-2px) scale(0.97); }
+    .textlink:hover { text-underline-offset: 3px; text-decoration-color: currentColor; }
+  }
+
+  /* Header */
+  .top { background: var(--yellow); }
+  .nav { display: flex; align-items: center; gap: 40px; min-height: 80px; }
+  .brand {
+    display: inline-flex; align-items: center; gap: 10px; min-height: 40px;
+    font-size: 21px; font-weight: 600; letter-spacing: -0.03em; text-decoration: none;
+  }
+  .brand svg { width: 22px; height: 22px; color: var(--ink); }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    display: inline-flex; align-items: center; min-height: 40px;
+    font-size: 15px; color: var(--ink-2); text-decoration: none;
+    background: linear-gradient(currentColor, currentColor) 0 calc(100% - 8px) / 0 1px no-repeat;
+    transition: background-size 220ms var(--ease-out);
+  }
+  .nav-links a:hover { background-size: 100% 1px; }
+  .nav-end { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+  .nav-end .textlink { font-size: 15px; }
+
+  /* Hero */
+  .hero {
+    background:
+      linear-gradient(var(--yellow), var(--yellow)) top / 100% calc(100% - 240px) no-repeat,
+      var(--paper);
+    padding-top: 64px;
+  }
+  .hero-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 340px;
+    column-gap: 64px;
+    align-items: end;
+  }
+  .hero h1 {
+    font-size: clamp(44px, 5.8vw, 84px);
+    line-height: 0.98;
+    letter-spacing: -0.042em;
+  }
+  .lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); }
+  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 28px; }
+
+  /* Product demo */
+  .demo {
+    margin-top: 64px;
+    background: var(--sheet);
+    border-radius: 16px;
+    box-shadow: 0 0 0 1px var(--line), var(--shadow-lift);
+    overflow: hidden;
+  }
+  .demo-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    min-height: 56px; padding: 0 20px 0 24px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px; color: var(--ink-3);
+  }
+  .crumbs { display: flex; align-items: center; gap: 8px; }
+  .crumbs svg { width: 14px; height: 14px; opacity: 0.6; }
+  .crumbs b { color: var(--ink); font-weight: 600; }
+  .meta { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .people { display: flex; gap: 4px; margin-left: 8px; }
+  .av {
+    display: grid; place-items: center;
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--paper-2); color: var(--ink-2);
+    box-shadow: 0 0 0 2px var(--sheet);
+    font-size: 11px; font-weight: 600; letter-spacing: 0;
+  }
+  .av-you { background: var(--ink); color: var(--on-ink); }
+
+  .demo-body {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
+    column-gap: 112px;
+  }
+  .links {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    pointer-events: none; overflow: visible;
+  }
+  .links path {
+    fill: none; stroke: var(--ink);
+    stroke-width: var(--path-w, 1);
+    stroke-opacity: var(--path-o, 0.16);
+    stroke-linecap: round;
+    transition: stroke-opacity 200ms ease;
+  }
+  .links circle { fill: var(--ink); fill-opacity: var(--path-o, 0.16); transition: fill-opacity 200ms ease; }
+
+  .pane-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding: 22px 0 0;
+  }
+  .pane-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
+  .pane-note { font-size: 13px; color: var(--ink-3); }
+
+  .pane-rec {
+    background: var(--paper-2);
+    border-right: 1px solid var(--line);
+    padding: 0 20px 12px 24px;
+  }
+
+  .wave { position: relative; margin: 20px 0 8px; padding-top: 26px; }
+  .wave svg { display: block; width: 100%; height: 40px; fill: var(--ink); opacity: 0.2; }
+  .pin {
+    position: absolute; top: 0; left: var(--x);
+    transform: translateX(-50%);
+    display: grid; place-items: center;
+    width: 20px; height: 20px; border-radius: 50%;
+    font-size: 11px; font-weight: 600;
+    background: var(--badge-bg, var(--sheet));
+    color: var(--badge-fg, var(--ink-2));
+    box-shadow: 0 0 0 1px var(--badge-bd, var(--line-2));
+    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  }
+  .pin::after {
+    content: ""; position: absolute; left: 50%; top: 20px;
+    width: 1px; height: 46px; margin-left: -0.5px;
+    background: var(--ink); opacity: var(--tick-o, 0.22);
+    transition: opacity 200ms ease;
+  }
+  .wave-scale { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: var(--ink-3); }
+
+  .badge {
+    display: grid; place-items: center;
+    width: 22px; height: 22px; border-radius: 50%;
+    font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
+    background: var(--badge-bg, var(--sheet));
+    color: var(--badge-fg, var(--ink-2));
+    box-shadow: 0 0 0 1px var(--badge-bd, var(--line-2));
+    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
+  }
+
+  .lines li {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 22px;
+    column-gap: 14px;
+    padding: 13px 0;
+    border-top: 1px solid var(--line);
+    font-size: 15px; line-height: 1.5;
+    border-radius: 0;
+  }
+  .lines li:first-child { border-top: 0; }
+  .lines .t { font-size: 13px; color: var(--ink-3); padding-top: 1px; }
+  .lines .who { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 1px; }
+  .lines p { color: var(--ink-2); }
+  .lines .badge { margin-top: 1px; }
+  .lines .quiet p { color: var(--ink-3); }
+
+  mark {
+    color: var(--ink);
+    background: var(--hl, var(--mark));
+    padding: 1px 2px; margin: 0 -2px;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-color 200ms ease;
+  }
+
+  .pane-mail { padding: 0 32px 0 0; display: flex; flex-direction: column; }
+  .fields { margin-top: 16px; border-top: 1px solid var(--line); }
+  .fields div { display: grid; grid-template-columns: 72px 1fr; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .fields dt { color: var(--ink-3); font-size: 13px; padding-top: 2px; }
+  .fields dd { color: var(--ink); }
+  .fields .subj { font-weight: 600; letter-spacing: -0.01em; }
+
+  .mail-body { padding: 18px 0 8px; font-size: 15.5px; line-height: 1.55; }
+  .mail-body > p + p, .mail-body > p + ol, .mail-body > ol + p { margin-top: 12px; }
+  .points li {
+    display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 14px;
+    padding: 6px 0;
+    outline-offset: 2px;
+  }
+  .points .txt {
+    background: var(--hl-mail, transparent);
+    padding: 1px 3px; margin: 0 -3px; border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-color 200ms ease;
+  }
+  .still { color: var(--ink-3); font-size: 14px; }
+
+  .mail-actions {
+    margin-top: auto;
+    display: flex; align-items: center; gap: 8px;
+    padding: 16px 0 20px;
+    border-top: 1px solid var(--line);
+  }
+  .ui-btn {
+    display: inline-flex; align-items: center; height: 34px; padding: 0 14px;
+    border-radius: 8px; font-size: 14px; font-weight: 600;
+    background: var(--ink); color: var(--on-ink);
+  }
+  .ui-btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line-2); }
+  .voice { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-3); }
+  .voice svg { width: 14px; height: 14px; }
+
+  [data-link] { cursor: default; }
+  .lines li:focus-visible, .points li:focus-visible { outline-offset: 4px; }
+
+  /* Active pair. Default state is set in the markup so the static page shows one link drawn. */
+  .demo[data-active="1"] [data-link="1"],
+  .demo[data-active="2"] [data-link="2"],
+  .demo[data-active="3"] [data-link="3"],
+  .demo[data-active="4"] [data-link="4"] {
+    --hl: var(--mark-strong);
+    --hl-mail: var(--mark);
+    --badge-bg: var(--ink);
+    --badge-fg: var(--on-ink);
+    --badge-bd: var(--ink);
+    --path-o: 1;
+    --path-w: 1.5;
+    --tick-o: 0.9;
+  }
+
+  .demo-hint {
+    display: flex; align-items: center; gap: 8px;
+    margin-top: 18px; font-size: 14px; color: var(--ink-3);
+  }
+  .demo-hint svg { width: 16px; height: 16px; }
+
+  /* How it works */
+  .how { padding: 144px 0 136px; }
+  .how-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 96px; align-items: start; }
+  .how h2 { font-size: clamp(32px, 3.1vw, 46px); line-height: 1.04; letter-spacing: -0.035em; }
+  .how-intro p { margin-top: 24px; color: var(--ink-2); max-width: 42ch; }
+  .tools { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tools li {
+    display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px;
+    border-radius: 8px; font-size: 14px; color: var(--ink-2);
+    box-shadow: inset 0 0 0 1px var(--line-2);
+  }
+  .timeline li {
+    display: grid; grid-template-columns: 128px minmax(0, 1fr); column-gap: 32px;
+    padding: 30px 0;
+    border-top: 1px solid var(--line-2);
+  }
+  .timeline li:last-child { border-bottom: 1px solid var(--line-2); }
+  .timeline time {
+    font-size: 34px; font-weight: 600; line-height: 1; letter-spacing: -0.03em;
+  }
+  .timeline h3 { font-size: 21px; line-height: 1.25; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
+  .timeline p { margin-top: 8px; color: var(--ink-2); max-width: 54ch; }
+  .rec-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rec); flex: none; }
+
+  /* Draft specimen */
+  .draft { background: var(--paper-2); padding: 136px 0 144px; }
+  .spec {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 700px) minmax(0, 1fr);
+    column-gap: 80px;
+  }
+  .spec::before {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 0;
+    width: min(700px, 100%);
+    background: var(--sheet);
+    border-radius: 14px;
+    box-shadow: 0 0 0 1px var(--line), var(--shadow-lift);
+  }
+  .spec > * { position: relative; }
+  .cell { padding: var(--pt, 14px) 48px 0; font-size: 17px; line-height: 1.6; }
+  .cell.first { --pt: 40px; }
+  .cell.last { padding-bottom: 48px; }
+  .spec-meta { font-size: 13px; color: var(--ink-3); }
+  .spec-fields { margin-top: 18px; border-top: 1px solid var(--line); }
+  .spec-fields div { display: grid; grid-template-columns: 76px 1fr; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+  .spec-fields dt { color: var(--ink-3); font-size: 13px; padding-top: 2px; }
+  .spec-fields .subj { font-weight: 600; letter-spacing: -0.01em; }
+  .bullet { position: relative; padding-left: 22px; }
+  .bullet::before { content: ""; position: absolute; left: 4px; top: calc(0.8em - 1px); width: 7px; height: 2px; background: var(--ink); }
+  .cell mark { --hl: var(--mark); }
+
+  .spec > .cell { grid-column: 1; }
+  .spec > .note { grid-column: 2; }
+  .spec-head { grid-column: 2; grid-row: span 2; padding-top: 32px; }
+  .spec-head h2 { font-size: clamp(32px, 3vw, 44px); line-height: 1.04; letter-spacing: -0.035em; max-width: 13ch; }
+  .spec-head p { margin-top: 20px; color: var(--ink-2); max-width: 40ch; }
+
+  .note {
+    font-size: 15px; line-height: 1.45; color: var(--ink);
+    max-width: 34ch;
+    padding-top: calc(var(--pt, 14px) + 3px);
+    margin-bottom: -22px;
+  }
+  .note:not(:empty)::before {
+    content: ""; position: absolute; top: calc(var(--pt, 14px) + 14px); left: -76px; width: 64px; height: 1px;
+    background: var(--ink); opacity: 0.35;
+  }
+  .note:not(:empty)::after {
+    content: ""; position: absolute; top: calc(var(--pt, 14px) + 11.5px); left: -78px; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--ink);
+  }
+
+  /* Privacy */
+  .privacy { background: var(--ink); color: var(--on-ink); padding: 136px 0 128px; }
+  .privacy h2 {
+    font-size: clamp(44px, 6.4vw, 92px); line-height: 1; letter-spacing: -0.042em;
+    max-width: 14ch;
+  }
+  .privacy-lede { margin-top: 28px; font-size: 19px; color: var(--on-ink-2); max-width: 46ch; line-height: 1.6; }
+  .facts {
+    margin-top: 88px;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 40px; row-gap: 40px;
+  }
+  .facts li { border-top: 1px solid var(--on-ink-line); padding-top: 22px; }
+  .facts h3 { font-size: 19px; line-height: 1.3; letter-spacing: -0.015em; }
+  .facts p { margin-top: 10px; font-size: 16px; line-height: 1.6; color: var(--on-ink-2); }
+
+  /* Closing */
+  .cta { background: var(--yellow); padding: 136px 0 120px; }
+  .cta-grid { display: grid; grid-template-columns: minmax(0, 1fr) 400px; column-gap: 72px; align-items: end; }
+  .cta h2 { font-size: clamp(44px, 6vw, 88px); line-height: 0.98; letter-spacing: -0.042em; }
+  .cta-side p { font-size: 18px; color: var(--ink-2); line-height: 1.55; }
+  .cta-side .small { margin-top: 16px; font-size: 14px; }
+  .foot { background: var(--yellow); }
+  .foot-row {
+    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    padding-block: 24px 32px; border-top: 1px solid var(--line-2);
+    font-size: 14px; color: var(--ink-2);
+  }
+  .foot-row .brand { font-size: 17px; }
+  .foot-row .brand svg { width: 18px; height: 18px; }
+  .foot-links { margin-left: auto; display: flex; gap: 24px; }
+  .foot-links a { text-decoration: none; display: inline-flex; align-items: center; min-height: 40px; }
+  .foot-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Narrow layouts */
+  @media (max-width: 1080px) {
+    .hero-copy, .cta-grid { grid-template-columns: 1fr; row-gap: 28px; }
+    .demo-body { grid-template-columns: 1fr; column-gap: 0; }
+    .links { display: none; }
+    .pane-rec { border-right: 0; border-bottom: 1px solid var(--line); }
+    .pane-mail { padding: 0 24px; }
+    .how-grid { grid-template-columns: 1fr; row-gap: 48px; }
+    .spec { grid-template-columns: 1fr; }
+    .spec::before { display: none; }
+    .spec > .cell, .spec > .note { background: var(--sheet); }
+    .spec > .cell.first { border-radius: 14px 14px 0 0; }
+    .spec > .cell.last { padding-bottom: 10px; }
+    .spec > :last-child { border-radius: 0 0 14px 14px; padding-bottom: 32px; }
+    .spec > .cell, .spec > .note, .spec-head { grid-column: 1; }
+    .spec-head { order: -1; grid-row: auto; padding: 0 0 40px; }
+    .note { padding: 0 48px 14px; margin-bottom: 0; color: var(--ink-3); font-size: 14px; max-width: none; }
+    .note:empty { display: none; }
+    .note::before, .note::after { display: none; }
+    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 760px) {
+    .nav-links, .nav-end .textlink, .meta > :not(.people) { display: none; }
+    .demo-bar { padding: 0 16px; }
+    .pane-rec { padding: 0 16px 8px; }
+    .pane-mail { padding: 0 16px; }
+    .lines li { grid-template-columns: 40px minmax(0, 1fr) 22px; column-gap: 10px; }
+    .cell { padding-inline: 20px; }
+    .note { padding-inline: 20px; }
+    .timeline li { grid-template-columns: 1fr; row-gap: 12px; }
+    .facts { grid-template-columns: 1fr; }
+    .foot-links { margin-left: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn, .skip, .textlink, .nav-links a { transition-duration: 0ms; }
+    .btn:hover, .btn:active, .btn:hover:active { transform: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap nav">
+    <a class="brand" href="#" aria-label="Fieldnote home">
+      <svg viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">
+        <rect x="1" y="7" width="2.6" height="8" rx="1.3"/>
+        <rect x="5.5" y="3" width="2.6" height="16" rx="1.3"/>
+        <rect x="10" y="6" width="2.6" height="10" rx="1.3"/>
+        <rect x="14.5" y="9.7" width="6.5" height="2.6" rx="1.3"/>
+      </svg>
+      <span translate="no">Fieldnote</span>
+    </a>
+    <nav aria-label="Main">
+      <ul class="nav-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#draft">The draft</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+      </ul>
+    </nav>
+    <div class="nav-end">
+      <a class="textlink" href="#">Sign in</a>
+      <a class="btn btn-sm" href="#start"><span>Try <span translate="no">Fieldnote</span></span></a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1 id="hero-title">Hang up. Your follow&#8209;up is already in drafts.</h1>
+        <div class="hero-side">
+          <p class="lede"><span translate="no">Fieldnote</span> records your calls, keeps track of what everyone agreed to, and writes the recap email the way you would. You read it, change a word or two, and press Send.</p>
+          <div class="actions">
+            <a class="btn" href="#start">Try it on your next call
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+            <a class="textlink" href="#how">See how it works</a>
+          </div>
+        </div>
+      </div>
+
+      <figure class="demo" data-active="2" aria-label="Example: a recorded call and the follow-up email Fieldnote drafted from it">
+        <div class="demo-bar">
+          <div class="crumbs">
+            <span>Meetings</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>
+            <b><span translate="no">Halden</span> renewal call</b>
+          </div>
+          <div class="meta">
+            <span>Thu 29&nbsp;Oct, 10:00</span>
+            <span aria-hidden="true">·</span>
+            <span>42&nbsp;min</span>
+            <span class="people" role="img" aria-label="Maya Okafor, Dev Banerjee and you">
+              <span class="av" aria-hidden="true">MO</span>
+              <span class="av" aria-hidden="true">DB</span>
+              <span class="av av-you" aria-hidden="true">TR</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="demo-body">
+          <svg class="links" aria-hidden="true"></svg>
+
+          <div class="pane pane-rec" role="group" aria-label="Transcript">
+            <div class="pane-head">
+              <p class="pane-title">Transcript</p>
+              <p class="pane-note">3 speakers, 4 things to follow up</p>
+            </div>
+            <div class="wave" aria-hidden="true">
+              <svg viewBox="0 0 600 40" preserveAspectRatio="none"><rect x="0.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="4.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="8.0" y="12.0" width="2" height="16.0" rx="1"/><rect x="12.0" y="17.6" width="2" height="4.7" rx="1"/><rect x="16.0" y="17.7" width="2" height="4.6" rx="1"/><rect x="20.0" y="18.2" width="2" height="3.5" rx="1"/><rect x="24.0" y="7.2" width="2" height="25.7" rx="1"/><rect x="28.0" y="11.8" width="2" height="16.5" rx="1"/><rect x="32.0" y="5.8" width="2" height="28.3" rx="1"/><rect x="36.0" y="10.2" width="2" height="19.5" rx="1"/><rect x="40.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="44.0" y="11.2" width="2" height="17.5" rx="1"/><rect x="48.0" y="12.8" width="2" height="14.5" rx="1"/><rect x="52.0" y="7.6" width="2" height="24.9" rx="1"/><rect x="56.0" y="9.6" width="2" height="20.9" rx="1"/><rect x="60.0" y="11.3" width="2" height="17.3" rx="1"/><rect x="64.0" y="13.8" width="2" height="12.5" rx="1"/><rect x="68.0" y="18.2" width="2" height="3.5" rx="1"/><rect x="72.0" y="11.6" width="2" height="16.8" rx="1"/><rect x="76.0" y="10.8" width="2" height="18.4" rx="1"/><rect x="80.0" y="12.8" width="2" height="14.4" rx="1"/><rect x="84.0" y="10.4" width="2" height="19.2" rx="1"/><rect x="88.0" y="11.3" width="2" height="17.4" rx="1"/><rect x="92.0" y="9.4" width="2" height="21.1" rx="1"/><rect x="96.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="100.0" y="14.2" width="2" height="11.7" rx="1"/><rect x="104.0" y="10.1" width="2" height="19.9" rx="1"/><rect x="108.0" y="11.6" width="2" height="16.8" rx="1"/><rect x="112.0" y="17.6" width="2" height="4.9" rx="1"/><rect x="116.0" y="10.6" width="2" height="18.8" rx="1"/><rect x="120.0" y="12.2" width="2" height="15.7" rx="1"/><rect x="124.0" y="9.9" width="2" height="20.2" rx="1"/><rect x="128.0" y="10.6" width="2" height="18.8" rx="1"/><rect x="132.0" y="6.6" width="2" height="26.8" rx="1"/><rect x="136.0" y="8.4" width="2" height="23.2" rx="1"/><rect x="140.0" y="16.9" width="2" height="6.1" rx="1"/><rect x="144.0" y="5.1" width="2" height="29.8" rx="1"/><rect x="148.0" y="10.8" width="2" height="18.5" rx="1"/><rect x="152.0" y="7.3" width="2" height="25.3" rx="1"/><rect x="156.0" y="17.2" width="2" height="5.5" rx="1"/><rect x="160.0" y="11.9" width="2" height="16.1" rx="1"/><rect x="164.0" y="16.6" width="2" height="6.8" rx="1"/><rect x="168.0" y="10.9" width="2" height="18.1" rx="1"/><rect x="172.0" y="5.9" width="2" height="28.2" rx="1"/><rect x="176.0" y="9.7" width="2" height="20.6" rx="1"/><rect x="180.0" y="6.6" width="2" height="26.8" rx="1"/><rect x="184.0" y="7.3" width="2" height="25.3" rx="1"/><rect x="188.0" y="11.2" width="2" height="17.6" rx="1"/><rect x="192.0" y="8.6" width="2" height="22.8" rx="1"/><rect x="196.0" y="14.0" width="2" height="12.0" rx="1"/><rect x="200.0" y="14.1" width="2" height="11.8" rx="1"/><rect x="204.0" y="13.4" width="2" height="13.1" rx="1"/><rect x="208.0" y="15.2" width="2" height="9.6" rx="1"/><rect x="212.0" y="18.8" width="2" height="2.4" rx="1"/><rect x="216.0" y="13.7" width="2" height="12.6" rx="1"/><rect x="220.0" y="12.1" width="2" height="15.8" rx="1"/><rect x="224.0" y="11.6" width="2" height="16.9" rx="1"/><rect x="228.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="232.0" y="8.7" width="2" height="22.7" rx="1"/><rect x="236.0" y="7.6" width="2" height="24.8" rx="1"/><rect x="240.0" y="10.1" width="2" height="19.9" rx="1"/><rect x="244.0" y="7.4" width="2" height="25.2" rx="1"/><rect x="248.0" y="18.0" width="2" height="4.0" rx="1"/><rect x="252.0" y="10.8" width="2" height="18.5" rx="1"/><rect x="256.0" y="11.6" width="2" height="16.9" rx="1"/><rect x="260.0" y="17.6" width="2" height="4.8" rx="1"/><rect x="264.0" y="8.1" width="2" height="23.8" rx="1"/><rect x="268.0" y="15.7" width="2" height="8.6" rx="1"/><rect x="272.0" y="10.2" width="2" height="19.6" rx="1"/><rect x="276.0" y="8.2" width="2" height="23.5" rx="1"/><rect x="280.0" y="10.6" width="2" height="18.8" rx="1"/><rect x="284.0" y="2.2" width="2" height="35.5" rx="1"/><rect x="288.0" y="7.6" width="2" height="24.9" rx="1"/><rect x="292.0" y="11.4" width="2" height="17.1" rx="1"/><rect x="296.0" y="10.2" width="2" height="19.5" rx="1"/><rect x="300.0" y="11.6" width="2" height="16.9" rx="1"/><rect x="304.0" y="16.4" width="2" height="7.3" rx="1"/><rect x="308.0" y="12.3" width="2" height="15.3" rx="1"/><rect x="312.0" y="13.6" width="2" height="12.8" rx="1"/><rect x="316.0" y="7.1" width="2" height="25.8" rx="1"/><rect x="320.0" y="9.7" width="2" height="20.7" rx="1"/><rect x="324.0" y="12.3" width="2" height="15.4" rx="1"/><rect x="328.0" y="10.1" width="2" height="19.8" rx="1"/><rect x="332.0" y="10.5" width="2" height="19.0" rx="1"/><rect x="336.0" y="14.1" width="2" height="11.9" rx="1"/><rect x="340.0" y="10.1" width="2" height="19.9" rx="1"/><rect x="344.0" y="11.3" width="2" height="17.4" rx="1"/><rect x="348.0" y="11.8" width="2" height="16.4" rx="1"/><rect x="352.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="356.0" y="15.7" width="2" height="8.7" rx="1"/><rect x="360.0" y="18.6" width="2" height="2.8" rx="1"/><rect x="364.0" y="12.2" width="2" height="15.6" rx="1"/><rect x="368.0" y="13.4" width="2" height="13.2" rx="1"/><rect x="372.0" y="10.4" width="2" height="19.2" rx="1"/><rect x="376.0" y="13.6" width="2" height="12.8" rx="1"/><rect x="380.0" y="14.2" width="2" height="11.5" rx="1"/><rect x="384.0" y="14.3" width="2" height="11.4" rx="1"/><rect x="388.0" y="10.2" width="2" height="19.5" rx="1"/><rect x="392.0" y="12.6" width="2" height="14.9" rx="1"/><rect x="396.0" y="10.7" width="2" height="18.6" rx="1"/><rect x="400.0" y="11.4" width="2" height="17.1" rx="1"/><rect x="404.0" y="10.8" width="2" height="18.4" rx="1"/><rect x="408.0" y="12.7" width="2" height="14.7" rx="1"/><rect x="412.0" y="11.1" width="2" height="17.8" rx="1"/><rect x="416.0" y="11.3" width="2" height="17.4" rx="1"/><rect x="420.0" y="13.8" width="2" height="12.5" rx="1"/><rect x="424.0" y="11.4" width="2" height="17.2" rx="1"/><rect x="428.0" y="15.5" width="2" height="9.0" rx="1"/><rect x="432.0" y="15.9" width="2" height="8.1" rx="1"/><rect x="436.0" y="13.6" width="2" height="12.8" rx="1"/><rect x="440.0" y="12.8" width="2" height="14.5" rx="1"/><rect x="444.0" y="12.8" width="2" height="14.5" rx="1"/><rect x="448.0" y="12.6" width="2" height="14.8" rx="1"/><rect x="452.0" y="15.1" width="2" height="9.9" rx="1"/><rect x="456.0" y="10.4" width="2" height="19.2" rx="1"/><rect x="460.0" y="7.6" width="2" height="24.8" rx="1"/><rect x="464.0" y="7.1" width="2" height="25.8" rx="1"/><rect x="468.0" y="11.6" width="2" height="16.8" rx="1"/><rect x="472.0" y="10.3" width="2" height="19.3" rx="1"/><rect x="476.0" y="7.1" width="2" height="25.8" rx="1"/><rect x="480.0" y="8.1" width="2" height="23.8" rx="1"/><rect x="484.0" y="2.7" width="2" height="34.6" rx="1"/><rect x="488.0" y="6.8" width="2" height="26.4" rx="1"/><rect x="492.0" y="1.8" width="2" height="36.5" rx="1"/><rect x="496.0" y="1.2" width="2" height="37.5" rx="1"/><rect x="500.0" y="5.2" width="2" height="29.5" rx="1"/><rect x="504.0" y="10.8" width="2" height="18.4" rx="1"/><rect x="508.0" y="9.0" width="2" height="22.0" rx="1"/><rect x="512.0" y="15.6" width="2" height="8.8" rx="1"/><rect x="516.0" y="6.2" width="2" height="27.7" rx="1"/><rect x="520.0" y="5.6" width="2" height="28.8" rx="1"/><rect x="524.0" y="6.4" width="2" height="27.2" rx="1"/><rect x="528.0" y="4.2" width="2" height="31.5" rx="1"/><rect x="532.0" y="7.0" width="2" height="26.0" rx="1"/><rect x="536.0" y="10.2" width="2" height="19.6" rx="1"/><rect x="540.0" y="8.8" width="2" height="22.5" rx="1"/><rect x="544.0" y="7.4" width="2" height="25.1" rx="1"/><rect x="548.0" y="10.7" width="2" height="18.7" rx="1"/><rect x="552.0" y="10.9" width="2" height="18.2" rx="1"/><rect x="556.0" y="10.4" width="2" height="19.1" rx="1"/><rect x="560.0" y="12.2" width="2" height="15.7" rx="1"/><rect x="564.0" y="10.7" width="2" height="18.6" rx="1"/><rect x="568.0" y="11.9" width="2" height="16.2" rx="1"/><rect x="572.0" y="15.3" width="2" height="9.3" rx="1"/><rect x="576.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="580.0" y="16.0" width="2" height="8.0" rx="1"/><rect x="584.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="588.0" y="18.8" width="2" height="2.5" rx="1"/><rect x="592.0" y="18.1" width="2" height="3.7" rx="1"/><rect x="596.0" y="11.1" width="2" height="17.8" rx="1"/></svg>
+              <span class="pin" data-link="1" style="--x:19.4%">1</span>
+              <span class="pin" data-link="2" style="--x:27.7%">2</span>
+              <span class="pin" data-link="3" style="--x:51.7%">3</span>
+              <span class="pin" data-link="4" style="--x:78.5%">4</span>
+              <div class="wave-scale"><span>00:00</span><span>42:10</span></div>
+            </div>
+            <ol class="lines">
+              <li data-link="1" tabindex="0">
+                <span class="t">08:12</span>
+                <div><span class="who" translate="no">Maya Okafor</span><p>“<mark>If the paperwork’s signed before the fourteenth, we can hold the current rate through March.</mark>”</p></div>
+                <span class="badge" data-pin="src-1">1</span>
+              </li>
+              <li data-link="2" tabindex="0">
+                <span class="t">11:40</span>
+                <div><span class="who" translate="no">Tom Reyes</span><p>“That works for us. <mark>I’ll send the revised scope with the two new depots by Friday.</mark>”</p></div>
+                <span class="badge" data-pin="src-2">2</span>
+              </li>
+              <li data-link="3" tabindex="0">
+                <span class="t">21:47</span>
+                <div><span class="who" translate="no">Dev Banerjee</span><p>“I still owe you the Q1 pallet numbers. <mark>You’ll have them by next Wednesday.</mark>”</p></div>
+                <span class="badge" data-pin="src-3">3</span>
+              </li>
+              <li data-link="4" tabindex="0">
+                <span class="t">33:05</span>
+                <div><span class="who" translate="no">Maya Okafor</span><p>“<mark>Rotterdam is the one I’m not sure about.</mark> Weekly might be more than we need.”</p></div>
+                <span class="badge" data-pin="src-4">4</span>
+              </li>
+              <li class="quiet">
+                <span class="t">33:31</span>
+                <div><span class="who" translate="no">Tom Reyes</span><p>“Let me ask our ops team and come back to you.”</p></div>
+                <span></span>
+              </li>
+            </ol>
+          </div>
+
+          <div class="pane pane-mail" role="group" aria-label="Follow-up draft">
+            <div class="pane-head">
+              <p class="pane-title">Follow-up draft</p>
+              <p class="pane-note">Saved to your drafts at 10:42</p>
+            </div>
+            <dl class="fields">
+              <div><dt>To</dt><dd translate="no">Maya Okafor, Dev Banerjee</dd></div>
+              <div><dt>Subject</dt><dd class="subj"><span translate="no">Halden</span> renewal: what we agreed today</dd></div>
+            </dl>
+            <div class="mail-body">
+              <p>Hi <span translate="no">Maya</span>, <span translate="no">Dev</span>,</p>
+              <p>Thanks for the time today. Here’s where we landed:</p>
+              <ol class="points">
+                <li data-link="1" tabindex="0"><span class="badge" data-pin="dst-1">1</span><span><span class="txt">We’ll hold the current rate through March, as long as the renewal is signed by 14&nbsp;November.</span><span class="sr-only"> (From Maya at 08:12.)</span></span></li>
+                <li data-link="2" tabindex="0"><span class="badge" data-pin="dst-2">2</span><span><span class="txt">I’ll send the revised scope, including the two new depots, by Friday 30&nbsp;October.</span><span class="sr-only"> (From Tom at 11:40.)</span></span></li>
+                <li data-link="3" tabindex="0"><span class="badge" data-pin="dst-3">3</span><span><span class="txt"><span translate="no">Dev</span> will share the Q1 pallet volumes by Wednesday 4&nbsp;November.</span><span class="sr-only"> (From Dev at 21:47.)</span></span></li>
+              </ol>
+              <p class="still">Still open</p>
+              <ol class="points">
+                <li data-link="4" tabindex="0"><span class="badge" data-pin="dst-4">4</span><span><span class="txt">Whether the Rotterdam lane needs to run weekly. I’ll check with our ops team and come back to you.</span><span class="sr-only"> (From Maya at 33:05.)</span></span></li>
+              </ol>
+              <p>Best,<br><span translate="no">Tom</span></p>
+            </div>
+            <div class="mail-actions" aria-hidden="true">
+              <span class="ui-btn">Send</span>
+              <span class="ui-btn ghost">Edit</span>
+              <span class="voice">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>
+                <span>Matched to how you write to <span translate="no">Halden</span></span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </figure>
+      <p class="demo-hint">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2.5 12.5 7l-4 1.3L7 12.5z"/></svg>
+        Point at a line in the draft, or tab to it, to see where it was said.
+      </p>
+    </div>
+  </section>
+
+  <section id="how" class="how" aria-labelledby="how-title">
+    <div class="wrap how-grid">
+      <div class="how-intro">
+        <h2 id="how-title">From the invite to the draft, without you taking a single note.</h2>
+        <p>It joins from your calendar, so there’s nothing to remember to start. On your phone, it works for meetings in a room too.</p>
+        <ul class="tools" aria-label="Works with">
+          <li translate="no">Zoom</li>
+          <li translate="no">Google Meet</li>
+          <li translate="no">Microsoft Teams</li>
+          <li>In person</li>
+        </ul>
+      </div>
+      <ol class="timeline">
+        <li>
+          <time datetime="09:58">09:58</time>
+          <div>
+            <h3>It joins from the invite.</h3>
+            <p><span translate="no">Fieldnote</span> shows up as a named participant and posts in the chat that the call is being recorded. Anyone on the call can ask it to leave.</p>
+          </div>
+        </li>
+        <li>
+          <time datetime="10:00">10:00</time>
+          <div>
+            <h3><span class="rec-dot" aria-hidden="true"></span>It listens, so you can too.</h3>
+            <p>A live transcript with each speaker labelled. You stop typing notes and look at the people you’re talking to.</p>
+          </div>
+        </li>
+        <li>
+          <time datetime="10:17">10:17</time>
+          <div>
+            <h3>It catches what people commit to.</h3>
+            <p>“I’ll send the revised scope by Friday” becomes a next step with an owner and a date. Decisions and open questions get picked out the same way.</p>
+          </div>
+        </li>
+        <li>
+          <time datetime="10:42">10:42</time>
+          <div>
+            <h3>You hang up. The email is waiting.</h3>
+            <p>Addressed to everyone who was on the call, written the way you write, with each point linked to the moment it was said.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="draft" class="draft" aria-labelledby="draft-title">
+    <div class="wrap">
+      <div class="spec">
+        <div class="cell first">
+          <p class="spec-meta">Draft from <span translate="no">Brightwater</span> intro call, Tue 27&nbsp;Oct, 25&nbsp;min</p>
+          <dl class="spec-fields">
+            <div><dt>To</dt><dd translate="no">Lena Hartmann</dd></div>
+            <div><dt>Subject</dt><dd class="subj"><span translate="no">Brightwater</span> intro, and the two things I owe you</dd></div>
+          </dl>
+        </div>
+        <div class="spec-head">
+          <h2 id="draft-title">It sounds like you on a good day.</h2>
+          <p><span translate="no">Fieldnote</span> learns from the emails you’ve already sent, so each draft keeps your greeting, your length and your sign-off.</p>
+        </div>
+
+        <div class="cell" style="--pt:28px">
+          <p>Hi <span translate="no">Lena</span>,</p>
+        </div>
+
+        <div class="cell">
+          <p>Thanks for walking me through the front desk this morning. What stuck with me: <mark>on Mondays, three of your clinics still book by phone, and calls go to voicemail by nine.</mark></p>
+        </div>
+        <p class="note">Repeats her problem in her words, so she knows you were listening.</p>
+
+        <div class="cell">
+          <p>What I said I’d do:</p>
+        </div>
+        <p class="note">Lists only what you promised. Her to-dos stay in her notes.</p>
+
+        <div class="cell">
+          <p class="bullet">Send pricing for three locations. It’s attached.</p>
+        </div>
+        <div class="note"></div>
+
+        <div class="cell" style="--pt:6px">
+          <p class="bullet">Book 30&nbsp;minutes with <span translate="no">Sam</span> from your front desk. <mark>Does Tuesday 3&nbsp;November at 10:00 work for him?</mark></p>
+        </div>
+        <p class="note" style="--pt:6px">Offers the slot you both mentioned, after checking your calendar.</p>
+
+        <div class="cell">
+          <p>You asked whether patients would need to download anything. <mark>They won’t; reminders go out as a text message.</mark></p>
+        </div>
+        <p class="note">Answers her question with what you said on the call, nothing new.</p>
+
+        <div class="cell last">
+          <p><mark>Speak soon,</mark><br><span translate="no">Tom</span></p>
+        </div>
+        <p class="note">Signs off the way you do. You never write “Best regards”, so neither does it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="privacy" aria-labelledby="privacy-title">
+    <div class="wrap">
+      <h2 id="privacy-title">Nothing is sent until you press Send.</h2>
+      <p class="privacy-lede"><span translate="no">Fieldnote</span> writes into your drafts folder and stops there. It has no way to email anyone on its own.</p>
+      <ul class="facts">
+        <li>
+          <h3>It says it’s recording.</h3>
+          <p>It joins under its own name and posts a notice in the chat. Anyone on the call can remove it.</p>
+        </li>
+        <li>
+          <h3>You choose when it’s deleted.</h3>
+          <p>Keep them for a year, a week, or delete the audio as soon as the email goes out.</p>
+        </li>
+        <li>
+          <h3>Only the people who were there.</h3>
+          <p>Transcripts are shared with the attendees you choose, never with your whole workspace by default.</p>
+        </li>
+        <li>
+          <h3>Your calls don’t train models.</h3>
+          <p>Recordings and transcripts are used to write your drafts and for nothing else.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="start" class="cta" aria-labelledby="cta-title">
+    <div class="wrap cta-grid">
+      <h2 id="cta-title">Try it on your next call.</h2>
+      <div class="cta-side">
+        <p>Connect your calendar and pick the meetings you want recorded. <span translate="no">Fieldnote</span> asks before it joins anything new.</p>
+        <div class="actions">
+          <a class="btn" href="#">Connect your calendar
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+          <a class="textlink" href="#">Sign in</a>
+        </div>
+        <p class="small">For Mac, Windows and the browser.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-row">
+    <a class="brand" href="#" aria-label="Fieldnote home">
+      <svg viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">
+        <rect x="1" y="7" width="2.6" height="8" rx="1.3"/>
+        <rect x="5.5" y="3" width="2.6" height="16" rx="1.3"/>
+        <rect x="10" y="6" width="2.6" height="10" rx="1.3"/>
+        <rect x="14.5" y="9.7" width="6.5" height="2.6" rx="1.3"/>
+      </svg>
+      <span translate="no">Fieldnote</span>
+    </a>
+    <span>© 2026 <span translate="no">Fieldnote</span></span>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#privacy">Privacy</a>
+      <a href="#">Security</a>
+      <a href="#">Terms</a>
+      <a href="#">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (() => {
+    const demo = document.querySelector('.demo');
+    if (!demo) return;
+    const body = demo.querySelector('.demo-body');
+    const svg = body.querySelector('.links');
+    const NS = 'http://www.w3.org/2000/svg';
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const ids = ['1', '2', '3', '4'];
+    const parts = {};
+
+    for (const n of ids) {
+      const g = document.createElementNS(NS, 'g');
+      g.setAttribute('data-link', n);
+      const path = document.createElementNS(NS, 'path');
+      path.setAttribute('data-link', n);
+      const a = document.createElementNS(NS, 'circle');
+      const b = document.createElementNS(NS, 'circle');
+      for (const c of [a, b]) { c.setAttribute('r', '2.5'); c.setAttribute('data-link', n); }
+      g.append(path, a, b);
+      svg.append(g);
+      parts[n] = { path, a, b };
+    }
+
+    function layout() {
+      if (getComputedStyle(svg).display === 'none') return;
+      const box = body.getBoundingClientRect();
+      svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
+      for (const n of ids) {
+        const s = body.querySelector(`[data-pin="src-${n}"]`).getBoundingClientRect();
+        const d = body.querySelector(`[data-pin="dst-${n}"]`).getBoundingClientRect();
+        const x1 = s.right - box.left + 6;
+        const y1 = s.top + s.height / 2 - box.top;
+        const x2 = d.left - box.left - 6;
+        const y2 = d.top + d.height / 2 - box.top;
+        const k = (x2 - x1) * 0.6;
+        const p = parts[n];
+        p.path.setAttribute('d', `M${x1} ${y1} C${x1 + k} ${y1} ${x2 - k} ${y2} ${x2} ${y2}`);
+        p.a.setAttribute('cx', x1); p.a.setAttribute('cy', y1);
+        p.b.setAttribute('cx', x2); p.b.setAttribute('cy', y2);
+      }
+    }
+
+    function activate(n) {
+      if (demo.dataset.active === n) return;
+      demo.dataset.active = n;
+      if (reduce.matches) return;
+      const path = parts[n].path;
+      const len = path.getTotalLength();
+      path.animate(
+        [
+          { strokeDasharray: `${len} ${len}`, strokeDashoffset: len },
+          { strokeDasharray: `${len} ${len}`, strokeDashoffset: 0 }
+        ],
+        { duration: 650, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
+      );
+    }
+
+    body.querySelectorAll('li[data-link], .pin[data-link]').forEach((el) => {
+      const n = el.getAttribute('data-link');
+      el.addEventListener('pointerenter', () => activate(n));
+      el.addEventListener('focus', () => activate(n));
+    });
+
+    layout();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+    if ('ResizeObserver' in window) new ResizeObserver(layout).observe(body);
+    window.addEventListener('load', layout);
+  })();
+</script>
+</body>
+</html>
