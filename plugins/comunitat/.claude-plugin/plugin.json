@@ -1,7 +1,7 @@
 {
   "name": "comunitat",
-  "version": "0.3.1",
-  "description": "Els subagents en marxa, cadascun dibuixat segons el que fa (/comunitat), i el mapa del projecte: branques, equip, PR i els agents de cada branca (/projecte).",
+  "version": "0.4.0",
+  "description": "A live panel of running subagents, each drawn as a Claude crab dressed for the tool it is using (/comunitat), and a project map with branches, team, PRs and the agents on each branch (/projecte).",
   "author": {
     "name": "Joan Solé"
   },

@@ -1,0 +1,30 @@
+name: Suggest a reference or skill
+description: A site, gallery or skill you reach for when the UI has to look good.
+title: "[suggest] "
+labels: [suggestion]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is it?
+      options:
+        - Inspiration site or gallery
+        - Motion / 3D reference
+        - Skill
+        - House rule
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Link
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: When do you reach for it?
+      description: One or two lines. What does it give you that the current list doesn't?
+    validations:
+      required: true

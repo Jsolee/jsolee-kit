@@ -72,22 +72,22 @@ export function statusFromEngine(s: string): { status: RowStatus; waiting?: bool
 // --- words
 
 export const LABEL: Record<Activity, string> = {
-  thinking: 'pensant',
-  reading: 'llegint',
-  searching: 'cercant',
-  writing: 'escrivint',
+  thinking: 'thinking',
+  reading: 'reading',
+  searching: 'searching',
+  writing: 'writing',
   terminal: 'terminal',
-  web: 'a la web',
-  delegating: 'delegant',
-  waiting: 'esperant',
-  tool: 'eina',
+  web: 'on the web',
+  delegating: 'delegating',
+  waiting: 'waiting',
+  tool: 'tool',
 }
 
 export const STATUS_LABEL: Record<RowStatus, string> = {
-  running: 'treballant',
-  done: 'acabat',
-  failed: 'error',
-  stopped: 'aturat',
+  running: 'working',
+  done: 'done',
+  failed: 'failed',
+  stopped: 'stopped',
 }
 
 export const GLYPH: Record<Activity, string> = {
@@ -121,7 +121,7 @@ export function fmtTime(ms: number): string {
 export const elapsed = (a: AgentRow, now: number): number => (a.endedAt ?? Math.max(now, a.startedAt)) - a.startedAt
 
 export const metaLine = (a: AgentRow, now: number): string =>
-  [a.type, modelName(a.model), fmtTime(elapsed(a, now)), `${a.toolCount} ${a.toolCount === 1 ? 'eina' : 'eines'}`]
+  [a.type, modelName(a.model), fmtTime(elapsed(a, now)), `${a.toolCount} ${a.toolCount === 1 ? 'tool' : 'tools'}`]
     .filter(Boolean)
     .join(' · ')
 
@@ -201,7 +201,7 @@ export const DONE_H = 30
 
 /** A finished agent: a small still crab, the task, how long it took and its mark. */
 export function doneSvg(W: number, a: AgentRow, now: number): string {
-  const right = `${fmtTime(elapsed(a, now))} · ${a.toolCount} ${a.toolCount === 1 ? 'eina' : 'eines'}`
+  const right = `${fmtTime(elapsed(a, now))} · ${a.toolCount} ${a.toolCount === 1 ? 'tool' : 'tools'}`
   return svg(
     W,
     DONE_H,

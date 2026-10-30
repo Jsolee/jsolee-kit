@@ -67,7 +67,7 @@ export const firstName = (name: string): string => {
   return first.charAt(0).toUpperCase() + first.slice(1)
 }
 
-/** `~/codi/app` → `/Users/me/codi/app`; la resta, tal com és. */
+/** `~/code/app` → `/Users/me/code/app`; anything else as it is. */
 export const expandHome = (path: string, home: string): string => (home ? path.replace(/^~(?=\/|$)/, home) : path)
 
 export const refOf = (name: string): string => /TG-\d+/i.exec(name)?.[0]?.toUpperCase() ?? ''
@@ -367,18 +367,18 @@ export function branchOfAgent(a: Pick<AgentRow, 'cwd' | 'path' | 'description'>,
 
 export function relTime(ms: number): string {
   const m = Math.floor(ms / 60_000)
-  if (m < 1) return 'ara'
-  if (m < 60) return `fa ${m} min`
+  if (m < 1) return 'just now'
+  if (m < 60) return `${m} min ago`
   const h = Math.round(m / 60)
-  if (h < 24) return `fa ${h} h`
+  if (h < 24) return `${h} h ago`
   const d = Math.round(h / 24)
-  return `fa ${d} ${d === 1 ? 'dia' : 'dies'}`
+  return `${d} ${d === 1 ? 'day' : 'days'} ago`
 }
 
 export const shortBranch = (name: string): string => name.replace(/^(feature|docs|fix|hotfix|release|chore)\//, '')
 export const kindOf = (name: string): string => /^(feature|docs|fix|hotfix|release|chore)\//.exec(name)?.[1] ?? ''
 
-export const PR_LABEL: Record<PrState, string> = { approved: 'aprovada', changes: 'canvis demanats', review: 'per revisar', draft: 'esborrany' }
+export const PR_LABEL: Record<PrState, string> = { approved: 'approved', changes: 'changes requested', review: 'in review', draft: 'draft' }
 
 export type BranchState = 'active' | 'pr' | 'merged' | 'stale'
 
@@ -451,7 +451,7 @@ export const LINES_H = (n: number): number => 28 + n * 30
 export function linesSvg(W: number, view: ProjectView, now: number): string {
   const rows = [...view.lines].reverse()
   const H = LINES_H(rows.length)
-  let body = `<text class="t" x="0" y="16" font-family="${FONT}" font-size="14" font-weight="700">${xml(view.repo || 'Repositori')}</text>`
+  let body = `<text class="t" x="0" y="16" font-family="${FONT}" font-size="14" font-weight="700">${xml(view.repo || 'Repository')}</text>`
   rows.forEach((l, i) => {
     const y = 40 + i * 30
     const c = LINE_COLOR[l.name] ?? '#888780'
@@ -460,7 +460,7 @@ export function linesSvg(W: number, view: ProjectView, now: number): string {
     const labelW = chipW(l.name, 11.5)
     body += `<rect x="30" y="${y - 11}" width="${labelW + 4}" height="22" rx="11" class="chip"/>${chip(32, y + 4, l.name, c, 11.5)}`
     const x = 32 + labelW + 12
-    const waits = l.ahead > 0 ? `${l.ahead} commits per baixar a ${rows[i + 1]?.name ?? ''}` : rows[i + 1] ? `al dia amb ${rows[i + 1]?.name}` : ''
+    const waits = l.ahead > 0 ? `${l.ahead} commits to promote to ${rows[i + 1]?.name ?? ''}` : rows[i + 1] ? `in sync with ${rows[i + 1]?.name}` : ''
     body += `<rect x="${x - 4}" y="${y - 11}" width="${Math.min(W - x - 10, 420)}" height="22" rx="6" class="chip"/>`
     body += `<text class="s" x="${x + 4}" y="${y + 4}" font-family="${FONT}" font-size="11">${xml(fit(`${relTime(now - l.lastAt)}${waits ? ' · ' + waits : ''}`, 11, Math.min(W - x - 22, 400)))}</text>`
   })
@@ -476,7 +476,7 @@ function teamLayout(W: number, members: Member[], now: number) {
   let x = 0
   let y = 6
   for (const m of members) {
-    const where = m.branches.length > 0 ? `${m.branches.length} ${m.branches.length === 1 ? 'branca' : 'branques'}` : `${m.landed} a la base`
+    const where = m.branches.length > 0 ? `${m.branches.length} ${m.branches.length === 1 ? 'branch' : 'branches'}` : `${m.landed} on base`
     const label = `${firstName(m.name)} · ${where} · ${relTime(now - m.lastAt)}`
     const w = Math.round(34 + [...label].length * 6)
     if (x > 0 && x + w > W) {
@@ -527,15 +527,15 @@ export function branchSvg(W: number, b: BranchInfo, agents: AgentRow[], now: num
   const badge = b.pr
     ? `#${b.pr.number} · ${PR_LABEL[b.pr.state]}${b.pr.checks === 'fail' ? ' · CI ✗' : ''}`
     : state === 'merged'
-      ? 'fusionada · es pot esborrar'
+      ? 'merged · can be deleted'
       : state === 'stale'
-        ? 'aturada'
+        ? 'stale'
         : ''
   const badgeColor = b.pr ? (b.pr.checks === 'fail' ? '#D0453F' : PR_COLOR[b.pr.state]) : '#8A8A86'
   const badgeW = badge ? chipW(badge) : 0
   if (badge) body += chip(right - badgeW, 28, badge, badgeColor)
   const title = shortBranch(b.name).replace(/^TG-\d+-?/i, '') || b.name
-  body += `<text class="t" x="${x}" y="28" font-family="${FONT}" font-size="13" font-weight="600">${xml(fit(title, 13, right - x - badgeW - 12))}${b.isCurrent ? '<tspan class="s" font-weight="400"> · aquí</tspan>' : ''}</text>`
+  body += `<text class="t" x="${x}" y="28" font-family="${FONT}" font-size="13" font-weight="600">${xml(fit(title, 13, right - x - badgeW - 12))}${b.isCurrent ? '<tspan class="s" font-weight="400"> · here</tspan>' : ''}</text>`
   // Second line: avatars, how far it is from the base, the last commit.
   let ax = 62
   for (const name of b.authors.slice(0, 4)) {
@@ -571,21 +571,21 @@ export function attentionOf(view: ProjectView, now: number): string[] {
   const prs = view.branches.filter(b => b.pr).map(b => ({ b, pr: b.pr as PrInfo }))
   const name = (b: BranchInfo) => mdText(`${b.ref ? b.ref + ' ' : ''}${shortBranch(b.name).replace(/^TG-\d+-?/i, '')}`)
   for (const { b, pr } of prs.filter(x => x.pr.state === 'approved' && x.pr.checks !== 'fail'))
-    out.push(`- **Per fusionar** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}: aprovada${pr.checks === 'pass' ? ' i amb la CI en verd' : ''}`)
+    out.push(`- **Ready to merge** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}: approved${pr.checks === 'pass' ? ' and CI is green' : ''}`)
   for (const { b, pr } of prs.filter(x => x.pr.checks === 'fail'))
-    out.push(`- **La CI falla** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}`)
+    out.push(`- **CI failing** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}`)
   for (const { b, pr } of prs.filter(x => x.pr.state === 'changes'))
-    out.push(`- **Canvis demanats** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}, de ${mdText(firstName(b.lastAuthor))}`)
+    out.push(`- **Changes requested** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}, by ${mdText(firstName(b.lastAuthor))}`)
   for (const { b, pr } of prs.filter(x => x.pr.state === 'review' && x.pr.checks !== 'fail'))
-    out.push(`- **Per revisar** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}${pr.createdAt ? `, oberta ${relTime(now - pr.createdAt)}` : ''}`)
+    out.push(`- **Needs review** · ${prLink(view, pr, `#${pr.number}`)} ${name(b)}${pr.createdAt ? `, opened ${relTime(now - pr.createdAt)}` : ''}`)
   const [stable, base] = [view.lines.at(-2), view.lines.at(-1)]
   if (stable && base && base.ahead > 0)
-    out.push(`- **Release pendent** · ${base.name} té ${base.ahead} commits que no són a ${stable.name}`)
+    out.push(`- **Release pending** · ${base.name} has ${base.ahead} commits not yet in ${stable.name}`)
   for (const b of view.branches.filter(x => stateOf(x, now) === 'active' && x.behind > 20))
-    out.push(`- **Desfasada** · ${branchLink(view, b.name, name(b))} va ${b.behind} commits per darrere de ${view.base}`)
+    out.push(`- **Behind** · ${branchLink(view, b.name, name(b))} is ${b.behind} commits behind ${view.base}`)
   const gone = view.branches.filter(x => stateOf(x, now) === 'merged')
   if (gone.length)
-    out.push(`- **Per esborrar** · ${gone.length === 1 ? 'una branca ja fusionada' : `${gone.length} branques ja fusionades`}: ${gone.map(b => branchLink(view, b.name, name(b))).join(', ')}`)
+    out.push(`- **To delete** · ${gone.length === 1 ? 'one merged branch' : `${gone.length} merged branches`}: ${gone.map(b => branchLink(view, b.name, name(b))).join(', ')}`)
   return out
 }
 
@@ -685,10 +685,10 @@ export function historySvg(W: number, view: ProjectView, onBranch: Map<string, A
   const H = baseY + 58
   const trunk = LINE_COLOR[view.base] ?? '#4F8FD6'
   let body = `<text class="t" x="0" y="14" font-family="${FONT}" font-size="13" font-weight="700">${xml(view.base)}</text>`
-  body += `<text class="s" x="${8 + [...view.base].length * 7.6}" y="14" font-family="${FONT}" font-size="11">${xml(`${view.history.merges.length} branques fusionades des del ${dayMonth(view.history.start)} · ${arcs.filter(a => a.open).length} obertes`)}</text>`
+  body += `<text class="s" x="${8 + [...view.base].length * 7.6}" y="14" font-family="${FONT}" font-size="11">${xml(`${view.history.merges.length} branches merged since ${dayMonth(view.history.start)} · ${arcs.filter(a => a.open).length} open`)}</text>`
   // Today.
   body += `<line x1="${x(now)}" y1="20" x2="${x(now)}" y2="${baseY + 6}" class="trunk" stroke-width="1" stroke-dasharray="2 3"/>`
-  body += `<text class="m" x="${x(now) + 4}" y="28" font-family="${FONT}" font-size="10">avui</text>`
+  body += `<text class="m" x="${x(now) + 4}" y="28" font-family="${FONT}" font-size="10">today</text>`
   // The arcs, the oldest lanes lowest; each lands on the line where it merged.
   for (const a of arcs) {
     const y = baseY - 10 - a.lane * LANE
