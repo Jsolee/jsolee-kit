@@ -1,0 +1,630 @@
+<!doctype html>
+<!--
+  Ledger, main dashboard.
+
+  Scene: one person runs a pottery shop. The laptop sits on the packing bench in
+  daylight. She glances at it from a couple of metres, hands full, to see whether
+  the month is in the black and what is waiting on her.
+
+  Three directions, each from something true:
+  1. Account book (thrown away, it came first): green-ruled paper, serif total, red ink.
+     Three ruled columns on a pale page. It is the default look with a costume on.
+  2. Packing slip: kraft field, stencil numerals, a grid of shipping labels. True to the
+     parcels, but the page is about money and the labels would be decoration.
+  3. In the black, in the red (kept): one line splits the screen. Money in stands on it
+     over black, refunds hang from it over red, and a till roll prints across both.
+     True to the bookkeeping idiom and to the two-colour ribbon on adding machines, which
+     printed credits in black and debits in red. A dashboard that files refunds in a KPI
+     card next to everything else cannot wear this.
+
+  Register: product UI. Colour: black, paper, and one committed red that only ever means
+  money going out. Type: Fira Sans and Fira Sans Extra Condensed, Spiekermann's descendant
+  of Meta, the face first drawn for the West German post office. Two weights.
+
+  Taken from the Awwwards gallery screenshot:
+  - The Liubomyr Ulytskyi tile: one oversized numeral used as structure, red as a slashed
+    shape and never as a tint.
+  - The pixel-icons tile: a single flat field with type at the scale of the field.
+  - The gallery's own chrome: one row of filters above everything it scopes, and small
+    outlined tags beside names (the "To pack" tags on the roll).
+
+  Double rule: accountants underline a final total twice. It marks the wordmark and every
+  bottom line on this screen, and nothing else.
+
+  Working thing: settle a refund and the roll prints a line, the bars and totals move.
+  Signature motion: changing the period collapses the older days, so the timeline zooms.
+  Nothing animates on load, so the first paint is the finished screen.
+
+  Palette check (dataviz validator on the black surface): red against paper passes CVD
+  (34.8) and normal vision (41.2) separation, and both clear 3:1. Paper fails the hue bands
+  by design: it is ink on ink, not a categorical hue. Text on red is ink at 5.1:1.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#120d0c">
+<title>Overview · Ledger</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@400;600&family=Fira+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: oklch(.165 .008 30);
+  --ink-soft: oklch(.78 .006 30);
+  --ink-line: oklch(.31 .008 30);
+  --paper: oklch(.985 .003 30);
+  --paper-soft: oklch(.45 .008 30);
+  --red: oklch(.64 .23 28);
+  --expo: cubic-bezier(.22, 1, .36, 1);
+  --smooth: cubic-bezier(.25, .4, .25, 1);
+  --margin: 32px;
+  --roll: 340px;
+  --roll-gap: 40px;
+  --axis: 44px;
+  --text: "Fira Sans", "Helvetica Neue", Arial, sans-serif;
+  --display: "Fira Sans Extra Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; }
+html { color-scheme: dark; background: var(--ink); -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+body { font: 400 15px/20px var(--text); color: var(--paper); background: var(--ink); }
+ul, ol { list-style: none; padding: 0; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; touch-action: manipulation; }
+a { color: inherit; text-decoration: none; }
+em { font-style: normal; }
+h1, h2 { font: inherit; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; border-radius: 2px; }
+.below :focus-visible { outline-color: var(--ink); }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.skip { position: absolute; left: var(--margin); top: 8px; z-index: 9; padding: 8px 12px; background: var(--paper); color: var(--ink); border-radius: 4px; transform: translateY(-200%); }
+.skip:focus { transform: none; }
+
+.sheet { position: relative; }
+.main { min-height: max(100vh, 860px); display: flex; flex-direction: column; }
+[id] { scroll-margin-top: 24px; }
+.above, .below { padding-left: var(--margin); padding-right: calc(var(--roll) + var(--roll-gap) + 16px); }
+.above { flex: 1 1 auto; display: flex; flex-direction: column; padding-top: 68px; background: var(--ink); }
+.below { flex: none; height: 310px; background: var(--red); color: var(--ink); }
+
+/* Top row */
+.top { position: absolute; z-index: 2; top: 0; left: var(--margin); right: calc(var(--roll) + var(--roll-gap) + 16px); display: flex; align-items: center; height: 68px; }
+.mark { font: 600 30px/30px var(--display); letter-spacing: -.02em; padding-bottom: 1px; border-bottom: 6px double currentColor; }
+.nav { display: flex; gap: 24px; margin-left: 44px; }
+.nav a { padding: 12px 0; color: var(--ink-soft); transition: transform .2s var(--smooth); }
+.nav a:hover { transform: translateY(-2px); }
+.nav a[aria-current] { color: var(--paper); font-weight: 600; }
+.range { display: flex; align-items: center; gap: 2px; margin-left: auto; color: var(--ink-soft); }
+.range button { position: relative; height: 34px; padding: 0 10px; border-radius: 4px; transition: transform .2s var(--smooth); }
+.range button::after { content: ""; position: absolute; inset: -5px 0; }
+.range button:hover { transform: translateY(-2px); }
+.range button[aria-pressed="true"] { background: var(--paper); color: var(--ink); font-weight: 600; }
+
+/* Figures */
+.figures { flex: none; display: grid; grid-template-columns: auto 1fr; column-gap: 64px; align-items: baseline; padding-top: 6px; }
+.fig { display: contents; }
+.fig h2 { grid-row: 1; font-weight: 600; }
+.fig-rev > * { grid-column: 1; }
+.fig-orders > * { grid-column: 2; }
+.note { font-weight: 400; color: var(--ink-soft); margin-left: 8px; }
+.hero { grid-row: 2; font: 600 184px/150px var(--display); letter-spacing: -.025em; margin-left: -4px; }
+.orders-row { grid-row: 2; display: flex; align-items: baseline; gap: 20px; min-width: 0; }
+.second { font: 600 96px/96px var(--display); letter-spacing: -.02em; margin-left: -2px; }
+.spark { flex: 1; min-width: 0; height: 60px; overflow: visible; display: block; }
+
+/* The plot: bars stand on the line and hang from it */
+.plot-up, .plot-down { position: relative; margin-right: var(--axis); touch-action: pan-y; }
+.plot-up { flex: 1 1 auto; min-height: 180px; outline-offset: 6px; }
+.plot-down { height: 72px; }
+.cols { position: absolute; inset: 0; display: flex; }
+.c { flex: 1 1 0; min-width: 0; display: flex; justify-content: flex-start; }
+.plot-up .c { align-items: flex-end; }
+.plot-down .c { align-items: flex-start; }
+.c b { display: block; width: calc(100% - 2px); max-width: 24px; transition: opacity .15s linear; }
+.moving .c { transition: flex-grow .45s var(--expo); }
+.moving .c b { transition: height .45s var(--expo), width .45s var(--expo); }
+.plot-up .c b { background: var(--paper); border-radius: 4px 4px 0 0; }
+.plot-down .c b { background: var(--ink); border-radius: 0 0 4px 4px; }
+.c.off { flex-grow: 0; }
+.c.off b { width: 0; }
+.c.today .up-bar { opacity: .5; }
+.hovering .c b { opacity: .38; }
+.hovering .c.hot b { opacity: 1; }
+
+.grid { position: absolute; inset: 0 calc(var(--axis) * -1) 0 0; pointer-events: none; }
+.grid i { position: absolute; left: 0; right: var(--axis); height: 1px; background: var(--ink-line); }
+.grid span { position: absolute; right: 0; white-space: nowrap; text-align: right; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+
+.tag-best, .tag-worst { position: absolute; white-space: nowrap; font-size: 14px; pointer-events: none; padding: 0 4px; }
+.tag-best { background: var(--ink); color: var(--paper); }
+.tag-worst { background: var(--red); color: var(--ink); }
+.tag-best strong, .tag-worst strong { font-weight: 600; }
+
+.side { position: absolute; right: calc(var(--axis) * -1); font-size: 13px; font-weight: 600; line-height: 16px; width: calc(var(--axis) - 8px); text-align: right; }
+.side-in { bottom: 6px; }
+.side-out { top: 6px; }
+
+.ticks { position: relative; height: 22px; margin-right: var(--axis); font-size: 13px; font-variant-numeric: tabular-nums; }
+.ticks span { position: absolute; top: 0; white-space: nowrap; }
+.ticks .end { transform: translateX(-100%); font-weight: 600; }
+
+.readout { position: absolute; z-index: 3; width: 148px; padding: 10px 12px; background: var(--paper); color: var(--ink); border-radius: 4px; pointer-events: none; opacity: 0; transition: opacity .12s linear; font-variant-numeric: tabular-nums; }
+.readout.on { opacity: 1; }
+.readout p { display: flex; justify-content: space-between; gap: 8px; font-size: 13px; line-height: 19px; color: var(--paper-soft); }
+.readout p strong { font-weight: 600; color: var(--ink); }
+.readout .day { font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+
+/* Under the line */
+.band { display: grid; grid-template-columns: 392px 1fr; gap: 40px; padding-top: 8px; }
+.band h2 { font-weight: 600; }
+.band .note { color: inherit; }
+.ref-figure { font: 600 96px/80px var(--display); letter-spacing: -.02em; margin: 2px 0 16px -2px; }
+.ref-note, .ask span { font-size: 14px; text-wrap: pretty; }
+.bottom-line { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; padding: 3px 0 2px; border-top: 1px solid var(--ink); border-bottom: 6px double var(--ink); font-size: 14px; }
+.bottom-line strong { font: 600 22px/24px var(--display); letter-spacing: -.01em; }
+
+.waiting h2 { margin-bottom: 8px; }
+.ask { display: grid; grid-template-columns: 138px 1fr auto; align-items: center; column-gap: 16px; min-height: 48px; font-size: 14px; line-height: 19px; }
+.ask strong { display: block; font-weight: 600; }
+.acts { display: flex; align-items: center; gap: 16px; }
+.btn { position: relative; height: 36px; padding: 0 14px; background: var(--ink); color: var(--paper); border-radius: 4px; font-weight: 600; white-space: nowrap; font-variant-numeric: tabular-nums; transition: transform .2s var(--smooth); }
+.btn::after { content: ""; position: absolute; inset: -4px 0; }
+.link::after { content: ""; position: absolute; inset: -4px -6px; }
+.btn:hover, .link:hover { transform: translateY(-2px); }
+.btn:active, .link:active { transform: scale(.97); }
+.link { position: relative; height: 36px; font-weight: 400; text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; transition: transform .2s var(--smooth); }
+.ask.done { grid-template-columns: 1fr auto; }
+.none { min-height: 48px; display: flex; align-items: center; }
+
+/* The till roll */
+.roll { position: absolute; top: 0; bottom: 0; right: var(--roll-gap); width: var(--roll); display: flex; flex-direction: column; background: var(--paper); color: var(--ink); scroll-margin-top: 24px; }
+.roll-head { flex: none; padding: 21px 20px 12px; }
+.roll-head h2 { font: 600 22px/24px var(--display); letter-spacing: -.01em; }
+.roll-head p { font-size: 14px; color: var(--paper-soft); }
+.roll-head .pack { color: var(--ink); margin-top: 10px; }
+.entries { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; padding: 0 20px; font-variant-numeric: tabular-nums; }
+.entries::-webkit-scrollbar { display: none; }
+.entry { display: grid; grid-template-columns: 42px 1fr auto; column-gap: 4px; padding: 6px 0; font-size: 14px; line-height: 19px; }
+.entry time { color: var(--paper-soft); }
+.entry .meta { grid-column: 2 / -1; display: flex; align-items: center; gap: 8px; font-size: 13px; line-height: 18px; color: var(--paper-soft); }
+.tag { padding: 0 5px; line-height: 16px; font-size: 12px; color: var(--ink); border: 1px solid color-mix(in oklch, var(--ink) 28%, transparent); border-radius: 3px; }
+.entry.out { margin: 2px -20px; padding: 6px 20px; background: var(--red); }
+.entry.out time, .entry.out .meta { color: var(--ink); }
+.entry.new { animation: feed .25s var(--expo); }
+@keyframes feed { from { opacity: 0; transform: translateY(10px); } }
+.totals { flex: none; padding: 10px 20px 18px; font-size: 14px; line-height: 21px; font-variant-numeric: tabular-nums; }
+.totals div { display: flex; justify-content: space-between; }
+.totals dd { margin: 0; }
+.totals .sum { margin-top: 6px; padding: 5px 0 3px; border-top: 1px solid var(--ink); border-bottom: 6px double var(--ink); align-items: baseline; }
+.totals .sum dt { font-weight: 600; }
+.totals .sum dd { font: 600 30px/32px var(--display); letter-spacing: -.01em; }
+
+@media (max-width: 1360px) {
+  :root { --roll: 300px; --roll-gap: 24px; }
+  .band { grid-template-columns: 330px 1fr; gap: 24px; }
+  .ask { grid-template-columns: 118px 1fr auto; column-gap: 12px; }
+}
+@media (max-width: 1240px) {
+  .main { min-height: 0; }
+  .above, .below { padding-right: var(--margin); }
+  .top { right: var(--margin); }
+  .above { min-height: 640px; }
+  .below { height: auto; padding-bottom: 24px; }
+  .roll { position: static; width: auto; margin: 0; }
+  .entries { overflow: visible; flex: none; }
+}
+@media (max-width: 760px) {
+  :root { --margin: 16px; --axis: 36px; }
+  .top { flex-wrap: wrap; height: auto; padding: 14px 0; gap: 10px 0; }
+  .above { padding-top: 128px; }
+  .nav { margin-left: 20px; gap: 14px; }
+  .range { margin-left: -10px; width: 100%; }
+  .figures { display: block; }
+  .fig { display: block; }
+  .note { display: block; margin-left: 0; }
+  .hero { font-size: 112px; line-height: 96px; margin-bottom: 20px; }
+  .second { font-size: 72px; line-height: 72px; }
+  .above { min-height: 0; }
+  .plot-up { flex: none; height: 240px; }
+  .band { grid-template-columns: 1fr; }
+  .ask { grid-template-columns: 1fr; row-gap: 4px; padding: 8px 0; }
+  .ask.done { grid-template-columns: 1fr auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+@media (forced-colors: active) {
+  .c b { forced-color-adjust: none; background: CanvasText !important; }
+  .entry.out { border: 1px solid CanvasText; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the figures</a>
+<div class="sheet">
+  <header class="top">
+      <span class="mark" translate="no">Ledger</span>
+      <nav class="nav" aria-label="Main">
+        <a href="#main" aria-current="page">Overview</a>
+        <a href="#today">Orders</a>
+        <a href="#refunds">Refunds</a>
+        <a href="#payouts">Payouts</a>
+      </nav>
+      <div class="range" role="group" aria-label="Period for every figure on this screen">
+        <button type="button" data-range="7" aria-pressed="false">7&nbsp;days</button>
+        <button type="button" data-range="30" aria-pressed="true">30&nbsp;days</button>
+        <button type="button" data-range="90" aria-pressed="false">90&nbsp;days</button>
+      </div>
+  </header>
+
+  <main class="main" id="main">
+  <div class="above">
+    <h1 class="sr-only"><span translate="no">Saltglaze Pottery</span> overview</h1>
+    <section class="figures" aria-label="Period totals">
+      <div class="fig fig-rev">
+        <h2><span id="rev-label"></span><span class="note" id="rev-note"></span></h2>
+        <p class="hero" id="rev"></p>
+      </div>
+      <div class="fig fig-orders">
+        <h2>Orders<span class="note" id="ord-note"></span></h2>
+        <div class="orders-row">
+          <p class="second" id="ord"></p>
+          <svg class="spark" id="spark" aria-hidden="true"></svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="plot-up" id="up" tabindex="0" role="group" aria-label="Revenue and refunds per day. Left and right arrow keys read one day at a time.">
+      <div class="grid" id="grid-up" aria-hidden="true"></div>
+      <div class="cols" id="cols-up" aria-hidden="true"></div>
+      <p class="tag-best" id="best" aria-hidden="true"></p>
+      <p class="side side-in" aria-hidden="true">In</p>
+      <div class="readout" id="readout" role="status"></div>
+    </div>
+  </div>
+
+  <section class="below" id="refunds" aria-label="Refunds">
+    <div class="plot-down" id="down">
+      <div class="cols" id="cols-down" aria-hidden="true"></div>
+      <p class="tag-worst" id="worst" aria-hidden="true"></p>
+      <p class="side side-out" aria-hidden="true">Out</p>
+    </div>
+    <div class="ticks" id="ticks" aria-hidden="true"></div>
+    <div class="band">
+      <div>
+        <h2>Refunds<span class="note" id="ref-note"></span></h2>
+        <p class="ref-figure" id="ref"></p>
+        <p class="ref-note" id="ref-why"></p>
+        <p class="bottom-line"><span>Revenue after refunds</span><strong id="net"></strong></p>
+      </div>
+      <div class="waiting">
+        <h2 id="wait-title"></h2>
+        <ul id="asks"></ul>
+      </div>
+    </div>
+  </section>
+
+  <aside class="roll" id="today" aria-label="Today's entries">
+    <header class="roll-head">
+      <h2 translate="no">Saltglaze Pottery</h2>
+      <p>Friday 30 October, 11:54</p>
+      <p class="pack" id="pack"></p>
+    </header>
+    <ol class="entries" id="entries" tabindex="0" aria-label="Entries so far today, oldest first"></ol>
+    <dl class="totals">
+      <div><dt>Orders</dt><dd id="t-ord"></dd></div>
+      <div><dt>Revenue</dt><dd id="t-rev"></dd></div>
+      <div><dt>Refunds</dt><dd id="t-ref"></dd></div>
+      <div class="sum"><dt>After refunds</dt><dd id="t-net"></dd></div>
+    </dl>
+  </aside>
+
+  <table class="sr-only" id="table"><caption>Daily revenue, orders and refunds</caption><thead><tr><th scope="col">Day</th><th scope="col">Revenue</th><th scope="col">Orders</th><th scope="col">Refunds</th></tr></thead><tbody></tbody></table>
+  <p class="sr-only" id="said" role="status"></p>
+  </main>
+</div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const NB = ' ', MINUS = '−';
+  const eur = (n, dp = 0) => '€' + n.toLocaleString('en-GB', { minimumFractionDigits: dp, maximumFractionDigits: dp });
+  const out = (n, dp = 0) => n ? MINUS + eur(n, dp) : eur(0, dp);
+  const signed = n => (n >= 0 ? '+' : MINUS) + Math.abs(n) + '%';
+  const dayName = d => d.toLocaleDateString('en-GB', { weekday: 'short' });
+  const dayLong = d => `${dayName(d)}${NB}${d.getDate()}${NB}${d.toLocaleDateString('en-GB', { month: 'short' })}`;
+  const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+
+  // Today, oldest first. Refunds carry `out`.
+  const tape = [
+    { t: '00:42', what: 'Speckled mug ×2', id: '#4519', amount: 56, packed: true },
+    { t: '07:15', what: 'Salt bowl, large', id: '#4520', amount: 46, packed: true },
+    { t: '08:03', what: 'Ash-glaze teapot', id: '#4521', amount: 96, packed: true },
+    { t: '08:26', what: 'Refund, arrived chipped', id: '#4488', amount: 28, out: true, chipped: true },
+    { t: '08:51', what: 'Espresso cups, set of 4', id: '#4522', amount: 72, packed: true },
+    { t: '09:17', what: 'Speckled mug', id: '#4523', amount: 28 },
+    { t: '09:40', what: 'Bud vase, small', id: '#4524', amount: 26 },
+    { t: '10:08', what: 'Salt bowl, small', id: '#4525', amount: 24 },
+    { t: '10:33', what: 'Stoneware plate ×2', id: '#4526', amount: 64 },
+    { t: '10:59', what: 'Refund, wrong glaze sent', id: '#4473', amount: 46, out: true },
+    { t: '11:21', what: 'Bud vase, small', id: '#4527', amount: 26 },
+    { t: '11:48', what: 'Speckled mug ×2', id: '#4528', amount: 56 },
+  ];
+
+  const asks = [
+    { name: 'Ines Ferrer', id: '#4502', item: 'Speckled mug', reason: 'Arrived chipped', amount: 28, chipped: true },
+    { name: 'Tom Akande', id: '#4496', item: 'Salt bowl, large', reason: 'Wrong glaze sent', amount: 46 },
+    { name: 'Lucia Romero', id: '#4481', item: 'Ash-glaze teapot', reason: 'Lid does not fit', amount: 96 },
+  ];
+
+  // Sample data: 180 days ending today, seeded so every load tells the same story.
+  const data = (() => {
+    let s = 20261030;
+    const rnd = () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+    const week = [1.34, .84, .8, .9, .98, 1.02, 1.2];
+    const prices = [28, 28, 28, 46, 24, 26, 32, 64, 72, 96];
+    const days = [];
+    for (let i = 0; i < 180; i++) {
+      const date = new Date(2026, 9, 30 - (179 - i));
+      const rev = Math.round((462 + 1.05 * i) * week[date.getDay()] * (.84 + rnd() * .32));
+      const orders = Math.max(3, Math.round(rev / (42 + rnd() * 9)));
+      let ref = 0, refN = 0, chipped = 0;
+      for (let o = 0; o < orders; o++) if (rnd() < .056) { ref += prices[Math.floor(rnd() * prices.length)]; refN++; if (rnd() < .46) chipped++; }
+      days.push({ date, rev, orders, ref, refN, chipped });
+    }
+    const on = (m, d) => days.find(x => x.date.getMonth() === m && x.date.getDate() === d);
+    Object.assign(on(9, 18), { rev: 1184, orders: 26 });
+    Object.assign(on(9, 13), { ref: 262, refN: 7, chipped: 6 });
+    const last = days[days.length - 1];
+    last.rev = tape.filter(e => !e.out).reduce((a, e) => a + e.amount, 0);
+    last.orders = tape.filter(e => !e.out).length;
+    last.ref = tape.filter(e => e.out).reduce((a, e) => a + e.amount, 0);
+    last.refN = tape.filter(e => e.out).length;
+    last.chipped = tape.filter(e => e.out && e.chipped).length;
+    return days;
+  })();
+  const today = data[data.length - 1];
+
+  // Ninety columns always exist. Changing the period collapses or opens the older ones,
+  // so the timeline zooms instead of redrawing.
+  const SHOWN = 90;
+  const shown = data.slice(-SHOWN);
+  const colsUp = shown.map(() => { const c = el('i', 'c'); c.append(el('b', 'up-bar')); $('cols-up').append(c); return c; });
+  const colsDown = shown.map(() => { const c = el('i', 'c'); c.append(el('b')); $('cols-down').append(c); return c; });
+  colsUp[SHOWN - 1].classList.add('today');
+
+  let range = 30, hot = -1;
+  const total = list => list.reduce((a, d) => ({ rev: a.rev + d.rev, orders: a.orders + d.orders, ref: a.ref + d.ref, refN: a.refN + d.refN, chipped: a.chipped + d.chipped }), { rev: 0, orders: 0, ref: 0, refN: 0, chipped: 0 });
+  const pct = (a, b) => Math.round((a / b - 1) * 100);
+  let moveTimer;
+  const moving = () => {
+    document.documentElement.classList.add('moving');
+    clearTimeout(moveTimer);
+    moveTimer = setTimeout(() => document.documentElement.classList.remove('moving'), 500);
+  };
+
+  function slot() {
+    const w = $('up').clientWidth, pitch = w / range;
+    return { w, pitch, bar: Math.min(24, pitch - 2) };
+  }
+
+  function render() {
+    const win = data.slice(-range), prev = data.slice(-2 * range, -range);
+    const t = total(win), p = total(prev);
+    const days = `${range}${NB}days`;
+
+    $('rev-label').textContent = `Revenue, last ${days}`;
+    $('rev').textContent = eur(t.rev);
+    $('rev-note').textContent = `${signed(pct(t.rev, p.rev))} on the previous ${days}`;
+    $('ord').textContent = t.orders.toLocaleString('en-GB');
+    $('ord-note').textContent = `${signed(pct(t.orders, p.orders))}, ${eur(t.rev / t.orders, 2)} an order`;
+    $('ref').textContent = out(t.ref).replace(MINUS, MINUS + '\u200a');
+    const rate = t.ref / t.rev * 100, before = p.ref / p.rev * 100;
+    $('ref-note').textContent = `${t.refN}, ${rate.toFixed(1)}% of revenue, ${rate < before ? 'down' : 'up'} from ${before.toFixed(1)}%`;
+    $('ref-why').textContent = `Arrived chipped is the top reason: ${t.chipped} of ${t.refN}.`;
+    $('net').textContent = eur(t.rev - t.ref);
+
+    // One axis: euros above and below the line share a single scale.
+    const hUp = $('up').clientHeight - 26, hDown = $('down').clientHeight - 2;
+    const px = Math.min(hUp / Math.max(...win.map(d => d.rev)), hDown / Math.max(...win.map(d => d.ref)));
+    shown.forEach((d, i) => {
+      const off = i < SHOWN - range;
+      colsUp[i].classList.toggle('off', off);
+      colsDown[i].classList.toggle('off', off);
+      colsUp[i].firstChild.style.height = (off ? 0 : d.rev * px) + 'px';
+      colsDown[i].firstChild.style.height = (off || !d.ref ? 0 : Math.max(2, d.ref * px)) + 'px';
+    });
+
+    const { w, pitch, bar } = slot();
+    const x = i => (i - (SHOWN - range)) * pitch;
+
+    $('grid-up').replaceChildren(...[500, 1000].filter(v => v * px < hUp + 26).flatMap(v => {
+      const line = el('i'), label = el('span', '', v >= 1000 ? `\u20ac${v / 1000}K` : `\u20ac${v}`);
+      line.style.bottom = label.style.bottom = v * px + 'px';
+      label.style.transform = 'translateY(50%)';
+      return [line, label];
+    }));
+
+    // Label the extremes and nothing else.
+    const place = (tag, index, tip, parts) => {
+      tag.replaceChildren(parts[0], Object.assign(el('strong'), { textContent: parts[1] }));
+      tag.style.visibility = 'hidden';
+      tag.style.left = '0';
+      const width = tag.offsetWidth, right = index * pitch + bar + 2, left = index * pitch - width - 2;
+      if (right + width > w && left < 0) return;
+      tag.style.left = (right + width <= w ? right : left) + 'px';
+      tag.style.visibility = 'visible';
+      tag.style[tag.id === 'best' ? 'bottom' : 'top'] = Math.max(0, tip - 20) + 'px';
+    };
+    const bestI = win.reduce((b, d, i) => d.rev > win[b].rev ? i : b, 0);
+    place($('best'), bestI, win[bestI].rev * px, [`Best day, ${dayLong(win[bestI].date)}: `, eur(win[bestI].rev)]);
+    const worstI = win.reduce((b, d, i) => d.ref > win[b].ref ? i : b, 0);
+    place($('worst'), worstI, Math.max(2, win[worstI].ref * px), [`Most refunded, ${dayLong(win[worstI].date)}: `, out(win[worstI].ref)]);
+
+    // Date axis
+    const ticks = $('ticks');
+    ticks.replaceChildren();
+    win.forEach((d, i) => {
+      if (i === range - 1) return;
+      const label = range === 7 ? `${dayName(d.date)}${NB}${d.date.getDate()}`
+        : range === 30 ? (d.date.getDay() === 1 ? `Mon${NB}${d.date.getDate()}` : '')
+        : (d.date.getDate() === 1 ? d.date.toLocaleDateString('en-GB', { month: 'long' }) : '');
+      if (!label) return;
+      const s = el('span', '', ticks.childElementCount || range === 90 ? label : `${label}${NB}${d.date.toLocaleDateString('en-GB', { month: 'short' })}`);
+      s.style.left = i * pitch + 'px';
+      ticks.append(s);
+    });
+    const end = el('span', 'end', 'Today');
+    end.style.left = (range - 1) * pitch + bar + 'px';
+    ticks.append(end);
+    const endLeft = (range - 1) * pitch + bar - end.offsetWidth;
+    [...ticks.children].forEach(t => { if (t !== end && t.offsetLeft + t.offsetWidth + 8 > endLeft) t.remove(); });
+
+    // Orders per day get their own small chart, never a second axis on the big one.
+    const svg = $('spark'), W = svg.clientWidth || 200, H = svg.clientHeight || 60;
+    const top = Math.max(...win.map(d => d.orders));
+    const pts = win.map((d, i) => [(i / (range - 1)) * (W - 6) + 1, H - 6 - (d.orders / top) * (H - 12)]);
+    const ns = 'http://www.w3.org/2000/svg';
+    const line = document.createElementNS(ns, 'polyline');
+    line.setAttribute('points', pts.map(p => p.join(',')).join(' '));
+    line.setAttribute('fill', 'none'); line.setAttribute('stroke', 'currentColor'); line.setAttribute('stroke-width', '2');
+    line.setAttribute('stroke-linejoin', 'round'); line.setAttribute('stroke-linecap', 'round');
+    const dot = document.createElementNS(ns, 'circle');
+    const lastPt = pts[pts.length - 1];
+    dot.setAttribute('cx', lastPt[0]); dot.setAttribute('cy', lastPt[1]); dot.setAttribute('r', '4'); dot.setAttribute('fill', 'currentColor');
+    svg.replaceChildren(line, dot);
+
+    // The twin table for screen readers
+    const rows = win.map(d => { const tr = el('tr'); [dayLong(d.date), eur(d.rev), String(d.orders), out(d.ref)].forEach(v => tr.append(el('td', '', v))); return tr; });
+    $('table').tBodies[0].replaceChildren(...rows);
+
+    if (hot >= 0) showDay(hot);
+  }
+
+  function renderRoll(feed) {
+    const list = $('entries');
+    list.replaceChildren(...tape.map((e, i) => {
+      const li = el('li', 'entry' + (e.out ? ' out' : '') + (feed && i === tape.length - 1 ? ' new' : ''));
+      const meta = el('span', 'meta', e.id);
+      if (!e.out) meta.append(e.packed ? el('span', '', 'Packed') : el('em', 'tag', 'To pack'));
+      li.append(el('time', '', e.t), el('span', '', e.what), el('span', '', (e.out ? out : eur)(e.amount, 2)), meta);
+      return li;
+    }));
+    if (feed) list.scrollTo({ top: list.scrollHeight, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+
+    const sold = tape.filter(e => !e.out), back = tape.filter(e => e.out);
+    const takings = sold.reduce((a, e) => a + e.amount, 0), refunded = back.reduce((a, e) => a + e.amount, 0);
+    const toPack = sold.filter(e => !e.packed).length;
+    $('pack').textContent = `${toPack} of ${sold.length}${NB}orders to pack. Courier at${NB}15:00.`;
+    $('t-ord').textContent = sold.length;
+    $('t-rev').textContent = eur(takings, 2);
+    $('t-ref').textContent = out(refunded, 2);
+    $('t-net').textContent = eur(takings - refunded, 2);
+  }
+
+  function renderAsks(focusIndex) {
+    const open = asks.filter(a => !a.state).length;
+    $('wait-title').textContent = open ? `Waiting on you: ${open}${NB}refund${open > 1 ? 's' : ''}` : 'Nothing else waiting on you';
+    $('asks').replaceChildren(...asks.map((a, i) => {
+      const li = el('li', 'ask' + (a.state ? ' done' : ''));
+      if (a.state) {
+        const msg = el('span');
+        const name = Object.assign(el('span', '', a.name), { translate: false });
+        if (a.state === 'refunded') msg.append(`${eur(a.amount)} sent back to `, name, '.');
+        else msg.append('Declined. ', name, ' gets an email saying why.');
+        const undo = el('button', 'link', 'Undo');
+        undo.type = 'button';
+        undo.addEventListener('click', () => settle(i, null));
+        li.append(msg, undo);
+      } else {
+        const who = el('span'); who.append(Object.assign(el('strong', '', a.name), { translate: false }), a.id);
+        const why = el('span'); why.append(el('strong', '', a.item), a.reason);
+        const yes = el('button', 'btn', `Refund${NB}${eur(a.amount)}`);
+        const no = el('button', 'link', 'Decline');
+        yes.type = no.type = 'button';
+        yes.addEventListener('click', () => settle(i, 'refunded'));
+        no.addEventListener('click', () => settle(i, 'declined'));
+        const acts = el('span', 'acts'); acts.append(yes, no);
+        li.append(who, why, acts);
+      }
+      return li;
+    }));
+    if (focusIndex != null) $('asks').children[focusIndex].querySelector('button').focus();
+  }
+
+  function settle(i, state) {
+    const a = asks[i], was = a.state;
+    a.state = state;
+    if (state === 'refunded') {
+      today.ref += a.amount; today.refN++; if (a.chipped) today.chipped++;
+      tape.push({ t: '11:54', what: `Refund, ${a.reason.toLowerCase()}`, id: a.id, amount: a.amount, out: true, chipped: a.chipped, ask: i });
+      renderRoll(true);
+    } else if (was === 'refunded') {
+      today.ref -= a.amount; today.refN--; if (a.chipped) today.chipped--;
+      tape.splice(tape.findIndex(e => e.ask === i), 1);
+      renderRoll(false);
+    }
+    renderAsks(i);
+    $('said').textContent = !state ? `Undone. Refund for ${a.name} is waiting again.`
+      : state === 'refunded' ? `${eur(a.amount)} sent back to ${a.name}.` : `Declined the refund for ${a.name}.`;
+    moving();
+    render();
+  }
+
+  // Readout: hover, touch and arrow keys all land here.
+  const readout = $('readout');
+  function showDay(i) {
+    hot = i;
+    const d = shown[i], { w, pitch, bar } = slot();
+    [$('up'), $('down')].forEach(p => p.classList.add('hovering'));
+    colsUp.forEach((c, k) => c.classList.toggle('hot', k === i));
+    colsDown.forEach((c, k) => c.classList.toggle('hot', k === i));
+    const row = (label, value) => { const p = el('p'); p.append(el('strong', '', value), label); return p; };
+    readout.replaceChildren(el('p', 'day', dayLong(d.date) + (i === SHOWN - 1 ? ', so far' : '')), row('revenue', eur(d.rev)), row('orders', String(d.orders)), row('refunds', out(d.ref)));
+    const x = (i - (SHOWN - range)) * pitch;
+    readout.style.left = (x + bar + 10 + 148 <= w ? x + bar + 10 : x - 158) + 'px';
+    readout.style.bottom = '12px';
+    readout.classList.add('on');
+  }
+  function hideDay() {
+    hot = -1;
+    [$('up'), $('down')].forEach(p => p.classList.remove('hovering'));
+    colsUp.forEach(c => c.classList.remove('hot'));
+    colsDown.forEach(c => c.classList.remove('hot'));
+    readout.classList.remove('on');
+  }
+  [$('up'), $('down')].forEach(p => {
+    p.addEventListener('pointermove', e => {
+      const r = p.getBoundingClientRect();
+      const k = Math.max(0, Math.min(range - 1, Math.floor((e.clientX - r.left) / r.width * range)));
+      showDay(SHOWN - range + k);
+    });
+    p.addEventListener('pointerleave', hideDay);
+  });
+  $('up').addEventListener('keydown', e => {
+    if (e.key === 'Escape') return hideDay();
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    e.preventDefault();
+    const from = hot < 0 ? SHOWN - 1 : hot + (e.key === 'ArrowLeft' ? -1 : 1);
+    showDay(Math.max(SHOWN - range, Math.min(SHOWN - 1, from)));
+  });
+  $('up').addEventListener('blur', hideDay);
+
+  document.querySelectorAll('.range button').forEach(b => b.addEventListener('click', () => {
+    range = +b.dataset.range;
+    document.querySelectorAll('.range button').forEach(o => o.setAttribute('aria-pressed', String(o === b)));
+    hideDay();
+    moving();
+    render();
+  }));
+  addEventListener('resize', render);
+
+  renderRoll(false);
+  renderAsks();
+  render();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+})();
+</script>
+</body>
+</html>

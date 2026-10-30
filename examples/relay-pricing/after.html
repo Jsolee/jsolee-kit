@@ -1,0 +1,680 @@
+<!doctype html>
+<!--
+  Relay pricing. Direction notes (jsolee-kit workflow, steps 1 and 2).
+
+  Thrown away, the first thought: dark API page, curl in the hero, green on black. Any API can wear it.
+  A. Telegram blank. Telegrams billed per word, SMS bills per segment. True, but it lands on the cream form.
+  B. Relay panel. Bakelite and brass switchgear, oxblood field, stencil type. About the name, not the product.
+  C. Kept: "The page is the screen." SMS was counted on a small mint LCD with a character counter in the
+     corner, and that count is still the billing unit. An email API could not wear this.
+
+  Register: brand page around one working instrument.
+  Color: 1-bit LCD mint and its ink, nothing the screen could not show.
+  Type: 5x8 character-LCD dot matrix drawn as SVG, with Fira Sans, from Erik Spiekermann, who drew Nokia Sans
+  and whose studio made Fira for Firefox OS phones.
+
+  References, and what each one gives:
+  - Fey (pricingpages): one number as the whole picture. Here, price numerals at 126 px.
+  - URL Box (pricingpages): a usage control wired straight to the plans. Here, the volume bars.
+  - Breakline (pricingpages): one plan inverted against the rest. Here it is earned by the math, not assigned.
+  - mappy (onepagelove): one flat color run to the edge of the page, no framing around it.
+  - Felix Haas (onepagelove): a single-serving page that does one thing.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay pricing</title>
+<meta name="description" content="Relay is an API for transactional SMS, billed by the segment. Type your message, set your volume and see what each of the three plans costs.">
+<meta name="theme-color" content="#c7f0d8">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 9'%3E%3Crect width='7' height='9' fill='%2314211a'/%3E%3Cpath fill='%23c7f0d8' d='M1 1h1v7h-1zM2 1h1v1h-1zM2 4h1v1h-1zM3 1h1v1h-1zM3 4h1v1h-1zM3 5h1v1h-1zM4 1h1v1h-1zM4 4h1v1h-1zM4 6h1v1h-1zM5 2h1v2h-1zM5 7h1v1h-1z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&family=Fira+Sans:wght@400;500&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Relay",
+  "description": "API for sending transactional SMS, billed by the segment.",
+  "brand": { "@type": "Brand", "name": "Relay" },
+  "offers": [
+    { "@type": "Offer", "name": "Sandbox", "price": "0", "priceCurrency": "USD" },
+    { "@type": "Offer", "name": "Live", "price": "25", "priceCurrency": "USD",
+      "priceSpecification": { "@type": "UnitPriceSpecification", "price": "25", "priceCurrency": "USD", "billingDuration": "P1M" } },
+    { "@type": "Offer", "name": "Volume", "price": "299", "priceCurrency": "USD",
+      "priceSpecification": { "@type": "UnitPriceSpecification", "price": "299", "priceCurrency": "USD", "billingDuration": "P1M" } }
+  ]
+}
+</script>
+<style>
+:root{
+  --lcd:#c7f0d8;
+  --ink:#14211a;
+  --gut:28px;
+  --expo:cubic-bezier(.22,1,.36,1);
+  --smooth:cubic-bezier(.25,.4,.25,1);
+  --notch:polygon(3px 0,calc(100% - 3px) 0,calc(100% - 3px) 3px,100% 3px,100% calc(100% - 3px),calc(100% - 3px) calc(100% - 3px),calc(100% - 3px) 100%,3px 100%,3px calc(100% - 3px),0 calc(100% - 3px),0 3px,3px 3px);
+  --sans:"Fira Sans",-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --mono:"Fira Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{background:var(--lcd);color-scheme:light;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-text-size-adjust:100%}
+body{background:var(--lcd);color:var(--ink);font:400 18px/1.45 var(--sans);font-variant-numeric:tabular-nums;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+h1,h2,h3{font-weight:500;letter-spacing:-.03em;text-wrap:balance}
+p,dd,li{text-wrap:pretty}
+[id]{scroll-margin-top:24px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:fixed;left:12px;top:-80px;z-index:10;background:var(--ink);color:var(--lcd);padding:12px 18px;text-decoration:none;transition:top .2s var(--smooth)}
+.skip:focus{top:12px}
+.wrap{max-width:1440px;margin-inline:auto}
+
+.dm{display:inline-block;line-height:0;vertical-align:bottom}
+.dm svg{display:block;max-width:100%;height:auto;fill:currentColor}
+.dm .gh{fill-opacity:.065}
+html:not(.js) .dm{font:500 64px/1 var(--sans);letter-spacing:-.03em}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border:0;font:500 17px/1 var(--sans);text-decoration:none;white-space:nowrap;cursor:pointer;color:var(--ink);background:color-mix(in srgb,var(--ink) 9%,transparent);clip-path:var(--notch);touch-action:manipulation;transition:transform .2s var(--smooth),background-color .3s var(--smooth),color .3s var(--smooth)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible{outline:2px solid currentColor;outline-offset:-6px}
+.btn.solid,.btn[aria-pressed=true]{background:var(--ink);color:var(--lcd)}
+
+/* first screen */
+.hero{--lcdw:min(60.28vw,868px);display:grid;grid-template-columns:var(--lcdw) minmax(0,1fr);column-gap:48px;padding-right:var(--gut)}
+.screen{grid-column:1;grid-row:1;position:relative;min-width:0}
+.lcd{position:relative}
+.lcd svg{display:block;width:100%;height:auto}
+.lcd .bar{fill:var(--ink)}
+.lcd .ghost{fill:var(--ink);fill-opacity:.075}
+.lcd .ghost-s{fill:var(--lcd);fill-opacity:.09}
+.lcd .ink{fill:var(--ink)}
+.lcd .lit{fill:var(--lcd)}
+.lcd .sel{fill:var(--ink);fill-opacity:.24}
+.lcd .part{fill:var(--ink);fill-opacity:.15}
+#car.blink{animation:blink 1.06s steps(1) 4}
+@keyframes blink{50%{opacity:0}}
+.logo{position:absolute;left:0;top:0;width:28%;height:calc(11/85*100%);z-index:2}
+.logo:focus-visible{outline:2px solid var(--lcd);outline-offset:-6px}
+#msg{position:absolute;left:calc(4/124*100%);top:calc(13/85*100%);width:calc(119/124*100%);height:calc(71/85*100%);resize:none;border:0;padding:0;background:none;opacity:0;font-size:16px;cursor:text;outline:0}
+.ring{position:absolute;left:calc(3/124*100%);top:calc(12/85*100%);width:calc(121/124*100%);height:calc(73/85*100%);pointer-events:none}
+#msg:focus-visible + .ring{outline:2px solid var(--ink);outline-offset:2px}
+html:not(.js) #msg{opacity:1;font:400 28px/1.3 var(--mono);color:var(--ink)}
+.keys{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:14px 0 0 var(--gut)}
+.part-note{margin-left:auto;padding-right:7px;font-size:16px}
+.keys .btn{min-height:42px;padding:0 16px;font-size:16px}
+
+.side{grid-column:2;grid-row:1;display:flex;flex-direction:column;min-width:0}
+.nav{height:calc(var(--lcdw)*11/124);display:flex;align-items:center;justify-content:flex-end;gap:26px;font-size:17px;font-weight:500}
+.nav a{white-space:nowrap}
+.nav a:not(.btn){display:inline-block;padding:10px 0;text-decoration:none;transition:transform .2s var(--smooth)}
+.nav a:not(.btn):hover{transform:translateY(-2px)}
+.nav a:focus-visible,.foot a:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.nav .btn{min-height:44px;padding:0 18px}
+h1{margin-top:28px;font-size:clamp(52px,6.39vw,92px);line-height:.98;letter-spacing:-.04em}
+.lede{margin-top:18px;font-size:20px;line-height:1.38;max-width:27em}
+.answer{margin-top:auto;padding-top:18px}
+.answer p{font-size:18px;line-height:1.25;margin-bottom:10px}
+.vol{display:block;margin-top:20px;cursor:ew-resize}
+.vol-top{display:block;font-size:24px;line-height:1.2;font-weight:500;letter-spacing:-.02em}
+.barbox{position:relative;display:block;height:56px;margin-top:10px;touch-action:pan-y}
+.barbox:has(input:focus-visible){outline:2px solid var(--ink);outline-offset:5px}
+.bars{position:absolute;inset:0;display:flex;align-items:flex-end;gap:3px}
+.bars i{flex:1;height:calc(16% + 84%*var(--t));background:var(--ink);opacity:.13}
+.bars i.on{opacity:1}
+.bars i.cur{height:100%;transition:transform .2s var(--smooth);transform-origin:bottom}
+.barbox:hover .bars i.cur{transform:scaleX(1.5)}
+.barbox input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize}
+html:not(.js) .barbox input{opacity:1}
+
+/* plans */
+.plans{padding:16px var(--gut) 72px}
+.eq{font-size:28px;line-height:1.2;font-weight:500;letter-spacing:-.02em;min-height:1.2em}
+.pg{position:relative;display:grid;grid-template-columns:168fr 296fr 430fr 490fr;grid-template-rows:repeat(11,auto);margin-top:12px}
+.hl{display:none;position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--ink);transform-origin:0 0}
+.pg.sliding .hl{display:block}
+.labels,.plan{grid-row:1/-1;display:grid;grid-template-rows:subgrid;position:relative}
+.labels{grid-column:1;font-size:16px;padding-right:18px}
+.labels > span,.plan dl > div{padding-block:13px;--rule:color-mix(in srgb,currentColor 28%,transparent);background:linear-gradient(90deg,var(--rule) 0 3px,transparent 3px 7px) 0 0/7px 2px repeat-x}
+.labels > .blank{background:none}
+.labels > .this{padding-block:27px 0}
+.note{grid-column:1;grid-row:2;align-self:end;position:relative;font-size:15px;line-height:1.3;padding:0 18px 34px 0}
+.plan{padding-inline:24px;transition:color .3s var(--smooth)}
+.plan.best{color:var(--lcd);background:var(--ink)}
+.pg.sliding .plan.best{background:none}
+.plan header{display:flex;align-items:baseline;gap:12px;padding-top:14px}
+.plan h3{font-size:32px;line-height:1.1}
+.plan header p{font-size:16px;white-space:nowrap}
+.price{padding-top:10px}
+.per{display:block;margin-top:8px;font-size:17px}
+.month{padding-block:18px 16px;font-size:30px;line-height:1.1;font-weight:500;letter-spacing:-.02em}
+.month.off{font-size:18px;line-height:33px;font-weight:400;letter-spacing:0}
+.plan .btn{justify-self:start;align-self:start;margin-bottom:24px}
+.plan.best .btn{background:var(--lcd);color:var(--ink)}
+.plan dl{display:contents}
+.plan dd{margin:0;font-size:17px;line-height:1.3}
+.plan dl > div:last-child{padding-bottom:26px}
+.plan dt{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+
+/* how counting works */
+.band{background:var(--ink);color:var(--lcd)}
+.seg{padding:72px var(--gut) 76px}
+.seg-head h2{font-size:clamp(44px,6.8vw,98px);line-height:1.04;letter-spacing:-.04em}
+.seg-copy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;margin-top:28px;padding-left:104px}
+.rows{margin:48px 0 0;display:grid;row-gap:22px}
+.row{margin:0;display:grid;grid-template-columns:104px minmax(0,1fr);align-items:end}
+.row figcaption{display:contents}
+.row-l{font-size:17px;margin-bottom:8px}
+.rowbody{min-width:0}
+.ticks{display:flex;height:34px;--tk:min(8px,calc((100vw - 160px)/160));--tw:calc(var(--tk)*.75)}
+.ticks i{display:block;width:calc(var(--n)*var(--tk));background:repeating-linear-gradient(90deg,currentColor 0 var(--tw),transparent var(--tw) var(--tk))}
+.ticks .hd{opacity:.4;height:50%;align-self:flex-end}
+.ticks .no{opacity:.13}
+.api{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);column-gap:48px;margin-top:72px;align-items:start}
+.api h3{font-size:44px;line-height:1.02;letter-spacing:-.03em}
+.api p{margin-top:14px;max-width:29em}
+.api p + p{margin-top:10px}
+.code{font:400 16px/1.5 var(--mono);white-space:pre-wrap;word-break:break-word;letter-spacing:0;color:color-mix(in srgb,var(--lcd) 72%,var(--ink));display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);column-gap:32px}
+.code pre{font:inherit;white-space:inherit;margin:0}
+.code b{font-weight:400;color:var(--lcd)}
+code{font-family:var(--mono);font-size:.92em}
+
+/* questions */
+.qs{padding:72px var(--gut) 84px;display:grid;grid-template-columns:168fr 1216fr}
+.qs-mark{padding-top:4px}
+.qs-main h2{font-size:44px;line-height:1.02;letter-spacing:-.03em;padding-left:24px}
+.qlist{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;row-gap:30px;margin-top:34px;padding-left:24px}
+.qlist h3{font-size:22px;line-height:1.2;letter-spacing:-.015em}
+.qlist p{margin-top:6px;max-width:32em}
+
+/* end */
+.cap{padding:56px var(--gut) 30px}
+.cap-top{display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.cap-cta{display:grid;justify-items:start;gap:10px}
+.cap-cta .btn{background:var(--lcd);color:var(--ink)}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 28px;margin-top:48px;font-size:16px}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 24px}
+.foot a{display:inline-block;padding:4px 0;text-decoration:none;transition:transform .2s var(--smooth)}
+.foot a:hover{transform:translateY(-2px)}
+
+@media (max-width:1439px){
+  .lcd svg,.dm svg{shape-rendering:geometricPrecision}
+}
+@media (min-width:1441px){
+  .screen::before{content:"";position:absolute;right:100%;top:0;width:50vw;height:77px;background:var(--ink)}
+}
+@media (max-width:1279px){
+  .nav a.opt{display:none}
+}
+@media (max-width:999px){
+  .hero{display:flex;flex-direction:column;padding-right:0}
+  .side{display:contents}
+  .nav{order:1}
+  h1{order:2}
+  .lede{order:3}
+  .screen{order:4}
+  .answer{order:5}
+  .vol{order:6}
+  .hero{--lcdw:100vw}
+  .nav{height:auto;justify-content:flex-start;flex-wrap:wrap;padding:12px var(--gut);gap:6px 20px}
+  h1,.lede,.answer,.vol{margin-inline:var(--gut)}
+  h1{font-size:clamp(48px,14vw,84px);margin-top:12px}
+  .lede{margin-bottom:24px}
+  .answer{margin-top:24px}
+  .keys{padding-left:var(--gut);padding-right:var(--gut)}
+  .part-note{margin-left:0;flex-basis:100%}
+  .eq{font-size:22px}
+  .pg{display:block;margin-top:20px}
+  .labels{display:none}
+  .plan{display:block;padding:4px 20px 8px}
+  .plan + .plan{margin-top:16px}
+  .plan dt{position:static;width:auto;height:auto;clip-path:none;font-size:15px}
+  .plan dl{display:block}
+  .seg-copy,.api,.qs,.qlist,.code{grid-template-columns:minmax(0,1fr);row-gap:16px}
+  .seg-copy{padding-left:0}
+  .seg-head h2 br{display:none}
+  .qs-main h2,.qlist{padding-left:0}
+  .row{grid-template-columns:minmax(0,1fr);row-gap:6px}
+  .ticks{--tk:calc((100vw - 56px)/160);height:26px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#plans">Skip to the plans</a>
+<main id="top">
+
+<section class="hero wrap">
+  <div class="side">
+    <nav class="nav" aria-label="Main">
+      <a class="opt" href="#segments">Segments</a>
+      <a href="https://relay.example/docs">Docs</a>
+      <a href="https://relay.example/login">Sign in</a>
+      <a class="btn solid" href="https://relay.example/signup">Get an API key</a>
+    </nav>
+    <h1>What this<br>text costs.</h1>
+    <p class="lede"><span translate="no">Relay</span> bills by the segment, and one text can be several. Type on the screen, drag the volume, and every price on this page follows.</p>
+    <div class="answer">
+      <p id="perCap">On Live, one text is:</p>
+      <span class="dm" id="perText">$0.0129</span>
+    </div>
+    <label class="vol" for="vol">
+      <span class="vol-top"><span id="volN">15,000</span>&nbsp;texts a month</span>
+      <span class="barbox">
+        <span class="bars" id="bars" aria-hidden="true"></span>
+        <input id="vol" aria-label="Texts a month" type="range" min="0" max="1000" step="5" value="545" aria-valuetext="15,000 texts a month">
+      </span>
+    </label>
+  </div>
+
+  <div class="screen">
+    <a class="logo" href="#top" aria-label="Relay" translate="no"></a>
+    <div class="lcd">
+      <svg id="lcd" viewBox="-4 -2 124 85" aria-hidden="true" shape-rendering="crispEdges">
+        <path id="lG" class="ghost"/>
+        <rect class="bar" x="-4" y="-2" width="124" height="11"/>
+        <path id="lSG" class="ghost-s"/>
+        <path id="lS" class="lit"/>
+        <path id="lSeg" class="part"/>
+        <path id="lSel" class="sel"/>
+        <path id="lInv" class="ink"/>
+        <path id="lLit" class="ink"/>
+        <path id="lIL" class="lit"/>
+        <rect id="car" class="ink" width="4.857" height=".857"/>
+      </svg>
+      <textarea id="msg" aria-label="Message to price" spellcheck="false" autocomplete="off" autocapitalize="sentences" maxlength="918">Your login code:
+482 913
+
+Expires in 10 min.
+Not you? Ignore it.</textarea>
+      <span class="ring"></span>
+    </div>
+    <div class="keys" role="group" aria-label="Load a sample message">
+      <button class="btn" type="button" data-preset="login" aria-pressed="true">Login code</button>
+      <button class="btn" type="button" data-preset="ship" aria-pressed="false">Shipping update</button>
+      <button class="btn" type="button" data-preset="curly" aria-pressed="false">Same, curly quotes</button>
+      <button class="btn" type="button" data-preset="remind" aria-pressed="false">Long reminder</button>
+      <span class="part-note" id="partNote"></span>
+    </div>
+  </div>
+</section>
+
+<section class="plans wrap" id="plans" aria-labelledby="plans-h">
+  <h2 class="sr" id="plans-h">Plans</h2>
+  <p class="eq" id="eq" aria-live="polite">1&nbsp;segment × 15,000&nbsp;texts = 15,000&nbsp;segments a month. Live costs least.</p>
+  <div class="pg" id="pg">
+    <div class="hl" id="hl" aria-hidden="true"></div>
+    <div class="labels" aria-hidden="true">
+      <span class="blank"></span><span class="blank"></span>
+      <span class="blank this">This text, monthly</span>
+      <span class="blank"></span>
+      <span>Included monthly</span>
+      <span>After that</span>
+      <span>Who you can text</span>
+      <span>Sends from</span>
+      <span>Delivery logs</span>
+      <span>Support</span>
+      <span>Contract</span>
+    </div>
+
+    <p class="note">Prices in USD. US and Canadian rates include carrier fees.</p>
+
+    <article class="plan" data-plan="sandbox">
+      <header><h3>Sandbox</h3><p>For building it.</p></header>
+      <div class="price"><span class="dm" data-dm="$0" data-p="18">$0</span><span class="per">a month, no card</span></div>
+      <p class="month" data-month><span>Stops at 100&nbsp;segments</span></p>
+      <a class="btn" href="https://relay.example/signup?plan=sandbox">Get a test key</a>
+      <dl>
+        <div><dt>Included monthly</dt><dd>100&nbsp;segments</dd></div>
+        <div><dt>After that</dt><dd>Sending pauses</dd></div>
+        <div><dt>Who you can text</dt><dd>5&nbsp;numbers you verify</dd></div>
+        <div><dt>Sends from</dt><dd>A shared number</dd></div>
+        <div><dt>Delivery logs</dt><dd>3&nbsp;days</dd></div>
+        <div><dt>Support</dt><dd>Docs</dd></div>
+        <div><dt>Contract</dt><dd>None</dd></div>
+      </dl>
+    </article>
+
+    <article class="plan best" data-plan="live">
+      <header><h3>Live</h3><p>For shipping it.</p></header>
+      <div class="price"><span class="dm" data-dm="$25" data-p="18">$25</span><span class="per">a month</span></div>
+      <p class="month" data-month><span>$193.00</span></p>
+      <a class="btn" href="https://relay.example/signup?plan=live">Start on Live</a>
+      <dl>
+        <div><dt>Included monthly</dt><dd>1,000&nbsp;segments</dd></div>
+        <div><dt>After that</dt><dd>$0.012&nbsp;a&nbsp;segment</dd></div>
+        <div><dt>Who you can text</dt><dd>Anyone in the US and Canada</dd></div>
+        <div><dt>Sends from</dt><dd>1&nbsp;dedicated toll-free number</dd></div>
+        <div><dt>Delivery logs</dt><dd>30&nbsp;days</dd></div>
+        <div><dt>Support</dt><dd>Email, next business day</dd></div>
+        <div><dt>Contract</dt><dd>Monthly, cancel anytime</dd></div>
+      </dl>
+    </article>
+
+    <article class="plan" data-plan="volume">
+      <header><h3>Volume</h3><p>For sending a lot of it.</p></header>
+      <div class="price"><span class="dm" data-dm="$299" data-p="18">$299</span><span class="per">a month</span></div>
+      <p class="month" data-month><span>$299.00</span></p>
+      <a class="btn" href="https://relay.example/signup?plan=volume">Start on Volume</a>
+      <dl>
+        <div><dt>Included monthly</dt><dd>40,000&nbsp;segments</dd></div>
+        <div><dt>After that</dt><dd>$0.0085&nbsp;a&nbsp;segment</dd></div>
+        <div><dt>Who you can text</dt><dd>US and Canada, plus other countries at listed rates</dd></div>
+        <div><dt>Sends from</dt><dd>5&nbsp;dedicated numbers, or your own short code</dd></div>
+        <div><dt>Delivery logs</dt><dd>13&nbsp;months</dd></div>
+        <div><dt>Support</dt><dd>Shared Slack channel, 4-hour reply</dd></div>
+        <div><dt>Contract</dt><dd>Monthly, with a signed SLA and DPA</dd></div>
+      </dl>
+    </article>
+  </div>
+</section>
+
+<div class="band">
+<section class="seg wrap" id="segments" aria-labelledby="seg-h">
+  <div class="seg-head">
+    <h2 id="seg-h">A segment is 160&nbsp;characters <br>until it isn't.</h2>
+    <div class="seg-copy">
+      <p>Carriers charge for each part of a text. Stay inside GSM-7, the alphabet SMS was built on, and a part holds 160&nbsp;characters. One character from outside it switches the whole text to Unicode, and a part holds 70.</p>
+      <p>The usual cause is a curly quote or a long dash pasted from a doc. Emoji do it too. Inside GSM-7, nine characters such as [ and € count as two.</p>
+    </div>
+  </div>
+
+  <div class="rows">
+    <figure class="row">
+      <span class="dm" data-dm="160" data-p="5">160</span>
+      <div class="rowbody"><figcaption class="row-l">Plain text, one part.</figcaption>
+        <div class="ticks" aria-hidden="true"><i style="--n:160"></i></div></div>
+    </figure>
+    <figure class="row">
+      <span class="dm" data-dm="153" data-p="5">153</span>
+      <div class="rowbody"><figcaption class="row-l">Plain text, several parts. Each one gives up 7&nbsp;characters to the header that puts them back in order.</figcaption>
+        <div class="ticks" aria-hidden="true"><i style="--n:153"></i><i class="hd" style="--n:7"></i></div></div>
+    </figure>
+    <figure class="row">
+      <span class="dm" data-dm="70" data-p="5">70</span>
+      <div class="rowbody"><figcaption class="row-l">Unicode, one part. The same screen, less than half full.</figcaption>
+        <div class="ticks" aria-hidden="true"><i style="--n:70"></i><i class="no" style="--n:90"></i></div></div>
+    </figure>
+    <figure class="row">
+      <span class="dm" data-dm="67" data-p="5">67</span>
+      <div class="rowbody"><figcaption class="row-l">Unicode, several parts. 3&nbsp;characters each go to the header.</figcaption>
+        <div class="ticks" aria-hidden="true"><i style="--n:67"></i><i class="hd" style="--n:3"></i><i class="no" style="--n:90"></i></div></div>
+    </figure>
+  </div>
+
+  <div class="api">
+    <div>
+      <h3>Ask before you send.</h3>
+      <p>Add <code>dry_run</code> to any request. <span translate="no">Relay</span> returns the encoding, the segment count and the price, and sends nothing. Put it in your tests and a template that grows a segment fails CI before it reaches an invoice.</p>
+      <p>Dry runs are free on every plan. This one is reading the message on the screen up top.</p>
+    </div>
+    <div class="code" role="group" aria-label="Example dry run request and response">
+      <pre class="code-req" id="req"></pre>
+      <pre class="code-res" id="res"></pre>
+    </div>
+  </div>
+</section>
+</div>
+
+<section class="qs wrap" id="questions" aria-labelledby="qs-h">
+  <div class="qs-mark" aria-hidden="true"><span class="dm" data-dm="?" data-p="18">?</span></div>
+  <div class="qs-main">
+    <h2 id="qs-h">Questions about the bill.</h2>
+    <div class="qlist">
+      <div><h3>Do I pay for texts that fail?</h3><p>You pay for segments a carrier accepts. If we can't hand a segment over, it isn't billed.</p></div>
+      <div><h3>What if I go past my included segments?</h3><p>Live and Volume keep sending at the rate in the table, and the extra shows on that month's invoice. Sandbox pauses until next month.</p></div>
+      <div><h3>Are carrier fees extra?</h3><p>No. US and Canadian rates include them.</p></div>
+      <div><h3>Do unused segments roll over?</h3><p>No. The count resets on your billing date.</p></div>
+      <div><h3>Can I switch plans?</h3><p>Whenever you like. Moving up starts right away and is prorated by the day. Moving down starts on your next billing date.</p></div>
+      <div><h3>What about other countries?</h3><p>That's on Volume. Each country has its own rate on the rate sheet, and those segments don't draw on your included ones.</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="band">
+  <div class="wrap cap">
+    <div class="cap-top">
+      <span class="dm" data-dm="100 segments, free." data-p="10">100 segments, free.</span>
+      <div class="cap-cta">
+        <a class="btn" href="https://relay.example/signup?plan=sandbox">Get a test key</a>
+        <span>Sandbox needs no card.</span>
+      </div>
+    </div>
+    <div class="foot">
+      <span><span translate="no">Relay</span>, an API for transactional SMS.</span>
+      <nav aria-label="Footer">
+        <a href="https://relay.example/docs">Docs</a>
+        <a href="https://relay.example/rates">Rate sheet</a>
+        <a href="https://relay.example/status">Status</a>
+        <a href="https://relay.example/terms">Terms</a>
+        <a href="https://relay.example/privacy">Privacy</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // Classic 5x8 character-LCD font, ASCII 32 to 126, five column bytes per glyph (bit 0 is the top row).
+  const HEX = "0000000000 00005F0000 0007000700 147F147F14 242A7F2A12 2313086462 3649562050 0000070000 001C224100 0041221C00 2A1C7F1C2A 08083E0808 0080703000 0808080808 0000606000 2010080402 3E5149453E 00427F4000 7249494946 2141494D33 1814127F10 2745454539 3C4A494931 4121110907 3649494936 464949291E 0000140000 0040340000 0008142241 1414141414 0041221408 0201590906 3E415D594E 7C1211127C 7F49494936 3E41414122 7F4141413E 7F49494941 7F09090901 3E41415173 7F0808087F 00417F4100 2040413F01 7F08142241 7F40404040 7F021C027F 7F0408107F 3E4141413E 7F09090906 3E4151215E 7F09192946 2649494932 03017F0103 3F4040403F 1F2040201F 3F4038403F 6314081463 0304780403 6159494D43 007F414141 0204081020 004141417F 0402010204 4040404040 0003070800 2054547840 7F28444438 3844444428 384444287F 3854545418 00087E0902 18A4A49C78 7F08040478 00447D4000 2040403D00 7F10284400 00417F4000 7C04780478 7C08040478 3844444438 FC18242418 18242418FC 7C08040408 4854545424 04043F4424 3C4040207C 1C2040201C 3C4030403C 4428102844 4C9090907C 4464544C44 0008364100 0000770000 0041360800 0201020402".split(" ");
+  const EXTRA = {"’":"0008070300","‘":"0003070800","”":"0807000807","“":"0708000708","–":"0808080808","\u2014":"0808080808","…":"4000400040","€":"143E555541","£":"487E494142"};
+  const TOFU = "7F4141417F";
+  const bytes = h => [0,2,4,6,8].map(i => parseInt(h.substr(i,2),16));
+  function glyph(c){
+    const code = c.codePointAt(0);
+    if (code >= 32 && code < 127) return bytes(HEX[code-32]);
+    if (EXTRA[c]) return bytes(EXTRA[c]);
+    const base = c.normalize("NFD")[0], b = base.codePointAt(0);
+    if (base !== c && b >= 32 && b < 127) return bytes(HEX[b-32]);
+    return bytes(TOFU);
+  }
+  const box = (x,y,d) => `M${x} ${y}h${d}v${d}h-${d}z`;
+  function plot(out,c,x,y,d){ const g = glyph(c); for (let i=0;i<5;i++) for (let j=0;j<8;j++) if (g[i]>>j&1) out.push(box(x+i,y+j,d)); }
+  function cellGhost(out,x,y,d){ for (let i=0;i<5;i++) for (let j=0;j<8;j++) out.push(box(x+i,y+j,d)); }
+
+  function dotSvg(text,p){
+    const chars = Array.from(text), w = chars.length*6-1, d = +((p-Math.max(1,Math.round(p/7)))/p).toFixed(4), on = [], off = [];
+    chars.forEach((c,i) => { cellGhost(off,i*6,0,d); plot(on,c,i*6,0,d); });
+    return `<svg width="${w*p}" height="${8*p}" viewBox="0 0 ${w} 8" shape-rendering="crispEdges" aria-hidden="true"><path class="gh" d="${off.join("")}"/><path d="${on.join("")}"/></svg><span class="sr">${text}</span>`;
+  }
+  const setDm = (el,text,p) => { if (el.dataset.t !== text){ el.dataset.t = text; el.innerHTML = dotSvg(text,p); } };
+  document.querySelectorAll(".dm[data-dm]").forEach(el => setDm(el,el.dataset.dm,+el.dataset.p));
+
+  // GSM-7 basic set and extension table. Everything else forces UCS-2.
+  const GSM = new Set("@£$¥èéùìòÇ\nØø\rÅåΔ_ΦΓΛΩΠΨΣΘΞÆæßÉ !\"#¤%&'()*+,-./0123456789:;<=>?¡ABCDEFGHIJKLMNOPQRSTUVWXYZÄÖÑÜ§¿abcdefghijklmnopqrstuvwxyzäöñüà");
+  const EXT = new Set("^{}\\[~]|€");
+  function analyze(text){
+    const chars = Array.from(text), bad = chars.map(c => !GSM.has(c) && !EXT.has(c)), uni = bad.some(Boolean);
+    const width = c => uni ? c.length : (EXT.has(c) ? 2 : 1);
+    const units = chars.reduce((n,c) => n+width(c),0), single = uni ? 70 : 160, part = uni ? 67 : 153;
+    let segments = units ? 1 : 0, left = single-units; const starts = [];
+    if (units > single){
+      let used = 0;
+      chars.forEach((c,i) => { const w = width(c); if (used+w > part){ segments++; starts.push(i); used = 0; } used += w; });
+      left = part-used;
+    }
+    return {chars,bad,uni,units,segments,left,starts,badCount:bad.filter(Boolean).length,enc:uni?"UCS-2":"GSM-7"};
+  }
+
+  const COLS = 20, ROWS = 8, Y0 = 11;
+  function layout(chars){
+    const pos = []; let r = 0, c = 0;
+    chars.forEach((ch,i) => {
+      if (ch === "\n"){ pos[i] = {r,c,nl:true}; r++; c = 0; return; }
+      if (ch === " "){ pos[i] = {r,c:Math.min(c,COLS)}; if (c < COLS) c++; return; }
+      if (i === 0 || chars[i-1] === " " || chars[i-1] === "\n"){
+        let len = 0; for (let j=i;j<chars.length && chars[j] !== " " && chars[j] !== "\n";j++) len++;
+        if (c+len > COLS && len <= COLS && c > 0){ r++; c = 0; }
+      }
+      if (c >= COLS){ r++; c = 0; }
+      pos[i] = {r,c}; c++;
+    });
+    if (c >= COLS){ r++; c = 0; }
+    pos[chars.length] = {r,c};
+    return pos;
+  }
+
+  const $ = id => document.getElementById(id);
+  const msg = $("msg"), car = $("car"), reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const P = {
+    sandbox:{name:"Sandbox",base:0,incl:100,rate:null},
+    live:{name:"Live",base:25,incl:1000,rate:.012},
+    volume:{name:"Volume",base:299,incl:40000,rate:.0085}
+  };
+  const monthly = (p,s) => p.rate === null ? (s <= p.incl ? 0 : null) : p.base+Math.max(0,s-p.incl)*p.rate;
+  const num = n => n.toLocaleString("en-US");
+  const usd = n => "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+  const S = {text:msg.value,vol:15000,a:null,pos:[],top:0,best:"live"};
+
+  { const g = [], s = [];
+    for (let r=0;r<ROWS;r++) for (let c=0;c<COLS;c++) cellGhost(g,c*6,Y0+r*9,.857);
+    for (let c=0;c<COLS;c++) cellGhost(s,c*6,0,.857);
+    $("lG").setAttribute("d",g.join("")); $("lSG").setAttribute("d",s.join("")); }
+
+  function drawStatus(){
+    const a = S.a, out = [], meter = `${a.left}/${a.segments}`;
+    Array.from("RELAY").forEach((c,i) => plot(out,c,i*6,0,.857));
+    Array.from(a.enc).forEach((c,i) => plot(out,c,(i+7)*6,0,.857));
+    Array.from(meter).forEach((c,i) => plot(out,c,(COLS-meter.length+i)*6,0,.857));
+    $("lS").setAttribute("d",out.join(""));
+  }
+  const caretIndex = () => {
+    let n = 0; const u = msg.selectionStart ?? S.a.chars.length;
+    for (let i=0;i<S.a.chars.length;i++){ if (n >= u) return i; n += S.a.chars[i].length; }
+    return S.a.chars.length;
+  };
+  function drawScreen(limit){
+    const {chars,bad,starts} = S.a, pos = S.pos, n = limit ?? chars.length;
+    const ci = limit ?? caretIndex(), cp = pos[Math.min(ci,chars.length)] || {r:0,c:0};
+    S.top = Math.max(0,cp.r-ROWS+1);
+    const lit = [], inv = [], il = [], seg = [], sel = [], cell = (x,y) => `M${x-.5} ${y-.5}h5.86v8.86h-5.86z`;
+    let part = 0, si = 0;
+    const a0 = limit == null ? msg.selectionStart : 0, b0 = limit == null ? msg.selectionEnd : 0;
+    let units = 0;
+    for (let i=0;i<n;i++){
+      const p = pos[i], row = p.r-S.top, u0 = units; units += chars[i].length;
+      if (starts[si] === i){ part++; si++; }
+      if (p.nl || row < 0 || row >= ROWS || p.c >= COLS) continue;
+      const x = p.c*6, y = Y0+row*9;
+      if (part%2) seg.push(cell(x,y));
+      if (u0 >= a0 && u0 < b0) sel.push(cell(x,y));
+      if (bad[i]){ inv.push(cell(x,y)); plot(il,chars[i],x,y,.857); }
+      else if (chars[i] !== " ") plot(lit,chars[i],x,y,.857);
+    }
+    $("lLit").setAttribute("d",lit.join("")); $("lInv").setAttribute("d",inv.join("")); $("lIL").setAttribute("d",il.join(""));
+    $("lSeg").setAttribute("d",seg.join("")); $("lSel").setAttribute("d",sel.join(""));
+    const cr = cp.r-S.top;
+    car.setAttribute("x",Math.min(cp.c,COLS-1)*6); car.setAttribute("y",Y0+Math.min(cr,ROWS-1)*9+7);
+  }
+
+  const plans = {}; document.querySelectorAll(".plan").forEach(el => plans[el.dataset.plan] = el);
+  const hl = $("hl"), pg = $("pg");
+  let slide = null;
+  function slideTo(from,to){
+    if (reduced || from === to || matchMedia("(max-width:999px)").matches) return;
+    const g = pg.getBoundingClientRect(), box = el => { const r = el.getBoundingClientRect(); return [r.left-g.left,r.width]; };
+    const [x0,w0] = box(slide ? hl : plans[from]), [x1,w1] = box(plans[to]);
+    if (slide) slide.cancel();
+    pg.classList.add("sliding");
+    const a = slide = hl.animate(
+      [{transform:`translateX(${x0}px) scaleX(${w0})`},{transform:`translateX(${x1}px) scaleX(${w1})`}],
+      {duration:750,easing:"cubic-bezier(.22,1,.36,1)",fill:"both"});
+    a.onfinish = () => { if (slide === a){ pg.classList.remove("sliding"); a.cancel(); slide = null; } };
+  }
+  function commit(){
+    const a = S.a, segs = a.segments*S.vol, costs = {};
+    let best = null;
+    for (const k in P){ costs[k] = monthly(P[k],segs); if (costs[k] !== null && (best === null || costs[k] < costs[best])) best = k; }
+    for (const k in P){
+      const el = plans[k], m = el.querySelector("[data-month]"), over = costs[k] === null;
+      el.classList.toggle("best",k === best);
+      m.classList.toggle("off",over);
+      m.firstElementChild.textContent = over ? "Stops at 100 segments" : usd(costs[k]);
+    }
+    slideTo(S.best,best); S.best = best;
+    $("partNote").textContent = a.segments > 1 ? "Shading marks each new part." : "";
+    const name = P[best].name, per = S.vol ? costs[best]/S.vol : 0;
+    setDm($("perText"), per ? "$"+per.toFixed(4) : "$0", 11);
+    $("perCap").textContent = a.segments ? `On ${name}, one text is:` : "Nothing on the screen yet:";
+    const seg = a.segments === 1 ? "segment" : "segments";
+    const why = a.uni ? `${a.badCount} ${a.badCount === 1 ? "character" : "characters"} outside GSM-7. ` : "";
+    const verdict = best === "sandbox" ? "Sandbox covers it, if they all go to numbers you verify." : `${name} costs least.`;
+    $("eq").textContent = a.segments
+      ? `${why}${num(a.segments)} ${seg} × ${num(S.vol)} texts = ${num(segs)} segments a month. ${verdict}`
+      : "Nothing to count yet. Type on the screen above.";
+    const body = JSON.stringify(S.text), shown = body.length > 36 ? body.slice(0,32)+'..."' : body;
+    const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+    const rate = P[best].rate ?? 0;
+    $("req").innerHTML = `POST /v1/messages\n\n{\n  "to": "+12025550142",\n  "body":\n    <b>${esc(shown)}</b>,\n  "dry_run": true\n}`;
+    $("res").innerHTML = `200 OK\n\n{\n  "encoding": <b>"${a.enc}"</b>,\n  "characters": <b>${a.chars.length}</b>,\n  "segments": <b>${a.segments}</b>,\n  "price_usd": <b>"${(a.segments*rate).toFixed(4)}"</b>,\n  "sent": false\n}`;
+  }
+
+  const blink = () => { car.classList.remove("blink"); void car.getBoundingClientRect(); if (document.activeElement === msg && !reduced) car.classList.add("blink"); };
+  let raf = 0;
+  function refresh(){ S.text = msg.value; S.a = analyze(S.text); S.pos = layout(S.a.chars); drawStatus(); }
+  msg.addEventListener("input",() => {
+    cancelAnimationFrame(raf); refresh(); drawScreen(); commit(); blink();
+    document.querySelectorAll("[data-preset]").forEach(b => b.setAttribute("aria-pressed","false"));
+  });
+  msg.addEventListener("focus",() => { drawScreen(); blink(); });
+  msg.addEventListener("blur",blink);
+  document.addEventListener("selectionchange",() => { if (document.activeElement === msg){ drawScreen(); blink(); } });
+  msg.addEventListener("click",e => {
+    if (msg.selectionStart !== msg.selectionEnd) return;
+    const b = msg.getBoundingClientRect();
+    const col = Math.floor((e.clientX-b.left)/b.width*COLS), row = Math.floor((e.clientY-b.top)/b.height*ROWS)+S.top;
+    const {pos} = S, n = S.a.chars.length; let idx = n, last = -1;
+    for (let i=0;i<n;i++){ if (pos[i].r === row){ last = i; if (pos[i].c >= col){ idx = i; last = -2; break; } } }
+    if (last >= 0) idx = pos[last].nl ? last : last+1;
+    const u = S.a.chars.slice(0,idx).join("").length;
+    msg.setSelectionRange(u,u); drawScreen(); blink();
+  });
+
+  const PRESETS = {
+    login:"Your login code:\n482 913\n\nExpires in 10 min.\nNot you? Ignore it.",
+    ship:"Your order's on its way. It'll reach you Thursday by 8pm. Reply HELP with questions.",
+    curly:"Your order’s on its way. It’ll reach you Thursday by 8pm. Reply HELP with questions.",
+    remind:"Your car is booked for Friday at 9:40 am. Pickup is at 218 Mercer St, by the side entrance. Reply C to confirm or R to reschedule. Changes after 6 pm Thursday can't be refunded, so please check the time."
+  };
+  document.querySelectorAll("[data-preset]").forEach(btn => btn.addEventListener("click",() => {
+    document.querySelectorAll("[data-preset]").forEach(b => b.setAttribute("aria-pressed",String(b === btn)));
+    cancelAnimationFrame(raf);
+    msg.value = PRESETS[btn.dataset.preset];
+    msg.setSelectionRange(msg.value.length,msg.value.length);
+    refresh();
+    if (reduced){ drawScreen(); commit(); return; }
+    const n = S.a.chars.length, t0 = performance.now(), dur = Math.min(620,160+n*5);
+    const step = now => {
+      const t = Math.min(1,(now-t0)/dur), k = Math.ceil((1-Math.pow(1-t,3))*n);
+      drawScreen(k);
+      if (t < 1) raf = requestAnimationFrame(step); else { drawScreen(); commit(); }
+    };
+    raf = requestAnimationFrame(step);
+  }));
+
+  // Volume: log scale, 100 to 1,000,000 texts, snapped to two significant figures.
+  const vol = $("vol"), bars = $("bars"), N = 46;
+  for (let i=0;i<N;i++){ const b = document.createElement("i"); b.style.setProperty("--t",i/(N-1)); bars.append(b); }
+  const nice = n => { const m = Math.pow(10,Math.floor(Math.log10(n))-1); return Math.round(n/m)*m; };
+  function setVol(){
+    const v = +vol.value/1000;
+    S.vol = nice(100*Math.pow(10,v*4));
+    $("volN").textContent = num(S.vol);
+    vol.setAttribute("aria-valuetext",`${num(S.vol)} texts a month`);
+    const on = Math.round(v*(N-1));
+    [...bars.children].forEach((b,i) => { b.classList.toggle("on",i <= on); b.classList.toggle("cur",i === on); });
+  }
+  vol.addEventListener("input",() => { setVol(); commit(); });
+
+  msg.setSelectionRange(msg.value.length,msg.value.length);
+  refresh(); setVol(); drawScreen(); commit();
+})();
+</script>
+</body>
+</html>

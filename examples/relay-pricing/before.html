@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relay Pricing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F5F4EF;
+    --paper-2: #ECEAE3;
+    --card: #FFFFFF;
+    --ink: #15140F;
+    --muted: #5F5D55;
+    --faint: #8A877E;
+    --line: #E2DFD6;
+    --line-2: #D2CFC4;
+    --accent: #EE5A24;
+    --accent-ink: #B4400F;
+    --ok: #1C7A4B;
+    --sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  .mono { font-family: var(--mono); }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 40px; padding: 0 16px; border-radius: 9px; border: 1px solid transparent;
+    font: 500 14px/1 var(--sans); white-space: nowrap; cursor: pointer;
+  }
+  .btn-ink { background: var(--ink); color: var(--paper); }
+  .btn-line { background: var(--card); color: var(--ink); border-color: var(--line-2); }
+  .btn-accent { background: var(--accent); color: var(--ink); }
+  .btn-ghost { color: var(--paper); border-color: rgba(245,244,239,.24); }
+  .btn-lg { height: 46px; padding: 0 20px; font-size: 15px; }
+  .btn-block { width: 100%; }
+
+  /* Nav */
+  .nav { border-bottom: 1px solid var(--line); }
+  .nav .wrap { display: flex; align-items: center; height: 64px; gap: 44px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 17px; letter-spacing: -0.01em; }
+  .nav-links { display: flex; gap: 28px; font-size: 14px; color: var(--muted); }
+  .nav-links a[aria-current] { color: var(--ink); font-weight: 500; }
+  .nav-right { margin-left: auto; display: flex; align-items: center; gap: 22px; font-size: 14px; }
+
+  /* Eyebrow */
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent-ink);
+  }
+  .eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 1px; background: var(--accent); }
+
+  /* Hero */
+  .hero { padding: 80px 0 72px; }
+  .hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 440px; gap: 64px; align-items: center; }
+  h1 { margin-top: 22px; font-size: 64px; line-height: 1.02; letter-spacing: -0.04em; font-weight: 600; }
+  h1 .stop { color: var(--accent); }
+  .lede { margin-top: 24px; max-width: 31em; font-size: 19px; line-height: 1.55; color: var(--muted); }
+  .stats { display: flex; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--line); }
+  .stat { padding-right: 32px; margin-right: 32px; border-right: 1px solid var(--line); }
+  .stat:last-child { border-right: 0; margin-right: 0; padding-right: 0; }
+  .stat b { display: block; font-size: 24px; font-weight: 600; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .stat span { font-size: 13px; color: var(--muted); }
+
+  .receipt {
+    background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow: hidden;
+    box-shadow: 0 1px 0 rgba(21,20,15,.04), 0 28px 56px -32px rgba(21,20,15,.38);
+  }
+  .r-head { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid var(--line); font: 500 12.5px/1 var(--mono); }
+  .verb { background: var(--ink); color: var(--paper); padding: 4px 6px; border-radius: 4px; font-size: 11px; letter-spacing: .04em; }
+  .status { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; color: var(--ok); }
+  .status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+  .code { margin: 0; padding: 16px 18px; background: #FBFAF6; border-bottom: 1px solid var(--line); font: 13px/1.75 var(--mono); white-space: pre; color: var(--ink); }
+  .code .s { color: #A6461A; }
+  .code .p { color: var(--faint); }
+  .events { list-style: none; padding: 12px 18px 4px; }
+  .ev { position: relative; display: grid; grid-template-columns: 14px 78px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 7px 0; font-size: 13px; }
+  .ev i { position: relative; z-index: 1; justify-self: center; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); }
+  .ev.ok i { background: var(--ok); box-shadow: 0 0 0 4px rgba(28,122,75,.14); }
+  .ev:not(:last-child)::after { content: ""; position: absolute; left: 6px; top: calc(50% + 5px); width: 2px; height: calc(100% - 10px); background: var(--line); }
+  .ev .st { font-family: var(--mono); font-weight: 500; }
+  .ev .desc { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ev time { font-family: var(--mono); font-size: 12.5px; color: var(--faint); font-variant-numeric: tabular-nums; }
+  .r-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; padding: 14px 18px; border-top: 1px dashed var(--line-2); font-size: 13px; color: var(--muted); }
+  .r-foot b { margin-left: 6px; font: 600 15px/1 var(--mono); color: var(--ink); }
+  .sms { margin-top: 18px; padding-left: 10px; }
+  .sms-meta { font: 500 11px/1 var(--mono); letter-spacing: .04em; color: var(--faint); margin-bottom: 8px; }
+  .sms-bubble { display: inline-block; background: var(--paper-2); border: 1px solid var(--line); padding: 10px 14px; border-radius: 18px 18px 18px 5px; font-size: 14.5px; }
+
+  /* Plans */
+  .plans { padding: 0 0 104px; }
+  .plans-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .plan { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 30px 28px 32px; }
+  .plan-top { display: flex; align-items: center; justify-content: space-between; min-height: 26px; }
+  .plan h3 { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+  .tag { font: 500 11px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; background: var(--accent); color: var(--ink); padding: 6px 9px; border-radius: 999px; }
+  .plan-desc { margin-top: 8px; min-height: 44px; font-size: 14.5px; color: var(--muted); }
+  .price { margin-top: 24px; display: flex; align-items: baseline; gap: 6px; min-height: 54px; }
+  .price b { font-size: 54px; line-height: 1; font-weight: 600; letter-spacing: -0.045em; font-variant-numeric: tabular-nums; }
+  .price span { font-size: 15px; color: var(--muted); }
+  .rates { margin-top: 20px; border: 1px solid var(--line); border-radius: 10px; font-size: 13.5px; }
+  .rates div { display: flex; justify-content: space-between; gap: 12px; padding: 10px 14px; }
+  .rates div + div { border-top: 1px solid var(--line); }
+  .rates dt { color: var(--muted); }
+  .rates dd { font-family: var(--mono); font-weight: 500; font-variant-numeric: tabular-nums; }
+  .plan .btn { margin-top: 24px; }
+  .fine { margin-top: 10px; text-align: center; font-size: 12.5px; color: var(--faint); }
+  .feat-h { margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 600; }
+  .feats { list-style: none; margin-top: 14px; display: grid; gap: 11px; font-size: 14.5px; }
+  .feats li { display: flex; gap: 10px; align-items: flex-start; }
+  .chk { flex: none; width: 16px; height: 16px; margin-top: 3px; color: var(--ink); }
+  .plan.dark { background: var(--ink); border-color: var(--ink); color: var(--paper); box-shadow: 0 32px 64px -32px rgba(21,20,15,.6); }
+  .plan.dark .plan-desc, .plan.dark .price span, .plan.dark .rates dt { color: rgba(245,244,239,.64); }
+  .plan.dark .rates, .plan.dark .rates div + div, .plan.dark .feat-h { border-color: rgba(245,244,239,.14); }
+  .plan.dark .fine { color: rgba(245,244,239,.5); }
+  .plan.dark .chk { color: var(--accent); }
+  .plans-note { display: flex; justify-content: space-between; gap: 32px; margin-top: 20px; font-size: 13px; color: var(--muted); }
+  .plans-note span:last-child { display: inline-flex; align-items: center; gap: 8px; color: var(--ink); font-weight: 500; }
+  .plans-note span:last-child::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+  /* Sections */
+  .sec { padding: 96px 0; border-top: 1px solid var(--line); }
+  .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 48px; margin-bottom: 40px; }
+  h2 { margin-top: 14px; font-size: 40px; line-height: 1.08; letter-spacing: -0.03em; font-weight: 600; }
+  .sec-head p { max-width: 30em; font-size: 16px; color: var(--muted); }
+
+  /* Estimator */
+  .est-grid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 16px; }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 32px; display: flex; flex-direction: column; }
+  .est-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+  .est-top label { font-size: 14px; color: var(--muted); }
+  .est-val { font: 600 34px/1 var(--mono); letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .est-val small { margin-left: 6px; font: 400 14px/1 var(--sans); letter-spacing: 0; color: var(--muted); }
+  input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 28px; margin-top: 22px; background: transparent; cursor: pointer; }
+  input[type=range]::-webkit-slider-runnable-track { height: 6px; border-radius: 999px; background: linear-gradient(to right, var(--ink) 0 var(--p), var(--line) var(--p) 100%); }
+  input[type=range]::-moz-range-track { height: 6px; border-radius: 999px; background: linear-gradient(to right, var(--ink) 0 var(--p), var(--line) var(--p) 100%); }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; margin-top: -8px; border-radius: 50%; background: var(--card); border: 2px solid var(--ink); box-shadow: 0 2px 6px rgba(21,20,15,.18); }
+  input[type=range]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--card); border: 2px solid var(--ink); box-shadow: 0 2px 6px rgba(21,20,15,.18); }
+  input[type=range]:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+  .ticks { position: relative; height: 16px; margin-top: 6px; font: 12px/1 var(--mono); color: var(--faint); }
+  .ticks span { position: absolute; top: 0; transform: translateX(-50%); }
+  .est-out { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin-top: 28px; }
+  .out { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+  .out h4 { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 20px; font-size: 13.5px; font-weight: 500; color: var(--muted); }
+  .out .best-tag { display: none; font: 500 10.5px/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; background: var(--accent); color: var(--ink); padding: 4px 7px; border-radius: 999px; }
+  .out .cost { margin-top: 10px; font-size: 28px; line-height: 1.1; font-weight: 600; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
+  .out .cost small { margin-left: 2px; font-size: 13px; font-weight: 400; letter-spacing: 0; color: var(--muted); }
+  .out .math { margin-top: 6px; font: 12px/1.4 var(--mono); color: var(--faint); }
+  .out.best { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
+  .out.best h4 { color: var(--ink); }
+  .out.best .best-tag { display: inline-block; }
+  .est-note { margin-top: auto; padding-top: 20px; font-size: 14px; color: var(--muted); }
+  .est-note-wrap { margin-top: 24px; border-top: 1px solid var(--line); }
+  .panel h3 { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; }
+  .panel .sub { margin-top: 4px; font-size: 14px; color: var(--muted); }
+  .rate-list { list-style: none; margin-top: 18px; }
+  .rate-list li { display: grid; grid-template-columns: 40px minmax(0, 1fr) auto; align-items: center; padding: 11px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .cc { width: 28px; padding: 4px 0; border-radius: 4px; background: var(--paper-2); text-align: center; font: 500 11px/1 var(--mono); color: var(--muted); }
+  .rate-list .px { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+  .rate-list .px small { font-size: 12px; color: var(--faint); }
+  .more { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 500; color: var(--accent-ink); }
+
+  /* Compare */
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  thead th { padding: 20px 20px 18px; text-align: left; vertical-align: bottom; font-size: 16px; font-weight: 600; border-radius: 12px 12px 0 0; }
+  thead th:first-child { padding-left: 0; }
+  thead th small { display: block; margin-top: 2px; font-size: 13px; font-weight: 400; color: var(--muted); }
+  tbody th { padding: 13px 20px 13px 0; text-align: left; font-weight: 400; border-top: 1px solid var(--line); }
+  tbody td { padding: 13px 20px; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+  .hl { background: rgba(21,20,15,.035); }
+  tr.grp th, tr.grp td { padding-top: 34px; padding-bottom: 10px; border-top: 0; }
+  tr.grp th { font: 500 11.5px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--faint); }
+  tbody tr:last-child td.hl { border-radius: 0 0 12px 12px; }
+  td .chk { margin-top: 0; vertical-align: -3px; }
+  .no { color: var(--line-2); }
+
+  /* FAQ */
+  .faq-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 72px; }
+  .faq-side p { margin-top: 16px; font-size: 15px; color: var(--muted); max-width: 22em; }
+  .faq-side .btn { margin-top: 24px; }
+  .qa-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 48px; padding-top: 8px; }
+  .qa h3 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; }
+  .qa p { margin-top: 8px; font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+  /* CTA */
+  .cta { padding: 0 0 96px; }
+  .cta-box { position: relative; overflow: hidden; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 56px; align-items: center; padding: 56px; border-radius: 20px; background: var(--ink); color: var(--paper); }
+  .cta-art { position: absolute; right: -140px; top: 50%; width: 520px; height: 520px; transform: translateY(-50%); color: rgba(245,244,239,.07); pointer-events: none; }
+  .cta-box > div { position: relative; z-index: 1; }
+  .cta-box h2 { margin-top: 0; font-size: 42px; }
+  .cta-box p { margin-top: 14px; font-size: 17px; color: rgba(245,244,239,.66); }
+  .install { display: flex; gap: 10px; padding: 13px 16px; border-radius: 10px; background: rgba(245,244,239,.06); border: 1px solid rgba(245,244,239,.12); font: 14px/1.2 var(--mono); }
+  .install span { color: var(--accent); }
+  .cta-btns { display: flex; gap: 10px; margin-top: 12px; }
+
+  /* Footer */
+  .foot { border-top: 1px solid var(--line); padding: 28px 0 40px; font-size: 13.5px; color: var(--muted); }
+  .foot .wrap { display: flex; align-items: center; gap: 32px; }
+  .foot nav { display: flex; gap: 24px; }
+  .live { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
+  .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--ok); }
+
+  @media (max-width: 1040px) {
+    .hero .wrap, .est-grid, .faq-grid, .cta-box { grid-template-columns: minmax(0, 1fr); }
+    .receipt-col { max-width: 460px; }
+    .plans-grid { grid-template-columns: minmax(0, 1fr); max-width: 480px; }
+    .sec-head, .plans-note { flex-direction: column; align-items: flex-start; }
+    .nav-links { display: none; }
+    .table-scroll { overflow-x: auto; }
+    table { min-width: 720px; }
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    h1 { font-size: 44px; }
+    h2 { font-size: 32px; }
+    .stats { flex-wrap: wrap; gap: 16px; }
+    .stat { border: 0; margin: 0; padding: 0; }
+    .est-out, .qa-grid { grid-template-columns: minmax(0, 1fr); }
+    .cta-box { padding: 32px 24px; }
+    .cta-btns { flex-direction: column; }
+    .nav-right a:first-child, .foot nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="chk" viewBox="0 0 16 16"><path d="M3 8.5l3.2 3.1L13 4.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="#" class="brand" aria-label="Relay home">
+      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+        <rect width="24" height="24" rx="6" fill="#15140F"/>
+        <circle cx="7" cy="12" r="2.4" fill="#EE5A24"/>
+        <path d="M11 12h7m-3.2-3.4L18.2 12l-3.4 3.4" fill="none" stroke="#F5F4EF" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Relay
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#">Product</a>
+      <a href="#">Docs</a>
+      <a href="#" aria-current="page">Pricing</a>
+      <a href="#">Customers</a>
+      <a href="#">Changelog</a>
+    </nav>
+    <div class="nav-right">
+      <a href="#">Sign in</a>
+      <a href="#" class="btn btn-ink">Get API key</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Pricing</span>
+        <h1 id="hero-title">Pay for the texts<br>that arrive<span class="stop">.</span></h1>
+        <p class="lede">Every plan sends over the same carrier-direct routes with the same API. Plans differ in included volume, throughput and support. Messages a carrier rejects are never billed.</p>
+        <div class="stats">
+          <div class="stat"><b>1.8 s</b><span>median delivery, US carriers</span></div>
+          <div class="stat"><b>99.99%</b><span>API uptime, last 90 days</span></div>
+          <div class="stat"><b>190+</b><span>countries reachable</span></div>
+        </div>
+      </div>
+
+      <div class="receipt-col" aria-label="Example message and its cost">
+        <div class="receipt">
+          <div class="r-head"><span class="verb">POST</span><span>/v1/messages</span><span class="status">202 Accepted</span></div>
+<pre class="code"><span class="p">{</span>
+  "to"<span class="p">:</span> <span class="s">"+14155550142"</span><span class="p">,</span>
+  "from"<span class="p">:</span> <span class="s">"+18885550123"</span><span class="p">,</span>
+  "body"<span class="p">:</span> <span class="s">"482913 is your sign-in code"</span>
+<span class="p">}</span></pre>
+          <ol class="events">
+            <li class="ev"><i></i><span class="st">queued</span><span class="desc">accepted by Relay</span><time>+0 ms</time></li>
+            <li class="ev"><i></i><span class="st">sent</span><span class="desc">carrier-direct, T-Mobile US</span><time>+212 ms</time></li>
+            <li class="ev ok"><i></i><span class="st">delivered</span><span class="desc">handset receipt</span><time>+1,764 ms</time></li>
+          </ol>
+          <div class="r-foot"><span class="mono">1 segment · GSM-7 · 27 chars</span><span>billed<b>$0.0083</b></span></div>
+        </div>
+        <div class="sms">
+          <div class="sms-meta">MESSAGES · NOW</div>
+          <div class="sms-bubble">482913 is your sign-in code</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="plans" aria-label="Plans">
+    <div class="wrap">
+      <div class="plans-grid">
+        <article class="plan">
+          <div class="plan-top"><h3>Developer</h3></div>
+          <p class="plan-desc">For prototypes, side projects and low-volume alerts.</p>
+          <div class="price"><b>$0</b><span>/ month</span></div>
+          <dl class="rates">
+            <div><dt>Included segments</dt><dd>None</dd></div>
+            <div><dt>Per segment</dt><dd>$0.0083</dd></div>
+          </dl>
+          <a href="#" class="btn btn-line btn-lg btn-block">Start free</a>
+          <p class="fine">No card required · $5 of live credit</p>
+          <p class="feat-h">Includes</p>
+          <ul class="feats">
+            <li><svg class="chk"><use href="#chk"/></svg>REST API and SDKs in 6 languages</li>
+            <li><svg class="chk"><use href="#chk"/></svg>Delivery and inbound webhooks</li>
+            <li><svg class="chk"><use href="#chk"/></svg>1 toll-free sender number</li>
+            <li><svg class="chk"><use href="#chk"/></svg>10 messages per second</li>
+            <li><svg class="chk"><use href="#chk"/></svg>7-day message logs</li>
+            <li><svg class="chk"><use href="#chk"/></svg>Community and docs support</li>
+          </ul>
+        </article>
+
+        <article class="plan dark">
+          <div class="plan-top"><h3>Growth</h3><span class="tag">Best for production</span></div>
+          <p class="plan-desc">For products in production that send OTPs, receipts and alerts every day.</p>
+          <div class="price"><b>$79</b><span>/ month</span></div>
+          <dl class="rates">
+            <div><dt>Included segments</dt><dd>10,000 / mo</dd></div>
+            <div><dt>Then, per segment</dt><dd>$0.0071</dd></div>
+          </dl>
+          <a href="#" class="btn btn-accent btn-lg btn-block">Start with Growth</a>
+          <p class="fine">Billed monthly · cancel anytime</p>
+          <p class="feat-h">Everything in Developer, plus</p>
+          <ul class="feats">
+            <li><svg class="chk"><use href="#chk"/></svg>10DLC registration done for you</li>
+            <li><svg class="chk"><use href="#chk"/></svg>3 sender numbers, toll-free or 10DLC</li>
+            <li><svg class="chk"><use href="#chk"/></svg>OTP verify endpoint with fraud checks</li>
+            <li><svg class="chk"><use href="#chk"/></svg>100 messages per second</li>
+            <li><svg class="chk"><use href="#chk"/></svg>90-day logs and delivery analytics</li>
+            <li><svg class="chk"><use href="#chk"/></svg>99.9% uptime SLA, email support</li>
+          </ul>
+        </article>
+
+        <article class="plan">
+          <div class="plan-top"><h3>Scale</h3></div>
+          <p class="plan-desc">For high volume, regulated industries and teams that need a contract.</p>
+          <div class="price"><b>Custom</b></div>
+          <dl class="rates">
+            <div><dt>Monthly minimum</dt><dd>$1,500</dd></div>
+            <div><dt>Per segment</dt><dd>from $0.0049</dd></div>
+          </dl>
+          <a href="#" class="btn btn-ink btn-lg btn-block">Talk to sales</a>
+          <p class="fine">Annual contract · volume pricing</p>
+          <p class="feat-h">Everything in Growth, plus</p>
+          <ul class="feats">
+            <li><svg class="chk"><use href="#chk"/></svg>Dedicated short code</li>
+            <li><svg class="chk"><use href="#chk"/></svg>1,000+ messages per second</li>
+            <li><svg class="chk"><use href="#chk"/></svg>99.99% uptime SLA with credits</li>
+            <li><svg class="chk"><use href="#chk"/></svg>SSO, audit logs and EU data residency</li>
+            <li><svg class="chk"><use href="#chk"/></svg>HIPAA BAA available</li>
+            <li><svg class="chk"><use href="#chk"/></svg>Shared Slack channel, 1-hour response</li>
+          </ul>
+        </article>
+      </div>
+      <p class="plans-note">
+        <span>Prices in USD for messages to US and Canada numbers. 10DLC and toll-free carrier fees are passed through at cost.</span>
+        <span>Failed and carrier-rejected messages are never billed</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="est-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Estimate</span>
+          <h2 id="est-title">What will it cost at your volume?</h2>
+        </div>
+        <p>Growth costs less than pay-as-you-go above about 9,500 segments a month. Scale wins past roughly 210,000.</p>
+      </div>
+
+      <div class="est-grid">
+        <div class="panel">
+          <div class="est-top">
+            <label for="vol">Segments per month</label>
+            <div class="est-val"><span id="vol-out">50,000</span><small>segments</small></div>
+          </div>
+          <input type="range" id="vol" min="0" max="9" step="1" value="4" style="--p:44.444%" aria-valuetext="50,000 segments">
+          <div class="ticks" aria-hidden="true">
+            <span style="left:calc(11px + (100% - 22px) * 0)">1k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.1111)">5k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.2222)">10k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.3333)">25k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.4444)">50k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.5556)">100k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.6667)">250k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.7778)">500k</span>
+            <span style="left:calc(11px + (100% - 22px) * 0.8889)">1M</span>
+            <span style="left:calc(11px + (100% - 22px) * 1)">2M</span>
+          </div>
+          <div class="est-out" aria-live="polite">
+            <div class="out" id="o-dev"><h4>Developer<span class="best-tag">Lowest</span></h4><div class="cost"><span id="c-dev">$415</span><small>/mo</small></div><div class="math" id="m-dev">50k × $0.0083</div></div>
+            <div class="out best" id="o-gro"><h4>Growth<span class="best-tag">Lowest</span></h4><div class="cost"><span id="c-gro">$363</span><small>/mo</small></div><div class="math" id="m-gro">$79 + 40k × $0.0071</div></div>
+            <div class="out" id="o-sca"><h4>Scale<span class="best-tag">Lowest</span></h4><div class="cost"><span id="c-sca">$1,500</span><small>/mo</small></div><div class="math" id="m-sca">$1,500 monthly minimum</div></div>
+          </div>
+          <p class="est-note" id="est-note">Growth saves you $52 a month compared with pay-as-you-go.</p>
+        </div>
+
+        <div class="panel">
+          <h3>Sending outside North America</h3>
+          <p class="sub">Per segment, the same on every plan.</p>
+          <ul class="rate-list">
+            <li><span class="cc">GB</span><span>United Kingdom</span><span class="px">$0.0412</span></li>
+            <li><span class="cc">DE</span><span>Germany</span><span class="px">$0.0861</span></li>
+            <li><span class="cc">FR</span><span>France</span><span class="px">$0.0790</span></li>
+            <li><span class="cc">BR</span><span>Brazil</span><span class="px">$0.0365</span></li>
+            <li><span class="cc">MX</span><span>Mexico</span><span class="px">$0.0298</span></li>
+            <li><span class="cc">AU</span><span>Australia</span><span class="px">$0.0515</span></li>
+          </ul>
+          <a href="#" class="more">See rates for all 190+ countries →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="cmp-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Compare</span>
+          <h2 id="cmp-title">Every feature, side by side.</h2>
+        </div>
+        <p>All plans share the same routes, API and delivery infrastructure. What changes is volume, throughput, compliance and who picks up when you need help.</p>
+      </div>
+
+      <div class="table-scroll">
+        <table>
+          <colgroup><col style="width:34%"><col style="width:22%"><col style="width:22%"><col style="width:22%"></colgroup>
+          <thead>
+            <tr>
+              <th scope="col"><span class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Feature</span></th>
+              <th scope="col">Developer<small>$0 / month + usage</small></th>
+              <th scope="col" class="hl">Growth<small>$79 / month</small></th>
+              <th scope="col">Scale<small>Custom, annual</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="grp"><th scope="colgroup">Messaging</th><td></td><td class="hl"></td><td></td></tr>
+            <tr><th scope="row">Price per US segment</th><td>$0.0083</td><td class="hl">$0.0071 after 10k</td><td>from $0.0049</td></tr>
+            <tr><th scope="row">Included segments per month</th><td><span class="no">—</span></td><td class="hl">10,000</td><td>Committed volume</td></tr>
+            <tr><th scope="row">Sender numbers</th><td>1 toll-free</td><td class="hl">3</td><td>Unlimited + short code</td></tr>
+            <tr><th scope="row">Throughput</th><td>10 msg/s</td><td class="hl">100 msg/s</td><td>1,000+ msg/s</td></tr>
+            <tr><th scope="row">Two-way messaging and inbound webhooks</th><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td class="hl"><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+            <tr><th scope="row">Scheduled sends and templates</th><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td class="hl"><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+            <tr><th scope="row">OTP verify endpoint</th><td><span class="no" aria-label="Not included">—</span></td><td class="hl"><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+
+            <tr class="grp"><th scope="colgroup">Reliability</th><td></td><td class="hl"></td><td></td></tr>
+            <tr><th scope="row">Carrier failover and automatic retries</th><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td class="hl"><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+            <tr><th scope="row">Message log retention</th><td>7 days</td><td class="hl">90 days</td><td>13 months</td></tr>
+            <tr><th scope="row">Uptime SLA</th><td><span class="no" aria-label="None">—</span></td><td class="hl">99.9%</td><td>99.99% with credits</td></tr>
+
+            <tr class="grp"><th scope="colgroup">Compliance and security</th><td></td><td class="hl"></td><td></td></tr>
+            <tr><th scope="row">10DLC brand and campaign registration</th><td>Self-serve</td><td class="hl">Done for you</td><td>Done for you</td></tr>
+            <tr><th scope="row">Opt-out handling (STOP, HELP)</th><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td class="hl"><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+            <tr><th scope="row">SSO (SAML) and audit logs</th><td><span class="no" aria-label="Not included">—</span></td><td class="hl"><span class="no" aria-label="Not included">—</span></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+            <tr><th scope="row">EU data residency</th><td><span class="no" aria-label="Not included">—</span></td><td class="hl"><span class="no" aria-label="Not included">—</span></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+            <tr><th scope="row">HIPAA BAA</th><td><span class="no" aria-label="Not included">—</span></td><td class="hl"><span class="no" aria-label="Not included">—</span></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+
+            <tr class="grp"><th scope="colgroup">Support</th><td></td><td class="hl"></td><td></td></tr>
+            <tr><th scope="row">Channel</th><td>Community and docs</td><td class="hl">Email</td><td>Shared Slack channel</td></tr>
+            <tr><th scope="row">First response</th><td><span class="no" aria-label="None">—</span></td><td class="hl">1 business day</td><td>1 hour</td></tr>
+            <tr><th scope="row">Named technical account manager</th><td><span class="no" aria-label="Not included">—</span></td><td class="hl"><span class="no" aria-label="Not included">—</span></td><td><svg class="chk" aria-label="Included"><use href="#chk"/></svg></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="faq-title">
+    <div class="wrap faq-grid">
+      <div class="faq-side">
+        <span class="eyebrow">FAQ</span>
+        <h2 id="faq-title">Billing questions, answered.</h2>
+        <p>Something we missed? The billing team replies within one business day, on every plan.</p>
+        <a href="#" class="btn btn-line">Contact billing</a>
+      </div>
+      <div class="qa-grid">
+        <div class="qa">
+          <h3>What counts as a segment?</h3>
+          <p>An SMS is billed in segments of 160 characters, or 70 if it contains emoji or non-Latin characters. Longer messages are split and each part is billed. Every API response includes the segment count.</p>
+        </div>
+        <div class="qa">
+          <h3>Am I charged for failed messages?</h3>
+          <p>No. If a carrier rejects a message or it can't be delivered, it isn't billed. You still get the failure webhook with the carrier's reason code.</p>
+        </div>
+        <div class="qa">
+          <h3>What happens if I go over 10,000 on Growth?</h3>
+          <p>Extra segments are billed at $0.0071 at the end of the month. Nothing is throttled and your plan never changes without you.</p>
+        </div>
+        <div class="qa">
+          <h3>Can I test without paying?</h3>
+          <p>Yes. Test mode is free on every plan and returns realistic delivery webhooks without touching a carrier. New accounts also get $5 of live credit.</p>
+        </div>
+        <div class="qa">
+          <h3>How are international rates set?</h3>
+          <p>Per destination country, based on carrier cost plus a fixed margin. The full table is in the dashboard and published as JSON, so you can price messages before sending.</p>
+        </div>
+        <div class="qa">
+          <h3>Can I switch plans later?</h3>
+          <p>Anytime. Upgrades apply immediately and are prorated. Downgrades take effect at the start of your next billing cycle.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta-box">
+        <svg class="cta-art" viewBox="0 0 520 520" aria-hidden="true">
+          <g fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="260" cy="260" r="70"/>
+            <circle cx="260" cy="260" r="130"/>
+            <circle cx="260" cy="260" r="190"/>
+            <circle cx="260" cy="260" r="250"/>
+          </g>
+        </svg>
+        <div>
+          <h2 id="cta-title">Send your first text in five minutes.</h2>
+          <p>Free test mode, $5 of live credit, no card required.</p>
+        </div>
+        <div>
+          <div class="install"><span>$</span>npm install @relay/sdk</div>
+          <div class="cta-btns">
+            <a href="#" class="btn btn-accent btn-lg">Get an API key</a>
+            <a href="#" class="btn btn-ghost btn-lg">Talk to sales</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span>© 2026 Relay, Inc.</span>
+    <nav aria-label="Footer">
+      <a href="#">Docs</a>
+      <a href="#">Rate table</a>
+      <a href="#">Security</a>
+      <a href="#">Terms</a>
+      <a href="#">Privacy</a>
+    </nav>
+    <a href="#" class="live">All systems operational</a>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var steps = [1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000, 2000000];
+  var range = document.getElementById('vol');
+  var $ = function (id) { return document.getElementById(id); };
+  var num = function (v) { return v.toLocaleString('en-US'); };
+  var short = function (v) {
+    if (v >= 1e6) return +(v / 1e6).toFixed(2) + 'M';
+    if (v >= 1e3) return +(v / 1e3).toFixed(1) + 'k';
+    return String(v);
+  };
+  var usd = function (v) {
+    var c = Math.round(v * 100) / 100;
+    var d = Number.isInteger(c) ? 0 : 2;
+    return '$' + c.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+  };
+  var names = { dev: 'Developer', gro: 'Growth', sca: 'Scale' };
+
+  function update() {
+    var i = +range.value, v = steps[i];
+    range.style.setProperty('--p', (i / (steps.length - 1) * 100) + '%');
+    range.setAttribute('aria-valuetext', num(v) + ' segments');
+    $('vol-out').textContent = num(v);
+
+    var cost = {
+      dev: v * 0.0083,
+      gro: 79 + Math.max(0, v - 10000) * 0.0071,
+      sca: Math.max(1500, v * 0.0049)
+    };
+    $('c-dev').textContent = usd(cost.dev);
+    $('m-dev').textContent = short(v) + ' × $0.0083';
+    $('c-gro').textContent = usd(cost.gro);
+    $('m-gro').textContent = v <= 10000 ? '10k included' : '$79 + ' + short(v - 10000) + ' × $0.0071';
+    $('c-sca').textContent = usd(cost.sca);
+    $('m-sca').textContent = v * 0.0049 < 1500 ? '$1,500 monthly minimum' : short(v) + ' × $0.0049';
+
+    var best = ['dev', 'gro', 'sca'].reduce(function (a, b) { return cost[b] < cost[a] ? b : a; });
+    ['dev', 'gro', 'sca'].forEach(function (k) { $('o-' + k).classList.toggle('best', k === best); });
+    $('est-note').textContent = best === 'dev'
+      ? 'At this volume, pay-as-you-go on Developer is the cheapest option.'
+      : names[best] + ' saves you ' + usd(cost.dev - cost[best]) + ' a month compared with pay-as-you-go.';
+  }
+
+  range.addEventListener('input', update);
+  update();
+})();
+</script>
+</body>
+</html>

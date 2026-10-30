@@ -1,858 +1,648 @@
 <!doctype html>
+<!--
+  Direction: a full-bleed pink message slip. The "While You Were Out" office pad, redone for the meeting you were in.
+  Rejected: field notebook (kraft and serif, the name's reflex); dark tape deck with a giant waveform (any recorder could wear it).
+  Type: American Type Founders gothics by M. F. Benton, the faces office forms were printed in. League Gothic (Alternate Gothic, 1903), Libre Franklin (Franklin Gothic, 1902).
+  References: mappy (flat saturated field, one arguing sentence), Pixel Icons on Awwwards (condensed caps filling a color field),
+  Timeless Craft on Supahero (full-width headline with the object hanging under it), Felix Haas (someone's words as the picture).
+-->
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fieldnote: the follow-up email, already written</title>
-<meta name="description" content="Fieldnote records your calls, keeps track of what everyone agreed to, and drafts the follow-up email the way you would write it.">
+<title>Fieldnote: the follow-up email, written while you talk</title>
+<meta name="description" content="Fieldnote records your meetings and has the follow-up email in your drafts when the call ends. You read it and press send.">
+<meta name="theme-color" content="#fc959f">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fc959f'/%3E%3Cpath d='M7 17l6.5 6.5L25 9' fill='none' stroke='%233f0f1b' stroke-width='5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Libre+Franklin:wght@400;600&display=swap">
 <style>
   :root {
-    --yellow: oklch(0.87 0.165 95);
-    --mark: oklch(0.935 0.1 96);
-    --mark-strong: oklch(0.875 0.16 95);
-    --ink: oklch(0.21 0.015 85);
-    --ink-2: oklch(0.37 0.02 85);
-    --ink-3: oklch(0.47 0.015 85);
-    --paper: oklch(0.982 0.006 95);
-    --paper-2: oklch(0.96 0.009 95);
-    --sheet: oklch(0.995 0.003 95);
-    --line: oklch(0.21 0.015 85 / 0.08);
-    --line-2: oklch(0.21 0.015 85 / 0.12);
-    --on-ink: oklch(0.975 0.006 95);
-    --on-ink-2: oklch(0.8 0.012 95);
-    --on-ink-line: oklch(0.975 0.006 95 / 0.14);
-    --rec: oklch(0.6 0.19 28);
-    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-    --ease-smooth: cubic-bezier(0.25, 0.4, 0.25, 1);
-    --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.03);
-    --shadow-lift: 0 8px 40px rgba(0, 0, 0, 0.08);
-    --gutter: clamp(16px, 4.5vw, 64px);
-    --max: 1312px;
+    --pink: oklch(0.78 0.125 14);
+    --ink: oklch(0.25 0.08 12);
+    --sheet: oklch(0.985 0.006 6);
+    --tint: oklch(0.93 0.045 14);
+    --hair: color-mix(in oklch, var(--ink) 9%, transparent);
+    --blank: color-mix(in oklch, var(--ink) 34%, transparent);
+    --gutter: clamp(20px, 3.334vw, 72px);
+    --expo: cubic-bezier(0.22, 1, 0.36, 1);
+    --smooth: cubic-bezier(0.25, 0.4, 0.25, 1);
+    --display: "League Gothic", "Arial Narrow", Impact, sans-serif;
+    --text: "Libre Franklin", "Franklin Gothic Medium", Arial, sans-serif;
+    --p: 1;
+    --poster: clamp(64px, 13.34vw, 243px);
+    --tape-h: 88px;
+    color-scheme: light;
   }
 
   *, *::before, *::after { box-sizing: border-box; }
-  html {
-    color-scheme: light;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-size-adjust: 100%;
-    text-size-adjust: 100%;
-  }
-  body {
-    margin: 0;
-    background: var(--paper);
-    color: var(--ink);
-    font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-    font-size: 17px;
-    line-height: 1.55;
-    font-weight: 400;
-    overflow-x: clip;
-  }
-  h1, h2, h3, p, ol, ul, dl, dd, figure { margin: 0; }
-  ol, ul { padding: 0; list-style: none; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body { margin: 0; background: var(--pink); color: var(--ink); font: 400 18px/1.5 var(--text); }
+  h1, h2, h3, p, ul, ol, dl, dd { margin: 0; padding: 0; }
+  ul, ol { list-style: none; }
   a { color: inherit; }
-  h1, h2, h3 { font-weight: 600; text-wrap: balance; }
-  p, li, dd { text-wrap: pretty; }
+  button, input { font: inherit; color: inherit; }
+  p, li { text-wrap: pretty; }
+  h2, h3 { text-wrap: balance; }
+  [id] { scroll-margin-top: 24px; }
+  b { font-weight: 600; }
 
-  .wrap { max-width: calc(var(--max) + var(--gutter) * 2); margin-inline: auto; padding-inline: var(--gutter); }
+  .wrap { max-width: 1840px; margin-inline: auto; padding-inline: var(--gutter); }
 
-  .sr-only {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
+  .skip { position: absolute; left: var(--gutter); top: 12px; z-index: 10; padding: 10px 16px; background: var(--ink); color: var(--pink); border-radius: 6px; transform: translateY(-200%); transition: transform 200ms var(--expo); }
+  .skip:focus { transform: none; }
 
-  .skip {
-    position: absolute; left: 16px; top: 16px; z-index: 10;
-    padding: 10px 16px; border-radius: 8px;
-    background: var(--ink); color: var(--on-ink);
-    font-weight: 600; text-decoration: none;
-    transform: translateY(-160%);
-    transition: transform 160ms var(--ease-out);
-  }
-  .skip:focus-visible { transform: translateY(0); }
+  :focus-visible { outline: 3px solid currentColor; outline-offset: 3px; border-radius: 3px; }
 
-  :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
-  .privacy :focus-visible { outline-color: var(--on-ink); }
+  .display { font-family: var(--display); font-weight: 400; letter-spacing: -0.02em; text-transform: uppercase; }
 
-  section[id] { scroll-margin-top: 24px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 22px; border: 0; border-radius: 8px; background: var(--ink); color: var(--pink); font-weight: 600; font-size: 17px; text-decoration: none; cursor: pointer; transition-property: transform, box-shadow, opacity; transition-duration: 200ms; transition-timing-function: var(--expo); }
+  .btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08); }
+  .btn:active:not(:disabled) { transform: scale(0.96); }
+  .btn:disabled { opacity: 0.45; cursor: default; }
+  .btn-lg { min-height: 60px; padding: 0 30px; font-size: 20px; white-space: nowrap; }
+  .sheet .btn { color: var(--sheet); }
 
-  /* Buttons and links */
-  .btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    min-height: 48px; padding: 0 22px; border-radius: 10px;
-    background: var(--ink); color: var(--on-ink);
-    font: inherit; font-size: 16px; font-weight: 600; letter-spacing: -0.01em;
-    text-decoration: none; white-space: nowrap;
-    box-shadow: var(--shadow-card);
-    transition-property: transform, box-shadow;
-    transition-duration: 160ms;
-    transition-timing-function: var(--ease-out);
-    touch-action: manipulation;
-  }
-  .btn svg { width: 16px; height: 16px; flex: none; }
-  .btn-sm { min-height: 40px; padding: 0 16px; font-size: 15px; border-radius: 9px; }
-  .btn:active { transform: scale(0.97); }
-
-  .textlink {
-    display: inline-flex; align-items: center; min-height: 40px;
-    font-weight: 600; font-size: 16px; text-decoration: underline;
-    text-decoration-thickness: 1px; text-underline-offset: 5px;
-    text-decoration-color: var(--line-2);
-    transition: text-underline-offset 160ms var(--ease-out), text-decoration-color 160ms ease;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
-    .btn:hover:active { transform: translateY(-2px) scale(0.97); }
-    .textlink:hover { text-underline-offset: 3px; text-decoration-color: currentColor; }
-  }
-
-  /* Header */
-  .top { background: var(--yellow); }
-  .nav { display: flex; align-items: center; gap: 40px; min-height: 80px; }
-  .brand {
-    display: inline-flex; align-items: center; gap: 10px; min-height: 40px;
-    font-size: 21px; font-weight: 600; letter-spacing: -0.03em; text-decoration: none;
-  }
-  .brand svg { width: 22px; height: 22px; color: var(--ink); }
-  .nav-links { display: flex; gap: 28px; }
-  .nav-links a {
-    display: inline-flex; align-items: center; min-height: 40px;
-    font-size: 15px; color: var(--ink-2); text-decoration: none;
-    background: linear-gradient(currentColor, currentColor) 0 calc(100% - 8px) / 0 1px no-repeat;
-    transition: background-size 220ms var(--ease-out);
-  }
-  .nav-links a:hover { background-size: 100% 1px; }
-  .nav-end { margin-left: auto; display: flex; align-items: center; gap: 20px; }
-  .nav-end .textlink { font-size: 15px; }
+  /* Nav */
+  .nav { display: flex; align-items: center; justify-content: space-between; padding-block: 16px 12px; }
+  .mark { font: 400 36px/1 var(--display); text-transform: uppercase; text-decoration: none; }
+  .nav ul { display: flex; align-items: center; gap: 8px; }
+  .nav li a:not(.btn) { display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; text-decoration: none; font-size: 17px; transition: transform 200ms var(--expo); }
+  .nav li a:not(.btn):hover { transform: translateY(-2px); }
+  .nav .btn { margin-left: 12px; }
 
   /* Hero */
-  .hero {
-    background:
-      linear-gradient(var(--yellow), var(--yellow)) top / 100% calc(100% - 240px) no-repeat,
-      var(--paper);
-    padding-top: 64px;
-  }
-  .hero-copy {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 340px;
-    column-gap: 64px;
-    align-items: end;
-  }
-  .hero h1 {
-    font-size: clamp(44px, 5.8vw, 84px);
-    line-height: 0.98;
-    letter-spacing: -0.042em;
-  }
-  .lede { font-size: 19px; line-height: 1.5; color: var(--ink-2); }
-  .actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; margin-top: 28px; }
+  .poster { font-size: var(--poster); line-height: 0.94; }
+  .poster span { display: block; white-space: nowrap; }
+  .lede { display: grid; grid-template-columns: minmax(0, 960px) auto; justify-content: space-between; align-items: center; gap: 32px; margin-top: 22px; }
+  .lede p { font-size: clamp(20px, 1.6vw, 28px); line-height: 1.32; }
 
-  /* Product demo */
-  .demo {
-    margin-top: 64px;
-    background: var(--sheet);
-    border-radius: 16px;
-    box-shadow: 0 0 0 1px var(--line), var(--shadow-lift);
-    overflow: hidden;
-  }
-  .demo-bar {
-    display: flex; align-items: center; justify-content: space-between; gap: 24px;
-    min-height: 56px; padding: 0 20px 0 24px;
-    border-bottom: 1px solid var(--line);
-    font-size: 14px; color: var(--ink-3);
-  }
-  .crumbs { display: flex; align-items: center; gap: 8px; }
-  .crumbs svg { width: 14px; height: 14px; opacity: 0.6; }
-  .crumbs b { color: var(--ink); font-weight: 600; }
-  .meta { display: flex; align-items: center; gap: 10px; font-size: 13px; }
-  .people { display: flex; gap: 4px; margin-left: 8px; }
-  .av {
-    display: grid; place-items: center;
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--paper-2); color: var(--ink-2);
-    box-shadow: 0 0 0 2px var(--sheet);
-    font-size: 11px; font-weight: 600; letter-spacing: 0;
-  }
-  .av-you { background: var(--ink); color: var(--on-ink); }
+  /* The slip: form blanks and tick boxes */
+  .slip { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 24px 56px; margin-top: 34px; }
+  .blanks { display: grid; grid-template-columns: 0.8fr 1fr 1fr 0.8fr 1.7fr; gap: 20px; }
+  .blanks div { display: flex; align-items: baseline; gap: 10px; padding-bottom: 8px; border-bottom: 2px solid var(--blank); white-space: nowrap; }
+  .blanks dt { font-size: 15px; font-weight: 600; }
+  .boxes { display: flex; gap: 24px; font-size: 17px; font-weight: 600; }
+  .boxes li { display: flex; align-items: center; gap: 9px; }
+  .tick { display: block; flex: none; width: 26px; height: 26px; border: 2.5px solid var(--ink); border-radius: 3px; }
+  .tick path { fill: none; stroke: var(--ink); stroke-width: 3.4; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 450ms var(--expo); }
+  .off .tick path, .tick.off path { stroke-dashoffset: 1; }
 
-  .demo-body {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr);
-    column-gap: 112px;
-  }
-  .links {
-    position: absolute; inset: 0; width: 100%; height: 100%;
-    pointer-events: none; overflow: visible;
-  }
-  .links path {
-    fill: none; stroke: var(--ink);
-    stroke-width: var(--path-w, 1);
-    stroke-opacity: var(--path-o, 0.16);
-    stroke-linecap: round;
-    transition: stroke-opacity 200ms ease;
-  }
-  .links circle { fill: var(--ink); fill-opacity: var(--path-o, 0.16); transition: fill-opacity 200ms ease; }
+  /* The recording */
+  .rec { display: grid; grid-template-columns: 148px minmax(0, 1fr); gap: 28px; margin-top: 14px; align-items: end; }
+  .rec-side { display: flex; flex-direction: column; gap: 8px; }
+  .clock { font: 400 78px/0.88 var(--display); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .play { width: 100%; }
+  .play svg { width: 14px; height: 14px; fill: currentColor; }
+  .flags { position: relative; height: 40px; }
+  .drag { position: absolute; left: 0; top: 0; font-size: 15px; }
+  .flag { position: absolute; bottom: 0; left: calc(9px + (100% - 18px) * var(--at)); display: flex; align-items: flex-start; min-height: 40px; padding: 0 0 0 9px; border: 0; background: none; font-size: 15px; font-weight: 600; white-space: nowrap; cursor: pointer; transition: opacity 300ms var(--smooth), transform 200ms var(--expo); }
+  .flag::before { content: ""; position: absolute; left: -1px; top: 2px; bottom: 0; width: 2px; background: var(--ink); }
+  .flag:hover { transform: translateY(-2px); }
+  .flag.off { opacity: 0.62; }
+  .tape { position: relative; height: var(--tape-h); background: var(--ink); border-radius: 6px; touch-action: pan-y; }
+  .tape svg { position: absolute; inset: 0 9px; width: calc(100% - 18px); height: 100%; pointer-events: none; }
+  .tape path { fill: none; stroke-width: 3px; vector-effect: non-scaling-stroke; }
+  .wave-future path { stroke: color-mix(in oklch, var(--pink) 34%, var(--ink)); }
+  .wave-past { clip-path: inset(0 calc((1 - var(--p)) * 100%) 0 0); }
+  .wave-past .said-wave { stroke: var(--pink); }
+  .wave-past .kept-wave { stroke: var(--sheet); }
+  .tape input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; background: none; appearance: none; -webkit-appearance: none; cursor: ew-resize; touch-action: pan-y; }
+  .tape input:focus-visible { outline-offset: 2px; outline-color: var(--ink); border-radius: 6px; }
+  .tape input::-webkit-slider-runnable-track { height: var(--tape-h); background: none; }
+  .tape input::-moz-range-track { height: var(--tape-h); background: none; }
+  .tape input::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: var(--tape-h); border: 0; background: linear-gradient(var(--sheet), var(--sheet)) center / 3px 100% no-repeat, linear-gradient(var(--sheet), var(--sheet)) center / 11px 34px no-repeat; }
+  .tape input::-moz-range-thumb { width: 18px; height: var(--tape-h); border: 0; border-radius: 0; background: linear-gradient(var(--sheet), var(--sheet)) center / 3px 100% no-repeat, linear-gradient(var(--sheet), var(--sheet)) center / 11px 34px no-repeat; }
 
-  .pane-head {
-    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
-    padding: 22px 0 0;
-  }
-  .pane-title { font-size: 15px; font-weight: 600; letter-spacing: -0.01em; color: var(--ink); }
-  .pane-note { font-size: 13px; color: var(--ink-3); }
+  /* Said and sent */
+  .cols { position: relative; display: grid; grid-template-columns: 5fr 7fr; gap: 72px; margin-top: 30px; padding-bottom: 96px; }
+  .col-label { margin-bottom: 14px; font: 400 44px/1 var(--display); letter-spacing: -0.02em; text-transform: uppercase; }
+  .said li { display: grid; grid-template-columns: 50px 58px minmax(0, 1fr); gap: 0 10px; margin-inline: -10px; padding: 7px 10px; border-radius: 5px; font-size: 16.5px; line-height: 1.38; transition-property: opacity, background-color, color; transition-duration: 300ms; transition-timing-function: var(--smooth); }
+  .said li.off { opacity: 0.62; }
+  .said time { font-variant-numeric: tabular-nums; }
+  .said b { font-weight: 600; }
+  .said mark { background: linear-gradient(var(--sheet), var(--sheet)) left center / 100% 100% no-repeat; color: var(--ink); padding: 0.06em 0.28em; margin-inline: -0.1em; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; transition: background-size 600ms var(--expo); }
+  .said li.off mark { background-size: 0% 100%; }
+  .said li.lit { background: var(--ink); color: var(--pink); }
+  .thread { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
+  .thread path { fill: none; stroke: var(--ink); stroke-width: 2px; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .thread rect { fill: var(--ink); }
+  .thread.draw path { animation: draw 600ms var(--expo) both; }
+  @keyframes draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
 
-  .pane-rec {
-    background: var(--paper-2);
-    border-right: 1px solid var(--line);
-    padding: 0 20px 12px 24px;
-  }
+  .sheet { background: var(--sheet); border: 1px solid var(--hair); border-radius: 10px; box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08); }
+  .mail-head { padding: 12px 36px 0; }
+  .status { min-height: 44px; display: flex; align-items: center; font-size: 15px; font-weight: 600; }
+  .mail-head div { display: flex; gap: 14px; padding-block: 11px; border-top: 1px solid var(--hair); }
+  .mail-head dt { flex: none; width: 62px; font-size: 16px; opacity: 0.72; padding-top: 1px; }
+  .mail-head dd { font-weight: 600; }
+  .mail-body { padding: 20px 36px 8px; border-top: 1px solid var(--hair); font-size: 17.5px; line-height: 1.5; }
+  .mail-body > * + * { margin-top: 12px; }
+  .mail-body h3 { font-size: inherit; font-weight: 600; margin-top: 22px; }
+  .mail-body ul { margin-top: 4px; }
+  .line { transition-property: opacity, transform, filter, visibility; transition-duration: 550ms; transition-timing-function: var(--expo); }
+  .line.off { opacity: 0; transform: translateY(8px); filter: blur(2px); visibility: hidden; }
+  .item { display: grid; grid-template-columns: 16px minmax(0, 1fr) auto; align-items: baseline; gap: 2px 4px; margin-inline: -12px; padding: 5px 8px 5px 12px; border-radius: 5px; transition-property: opacity, transform, filter, visibility, background-color; transition-duration: 550ms, 550ms, 550ms, 550ms, 250ms; transition-timing-function: var(--expo); cursor: default; }
+  .item::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; transform: translateY(-3px); }
+  .item.lit { background: var(--tint); }
+  .src { position: relative; margin-left: 12px; padding: 0; border: 0; background: none; font-size: 14px; font-variant-numeric: tabular-nums; text-decoration: underline; text-decoration-color: var(--blank); text-underline-offset: 3px; cursor: pointer; }
+  .src::after { content: ""; position: absolute; inset: -11px -8px; }
+  .mail-foot { display: flex; align-items: center; gap: 16px; margin-top: 12px; padding: 16px 36px 24px; }
+  .mail-foot small { font-size: 15px; }
 
-  .wave { position: relative; margin: 20px 0 8px; padding-top: 26px; }
-  .wave svg { display: block; width: 100%; height: 40px; fill: var(--ink); opacity: 0.2; }
-  .pin {
-    position: absolute; top: 0; left: var(--x);
-    transform: translateX(-50%);
-    display: grid; place-items: center;
-    width: 20px; height: 20px; border-radius: 50%;
-    font-size: 11px; font-weight: 600;
-    background: var(--badge-bg, var(--sheet));
-    color: var(--badge-fg, var(--ink-2));
-    box-shadow: 0 0 0 1px var(--badge-bd, var(--line-2));
-    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
-  }
-  .pin::after {
-    content: ""; position: absolute; left: 50%; top: 20px;
-    width: 1px; height: 46px; margin-left: -0.5px;
-    background: var(--ink); opacity: var(--tick-o, 0.22);
-    transition: opacity 200ms ease;
-  }
-  .wave-scale { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: var(--ink-3); }
+  /* The wall */
+  .wall { background: var(--ink); color: color-mix(in oklch, var(--pink) 74%, var(--ink)); padding-block: 96px 88px; }
+  .wall h2 { float: left; margin: -6px 56px 10px 0; color: var(--pink); font-size: clamp(64px, 9.3vw, 172px); line-height: 0.94; }
+  .wall h2 span { display: block; white-space: nowrap; }
+  .talk { font-size: clamp(18px, 1.46vw, 24px); line-height: 1.62; }
+  .talk b { color: var(--pink); margin-right: 0.15em; }
+  .talk mark { background: var(--pink); color: var(--ink); padding: 0.08em 0.3em; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+  .coda { clear: both; margin-top: 64px; color: var(--pink); font: 400 clamp(36px, 7.5vw, 136px)/1 var(--display); letter-spacing: -0.02em; text-transform: uppercase; white-space: nowrap; }
 
-  .badge {
-    display: grid; place-items: center;
-    width: 22px; height: 22px; border-radius: 50%;
-    font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums;
-    background: var(--badge-bg, var(--sheet));
-    color: var(--badge-fg, var(--ink-2));
-    box-shadow: 0 0 0 1px var(--badge-bd, var(--line-2));
-    transition: background-color 200ms ease, color 200ms ease, box-shadow 200ms ease;
-  }
+  /* Four boxes */
+  .how { background: var(--sheet); padding-block: 96px 40px; }
+  .how h2 { font-size: clamp(56px, 6.2vw, 116px); line-height: 0.96; margin-bottom: 40px; }
+  .row { display: grid; grid-template-columns: 124px minmax(0, 1fr) minmax(0, 42ch); gap: 32px; align-items: center; padding-block: 22px; border-top: 1px solid var(--hair); }
+  .row h3 { font: 400 clamp(72px, 10.4vw, 190px)/0.92 var(--display); letter-spacing: -0.02em; text-transform: uppercase; }
+  .row p { font-size: 21px; line-height: 1.42; }
+  .bigbox { display: block; width: 124px; height: 124px; background: var(--pink); border-radius: 8px; }
+  .bigbox path { fill: none; stroke: var(--ink); stroke-width: 5; stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset 600ms var(--expo); }
+  .row-sent { position: relative; cursor: pointer; }
+  .row-sent input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .row-sent input:focus-visible + .bigbox { outline: 3px solid var(--ink); outline-offset: 4px; }
+  .row-sent .bigbox { background: none; box-shadow: inset 0 0 0 5px var(--ink); transition: transform 200ms var(--expo), background-color 300ms var(--smooth); }
+  .row-sent:hover .bigbox { transform: translateY(-2px); }
+  .row-sent input:active + .bigbox { transform: scale(0.96); }
+  .row-sent input:not(:checked) + .bigbox path { stroke-dashoffset: 1; }
+  .row-sent input:checked + .bigbox { background: var(--pink); }
+  .row-sent .after { display: none; }
+  .row-sent input:checked ~ p .before { display: none; }
+  .row-sent input:checked ~ p .after { display: inline; }
 
-  .lines li {
-    display: grid;
-    grid-template-columns: 44px minmax(0, 1fr) 22px;
-    column-gap: 14px;
-    padding: 13px 0;
-    border-top: 1px solid var(--line);
-    font-size: 15px; line-height: 1.5;
-    border-radius: 0;
-  }
-  .lines li:first-child { border-top: 0; }
-  .lines .t { font-size: 13px; color: var(--ink-3); padding-top: 1px; }
-  .lines .who { display: block; font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: 1px; }
-  .lines p { color: var(--ink-2); }
-  .lines .badge { margin-top: 1px; }
-  .lines .quiet p { color: var(--ink-3); }
+  /* Re: */
+  .qs { background: var(--sheet); padding-block: 72px 96px; }
+  .qs ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; }
+  .qs li:nth-child(2) { margin-top: 72px; }
+  .qs li:nth-child(3) { margin-top: 144px; }
+  .qs h3 { font: 400 clamp(38px, 3.9vw, 72px)/1 var(--display); letter-spacing: -0.015em; margin-bottom: 14px; }
+  .qs p { font-size: 19px; line-height: 1.48; max-width: 38ch; }
 
-  mark {
-    color: var(--ink);
-    background: var(--hl, var(--mark));
-    padding: 1px 2px; margin: 0 -2px;
-    border-radius: 3px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    transition: background-color 200ms ease;
-  }
+  /* Send it to yourself */
+  .get { padding-top: 88px; }
+  .get h2 { font-size: var(--poster); line-height: 0.94; }
+  .get h2 span { display: block; white-space: nowrap; }
+  .get-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 44%); gap: 56px; align-items: start; }
+  .get-grid p.pitch { font-size: clamp(20px, 1.8vw, 28px); line-height: 1.32; max-width: 36ch; margin-top: 32px; }
+  .compose { margin-top: calc(-1 * var(--poster) * 0.94 + 12px); position: relative; }
+  .compose .f { display: flex; align-items: center; gap: 14px; min-height: 56px; padding-inline: 32px; border-bottom: 1px solid var(--hair); }
+  .compose .f label, .compose .f > span:first-child { flex: none; width: 62px; font-size: 16px; opacity: 0.72; }
+  .compose .f b { font-weight: 600; }
+  .compose input { flex: 1; min-width: 0; height: 56px; border: 0; background: none; padding: 0; font-size: 18px; font-weight: 600; outline-offset: -6px; }
+  .compose input::placeholder { color: color-mix(in oklch, var(--ink) 66%, var(--sheet)); font-weight: 400; }
+  .compose .msg { padding: 20px 32px 4px; font-size: 17.5px; }
+  .compose .msg p + p { margin-top: 10px; }
+  .compose .foot { display: flex; align-items: center; gap: 16px; padding: 18px 32px 28px; }
+  .compose small { font-size: 15px; }
+  .foot-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; margin-top: 88px; padding-block: 22px 28px; border-top: 2px solid var(--blank); }
+  .foot-bar .mark { font-size: 30px; }
+  .foot-bar a:not(.mark) { display: inline-flex; align-items: center; min-height: 44px; }
+  .foot-bar p { margin-left: auto; font-size: 16px; }
 
-  .pane-mail { padding: 0 32px 0 0; display: flex; flex-direction: column; }
-  .fields { margin-top: 16px; border-top: 1px solid var(--line); }
-  .fields div { display: grid; grid-template-columns: 72px 1fr; padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
-  .fields dt { color: var(--ink-3); font-size: 13px; padding-top: 2px; }
-  .fields dd { color: var(--ink); }
-  .fields .subj { font-weight: 600; letter-spacing: -0.01em; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-  .mail-body { padding: 18px 0 8px; font-size: 15.5px; line-height: 1.55; }
-  .mail-body > p + p, .mail-body > p + ol, .mail-body > ol + p { margin-top: 12px; }
-  .points li {
-    display: grid; grid-template-columns: 22px minmax(0, 1fr); column-gap: 14px;
-    padding: 6px 0;
-    outline-offset: 2px;
+  @media (max-width: 1100px) {
+    .slip, .lede { grid-template-columns: minmax(0, 1fr); }
+    .blanks { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .blanks div:last-child { grid-column: 1 / -1; }
+    .boxes { flex-wrap: wrap; }
+    .cols { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+    .thread { display: none; }
+    .tape path { stroke-width: 2px; }
+    .get-grid { grid-template-columns: minmax(0, 1fr); }
+    .compose { margin-top: 0; }
+    .qs ul { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .qs li:nth-child(n) { margin-top: 0; }
+    .row { grid-template-columns: 88px minmax(0, 1fr); }
+    .row p { grid-column: 2; }
+    .bigbox { width: 88px; height: 88px; }
+    .wall h2 { float: none; margin: 0 0 32px; }
   }
-  .points .txt {
-    background: var(--hl-mail, transparent);
-    padding: 1px 3px; margin: 0 -3px; border-radius: 3px;
-    -webkit-box-decoration-break: clone;
-    box-decoration-break: clone;
-    transition: background-color 200ms ease;
+  @media (max-width: 720px) {
+    :root { --poster: 20vw; }
+    .poster span, .get h2 span, .wall h2 span { white-space: normal; }
+    .wall h2 { font-size: 17vw; }
+    .coda { font-size: 14vw; white-space: normal; text-wrap: balance; }
+    .nav li:not(:last-child) { display: none; }
+    .rec { grid-template-columns: minmax(0, 1fr); }
+    .rec-side { flex-direction: row; align-items: center; justify-content: space-between; }
+    .play { width: auto; }
+    .flags { height: 28px; }
+    .flag { display: none; }
+    .tape path { stroke-width: 1px; }
+    .mail-head, .mail-body, .mail-foot, .compose .f, .compose .msg, .compose .foot { padding-inline: 20px; }
+    .mail-foot, .compose .foot { flex-wrap: wrap; }
+    .row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+    .row p { grid-column: auto; }
+    .foot-bar p { margin-left: 0; }
+    .said li { grid-template-columns: 46px minmax(0, 1fr); }
+    .said li > span { grid-column: 2; }
   }
-  .still { color: var(--ink-3); font-size: 14px; }
-
-  .mail-actions {
-    margin-top: auto;
-    display: flex; align-items: center; gap: 8px;
-    padding: 16px 0 20px;
-    border-top: 1px solid var(--line);
-  }
-  .ui-btn {
-    display: inline-flex; align-items: center; height: 34px; padding: 0 14px;
-    border-radius: 8px; font-size: 14px; font-weight: 600;
-    background: var(--ink); color: var(--on-ink);
-  }
-  .ui-btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--line-2); }
-  .voice { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-3); }
-  .voice svg { width: 14px; height: 14px; }
-
-  [data-link] { cursor: default; }
-  .lines li:focus-visible, .points li:focus-visible { outline-offset: 4px; }
-
-  /* Active pair. Default state is set in the markup so the static page shows one link drawn. */
-  .demo[data-active="1"] [data-link="1"],
-  .demo[data-active="2"] [data-link="2"],
-  .demo[data-active="3"] [data-link="3"],
-  .demo[data-active="4"] [data-link="4"] {
-    --hl: var(--mark-strong);
-    --hl-mail: var(--mark);
-    --badge-bg: var(--ink);
-    --badge-fg: var(--on-ink);
-    --badge-bd: var(--ink);
-    --path-o: 1;
-    --path-w: 1.5;
-    --tick-o: 0.9;
-  }
-
-  .demo-hint {
-    display: flex; align-items: center; gap: 8px;
-    margin-top: 18px; font-size: 14px; color: var(--ink-3);
-  }
-  .demo-hint svg { width: 16px; height: 16px; }
-
-  /* How it works */
-  .how { padding: 144px 0 136px; }
-  .how-grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: 96px; align-items: start; }
-  .how h2 { font-size: clamp(32px, 3.1vw, 46px); line-height: 1.04; letter-spacing: -0.035em; }
-  .how-intro p { margin-top: 24px; color: var(--ink-2); max-width: 42ch; }
-  .tools { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 8px; }
-  .tools li {
-    display: inline-flex; align-items: center; min-height: 32px; padding: 0 12px;
-    border-radius: 8px; font-size: 14px; color: var(--ink-2);
-    box-shadow: inset 0 0 0 1px var(--line-2);
-  }
-  .timeline li {
-    display: grid; grid-template-columns: 128px minmax(0, 1fr); column-gap: 32px;
-    padding: 30px 0;
-    border-top: 1px solid var(--line-2);
-  }
-  .timeline li:last-child { border-bottom: 1px solid var(--line-2); }
-  .timeline time {
-    font-size: 34px; font-weight: 600; line-height: 1; letter-spacing: -0.03em;
-  }
-  .timeline h3 { font-size: 21px; line-height: 1.25; letter-spacing: -0.02em; display: flex; align-items: center; gap: 10px; }
-  .timeline p { margin-top: 8px; color: var(--ink-2); max-width: 54ch; }
-  .rec-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--rec); flex: none; }
-
-  /* Draft specimen */
-  .draft { background: var(--paper-2); padding: 136px 0 144px; }
-  .spec {
-    position: relative;
-    display: grid;
-    grid-template-columns: minmax(0, 700px) minmax(0, 1fr);
-    column-gap: 80px;
-  }
-  .spec::before {
-    content: ""; position: absolute; top: 0; bottom: 0; left: 0;
-    width: min(700px, 100%);
-    background: var(--sheet);
-    border-radius: 14px;
-    box-shadow: 0 0 0 1px var(--line), var(--shadow-lift);
-  }
-  .spec > * { position: relative; }
-  .cell { padding: var(--pt, 14px) 48px 0; font-size: 17px; line-height: 1.6; }
-  .cell.first { --pt: 40px; }
-  .cell.last { padding-bottom: 48px; }
-  .spec-meta { font-size: 13px; color: var(--ink-3); }
-  .spec-fields { margin-top: 18px; border-top: 1px solid var(--line); }
-  .spec-fields div { display: grid; grid-template-columns: 76px 1fr; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
-  .spec-fields dt { color: var(--ink-3); font-size: 13px; padding-top: 2px; }
-  .spec-fields .subj { font-weight: 600; letter-spacing: -0.01em; }
-  .bullet { position: relative; padding-left: 22px; }
-  .bullet::before { content: ""; position: absolute; left: 4px; top: calc(0.8em - 1px); width: 7px; height: 2px; background: var(--ink); }
-  .cell mark { --hl: var(--mark); }
-
-  .spec > .cell { grid-column: 1; }
-  .spec > .note { grid-column: 2; }
-  .spec-head { grid-column: 2; grid-row: span 2; padding-top: 32px; }
-  .spec-head h2 { font-size: clamp(32px, 3vw, 44px); line-height: 1.04; letter-spacing: -0.035em; max-width: 13ch; }
-  .spec-head p { margin-top: 20px; color: var(--ink-2); max-width: 40ch; }
-
-  .note {
-    font-size: 15px; line-height: 1.45; color: var(--ink);
-    max-width: 34ch;
-    padding-top: calc(var(--pt, 14px) + 3px);
-    margin-bottom: -22px;
-  }
-  .note:not(:empty)::before {
-    content: ""; position: absolute; top: calc(var(--pt, 14px) + 14px); left: -76px; width: 64px; height: 1px;
-    background: var(--ink); opacity: 0.35;
-  }
-  .note:not(:empty)::after {
-    content: ""; position: absolute; top: calc(var(--pt, 14px) + 11.5px); left: -78px; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--ink);
-  }
-
-  /* Privacy */
-  .privacy { background: var(--ink); color: var(--on-ink); padding: 136px 0 128px; }
-  .privacy h2 {
-    font-size: clamp(44px, 6.4vw, 92px); line-height: 1; letter-spacing: -0.042em;
-    max-width: 14ch;
-  }
-  .privacy-lede { margin-top: 28px; font-size: 19px; color: var(--on-ink-2); max-width: 46ch; line-height: 1.6; }
-  .facts {
-    margin-top: 88px;
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 40px; row-gap: 40px;
-  }
-  .facts li { border-top: 1px solid var(--on-ink-line); padding-top: 22px; }
-  .facts h3 { font-size: 19px; line-height: 1.3; letter-spacing: -0.015em; }
-  .facts p { margin-top: 10px; font-size: 16px; line-height: 1.6; color: var(--on-ink-2); }
-
-  /* Closing */
-  .cta { background: var(--yellow); padding: 136px 0 120px; }
-  .cta-grid { display: grid; grid-template-columns: minmax(0, 1fr) 400px; column-gap: 72px; align-items: end; }
-  .cta h2 { font-size: clamp(44px, 6vw, 88px); line-height: 0.98; letter-spacing: -0.042em; }
-  .cta-side p { font-size: 18px; color: var(--ink-2); line-height: 1.55; }
-  .cta-side .small { margin-top: 16px; font-size: 14px; }
-  .foot { background: var(--yellow); }
-  .foot-row {
-    display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
-    padding-block: 24px 32px; border-top: 1px solid var(--line-2);
-    font-size: 14px; color: var(--ink-2);
-  }
-  .foot-row .brand { font-size: 17px; }
-  .foot-row .brand svg { width: 18px; height: 18px; }
-  .foot-links { margin-left: auto; display: flex; gap: 24px; }
-  .foot-links a { text-decoration: none; display: inline-flex; align-items: center; min-height: 40px; }
-  .foot-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
-
-  /* Narrow layouts */
-  @media (max-width: 1080px) {
-    .hero-copy, .cta-grid { grid-template-columns: 1fr; row-gap: 28px; }
-    .demo-body { grid-template-columns: 1fr; column-gap: 0; }
-    .links { display: none; }
-    .pane-rec { border-right: 0; border-bottom: 1px solid var(--line); }
-    .pane-mail { padding: 0 24px; }
-    .how-grid { grid-template-columns: 1fr; row-gap: 48px; }
-    .spec { grid-template-columns: 1fr; }
-    .spec::before { display: none; }
-    .spec > .cell, .spec > .note { background: var(--sheet); }
-    .spec > .cell.first { border-radius: 14px 14px 0 0; }
-    .spec > .cell.last { padding-bottom: 10px; }
-    .spec > :last-child { border-radius: 0 0 14px 14px; padding-bottom: 32px; }
-    .spec > .cell, .spec > .note, .spec-head { grid-column: 1; }
-    .spec-head { order: -1; grid-row: auto; padding: 0 0 40px; }
-    .note { padding: 0 48px 14px; margin-bottom: 0; color: var(--ink-3); font-size: 14px; max-width: none; }
-    .note:empty { display: none; }
-    .note::before, .note::after { display: none; }
-    .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-  @media (max-width: 760px) {
-    .nav-links, .nav-end .textlink, .meta > :not(.people) { display: none; }
-    .demo-bar { padding: 0 16px; }
-    .pane-rec { padding: 0 16px 8px; }
-    .pane-mail { padding: 0 16px; }
-    .lines li { grid-template-columns: 40px minmax(0, 1fr) 22px; column-gap: 10px; }
-    .cell { padding-inline: 20px; }
-    .note { padding-inline: 20px; }
-    .timeline li { grid-template-columns: 1fr; row-gap: 12px; }
-    .facts { grid-template-columns: 1fr; }
-    .foot-links { margin-left: 0; }
-  }
-
   @media (prefers-reduced-motion: reduce) {
-    .btn, .skip, .textlink, .nav-links a { transition-duration: 0ms; }
-    .btn:hover, .btn:active, .btn:hover:active { transform: none; }
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    .line.off { transform: none; filter: none; }
   }
 </style>
 </head>
-<body>
+<body id="top">
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="top">
-  <div class="wrap nav">
-    <a class="brand" href="#" aria-label="Fieldnote home">
-      <svg viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">
-        <rect x="1" y="7" width="2.6" height="8" rx="1.3"/>
-        <rect x="5.5" y="3" width="2.6" height="16" rx="1.3"/>
-        <rect x="10" y="6" width="2.6" height="10" rx="1.3"/>
-        <rect x="14.5" y="9.7" width="6.5" height="2.6" rx="1.3"/>
-      </svg>
-      <span translate="no">Fieldnote</span>
-    </a>
+<div class="wrap">
+  <header class="nav">
+    <a class="mark" href="#top" translate="no">Fieldnote</a>
     <nav aria-label="Main">
-      <ul class="nav-links">
+      <ul>
+        <li><a href="#left-out">What it leaves out</a></li>
         <li><a href="#how">How it works</a></li>
-        <li><a href="#draft">The draft</a></li>
-        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#questions">Questions</a></li>
+        <li><a class="btn" href="#get"><span>Get <span translate="no">Fieldnote</span></span></a></li>
       </ul>
     </nav>
-    <div class="nav-end">
-      <a class="textlink" href="#">Sign in</a>
-      <a class="btn btn-sm" href="#start"><span>Try <span translate="no">Fieldnote</span></span></a>
-    </div>
-  </div>
-</header>
+  </header>
+</div>
 
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
-      <div class="hero-copy">
-        <h1 id="hero-title">Hang up. Your follow&#8209;up is already in drafts.</h1>
-        <div class="hero-side">
-          <p class="lede"><span translate="no">Fieldnote</span> records your calls, keeps track of what everyone agreed to, and writes the recap email the way you would. You read it, change a word or two, and press Send.</p>
-          <div class="actions">
-            <a class="btn" href="#start">Try it on your next call
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-            </a>
-            <a class="textlink" href="#how">See how it works</a>
-          </div>
-        </div>
+      <h1 class="poster display" id="hero-title">
+        <span>While you were talking,</span>
+        <span>we wrote the follow-up.</span>
+      </h1>
+
+      <div class="lede">
+        <p><span translate="no">Fieldnote</span> records your meetings and has the email in your drafts when the call ends: what you agreed, who owes what, by when. You read it and press send.</p>
+        <a class="btn btn-lg" href="#get">Try it on your next meeting</a>
       </div>
 
-      <figure class="demo" data-active="2" aria-label="Example: a recorded call and the follow-up email Fieldnote drafted from it">
-        <div class="demo-bar">
-          <div class="crumbs">
-            <span>Meetings</span>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>
-            <b><span translate="no">Halden</span> renewal call</b>
+      <div class="demo" id="demo">
+        <div class="slip">
+          <dl class="blanks">
+            <div><dt>For</dt><dd>You</dd></div>
+            <div><dt>Of</dt><dd translate="no">Larkfield</dd></div>
+            <div><dt>Date</dt><dd>Thu&nbsp;29&nbsp;Oct</dd></div>
+            <div><dt>Time</dt><dd>3:30&nbsp;pm</dd></div>
+            <div><dt>Re</dt><dd>Spring menu site</dd></div>
+          </dl>
+          <ul class="boxes" aria-label="Progress">
+            <li data-at="1920"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M5 12.5l5 5L19.5 6"/></svg>Recorded</li>
+            <li data-at="1920"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M5 12.5l5 5L19.5 6"/></svg>Sorted</li>
+            <li data-at="1920"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M5 12.5l5 5L19.5 6"/></svg>Drafted</li>
+            <li class="off" id="box-sent"><svg class="tick" viewBox="0 0 24 24" aria-hidden="true"><path pathLength="1" d="M5 12.5l5 5L19.5 6"/></svg>Sent</li>
+          </ul>
+        </div>
+
+        <div class="rec">
+          <div class="rec-side">
+            <output class="clock" id="clock" for="t" aria-live="off">32:00</output>
+            <button class="btn play" id="play" type="button">
+              <svg viewBox="0 0 14 14" aria-hidden="true"><path id="play-icon" d="M2.5 1v12l10-6z"/></svg>
+              <span id="play-label">Replay it</span>
+            </button>
           </div>
-          <div class="meta">
-            <span>Thu 29&nbsp;Oct, 10:00</span>
-            <span aria-hidden="true">·</span>
-            <span>42&nbsp;min</span>
-            <span class="people" role="img" aria-label="Maya Okafor, Dev Banerjee and you">
-              <span class="av" aria-hidden="true">MO</span>
-              <span class="av" aria-hidden="true">DB</span>
-              <span class="av av-you" aria-hidden="true">TR</span>
-            </span>
+          <div>
+            <div class="flags" role="group" aria-label="Moments that made the email">
+              <span class="drag">Drag to rewind</span>
+              <button class="flag" type="button" data-at="277" data-go="277" style="--at:.1443">Photos</button>
+              <button class="flag" type="button" data-at="701" data-go="701" style="--at:.3651">Launch</button>
+              <button class="flag" type="button" data-at="1152" data-go="1152" style="--at:.6">Allergen copy</button>
+              <button class="flag" type="button" data-at="1520" data-go="1520" style="--at:.7917">Homepage</button>
+              <button class="flag" type="button" data-at="1750" data-go="1750" style="--at:.9115">Gift cards</button>
+            </div>
+            <div class="tape">
+              <svg class="wave-future" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path id="wave-all"/></svg>
+              <svg class="wave-past" viewBox="0 0 1000 100" preserveAspectRatio="none" aria-hidden="true"><path class="said-wave" id="wave-said"/><path class="kept-wave" id="wave-kept"/></svg>
+              <input id="t" type="range" min="0" max="1920" step="1" value="1920" aria-label="Position in the meeting recording" aria-valuetext="32 minutes 0 seconds, end of meeting">
+            </div>
           </div>
         </div>
 
-        <div class="demo-body">
-          <svg class="links" aria-hidden="true"></svg>
-
-          <div class="pane pane-rec" role="group" aria-label="Transcript">
-            <div class="pane-head">
-              <p class="pane-title">Transcript</p>
-              <p class="pane-note">3 speakers, 4 things to follow up</p>
-            </div>
-            <div class="wave" aria-hidden="true">
-              <svg viewBox="0 0 600 40" preserveAspectRatio="none"><rect x="0.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="4.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="8.0" y="12.0" width="2" height="16.0" rx="1"/><rect x="12.0" y="17.6" width="2" height="4.7" rx="1"/><rect x="16.0" y="17.7" width="2" height="4.6" rx="1"/><rect x="20.0" y="18.2" width="2" height="3.5" rx="1"/><rect x="24.0" y="7.2" width="2" height="25.7" rx="1"/><rect x="28.0" y="11.8" width="2" height="16.5" rx="1"/><rect x="32.0" y="5.8" width="2" height="28.3" rx="1"/><rect x="36.0" y="10.2" width="2" height="19.5" rx="1"/><rect x="40.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="44.0" y="11.2" width="2" height="17.5" rx="1"/><rect x="48.0" y="12.8" width="2" height="14.5" rx="1"/><rect x="52.0" y="7.6" width="2" height="24.9" rx="1"/><rect x="56.0" y="9.6" width="2" height="20.9" rx="1"/><rect x="60.0" y="11.3" width="2" height="17.3" rx="1"/><rect x="64.0" y="13.8" width="2" height="12.5" rx="1"/><rect x="68.0" y="18.2" width="2" height="3.5" rx="1"/><rect x="72.0" y="11.6" width="2" height="16.8" rx="1"/><rect x="76.0" y="10.8" width="2" height="18.4" rx="1"/><rect x="80.0" y="12.8" width="2" height="14.4" rx="1"/><rect x="84.0" y="10.4" width="2" height="19.2" rx="1"/><rect x="88.0" y="11.3" width="2" height="17.4" rx="1"/><rect x="92.0" y="9.4" width="2" height="21.1" rx="1"/><rect x="96.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="100.0" y="14.2" width="2" height="11.7" rx="1"/><rect x="104.0" y="10.1" width="2" height="19.9" rx="1"/><rect x="108.0" y="11.6" width="2" height="16.8" rx="1"/><rect x="112.0" y="17.6" width="2" height="4.9" rx="1"/><rect x="116.0" y="10.6" width="2" height="18.8" rx="1"/><rect x="120.0" y="12.2" width="2" height="15.7" rx="1"/><rect x="124.0" y="9.9" width="2" height="20.2" rx="1"/><rect x="128.0" y="10.6" width="2" height="18.8" rx="1"/><rect x="132.0" y="6.6" width="2" height="26.8" rx="1"/><rect x="136.0" y="8.4" width="2" height="23.2" rx="1"/><rect x="140.0" y="16.9" width="2" height="6.1" rx="1"/><rect x="144.0" y="5.1" width="2" height="29.8" rx="1"/><rect x="148.0" y="10.8" width="2" height="18.5" rx="1"/><rect x="152.0" y="7.3" width="2" height="25.3" rx="1"/><rect x="156.0" y="17.2" width="2" height="5.5" rx="1"/><rect x="160.0" y="11.9" width="2" height="16.1" rx="1"/><rect x="164.0" y="16.6" width="2" height="6.8" rx="1"/><rect x="168.0" y="10.9" width="2" height="18.1" rx="1"/><rect x="172.0" y="5.9" width="2" height="28.2" rx="1"/><rect x="176.0" y="9.7" width="2" height="20.6" rx="1"/><rect x="180.0" y="6.6" width="2" height="26.8" rx="1"/><rect x="184.0" y="7.3" width="2" height="25.3" rx="1"/><rect x="188.0" y="11.2" width="2" height="17.6" rx="1"/><rect x="192.0" y="8.6" width="2" height="22.8" rx="1"/><rect x="196.0" y="14.0" width="2" height="12.0" rx="1"/><rect x="200.0" y="14.1" width="2" height="11.8" rx="1"/><rect x="204.0" y="13.4" width="2" height="13.1" rx="1"/><rect x="208.0" y="15.2" width="2" height="9.6" rx="1"/><rect x="212.0" y="18.8" width="2" height="2.4" rx="1"/><rect x="216.0" y="13.7" width="2" height="12.6" rx="1"/><rect x="220.0" y="12.1" width="2" height="15.8" rx="1"/><rect x="224.0" y="11.6" width="2" height="16.9" rx="1"/><rect x="228.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="232.0" y="8.7" width="2" height="22.7" rx="1"/><rect x="236.0" y="7.6" width="2" height="24.8" rx="1"/><rect x="240.0" y="10.1" width="2" height="19.9" rx="1"/><rect x="244.0" y="7.4" width="2" height="25.2" rx="1"/><rect x="248.0" y="18.0" width="2" height="4.0" rx="1"/><rect x="252.0" y="10.8" width="2" height="18.5" rx="1"/><rect x="256.0" y="11.6" width="2" height="16.9" rx="1"/><rect x="260.0" y="17.6" width="2" height="4.8" rx="1"/><rect x="264.0" y="8.1" width="2" height="23.8" rx="1"/><rect x="268.0" y="15.7" width="2" height="8.6" rx="1"/><rect x="272.0" y="10.2" width="2" height="19.6" rx="1"/><rect x="276.0" y="8.2" width="2" height="23.5" rx="1"/><rect x="280.0" y="10.6" width="2" height="18.8" rx="1"/><rect x="284.0" y="2.2" width="2" height="35.5" rx="1"/><rect x="288.0" y="7.6" width="2" height="24.9" rx="1"/><rect x="292.0" y="11.4" width="2" height="17.1" rx="1"/><rect x="296.0" y="10.2" width="2" height="19.5" rx="1"/><rect x="300.0" y="11.6" width="2" height="16.9" rx="1"/><rect x="304.0" y="16.4" width="2" height="7.3" rx="1"/><rect x="308.0" y="12.3" width="2" height="15.3" rx="1"/><rect x="312.0" y="13.6" width="2" height="12.8" rx="1"/><rect x="316.0" y="7.1" width="2" height="25.8" rx="1"/><rect x="320.0" y="9.7" width="2" height="20.7" rx="1"/><rect x="324.0" y="12.3" width="2" height="15.4" rx="1"/><rect x="328.0" y="10.1" width="2" height="19.8" rx="1"/><rect x="332.0" y="10.5" width="2" height="19.0" rx="1"/><rect x="336.0" y="14.1" width="2" height="11.9" rx="1"/><rect x="340.0" y="10.1" width="2" height="19.9" rx="1"/><rect x="344.0" y="11.3" width="2" height="17.4" rx="1"/><rect x="348.0" y="11.8" width="2" height="16.4" rx="1"/><rect x="352.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="356.0" y="15.7" width="2" height="8.7" rx="1"/><rect x="360.0" y="18.6" width="2" height="2.8" rx="1"/><rect x="364.0" y="12.2" width="2" height="15.6" rx="1"/><rect x="368.0" y="13.4" width="2" height="13.2" rx="1"/><rect x="372.0" y="10.4" width="2" height="19.2" rx="1"/><rect x="376.0" y="13.6" width="2" height="12.8" rx="1"/><rect x="380.0" y="14.2" width="2" height="11.5" rx="1"/><rect x="384.0" y="14.3" width="2" height="11.4" rx="1"/><rect x="388.0" y="10.2" width="2" height="19.5" rx="1"/><rect x="392.0" y="12.6" width="2" height="14.9" rx="1"/><rect x="396.0" y="10.7" width="2" height="18.6" rx="1"/><rect x="400.0" y="11.4" width="2" height="17.1" rx="1"/><rect x="404.0" y="10.8" width="2" height="18.4" rx="1"/><rect x="408.0" y="12.7" width="2" height="14.7" rx="1"/><rect x="412.0" y="11.1" width="2" height="17.8" rx="1"/><rect x="416.0" y="11.3" width="2" height="17.4" rx="1"/><rect x="420.0" y="13.8" width="2" height="12.5" rx="1"/><rect x="424.0" y="11.4" width="2" height="17.2" rx="1"/><rect x="428.0" y="15.5" width="2" height="9.0" rx="1"/><rect x="432.0" y="15.9" width="2" height="8.1" rx="1"/><rect x="436.0" y="13.6" width="2" height="12.8" rx="1"/><rect x="440.0" y="12.8" width="2" height="14.5" rx="1"/><rect x="444.0" y="12.8" width="2" height="14.5" rx="1"/><rect x="448.0" y="12.6" width="2" height="14.8" rx="1"/><rect x="452.0" y="15.1" width="2" height="9.9" rx="1"/><rect x="456.0" y="10.4" width="2" height="19.2" rx="1"/><rect x="460.0" y="7.6" width="2" height="24.8" rx="1"/><rect x="464.0" y="7.1" width="2" height="25.8" rx="1"/><rect x="468.0" y="11.6" width="2" height="16.8" rx="1"/><rect x="472.0" y="10.3" width="2" height="19.3" rx="1"/><rect x="476.0" y="7.1" width="2" height="25.8" rx="1"/><rect x="480.0" y="8.1" width="2" height="23.8" rx="1"/><rect x="484.0" y="2.7" width="2" height="34.6" rx="1"/><rect x="488.0" y="6.8" width="2" height="26.4" rx="1"/><rect x="492.0" y="1.8" width="2" height="36.5" rx="1"/><rect x="496.0" y="1.2" width="2" height="37.5" rx="1"/><rect x="500.0" y="5.2" width="2" height="29.5" rx="1"/><rect x="504.0" y="10.8" width="2" height="18.4" rx="1"/><rect x="508.0" y="9.0" width="2" height="22.0" rx="1"/><rect x="512.0" y="15.6" width="2" height="8.8" rx="1"/><rect x="516.0" y="6.2" width="2" height="27.7" rx="1"/><rect x="520.0" y="5.6" width="2" height="28.8" rx="1"/><rect x="524.0" y="6.4" width="2" height="27.2" rx="1"/><rect x="528.0" y="4.2" width="2" height="31.5" rx="1"/><rect x="532.0" y="7.0" width="2" height="26.0" rx="1"/><rect x="536.0" y="10.2" width="2" height="19.6" rx="1"/><rect x="540.0" y="8.8" width="2" height="22.5" rx="1"/><rect x="544.0" y="7.4" width="2" height="25.1" rx="1"/><rect x="548.0" y="10.7" width="2" height="18.7" rx="1"/><rect x="552.0" y="10.9" width="2" height="18.2" rx="1"/><rect x="556.0" y="10.4" width="2" height="19.1" rx="1"/><rect x="560.0" y="12.2" width="2" height="15.7" rx="1"/><rect x="564.0" y="10.7" width="2" height="18.6" rx="1"/><rect x="568.0" y="11.9" width="2" height="16.2" rx="1"/><rect x="572.0" y="15.3" width="2" height="9.3" rx="1"/><rect x="576.0" y="13.1" width="2" height="13.8" rx="1"/><rect x="580.0" y="16.0" width="2" height="8.0" rx="1"/><rect x="584.0" y="14.3" width="2" height="11.3" rx="1"/><rect x="588.0" y="18.8" width="2" height="2.5" rx="1"/><rect x="592.0" y="18.1" width="2" height="3.7" rx="1"/><rect x="596.0" y="11.1" width="2" height="17.8" rx="1"/></svg>
-              <span class="pin" data-link="1" style="--x:19.4%">1</span>
-              <span class="pin" data-link="2" style="--x:27.7%">2</span>
-              <span class="pin" data-link="3" style="--x:51.7%">3</span>
-              <span class="pin" data-link="4" style="--x:78.5%">4</span>
-              <div class="wave-scale"><span>00:00</span><span>42:10</span></div>
-            </div>
-            <ol class="lines">
-              <li data-link="1" tabindex="0">
-                <span class="t">08:12</span>
-                <div><span class="who" translate="no">Maya Okafor</span><p>“<mark>If the paperwork’s signed before the fourteenth, we can hold the current rate through March.</mark>”</p></div>
-                <span class="badge" data-pin="src-1">1</span>
-              </li>
-              <li data-link="2" tabindex="0">
-                <span class="t">11:40</span>
-                <div><span class="who" translate="no">Tom Reyes</span><p>“That works for us. <mark>I’ll send the revised scope with the two new depots by Friday.</mark>”</p></div>
-                <span class="badge" data-pin="src-2">2</span>
-              </li>
-              <li data-link="3" tabindex="0">
-                <span class="t">21:47</span>
-                <div><span class="who" translate="no">Dev Banerjee</span><p>“I still owe you the Q1 pallet numbers. <mark>You’ll have them by next Wednesday.</mark>”</p></div>
-                <span class="badge" data-pin="src-3">3</span>
-              </li>
-              <li data-link="4" tabindex="0">
-                <span class="t">33:05</span>
-                <div><span class="who" translate="no">Maya Okafor</span><p>“<mark>Rotterdam is the one I’m not sure about.</mark> Weekly might be more than we need.”</p></div>
-                <span class="badge" data-pin="src-4">4</span>
-              </li>
-              <li class="quiet">
-                <span class="t">33:31</span>
-                <div><span class="who" translate="no">Tom Reyes</span><p>“Let me ask our ops team and come back to you.”</p></div>
-                <span></span>
-              </li>
+        <div class="cols" id="cols">
+          <div class="said">
+            <h2 class="col-label">What was said</h2>
+            <ol>
+              <li data-at="41"><time>00:41</time><b translate="no">Tomás</b><span>Sorry, I'm on the train. Can you hear me? Okay. Okay, good.</span></li>
+              <li data-at="135"><time>02:15</time><b translate="no">Nadia</b><span>Let's start with photos, because everything sort of hangs off that.</span></li>
+              <li data-at="277" data-key="photos"><time>04:37</time><b translate="no">Ruth</b><span>Our photographer's away, so <mark>realistically the ninth</mark>. Is the ninth awful?</span></li>
+              <li data-at="592"><time>09:52</time><b translate="no">Tomás</b><span>The old photos aren't, they're not terrible.</span></li>
+              <li data-at="604"><time>10:04</time><b translate="no">Ruth</b><span><span translate="no">Tomás</span>. They're terrible.</span></li>
+              <li data-at="680"><time>11:20</time><b translate="no">Nadia</b><span>If photos slide, launch slides. Could we say the seventeenth?</span></li>
+              <li data-at="701" data-key="launch"><time>11:41</time><b translate="no">Tomás</b><span><mark>Seventeenth works.</mark> It just has to be before the sale.</span></li>
+              <li data-at="1145"><time>19:05</time><b translate="no">Tomás</b><span>Who's doing the allergen copy? Is that us?</span></li>
+              <li data-at="1152" data-key="allergen"><time>19:12</time><b translate="no">Ruth</b><span>That's me. <mark>I'll send it Friday. No, Monday.</mark></span></li>
+              <li data-at="1430"><time>23:50</time><b translate="no">Nadia</b><span>Sorry, someone's at the door, one sec.</span></li>
+              <li data-at="1520" data-key="home"><time>25:20</time><b translate="no">Nadia</b><span><mark>I'll send two homepage options by Wednesday</mark> and you pick one.</span></li>
+              <li data-at="1750" data-key="gift"><time>29:10</time><b translate="no">Ruth</b><span>Can we <mark>drop the gift card page</mark> for now? Bring it back in January.</span></li>
+              <li data-at="1900"><time>31:40</time><b translate="no">Tomás</b><span>Anyway. How was Lisbon?</span></li>
             </ol>
           </div>
 
-          <div class="pane pane-mail" role="group" aria-label="Follow-up draft">
-            <div class="pane-head">
-              <p class="pane-title">Follow-up draft</p>
-              <p class="pane-note">Saved to your drafts at 10:42</p>
+          <article class="sheet mail" aria-label="The follow-up email Fieldnote drafted">
+            <div class="mail-head">
+              <p class="status" id="status" role="status">Draft ready. Read it, then send it.</p>
+              <dl>
+                <div><dt>To</dt><dd translate="no">Ruth Adeyemi, Tomás Vidal</dd></div>
+                <div><dt>Subject</dt><dd><span translate="no">Larkfield</span> site: new dates, and who's doing what</dd></div>
+              </dl>
             </div>
-            <dl class="fields">
-              <div><dt>To</dt><dd translate="no">Maya Okafor, Dev Banerjee</dd></div>
-              <div><dt>Subject</dt><dd class="subj"><span translate="no">Halden</span> renewal: what we agreed today</dd></div>
-            </dl>
             <div class="mail-body">
-              <p>Hi <span translate="no">Maya</span>, <span translate="no">Dev</span>,</p>
-              <p>Thanks for the time today. Here’s where we landed:</p>
-              <ol class="points">
-                <li data-link="1" tabindex="0"><span class="badge" data-pin="dst-1">1</span><span><span class="txt">We’ll hold the current rate through March, as long as the renewal is signed by 14&nbsp;November.</span><span class="sr-only"> (From Maya at 08:12.)</span></span></li>
-                <li data-link="2" tabindex="0"><span class="badge" data-pin="dst-2">2</span><span><span class="txt">I’ll send the revised scope, including the two new depots, by Friday 30&nbsp;October.</span><span class="sr-only"> (From Tom at 11:40.)</span></span></li>
-                <li data-link="3" tabindex="0"><span class="badge" data-pin="dst-3">3</span><span><span class="txt"><span translate="no">Dev</span> will share the Q1 pallet volumes by Wednesday 4&nbsp;November.</span><span class="sr-only"> (From Dev at 21:47.)</span></span></li>
-              </ol>
-              <p class="still">Still open</p>
-              <ol class="points">
-                <li data-link="4" tabindex="0"><span class="badge" data-pin="dst-4">4</span><span><span class="txt">Whether the Rotterdam lane needs to run weekly. I’ll check with our ops team and come back to you.</span><span class="sr-only"> (From Maya at 33:05.)</span></span></li>
-              </ol>
-              <p>Best,<br><span translate="no">Tom</span></p>
+              <p translate="no">Hi Ruth, Tomás,</p>
+              <p class="line" data-at="1">Thanks for today. Here's where we got to.</p>
+              <h3 class="line" data-at="277">Decided</h3>
+              <ul>
+                <li class="item line" data-at="277" data-key="photos"><span>Photos move to Mon&nbsp;9&nbsp;Nov, once <span translate="no">Ruth</span>'s photographer is back.</span><button class="src" type="button" data-show="photos" aria-label="04:37, show where this came from">04:37</button></li>
+                <li class="item line" data-at="701" data-key="launch"><span>Launch moves to Tue&nbsp;17&nbsp;Nov, still ahead of the sale.</span><button class="src" type="button" data-show="launch" aria-label="11:41, show where this came from">11:41</button></li>
+                <li class="item line" data-at="1750" data-key="gift"><span>The gift card page waits until January.</span><button class="src" type="button" data-show="gift" aria-label="29:10, show where this came from">29:10</button></li>
+              </ul>
+              <h3 class="line" data-at="1152">Who's doing what</h3>
+              <ul>
+                <li class="item line" data-at="1152" data-key="allergen"><span><span translate="no">Ruth</span>: allergen copy by Mon&nbsp;2&nbsp;Nov.</span><button class="src" type="button" data-show="allergen" aria-label="19:12, show where this came from">19:12</button></li>
+                <li class="item line" data-at="1520" data-key="home"><span><span translate="no">Nadia</span>: two homepage options by Wed&nbsp;4&nbsp;Nov, you pick one.</span><button class="src" type="button" data-show="home" aria-label="25:20, show where this came from">25:20</button></li>
+              </ul>
+              <p class="line" data-at="1920">Tell me if I've got any of that wrong.</p>
+              <p class="line" data-at="1920" translate="no">Nadia</p>
             </div>
-            <div class="mail-actions" aria-hidden="true">
-              <span class="ui-btn">Send</span>
-              <span class="ui-btn ghost">Edit</span>
-              <span class="voice">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>
-                <span>Matched to how you write to <span translate="no">Halden</span></span>
-              </span>
+            <div class="mail-foot">
+              <button class="btn" id="send" type="button">Send</button>
+              <small>Nothing leaves until you press this.</small>
             </div>
-          </div>
+          </article>
+
+          <svg class="thread" id="thread" aria-hidden="true"><path pathLength="1"/><rect width="7" height="7"/></svg>
         </div>
-      </figure>
-      <p class="demo-hint">
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2.5 12.5 7l-4 1.3L7 12.5z"/></svg>
-        Point at a line in the draft, or tab to it, to see where it was said.
-      </p>
+      </div>
     </div>
   </section>
 
-  <section id="how" class="how" aria-labelledby="how-title">
-    <div class="wrap how-grid">
-      <div class="how-intro">
-        <h2 id="how-title">From the invite to the draft, without you taking a single note.</h2>
-        <p>It joins from your calendar, so there’s nothing to remember to start. On your phone, it works for meetings in a room too.</p>
-        <ul class="tools" aria-label="Works with">
-          <li translate="no">Zoom</li>
-          <li translate="no">Google Meet</li>
-          <li translate="no">Microsoft Teams</li>
-          <li>In person</li>
-        </ul>
-      </div>
-      <ol class="timeline">
-        <li>
-          <time datetime="09:58">09:58</time>
-          <div>
-            <h3>It joins from the invite.</h3>
-            <p><span translate="no">Fieldnote</span> shows up as a named participant and posts in the chat that the call is being recorded. Anyone on the call can ask it to leave.</p>
-          </div>
+  <section class="wall" id="left-out" aria-labelledby="wall-title">
+    <div class="wrap">
+      <h2 class="display" id="wall-title"><span>32&nbsp;minutes</span><span>of talk.</span><span>Five lines</span><span>worth sending.</span></h2>
+      <p class="talk"><b translate="no">Tomás</b> Sorry, I'm on the train. Can you hear me? Okay. Okay, good. <b translate="no">Ruth</b> We can hear you. We can also hear the train. <b translate="no">Nadia</b> Afternoon, both. Should we wait for anyone else? <b translate="no">Ruth</b> No, it's just us. <b translate="no">Nadia</b> Great. Let's start with photos, because everything sort of hangs off that. <b translate="no">Ruth</b> Right, so, the photos are the problem. Our photographer's away, so <mark>realistically the ninth</mark>. Is the ninth awful? <b translate="no">Nadia</b> It's not awful. It's not great. <b translate="no">Tomás</b> The old photos aren't, they're not terrible. <b translate="no">Ruth</b> <span translate="no">Tomás</span>. They're terrible. <b translate="no">Tomás</b> The croissant one is fine. <b translate="no">Ruth</b> The croissant one has a thumb in it. <b translate="no">Nadia</b> Okay. If photos slide, launch slides. Could we say the seventeenth? <b translate="no">Tomás</b> Hang on, tunnel. Sorry, what did I miss? <b translate="no">Nadia</b> The seventeenth, for launch. <b translate="no">Tomás</b> <mark>Seventeenth works.</mark> It just has to be before the sale. <b translate="no">Ruth</b> It is before the sale. <b translate="no">Tomás</b> Then it works. <b translate="no">Nadia</b> Lovely. What else, what else. Copy. We have most of it, except. <b translate="no">Tomás</b> Who's doing the allergen copy? Is that us? <b translate="no">Ruth</b> That's me. <mark>I'll send it Friday. No, Monday.</mark> I've got the supplier on Friday and they always, you know. <b translate="no">Nadia</b> Monday's fine. Sorry, someone's at the door, one sec. <b translate="no">Ruth</b> Is that your dog? <b translate="no">Nadia</b> That's my dog. Okay, I'm back. Where were we? <b translate="no">Tomás</b> Homepage. <b translate="no">Ruth</b> Were we? <b translate="no">Tomás</b> I thought we were. <b translate="no">Nadia</b> We can be. <mark>I'll send two homepage options by Wednesday</mark> and you pick one. <b translate="no">Ruth</b> Not three? <b translate="no">Nadia</b> Not three. Three is how we ended up here last time. <b translate="no">Ruth</b> Fair. While I think of it, can we <mark>drop the gift card page</mark> for now? Bring it back in January. Nobody's asked for it, and I don't want to write the terms. <b translate="no">Tomás</b> Does anyone ever ask for it? <b translate="no">Ruth</b> My mum. <b translate="no">Nadia</b> Out for now, then. I think that's everything. <b translate="no">Tomás</b> Anyway. How was Lisbon? <b translate="no">Nadia</b> Oh, Lisbon was great. We did the tram, the one everyone does. <b translate="no">Ruth</b> Did you go to the place I told you about? <b translate="no">Nadia</b> We tried. It was shut.</p>
+      <p class="coda">The train, the dog and Lisbon stay out of it.</p>
+    </div>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 class="display" id="how-title">Four boxes. We tick three.</h2>
+      <ol>
+        <li class="row">
+          <svg class="bigbox" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M11 25l9 9 17-20"/></svg>
+          <h3>Recorded</h3>
+          <p>Add it to the call, or put your phone on the table. It says out loud that it's recording, so nobody has to ask.</p>
         </li>
-        <li>
-          <time datetime="10:00">10:00</time>
-          <div>
-            <h3><span class="rec-dot" aria-hidden="true"></span>It listens, so you can too.</h3>
-            <p>A live transcript with each speaker labelled. You stop typing notes and look at the people you’re talking to.</p>
-          </div>
+        <li class="row">
+          <svg class="bigbox" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M11 25l9 9 17-20"/></svg>
+          <h3>Sorted</h3>
+          <p>Decisions, dates and who said they'd do what get pulled out of the talk. "Friday. No, Monday." goes in as Monday.</p>
         </li>
-        <li>
-          <time datetime="10:17">10:17</time>
-          <div>
-            <h3>It catches what people commit to.</h3>
-            <p>“I’ll send the revised scope by Friday” becomes a next step with an owner and a date. Decisions and open questions get picked out the same way.</p>
-          </div>
+        <li class="row">
+          <svg class="bigbox" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M11 25l9 9 17-20"/></svg>
+          <h3>Drafted</h3>
+          <p>The email is in your drafts when the meeting ends, addressed to the people who were in it, written the way you usually write.</p>
         </li>
-        <li>
-          <time datetime="10:42">10:42</time>
-          <div>
-            <h3>You hang up. The email is waiting.</h3>
-            <p>Addressed to everyone who was on the call, written the way you write, with each point linked to the moment it was said.</p>
-          </div>
+        <li class="row row-sent">
+            <input type="checkbox" id="sent-check" aria-labelledby="sent-title">
+            <svg class="bigbox" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M11 25l9 9 17-20"/></svg>
+            <h3 id="sent-title">Sent</h3>
+            <p><span class="before">This box is yours. <span translate="no">Fieldnote</span> never sends anything on its own. Go on, tick it.</span><span class="after">There. That was the whole job.</span></p>
         </li>
       </ol>
     </div>
   </section>
 
-  <section id="draft" class="draft" aria-labelledby="draft-title">
+  <section class="qs" id="questions" aria-labelledby="qs-title">
     <div class="wrap">
-      <div class="spec">
-        <div class="cell first">
-          <p class="spec-meta">Draft from <span translate="no">Brightwater</span> intro call, Tue 27&nbsp;Oct, 25&nbsp;min</p>
-          <dl class="spec-fields">
-            <div><dt>To</dt><dd translate="no">Lena Hartmann</dd></div>
-            <div><dt>Subject</dt><dd class="subj"><span translate="no">Brightwater</span> intro, and the two things I owe you</dd></div>
-          </dl>
-        </div>
-        <div class="spec-head">
-          <h2 id="draft-title">It sounds like you on a good day.</h2>
-          <p><span translate="no">Fieldnote</span> learns from the emails you’ve already sent, so each draft keeps your greeting, your length and your sign-off.</p>
-        </div>
-
-        <div class="cell" style="--pt:28px">
-          <p>Hi <span translate="no">Lena</span>,</p>
-        </div>
-
-        <div class="cell">
-          <p>Thanks for walking me through the front desk this morning. What stuck with me: <mark>on Mondays, three of your clinics still book by phone, and calls go to voicemail by nine.</mark></p>
-        </div>
-        <p class="note">Repeats her problem in her words, so she knows you were listening.</p>
-
-        <div class="cell">
-          <p>What I said I’d do:</p>
-        </div>
-        <p class="note">Lists only what you promised. Her to-dos stay in her notes.</p>
-
-        <div class="cell">
-          <p class="bullet">Send pricing for three locations. It’s attached.</p>
-        </div>
-        <div class="note"></div>
-
-        <div class="cell" style="--pt:6px">
-          <p class="bullet">Book 30&nbsp;minutes with <span translate="no">Sam</span> from your front desk. <mark>Does Tuesday 3&nbsp;November at 10:00 work for him?</mark></p>
-        </div>
-        <p class="note" style="--pt:6px">Offers the slot you both mentioned, after checking your calendar.</p>
-
-        <div class="cell">
-          <p>You asked whether patients would need to download anything. <mark>They won’t; reminders go out as a text message.</mark></p>
-        </div>
-        <p class="note">Answers her question with what you said on the call, nothing new.</p>
-
-        <div class="cell last">
-          <p><mark>Speak soon,</mark><br><span translate="no">Tom</span></p>
-        </div>
-        <p class="note">Signs off the way you do. You never write “Best regards”, so neither does it.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="privacy" class="privacy" aria-labelledby="privacy-title">
-    <div class="wrap">
-      <h2 id="privacy-title">Nothing is sent until you press Send.</h2>
-      <p class="privacy-lede"><span translate="no">Fieldnote</span> writes into your drafts folder and stops there. It has no way to email anyone on its own.</p>
-      <ul class="facts">
+      <h2 class="sr" id="qs-title">Questions</h2>
+      <ul>
         <li>
-          <h3>It says it’s recording.</h3>
-          <p>It joins under its own name and posts a notice in the chat. Anyone on the call can remove it.</p>
+          <h3>Re: Does everyone know it's recording?</h3>
+          <p>Yes. It says so when it starts and shows it for as long as it's running. If someone asks you to stop it, it's one button.</p>
         </li>
         <li>
-          <h3>You choose when it’s deleted.</h3>
-          <p>Keep them for a year, a week, or delete the audio as soon as the email goes out.</p>
+          <h3>Re: What if it gets something wrong?</h3>
+          <p>It's a draft, and nothing goes out until you send it. Every line links to the moment it came from, so checking takes a click, not a re-listen.</p>
         </li>
         <li>
-          <h3>Only the people who were there.</h3>
-          <p>Transcripts are shared with the attendees you choose, never with your whole workspace by default.</p>
-        </li>
-        <li>
-          <h3>Your calls don’t train models.</h3>
-          <p>Recordings and transcripts are used to write your drafts and for nothing else.</p>
+          <h3>Re: Will it sound like a robot?</h3>
+          <p>It writes the way your last few emails read. If you never open with "I hope this finds you well", neither will it.</p>
         </li>
       </ul>
     </div>
   </section>
 
-  <section id="start" class="cta" aria-labelledby="cta-title">
-    <div class="wrap cta-grid">
-      <h2 id="cta-title">Try it on your next call.</h2>
-      <div class="cta-side">
-        <p>Connect your calendar and pick the meetings you want recorded. <span translate="no">Fieldnote</span> asks before it joins anything new.</p>
-        <div class="actions">
-          <a class="btn" href="#">Connect your calendar
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-          </a>
-          <a class="textlink" href="#">Sign in</a>
-        </div>
-        <p class="small">For Mac, Windows and the browser.</p>
+  <section class="get" id="get" aria-labelledby="get-title">
+    <div class="wrap">
+      <h2 class="display" id="get-title"><span>Your next meeting</span><span>is the demo.</span></h2>
+      <div class="get-grid">
+        <p class="pitch">Leave it running on your next call. If the email it writes is wrong, you've lost nothing: you haven't sent it.</p>
+        <!-- Wire to the signup endpoint before launch; the submit handler below only shows the confirmation. -->
+        <form class="sheet compose" id="get-form" action="#" method="post" novalidate>
+          <div class="f"><label for="to">To</label><input id="to" name="email" type="email" required autocomplete="email" spellcheck="false" inputmode="email" placeholder="you@work.com"></div>
+          <div class="f"><span>Subject</span><b>The link to <span translate="no">Fieldnote</span></b></div>
+          <div class="msg">
+            <p>Here's your link. Open it before your next meeting and leave it running.</p>
+            <p>The follow-up will be waiting when you're done.</p>
+            <p translate="no">Fieldnote</p>
+          </div>
+          <div class="foot">
+            <button class="btn" type="submit">Send</button>
+            <small id="get-note" role="status">Just the link, nothing else.</small>
+          </div>
+        </form>
       </div>
+      <footer class="foot-bar">
+        <a class="mark" href="#top" translate="no">Fieldnote</a>
+        <a href="#how">How it works</a>
+        <a href="#questions">Questions</a>
+        <p><span translate="no">Larkfield</span>, <span translate="no">Ruth</span>, <span translate="no">Tomás</span> and <span translate="no">Nadia</span> are made up. The meeting is an example.</p>
+      </footer>
     </div>
   </section>
 </main>
 
-<footer class="foot">
-  <div class="wrap foot-row">
-    <a class="brand" href="#" aria-label="Fieldnote home">
-      <svg viewBox="0 0 22 22" fill="currentColor" aria-hidden="true">
-        <rect x="1" y="7" width="2.6" height="8" rx="1.3"/>
-        <rect x="5.5" y="3" width="2.6" height="16" rx="1.3"/>
-        <rect x="10" y="6" width="2.6" height="10" rx="1.3"/>
-        <rect x="14.5" y="9.7" width="6.5" height="2.6" rx="1.3"/>
-      </svg>
-      <span translate="no">Fieldnote</span>
-    </a>
-    <span>© 2026 <span translate="no">Fieldnote</span></span>
-    <nav class="foot-links" aria-label="Footer">
-      <a href="#privacy">Privacy</a>
-      <a href="#">Security</a>
-      <a href="#">Terms</a>
-      <a href="#">Contact</a>
-    </nav>
-  </div>
-</footer>
-
 <script>
-  (() => {
-    const demo = document.querySelector('.demo');
-    if (!demo) return;
-    const body = demo.querySelector('.demo-body');
-    const svg = body.querySelector('.links');
-    const NS = 'http://www.w3.org/2000/svg';
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const ids = ['1', '2', '3', '4'];
-    const parts = {};
+(() => {
+  const END = 1920;
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const root = document.documentElement;
+  const range = $('#t'), clock = $('#clock'), status = $('#status'), send = $('#send');
+  const play = $('#play'), playLabel = $('#play-label'), playIcon = $('#play-icon');
+  const sentCheck = $('#sent-check'), boxSent = $('#box-sent');
+  const timed = $$('[data-at]');
+  const moments = $$('.said [data-key]').map(el => ({ key: el.dataset.key, at: +el.dataset.at }));
 
-    for (const n of ids) {
-      const g = document.createElementNS(NS, 'g');
-      g.setAttribute('data-link', n);
-      const path = document.createElementNS(NS, 'path');
-      path.setAttribute('data-link', n);
-      const a = document.createElementNS(NS, 'circle');
-      const b = document.createElementNS(NS, 'circle');
-      for (const c of [a, b]) { c.setAttribute('r', '2.5'); c.setAttribute('data-link', n); }
-      g.append(path, a, b);
-      svg.append(g);
-      parts[n] = { path, a, b };
+  // A speech-shaped waveform, seeded so it never changes between loads.
+  let seed = 11;
+  const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+  const N = 230;
+  let all = '', said = '', kept = '', pause = 0;
+  for (let i = 0; i < N; i++) {
+    const x = ((i + 0.5) / N * 1000).toFixed(1);
+    const at = i / N * END;
+    let a = (0.3 + 0.5 * Math.abs(Math.sin(i / 8.5)) * (0.65 + 0.35 * Math.sin(i / 29 + 1))) * (0.4 + 0.6 * rnd());
+    if (rnd() < 0.05) pause = 1 + Math.floor(rnd() * 3);
+    if (pause > 0) { a = 0.04; pause--; }
+    const hit = moments.some(m => at >= m.at - 26 && at < m.at + 30);
+    if (hit) a = 0.56 + 0.34 * rnd();
+    const seg = `M${x} ${(50 - a * 42).toFixed(1)}V${(50 + a * 42).toFixed(1)}`;
+    all += seg;
+    if (hit) kept += seg; else said += seg;
+  }
+  $('#wave-all').setAttribute('d', all);
+  $('#wave-said').setAttribute('d', said);
+  $('#wave-kept').setAttribute('d', kept);
+
+  // The thread from a line in the transcript to the line it became.
+  const cols = $('#cols'), thread = $('#thread');
+  const threadPath = $('path', thread), threadEnd = $('rect', thread);
+  let lit = null;
+
+  function drawThread() {
+    const from = lit && $(`.said [data-key="${lit}"]`);
+    const to = lit && $(`.mail [data-key="${lit}"]`);
+    if (!from || !to || getComputedStyle(thread).display === 'none') {
+      threadPath.removeAttribute('d');
+      threadEnd.setAttribute('width', 0);
+      return;
     }
+    const c = cols.getBoundingClientRect(), a = from.getBoundingClientRect(), b = to.getBoundingClientRect();
+    const x1 = a.right - c.left, y1 = a.top + a.height / 2 - c.top;
+    const x2 = b.left - c.left, y2 = b.top + b.height / 2 - c.top;
+    const mid = x1 + 28;
+    threadPath.setAttribute('d', Math.abs(y1 - y2) < 1 ? `M${x1} ${y1}H${x2}` : `M${x1} ${y1}H${mid}V${y2}H${x2}`);
+    threadEnd.setAttribute('width', 7);
+    threadEnd.setAttribute('x', x2 - 3.5);
+    threadEnd.setAttribute('y', y2 - 3.5);
+  }
 
-    function layout() {
-      if (getComputedStyle(svg).display === 'none') return;
-      const box = body.getBoundingClientRect();
-      svg.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
-      for (const n of ids) {
-        const s = body.querySelector(`[data-pin="src-${n}"]`).getBoundingClientRect();
-        const d = body.querySelector(`[data-pin="dst-${n}"]`).getBoundingClientRect();
-        const x1 = s.right - box.left + 6;
-        const y1 = s.top + s.height / 2 - box.top;
-        const x2 = d.left - box.left - 6;
-        const y2 = d.top + d.height / 2 - box.top;
-        const k = (x2 - x1) * 0.6;
-        const p = parts[n];
-        p.path.setAttribute('d', `M${x1} ${y1} C${x1 + k} ${y1} ${x2 - k} ${y2} ${x2} ${y2}`);
-        p.a.setAttribute('cx', x1); p.a.setAttribute('cy', y1);
-        p.b.setAttribute('cx', x2); p.b.setAttribute('cy', y2);
-      }
+  function light(key, animate) {
+    if (key === lit) return;
+    lit = key;
+    $$('.lit').forEach(el => el.classList.remove('lit'));
+    if (key) $$(`[data-key="${key}"]`).forEach(el => el.classList.add('lit'));
+    drawThread();
+    if (animate) {
+      thread.classList.remove('draw');
+      void thread.getBoundingClientRect();
+      thread.classList.add('draw');
     }
+  }
 
-    function activate(n) {
-      if (demo.dataset.active === n) return;
-      demo.dataset.active = n;
-      if (reduce.matches) return;
-      const path = parts[n].path;
-      const len = path.getTotalLength();
-      path.animate(
-        [
-          { strokeDasharray: `${len} ${len}`, strokeDashoffset: len },
-          { strokeDasharray: `${len} ${len}`, strokeDashoffset: 0 }
-        ],
-        { duration: 650, easing: 'cubic-bezier(0.22, 1, 0.36, 1)' }
-      );
+  const READY = 'Draft ready. Read it, then send it.';
+  const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+
+  const say = text => { if (status.textContent !== text) status.textContent = text; };
+
+  function setSent(on) {
+    sentCheck.checked = on;
+    boxSent.classList.toggle('off', !on);
+    send.textContent = on ? 'Sent' : 'Send';
+    if (range.valueAsNumber >= END) say(on ? "Sent to Ruth and Tomás. Not really, they're made up." : READY);
+  }
+
+  function render(v, animate) {
+    v = Math.round(v);
+    range.value = v;
+    root.style.setProperty('--p', v / END);
+    clock.textContent = fmt(v);
+    const done = v >= END;
+    range.setAttribute('aria-valuetext', `${Math.floor(v / 60)} minutes ${v % 60} seconds${done ? ', end of meeting' : ''}`);
+    timed.forEach(el => el.classList.toggle('off', v < +el.dataset.at));
+    const passed = moments.filter(m => v >= m.at);
+    send.disabled = !done;
+    if (!done) {
+      if (sentCheck.checked) setSent(false);
+      say(passed.length ? `Listening. ${passed.length} of 5 lines so far.` : 'Listening. Nothing to write yet.');
+      light(passed.length ? passed[passed.length - 1].key : null, animate);
+    } else if (!sentCheck.checked) {
+      say(READY);
     }
+  }
 
-    body.querySelectorAll('li[data-link], .pin[data-link]').forEach((el) => {
-      const n = el.getAttribute('data-link');
-      el.addEventListener('pointerenter', () => activate(n));
-      el.addEventListener('focus', () => activate(n));
-    });
+  // Playback runs the 32-minute meeting in ten seconds; the same button pauses it.
+  let raf = 0, lastTime = 0, pos = END;
+  const ICON_PLAY = 'M2.5 1v12l10-6z', ICON_PAUSE = 'M2 1h3.6v12H2zM8.4 1H12v12H8.4z';
 
-    layout();
-    if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
-    if ('ResizeObserver' in window) new ResizeObserver(layout).observe(body);
-    window.addEventListener('load', layout);
-  })();
+  function setPlaying(on) {
+    cancelAnimationFrame(raf);
+    raf = 0;
+    playIcon.setAttribute('d', on ? ICON_PAUSE : ICON_PLAY);
+    if (on) playLabel.textContent = 'Pause';
+    else playLabel.textContent = range.valueAsNumber >= END ? 'Replay it' : 'Play';
+  }
+
+  function tick(now) {
+    pos += (now - lastTime) / 1000 * (END / 10);
+    lastTime = now;
+    if (pos >= END) {
+      render(END, true);
+      setPlaying(false);
+      return;
+    }
+    render(pos, true);
+    raf = requestAnimationFrame(tick);
+  }
+
+  play.addEventListener('click', () => {
+    if (raf) { setPlaying(false); return; }
+    pos = range.valueAsNumber >= END ? 0 : range.valueAsNumber;
+    setPlaying(true);
+    lastTime = performance.now();
+    raf = requestAnimationFrame(tick);
+  });
+
+  range.addEventListener('input', () => {
+    render(range.valueAsNumber, true);
+    setPlaying(false);
+  });
+
+  $$('.flag').forEach(el => el.addEventListener('click', () => {
+    render(+el.dataset.go, true);
+    setPlaying(false);
+  }));
+
+  // Every email line can show where it came from, without rewinding the draft.
+  $$('.src').forEach(el => el.addEventListener('click', () => light(el.dataset.show, true)));
+  $$('[data-key]').forEach(el => el.addEventListener('mouseenter', () => {
+    if (!raf && !el.classList.contains('off')) light(el.dataset.key, false);
+  }));
+
+  send.addEventListener('click', () => setSent(true));
+  sentCheck.addEventListener('change', () => {
+    const on = sentCheck.checked;
+    if (range.valueAsNumber < END) { render(END, false); setPlaying(false); }
+    setSent(on);
+  });
+
+  const form = $('#get-form'), note = $('#get-note'), to = $('#to');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    to.setAttribute('aria-invalid', String(!to.checkValidity()));
+    if (!to.checkValidity()) {
+      note.textContent = 'That address looks off. Check it and try again.';
+      to.focus();
+      return;
+    }
+    note.textContent = `On its way to ${to.value}.`;
+  });
+
+  light('launch', false);
+  render(END, false);
+  new ResizeObserver(drawThread).observe(cols);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawThread);
+})();
 </script>
 </body>
 </html>

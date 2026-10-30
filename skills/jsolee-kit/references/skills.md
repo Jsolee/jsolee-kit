@@ -1,6 +1,6 @@
 # Skills catalog
 
-What Joan has installed and where it comes from. `install.sh` installs the core set (marked ★); the rest install with `npx skills add <repo> --skill <name> -g -a claude-code`.
+What the kit points to and where it comes from. `install.sh` installs the core set (marked ★); the rest install with `npx skills add <repo> --skill <name> -g -a claude-code`.
 
 ## Design and UI
 
@@ -10,12 +10,24 @@ What Joan has installed and where it comes from. `install.sh` installs the core 
 | ★ design-taste-frontend | [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) | Anti-slop art direction with variance / motion / density dials |
 | ★ emil-design-eng | [emilkowalski/skills](https://github.com/emilkowalski/skills) | UI polish and animation decisions (Emil Kowalski) |
 | ★ ui-ux-pro-max | [nextlevelbuilder/ui-ux-pro-max-skill](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill) | Styles, palettes, font pairings by product type |
-| design, brand, ui-styling, design-system, slides, banner-design | same repo | Brand identity, tokens, banners, HTML slides |
+| ★ brand | same repo | Brand voice, visual identity, messaging, style guides |
+| ★ design | same repo | Logo generation (needs `GEMINI_API_KEY`), corporate identity, icons, social images |
+| ★ banner-design | same repo | Social covers, ads and hero banners |
+| ui-styling, design-system, slides | same repo | Tokens, component styling, HTML slides |
+| ★ ios-icon-gen | affaan-m/ECC | iOS app icons from SF Symbols or Iconify |
 | ★ web-design-guidelines | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | Vercel interface checklist |
 | ★ make-interfaces-feel-better | [affaan-m/ECC](https://github.com/affaan-m/ECC) | Concrete design-engineering details |
 | ★ frontend-a11y, accessibility | affaan-m/ECC | WCAG 2.2 for React / Next.js and native |
 | liquid-glass-design | affaan-m/ECC | iOS 26 Liquid Glass in SwiftUI |
 | ★ frontend-slides | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) | Slide decks as web pages |
+
+## Email
+
+| Skill | Repo | Use |
+|---|---|---|
+| ★ react-email | [resend/resend-skills](https://github.com/resend/resend-skills) | Build email templates with React components |
+| ★ email-best-practices | same repo | Deliverability, compliance, transactional and marketing patterns |
+| ★ resend | same repo | Send, receive and manage email through the Resend API |
 
 ## Motion and video
 

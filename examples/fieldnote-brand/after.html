@@ -1,0 +1,715 @@
+<!doctype html>
+<!--
+  Fieldnote brand sheet. Working notes, kept here so they travel with the file.
+
+  DIRECTIONS
+  1. Pocket notebook (thrown out, first thought): kraft or cream paper, ruled lines, a serif or a
+     typewriter face. It is the default look, and Field Notes memo books already own it.
+  2. Field recorder: true because a recorder sits in the room. Anodized panel, engraved caps, one
+     needle, one lamp. Dropped: it sells the tape, and people pay for the email.
+  3. Survey stake (kept): true because the product goes into the field, marks what was agreed and
+     comes back to it. Flagging-tape pink, routed park-sign lettering, a stake through the horizon.
+     A competitor can't wear it without also being called Fieldnote.
+     In five words: one black stake, pink field.
+
+  REFERENCES (saved screenshots, nothing copied)
+  - Logobook: black, one size, solid 1970s trademark shapes. The three ideas are judged that way.
+  - Logosystem: a mark alone on a full color tile. The color band works like that wall.
+  - Brand New: side-by-side panels with a tag hanging underneath. The do and don't row uses it,
+    and the tag became a small notched flag.
+  - Branding Style Guides: hard color split with no gutter. The type and voice band uses it.
+
+  THREE IDEAS, IN BLACK
+  Stake (kept), Furrow, Turned level. All three are drawn near the end of the sheet.
+
+  TESTS RUN ON THE WINNER
+  16 px favicon on a pixel-fitted grid, one color on pink, soil and white, next to the wordmark,
+  as an app icon and as an avatar. All on the sheet.
+
+  NOT DONE
+  No trademark search was run on the name or the shape (this pass stayed off the web, as briefed). The sheet says so.
+
+  TYPE
+  The wordmark is outlined from National Park ExtraBold (SIL OFL), overlaps merged and spacing
+  tuned by hand, so it needs no font to render. Everything else loads from Google Fonts.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnote brand sheet</title>
+<meta name="description" content="Logo, color, type and voice for Fieldnote, the app that records your meetings and writes the follow-up email.">
+<meta name="theme-color" content="#FF3F8E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23FF3F8E'/%3E%3Cpath fill='%2315120F' d='M3 1H14L10 5L12 9H7V12L5 15L3 12Z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=National+Park:wght@800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink:#FF3F8E;
+  --soil:#15120F;
+  --white:#FFFFFF;
+  --mist:#E9EAE7;
+  --gravel:#6B6762;
+  --display:'National Park','Arial Rounded MT Bold',system-ui,sans-serif;
+  --text:'Atkinson Hyperlegible Next',system-ui,sans-serif;
+  --mail:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  --expo:cubic-bezier(.22,1,.36,1);
+  --pad:48px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--white);color:var(--soil);font:400 18px/1.42 var(--text);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,figure{margin:0}
+h1,h2,h3,.display{text-wrap:balance}
+p{text-wrap:pretty}
+svg{display:block;fill:currentColor}
+a{color:inherit}
+.display{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.02}
+.h{font:800 30px/1.08 var(--display);letter-spacing:-.02em}
+.cap{font-size:17px;line-height:1.38}
+.skip{position:absolute;left:12px;top:-60px;z-index:9;background:var(--soil);color:var(--white);padding:10px 16px;font-weight:700}
+.skip:focus{top:12px}
+:focus-visible{outline:3px solid var(--soil);outline-offset:3px}
+.tag{display:inline-block;padding:3px 22px 3px 10px;font:700 15px/1.35 var(--text);background:var(--pink);color:var(--soil);clip-path:polygon(0 0,100% 0,calc(100% - 9px) 50%,100% 100%,0 100%)}
+.tag.dark{background:var(--soil);color:var(--white)}
+
+/* First screen: pink field, soil ground, one stake through the line */
+.hero{position:relative;background:var(--soil);color:var(--soil);container-type:inline-size}
+.hero>svg{width:100%;height:auto}
+.hero-top{position:absolute;left:calc(100%*560/1440);right:calc(100%*48/1440);top:calc(100cqw*48/1440)}
+.kicker{font-weight:700;font-size:max(13px,calc(100cqw*18/1440))}
+.hero h1{font-size:calc(100cqw*80/1440);margin-top:calc(100cqw*26/1440);white-space:nowrap}
+.ground{position:absolute;left:calc(100%*212/1440);right:calc(100%*48/1440);top:calc(100cqw*692/1440);display:grid;grid-template-columns:470px 1fr;gap:64px;color:var(--white)}
+.ground h2{color:var(--pink);font-size:58px;margin-bottom:16px}
+.ground p{font-size:21px;line-height:1.36}
+.reads{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.reads svg{height:96px;width:auto;margin-bottom:12px}
+.reads b{display:block;font:800 24px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:4px}
+.reads span{font-size:16px;line-height:1.34;display:block}
+
+/* Parts and the logo tool */
+.parts{display:grid;grid-template-columns:600px 1fr;gap:0 48px}
+.stack{display:grid;grid-template-columns:1fr 1fr;align-content:start}
+.cell{padding:36px var(--pad) 36px;position:relative;overflow:hidden}
+.span2{grid-column:span 2}
+.lockup-cell{padding-bottom:30px}
+.lockup-wrap{position:relative;width:444px;margin:30px 0 26px}
+.lockup-wrap svg{width:100%;height:auto;position:relative}
+.gl{position:absolute;left:-48px;width:640px;top:calc(100%*740/998);height:2px;background:var(--pink)}
+.mark-cell{background:var(--mist);padding-right:24px}
+.mark-pair{display:flex;align-items:flex-end;gap:28px;margin:22px 0 18px}
+.word-cell{padding-left:32px;padding-right:32px}
+.word-cell svg{width:220px;height:auto;margin:68px 0 66px}
+.clear-cell{padding-right:24px}
+.zone{display:inline-block;padding:14px;background:var(--pink);margin:20px 0 16px;position:relative}
+.zone>div{background:var(--white)}
+.small-cell{padding-left:32px;padding-right:24px;background:var(--mist)}
+.small-row{display:flex;align-items:center;gap:14px;min-height:44px;font-size:15px;line-height:1.25}
+.small-row:first-of-type{margin-top:14px}
+.small-row>span:first-child{flex:0 0 108px;display:flex;align-items:center}
+
+.tool{background:var(--white);padding:36px var(--pad) 40px 0;display:flex;flex-direction:column;scroll-margin-top:16px}
+.tool-head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:20px}
+.tool-head h2{font-size:48px;flex:none;white-space:nowrap}
+.tool-head p{flex:1 1 0;min-width:0;max-width:390px;font-size:17px;line-height:1.36}
+.stage{position:relative;flex:1;min-height:388px;overflow:hidden}
+.layer{position:absolute;inset:0;display:grid;place-items:center}
+.layer .z{padding:var(--c);background:var(--zone)}
+.layer .z>div{background:var(--surface);color:var(--ink)}
+.layer svg{height:var(--h);width:auto}
+.controls{display:grid;grid-template-columns:auto auto 1fr;gap:28px;margin-top:22px;align-items:start}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;font-weight:700;font-size:16px;margin-bottom:8px}
+.seg{display:flex}
+.seg label{position:relative;display:block;cursor:pointer}
+.seg input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.seg span{display:flex;align-items:center;height:44px;padding:0 14px;background:var(--mist);font-size:16px}
+.seg input:checked+span{background:var(--pink);font-weight:700}
+.seg input:focus-visible+span{outline:3px solid var(--soil);outline-offset:2px;position:relative}
+.size-l{display:flex;justify-content:space-between;font-weight:700;font-size:16px;margin-bottom:8px}
+.size-l output{font-weight:400}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:44px;margin:0;background:transparent;cursor:ew-resize;touch-action:pan-y}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--soil)}
+input[type=range]::-moz-range-track{height:4px;background:var(--soil)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:32px;margin-top:-14px;background:var(--pink);border:2px solid var(--soil)}
+input[type=range]::-moz-range-thumb{width:16px;height:28px;background:var(--pink);border:2px solid var(--soil);border-radius:0}
+.tool-foot{display:flex;align-items:center;gap:12px;margin-top:18px}
+.tool-foot p{margin-right:auto;font-size:16px;line-height:1.3;max-width:440px}
+.btn{appearance:none;border:0;cursor:pointer;height:44px;padding:0 18px;font:700 16px var(--text);background:var(--pink);color:var(--soil);white-space:nowrap;transition:transform .35s var(--expo)}
+.btn.alt{background:var(--mist)}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+
+/* Color doubles as the one color test */
+.colors{display:grid;grid-template-columns:5fr 3fr 2fr 1fr 1fr;height:470px}
+.c{padding:36px 22px 30px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
+.c:first-child{padding-left:var(--pad);padding-right:40px}
+.c-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.c .name{font:800 30px/1.08 var(--display);letter-spacing:-.02em}
+.c .hex{font:800 22px/1.2 var(--display);letter-spacing:-.01em;margin-top:6px}
+.c .rgb{font-size:15px;margin-top:2px}
+.c.big .name{font-size:58px}
+.c.big .hex{font-size:40px;margin-top:10px}
+.c.big .rgb{font-size:18px}
+.c.big p{max-width:360px;font-size:18px}
+.c.big svg{height:290px;width:auto;flex:none}
+.c.sm{padding:30px 14px}
+.c.sm .name{font-size:22px}
+.c.sm .hex{font-size:16px;letter-spacing:0;font-family:var(--text);font-weight:700}
+.c.sm .rgb{font-size:14px}
+.pairs{display:grid;grid-template-columns:repeat(5,1fr) auto;gap:0 28px;padding:30px var(--pad);align-items:center}
+.pair{display:flex;gap:14px;align-items:center}
+.chip{flex:none;width:64px;height:64px;display:grid;place-items:center;font:800 28px/1 var(--display)}
+.pair b{display:block;font:800 26px/1 var(--display);letter-spacing:-.01em}
+.pair span{display:block;font-size:15px;line-height:1.25;margin-top:4px}
+
+/* Places the mark has to live */
+.places{display:grid;grid-template-columns:repeat(12,1fr)}
+.p{padding:32px var(--pad) 36px;min-width:0}
+.p .cap{margin-top:6px;max-width:360px}
+.p4{grid-column:span 4}
+.p3{grid-column:span 3}
+.p6{grid-column:span 6}
+.mist{background:var(--mist)}
+.soil{background:var(--soil);color:var(--white)}
+.pinkbg{background:var(--pink)}
+.fav{display:flex;gap:26px;margin-top:20px;align-items:flex-start}
+.tabs{flex:1;display:grid;gap:10px;min-width:0}
+.tabbar{padding:8px 0 0 8px;height:42px}
+.tabbar div{display:flex;align-items:center;gap:7px;height:34px;padding:0 10px;font:400 13px var(--mail);width:156px}
+.tabbar.l{background:var(--mist)}
+.tabbar.l div{background:var(--white)}
+.tabbar.d{background:#000;color:#fff}
+.tabbar.d div{background:#2b2926}
+.tabbar svg{flex:none;width:16px;height:16px}
+.grid16{flex:none;width:160px;height:160px}
+.icons{display:flex;align-items:flex-end;gap:20px;margin-top:20px}
+.icon{border-radius:22.37%;overflow:hidden;flex:none}
+.round{border-radius:50%;overflow:hidden;flex:none}
+.mailbox{background:var(--white);color:var(--soil);padding:20px 22px;margin-top:18px;font:400 15px/1.42 var(--mail)}
+.mail-logo{height:26px;width:auto;margin-bottom:16px}
+.mailbox strong{display:block;margin-bottom:6px;font-size:16px;line-height:1.3}
+.mail-btn{display:flex;align-items:center;justify-content:center;height:44px;margin-top:14px;padding:0 18px;background:var(--pink);color:var(--soil);font-weight:700;text-decoration:none}
+.mailbox.dk{background:#201d19;color:#fff}
+.slide{position:relative;margin-top:18px;aspect-ratio:16/9;width:100%;overflow:hidden}
+.slide svg{position:absolute;inset:0;width:100%;height:100%}
+.slide h3{position:absolute;left:36.5%;top:11.6%;font-size:52px;color:var(--soil);max-width:60%}
+.slide p{position:absolute;left:36.5%;top:78%;color:var(--white);font-size:19px}
+
+/* Type and voice, hard split */
+.tv{display:grid;grid-template-columns:7fr 5fr}
+.type{padding:40px var(--pad) 44px}
+.type .np{font-size:128px;line-height:.98;margin:0 0 14px -5px;white-space:nowrap}
+.type .ah{font:700 44px/1.08 var(--text);letter-spacing:-.015em;margin:34px 0 12px}
+.type .cap{max-width:620px}
+.glyphs{font-size:44px;line-height:1;font-weight:400;display:flex;gap:30px;margin-top:20px;color:var(--pink);white-space:nowrap}
+.voice{padding:40px var(--pad) 44px;display:flex;flex-direction:column;justify-content:space-between;gap:34px}
+.voice .lines{font-size:42px;line-height:1.06;display:grid;gap:20px}
+.saying{display:grid;gap:10px;font-size:18px}
+.saying div{display:flex;gap:12px;align-items:baseline}
+.saying .tag{flex:none;min-width:62px}
+
+/* Do and don't */
+.rules{padding:40px var(--pad) 44px}
+.rules-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:22px}
+.tile{height:178px;position:relative;overflow:hidden;display:grid;place-items:center}
+.rule .tag{display:block;width:max-content}
+.rule p{font-size:16px;line-height:1.32;margin-top:8px}
+
+/* How we got here */
+.why{background:var(--mist);padding:40px var(--pad) 44px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px 36px}
+.why h2{font-size:48px;margin-bottom:12px}
+.idea svg{height:168px;width:auto}
+.idea .box{height:182px;display:flex;align-items:flex-end;margin-bottom:14px}
+.idea b{display:block;font:800 26px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:4px}
+.idea p{font-size:16px;line-height:1.34}
+.note{font-size:16px;line-height:1.36}
+.note b{display:block;font:800 26px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:6px}
+.note .tag{margin-bottom:8px}
+.s2{grid-column:span 2}
+footer{background:var(--soil);color:var(--white);padding:26px var(--pad);display:flex;justify-content:space-between;align-items:center;font-size:16px}
+footer svg{height:30px;width:auto}
+
+@media (max-width:1100px){
+  .ground{position:static;display:block;padding:24px 20px 40px}
+  .ground h2{font-size:44px}
+  .reads{margin-top:28px}
+  .parts,.tv{grid-template-columns:minmax(0,1fr);gap:0}
+  .tool{padding:32px 20px}
+  .tool-head,.tool-foot{flex-direction:column;align-items:flex-start}
+  .controls{grid-template-columns:1fr}
+  .stage{height:300px}
+  .colors{grid-template-columns:1fr 1fr;height:auto}
+  .c.big,.c:nth-child(2){grid-column:span 2;min-height:300px}
+  .c.big svg{height:180px}
+  .pairs{grid-template-columns:1fr;gap:14px;padding:24px 20px}
+  .places{grid-template-columns:1fr}
+  .p4,.p3,.p6{grid-column:auto;padding:28px 20px}
+  .type,.voice,.rules,.why{padding:32px 20px}
+  .type .np{font-size:13.5vw;margin-left:-2px}
+  .glyphs{flex-wrap:wrap}
+  .rules-grid{grid-template-columns:1fr 1fr}
+  .why{grid-template-columns:1fr}
+  .s2{grid-column:auto}
+  .cell{padding-left:20px;padding-right:20px}
+  .lockup-wrap{width:100%}
+  .slide h3{font-size:6vw}
+  .slide p{font-size:3vw}
+  footer{flex-direction:column;align-items:flex-start;gap:12px;padding:24px 20px}
+}
+@media (max-width:640px){
+  .c.big .name{font-size:40px}
+  .c.big .hex{font-size:28px}
+  .c.big svg{height:130px}
+  .c:first-child{padding:28px 20px;}
+  .stack{grid-template-columns:1fr}
+  .span2{grid-column:auto}
+  .reads{grid-template-columns:1fr}
+  .seg{flex-wrap:wrap}
+  .fav{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  .btn{transition:none}
+  .btn:hover{transform:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#tool">Skip to the logo tool</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="long" viewBox="0 0 100 184"><path d="M0 0H100L62 32L86 64H28V136L14 184L0 136Z"/></symbol>
+  <symbol id="short" viewBox="0 0 100 136"><path d="M0 0H100L62 32L86 64H30V100L15 136L0 100Z"/></symbol>
+  <symbol id="word" viewBox="0 0 4231 755"><path d="M172 750Q203 750 225 728Q247 706 247 675V355H322Q349 355 368 336Q387 317 387 290Q387 263 368 244Q349 225 322 225H247V179Q247 166 249 158Q251 150 259 150Q266 150 274.5 154.5Q283 159 295.5 164Q308 169 325 169Q356 169 375 149.5Q394 130 394 99Q394 65 373 44.5Q352 24 320 14.5Q288 5 256 5Q203 5 167.5 27Q132 49 114.5 84.5Q97 120 97 161V225H65Q38 225 19 244Q0 263 0 290Q0 317 19 336Q38 355 65 355H97V675Q97 706 119 728Q141 750 172 750ZM537 750Q568 750 590 727.5Q612 705 612 674V290Q612 259 590 237Q568 215 537 215Q506 215 484 237Q462 259 462 290V674Q462 705 484 727.5Q506 750 537 750ZM536 168Q572 168 594 146Q616 124 616 84Q616 44 594 22Q572 0 536 0Q502 0 480 22Q458 44 458 84Q458 124 480 146Q502 168 536 168ZM957 755Q1003 755 1043 745Q1083 735 1114 718Q1145 701 1162.5 679Q1180 657 1180 632Q1180 600 1160.5 582.5Q1141 565 1112 565Q1090 565 1076.5 573.5Q1063 582 1051 591Q1034 604 1017.5 612.5Q1001 621 975 621Q948 621 925 611Q902 601 885.5 580Q869 559 861 526H1110Q1154 526 1175.5 502.5Q1197 479 1197 437Q1197 400 1180.5 360.5Q1164 321 1132 287Q1100 253 1054.5 231.5Q1009 210 951 210Q874 210 818.5 247.5Q763 285 733.5 347.5Q704 410 704 484Q704 564 736.5 625Q769 686 826 720.5Q883 755 957 755ZM860 426Q868 382 892 362.5Q916 343 953 343Q989 343 1013.5 362.5Q1038 382 1045 426ZM1364 750Q1396 750 1417.5 728Q1439 706 1439 674V85Q1439 53 1417.5 31.5Q1396 10 1364 10Q1332 10 1310.5 31.5Q1289 53 1289 85V674Q1289 706 1310.5 728Q1332 750 1364 750ZM1757 755Q1801 755 1834.5 735.5Q1868 716 1890.5 686.5Q1892.7 683.6 1894.8 680.7Q1899.2 704.8 1914 723Q1936 750 1968 750Q2000 750 2021.5 728.5Q2043 707 2043 674V85Q2043 53 2021.5 31.5Q2000 10 1968 10Q1936 10 1914.5 31.5Q1893 53 1893 85V269.5Q1883.1 258.6 1872.5 250Q1848 230 1818.5 220Q1789 210 1753 210Q1691 210 1640.5 244Q1590 278 1560.5 338.5Q1531 399 1531 480Q1531 565 1560.5 627Q1590 689 1641 722Q1692 755 1757 755ZM1793 620Q1742 620 1714 584.5Q1686 549 1686 485Q1686 419 1714.5 382Q1743 345 1792 345Q1842 345 1869.5 382.5Q1897 420 1897 483Q1897 549 1867.5 584.5Q1838 620 1793 620ZM2240 750Q2272 750 2293.5 728.5Q2315 707 2315 675V455Q2315 428 2325.5 404Q2336 380 2357.5 365.5Q2379 351 2412 351Q2455 351 2477.5 378Q2500 405 2500 449V675Q2500 707 2521.5 728.5Q2543 750 2575 750Q2607 750 2628.5 728.5Q2650 707 2650 675V420Q2650 352 2626 305Q2602 258 2559.5 234Q2517 210 2463 210Q2402 210 2359.5 242Q2335.6 260 2315 288.2Q2314.3 258.3 2293 237Q2271 215 2240 215Q2208 215 2186.5 236.5Q2165 258 2165 290V675Q2165 707 2186.5 728.5Q2208 750 2240 750ZM2995 755Q3073 755 3131 719Q3189 683 3221 620.5Q3253 558 3253 481Q3253 405 3221 344Q3189 283 3131 246.5Q3073 210 2995 210Q2918 210 2859.5 246.5Q2801 283 2769 344Q2737 405 2737 481Q2737 558 2769 620.5Q2801 683 2859.5 719Q2918 755 2995 755ZM2995 618Q2946 618 2919 584Q2892 550 2892 481Q2892 415 2919 381Q2946 347 2995 347Q3044 347 3071 381Q3098 415 3098 481Q3098 550 3071 584Q3044 618 2995 618ZM3538 750Q3570 750 3601.5 740.5Q3633 731 3654 711Q3675 691 3675 660Q3675 628 3653 606Q3631 584 3600 584Q3586 584 3575 588.5Q3564 593 3556 598Q3548 603 3540 603Q3534 603 3531 598Q3528 593 3528 583V355H3617Q3644 355 3663 336Q3682 317 3682 290Q3682 263 3663 244Q3644 225 3617 225H3528V190Q3528 159 3506 137Q3484 115 3453 115Q3422 115 3400 137Q3378 159 3378 190V225H3366Q3339 225 3320 244Q3301 263 3301 290Q3301 317 3320 336Q3339 355 3366 355H3378V594Q3378 634 3396 670Q3414 706 3449.5 728Q3485 750 3538 750ZM3991 755Q4037 755 4077 745Q4117 735 4148 718Q4179 701 4196.5 679Q4214 657 4214 632Q4214 600 4194.5 582.5Q4175 565 4146 565Q4124 565 4110.5 573.5Q4097 582 4085 591Q4068 604 4051.5 612.5Q4035 621 4009 621Q3982 621 3959 611Q3936 601 3919.5 580Q3903 559 3895 526H4144Q4188 526 4209.5 502.5Q4231 479 4231 437Q4231 400 4214.5 360.5Q4198 321 4166 287Q4134 253 4088.5 231.5Q4043 210 3985 210Q3908 210 3852.5 247.5Q3797 285 3767.5 347.5Q3738 410 3738 484Q3738 564 3770.5 625Q3803 686 3860 720.5Q3917 755 3991 755ZM3894 426Q3902 382 3926 362.5Q3950 343 3987 343Q4023 343 4047.5 362.5Q4072 382 4079 426Z"/></symbol>
+  <symbol id="lockup" viewBox="0 0 4944 998"><path d="M0 10L536.8 10L332.8 181.8L461.6 353.5L150.3 353.5L150.3 740L75.1 997.6L0 740ZM884.8 750Q915.8 750 937.8 728Q959.8 706 959.8 675V355H1034.8Q1061.8 355 1080.8 336Q1099.8 317 1099.8 290Q1099.8 263 1080.8 244Q1061.8 225 1034.8 225H959.8V179Q959.8 166 961.8 158Q963.8 150 971.8 150Q978.8 150 987.3 154.5Q995.8 159 1008.3 164Q1020.8 169 1037.8 169Q1068.8 169 1087.8 149.5Q1106.8 130 1106.8 99Q1106.8 65 1085.8 44.5Q1064.8 24 1032.8 14.5Q1000.8 5 968.8 5Q915.8 5 880.3 27Q844.8 49 827.3 84.5Q809.8 120 809.8 161V225H777.8Q750.8 225 731.8 244Q712.8 263 712.8 290Q712.8 317 731.8 336Q750.8 355 777.8 355H809.8V675Q809.8 706 831.8 728Q853.8 750 884.8 750ZM1249.8 750Q1280.8 750 1302.8 727.5Q1324.8 705 1324.8 674V290Q1324.8 259 1302.8 237Q1280.8 215 1249.8 215Q1218.8 215 1196.8 237Q1174.8 259 1174.8 290V674Q1174.8 705 1196.8 727.5Q1218.8 750 1249.8 750ZM1248.8 168Q1284.8 168 1306.8 146Q1328.8 124 1328.8 84Q1328.8 44 1306.8 22Q1284.8 0 1248.8 0Q1214.8 0 1192.8 22Q1170.8 44 1170.8 84Q1170.8 124 1192.8 146Q1214.8 168 1248.8 168ZM1669.8 755Q1715.8 755 1755.8 745Q1795.8 735 1826.8 718Q1857.8 701 1875.3 679Q1892.8 657 1892.8 632Q1892.8 600 1873.3 582.5Q1853.8 565 1824.8 565Q1802.8 565 1789.3 573.5Q1775.8 582 1763.8 591Q1746.8 604 1730.3 612.5Q1713.8 621 1687.8 621Q1660.8 621 1637.8 611Q1614.8 601 1598.3 580Q1581.8 559 1573.8 526H1822.8Q1866.8 526 1888.3 502.5Q1909.8 479 1909.8 437Q1909.8 400 1893.3 360.5Q1876.8 321 1844.8 287Q1812.8 253 1767.3 231.5Q1721.8 210 1663.8 210Q1586.8 210 1531.3 247.5Q1475.8 285 1446.3 347.5Q1416.8 410 1416.8 484Q1416.8 564 1449.3 625Q1481.8 686 1538.8 720.5Q1595.8 755 1669.8 755ZM1572.8 426Q1580.8 382 1604.8 362.5Q1628.8 343 1665.8 343Q1701.8 343 1726.3 362.5Q1750.8 382 1757.8 426ZM2076.8 750Q2108.8 750 2130.3 728Q2151.8 706 2151.8 674V85Q2151.8 53 2130.3 31.5Q2108.8 10 2076.8 10Q2044.8 10 2023.3 31.5Q2001.8 53 2001.8 85V674Q2001.8 706 2023.3 728Q2044.8 750 2076.8 750ZM2469.8 755Q2513.8 755 2547.3 735.5Q2580.8 716 2603.3 686.5Q2605.5 683.6 2607.6 680.7Q2611.9 704.8 2626.8 723Q2648.8 750 2680.8 750Q2712.8 750 2734.3 728.5Q2755.8 707 2755.8 674V85Q2755.8 53 2734.3 31.5Q2712.8 10 2680.8 10Q2648.8 10 2627.3 31.5Q2605.8 53 2605.8 85V269.5Q2595.8 258.6 2585.3 250Q2560.8 230 2531.3 220Q2501.8 210 2465.8 210Q2403.8 210 2353.3 244Q2302.8 278 2273.3 338.5Q2243.8 399 2243.8 480Q2243.8 565 2273.3 627Q2302.8 689 2353.8 722Q2404.8 755 2469.8 755ZM2505.8 620Q2454.8 620 2426.8 584.5Q2398.8 549 2398.8 485Q2398.8 419 2427.3 382Q2455.8 345 2504.8 345Q2554.8 345 2582.3 382.5Q2609.8 420 2609.8 483Q2609.8 549 2580.3 584.5Q2550.8 620 2505.8 620ZM2952.8 750Q2984.8 750 3006.3 728.5Q3027.8 707 3027.8 675V455Q3027.8 428 3038.3 404Q3048.8 380 3070.3 365.5Q3091.8 351 3124.8 351Q3167.8 351 3190.3 378Q3212.8 405 3212.8 449V675Q3212.8 707 3234.3 728.5Q3255.8 750 3287.8 750Q3319.8 750 3341.3 728.5Q3362.8 707 3362.8 675V420Q3362.8 352 3338.8 305Q3314.8 258 3272.3 234Q3229.8 210 3175.8 210Q3114.8 210 3072.3 242Q3048.3 260 3027.7 288.2Q3027.1 258.3 3005.8 237Q2983.8 215 2952.8 215Q2920.8 215 2899.3 236.5Q2877.8 258 2877.8 290V675Q2877.8 707 2899.3 728.5Q2920.8 750 2952.8 750ZM3707.8 755Q3785.8 755 3843.8 719Q3901.8 683 3933.8 620.5Q3965.8 558 3965.8 481Q3965.8 405 3933.8 344Q3901.8 283 3843.8 246.5Q3785.8 210 3707.8 210Q3630.8 210 3572.3 246.5Q3513.8 283 3481.8 344Q3449.8 405 3449.8 481Q3449.8 558 3481.8 620.5Q3513.8 683 3572.3 719Q3630.8 755 3707.8 755ZM3707.8 618Q3658.8 618 3631.8 584Q3604.8 550 3604.8 481Q3604.8 415 3631.8 381Q3658.8 347 3707.8 347Q3756.8 347 3783.8 381Q3810.8 415 3810.8 481Q3810.8 550 3783.8 584Q3756.8 618 3707.8 618ZM4250.8 750Q4282.8 750 4314.3 740.5Q4345.8 731 4366.8 711Q4387.8 691 4387.8 660Q4387.8 628 4365.8 606Q4343.8 584 4312.8 584Q4298.8 584 4287.8 588.5Q4276.8 593 4268.8 598Q4260.8 603 4252.8 603Q4246.8 603 4243.8 598Q4240.8 593 4240.8 583V355H4329.8Q4356.8 355 4375.8 336Q4394.8 317 4394.8 290Q4394.8 263 4375.8 244Q4356.8 225 4329.8 225H4240.8V190Q4240.8 159 4218.8 137Q4196.8 115 4165.8 115Q4134.8 115 4112.8 137Q4090.8 159 4090.8 190V225H4078.8Q4051.8 225 4032.8 244Q4013.8 263 4013.8 290Q4013.8 317 4032.8 336Q4051.8 355 4078.8 355H4090.8V594Q4090.8 634 4108.8 670Q4126.8 706 4162.3 728Q4197.8 750 4250.8 750ZM4703.8 755Q4749.8 755 4789.8 745Q4829.8 735 4860.8 718Q4891.8 701 4909.3 679Q4926.8 657 4926.8 632Q4926.8 600 4907.3 582.5Q4887.8 565 4858.8 565Q4836.8 565 4823.3 573.5Q4809.8 582 4797.8 591Q4780.8 604 4764.3 612.5Q4747.8 621 4721.8 621Q4694.8 621 4671.8 611Q4648.8 601 4632.3 580Q4615.8 559 4607.8 526H4856.8Q4900.8 526 4922.3 502.5Q4943.8 479 4943.8 437Q4943.8 400 4927.3 360.5Q4910.8 321 4878.8 287Q4846.8 253 4801.3 231.5Q4755.8 210 4697.8 210Q4620.8 210 4565.3 247.5Q4509.8 285 4480.3 347.5Q4450.8 410 4450.8 484Q4450.8 564 4483.3 625Q4515.8 686 4572.8 720.5Q4629.8 755 4703.8 755ZM4606.8 426Q4614.8 382 4638.8 362.5Q4662.8 343 4699.8 343Q4735.8 343 4760.3 362.5Q4784.8 382 4791.8 426Z"/></symbol>
+  <defs>
+    <path id="up" d="M0 0H100L62 32L86 64H28V136H0Z"/>
+    <path id="lo" d="M0 136H28L14 184Z"/>
+    <path id="flag" d="M28 0H100L62 32L86 64H28Z"/>
+    <path id="stake" d="M0 0H28V136L14 184L0 136Z"/>
+  </defs>
+  <symbol id="icon" viewBox="0 0 120 120">
+    <rect width="120" height="120" fill="#FF3F8E"/><rect y="88" width="120" height="32" fill="#15120F"/>
+    <use href="#up" transform="translate(35 11.84) scale(.56)" fill="#15120F"/><use href="#lo" transform="translate(35 11.84) scale(.56)" fill="#FF3F8E"/>
+  </symbol>
+  <symbol id="avatar" viewBox="0 0 120 120">
+    <rect width="120" height="120" fill="#FF3F8E"/><rect y="84" width="120" height="36" fill="#15120F"/>
+    <use href="#up" transform="translate(37 16) scale(.5)" fill="#15120F"/><use href="#lo" transform="translate(37 16) scale(.5)" fill="#FF3F8E"/>
+  </symbol>
+  <symbol id="fav" viewBox="0 0 16 16"><rect width="16" height="16" fill="#FF3F8E"/><path fill="#15120F" d="M3 1H14L10 5L12 9H7V12L5 15L3 12Z"/></symbol>
+</svg>
+
+<header class="hero">
+  <svg viewBox="0 0 1440 930" role="img" aria-label="The Fieldnote mark, a flag on a stake, driven through the line where a pink field meets dark ground. The wordmark stands on the same line.">
+    <rect width="1440" height="646" fill="#FF3F8E"/>
+    <rect y="646" width="1440" height="284" fill="#15120F"/>
+    <use href="#up" transform="translate(48 47.6) scale(4.4)" fill="#15120F"/>
+    <use href="#lo" transform="translate(48 47.6) scale(4.4)" fill="#FF3F8E"/>
+    <use href="#word" x="212" y="443.62" width="1180" height="210.56" fill="#15120F"/>
+  </svg>
+  <div class="hero-top">
+    <p class="kicker"><span translate="no">Fieldnote</span> brand sheet, version 1. October 2026.</p>
+    <h1 class="display">Records the meeting.<br>Writes the follow-up.</h1>
+  </div>
+  <div class="ground">
+    <div>
+      <h2 class="display">An F, a flag and a&nbsp;stake.</h2>
+      <p><span translate="no">Fieldnote</span> goes into the meeting, marks what was agreed and comes back with the email.</p>
+    </div>
+    <div class="reads">
+      <div>
+        <svg viewBox="0 0 100 184" aria-hidden="true"><use href="#long" fill="#FF3F8E"/></svg>
+        <b>An F</b><span>The name, as one shape.</span>
+      </div>
+      <div>
+        <svg viewBox="0 0 100 184" aria-hidden="true"><use href="#stake" fill="#fff"/><use href="#flag" fill="#FF3F8E"/></svg>
+        <b>A flag</b><span>Mail apps flag a message to mean follow up.</span>
+      </div>
+      <div>
+        <svg viewBox="0 0 100 184" aria-hidden="true"><use href="#flag" fill="#fff"/><use href="#stake" fill="#FF3F8E"/></svg>
+        <b>A stake</b><span>Surveyors drive one in to mean remember this spot.</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="parts" aria-label="Logo parts and logo tool">
+  <div class="stack">
+    <div class="cell span2 lockup-cell">
+      <h2 class="h">Lockup</h2>
+      <div class="lockup-wrap">
+        <div class="gl"></div>
+        <svg viewBox="0 0 4944 998" role="img" aria-label="Fieldnote lockup"><use href="#lockup"/></svg>
+      </div>
+      <p class="cap">Letters stand on the ground line and the point goes below it. The stake is as wide as a letter stem, and the flag top meets the ascenders.</p>
+    </div>
+    <div class="cell mark-cell">
+      <h2 class="h">Mark</h2>
+      <div class="mark-pair">
+        <svg style="height:150px;width:auto" viewBox="0 0 100 184" role="img" aria-label="Long stake"><use href="#long"/></svg>
+        <svg style="height:56px;width:auto" viewBox="0 0 100 136" role="img" aria-label="Short stake"><use href="#short"/></svg>
+      </div>
+      <p class="cap">Long stake from 32&nbsp;px up. Short stake below that, so the flag stays readable.</p>
+    </div>
+    <div class="cell word-cell">
+      <h2 class="h">Wordmark</h2>
+      <svg viewBox="0 0 4231 755" role="img" aria-label="Fieldnote wordmark"><use href="#word"/></svg>
+      <p class="cap">National Park ExtraBold, outlined and spaced by hand. Lowercase, one word.</p>
+    </div>
+    <div class="cell clear-cell">
+      <h2 class="h">Clear space</h2>
+      <div class="zone"><div><svg viewBox="0 0 4944 998" aria-hidden="true" style="height:40px"><use href="#lockup"/></svg></div></div>
+      <p class="cap">One flag height on every side. About a third of the logo's height.</p>
+    </div>
+    <div class="cell small-cell">
+      <h2 class="h">Smallest</h2>
+      <div class="small-row"><span><svg style="width:16px;height:16px" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1H14L10 5L12 9H7V12L5 15L3 12Z"/></svg></span><span>Mark, 16&nbsp;px</span></div>
+      <div class="small-row"><span><svg style="height:20px;width:auto" viewBox="0 0 4944 998" aria-hidden="true"><use href="#lockup"/></svg></span><span>Lockup, 20&nbsp;px</span></div>
+      <div class="small-row"><span><svg style="height:14px;width:auto" viewBox="0 0 4231 755" aria-hidden="true"><use href="#word"/></svg></span><span>Wordmark, 14&nbsp;px</span></div>
+      <p class="cap" style="margin-top:10px">Shown at true size. All heights.</p>
+    </div>
+  </div>
+
+  <div class="tool" id="tool">
+    <div class="tool-head">
+      <h2 class="display">Take the logo.</h2>
+      <p>Pick a form, a surface and a height. The cut and the clear space follow this sheet, and the SVG is yours.</p>
+    </div>
+    <div class="stage" id="stage">
+      <div class="layer" style="background:#FF3F8E;--surface:#FF3F8E;--ink:#15120F;--zone:rgba(21,18,15,.14);--c:33px;--h:96px"><div class="z"><div><svg viewBox="0 0 4944 998" role="img" aria-label="Fieldnote lockup on pink"><use href="#lockup"/></svg></div></div></div>
+    </div>
+    <div class="controls">
+      <fieldset>
+        <legend>Form</legend>
+        <div class="seg">
+          <label><input type="radio" name="form" value="lockup" checked><span>Lockup</span></label>
+          <label><input type="radio" name="form" value="mark"><span>Mark</span></label>
+          <label><input type="radio" name="form" value="word"><span>Wordmark</span></label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Surface</legend>
+        <div class="seg">
+          <label><input type="radio" name="surface" value="pink" checked><span>Pink</span></label>
+          <label><input type="radio" name="surface" value="soil"><span>Soil</span></label>
+          <label><input type="radio" name="surface" value="white"><span>White</span></label>
+        </div>
+      </fieldset>
+      <div>
+        <label class="size-l" for="size"><span>Height</span><output id="sizeOut" for="size">96&nbsp;px</output></label>
+        <input id="size" type="range" min="20" max="120" value="96" step="1">
+      </div>
+    </div>
+    <div class="tool-foot">
+      <p id="readout" aria-live="polite">Long stake. Clear space 33&nbsp;px. Smallest for this form 20&nbsp;px.</p>
+      <button class="btn" id="copy" type="button">Copy SVG</button>
+      <button class="btn alt" id="dl" type="button">Download SVG</button>
+    </div>
+  </div>
+</section>
+
+<section class="colors" aria-label="Color">
+  <div class="c big pinkbg">
+    <div class="c-top">
+      <div>
+        <p class="name">Flagging pink</p>
+        <p class="hex">#FF3F8E</p>
+        <p class="rgb">rgb(255 63 142)</p>
+      </div>
+      <svg viewBox="0 0 100 184" role="img" aria-label="Mark in soil on pink"><use href="#long"/></svg>
+    </div>
+    <p>The tape surveyors tie to stakes. It is made to be seen across a field, so each layout gets one pink thing: the thing you need noticed.</p>
+  </div>
+  <div class="c soil">
+    <svg style="height:210px;width:auto" viewBox="0 0 100 184" role="img" aria-label="Mark in white on soil"><use href="#long"/></svg>
+    <div><p class="name">Soil</p><p class="hex">#15120F</p><p class="rgb">rgb(21 18 15)</p><p class="cap" style="margin-top:10px">Marks, text and the ground under everything.</p></div>
+  </div>
+  <div class="c" style="background:#fff">
+    <svg style="height:150px;width:auto" viewBox="0 0 100 184" role="img" aria-label="Mark in soil on white"><use href="#long"/></svg>
+    <div><p class="name">White</p><p class="hex">#FFFFFF</p><p class="rgb">rgb(255 255 255)</p></div>
+  </div>
+  <div class="c sm mist">
+    <svg style="height:84px;width:auto" viewBox="0 0 100 184" aria-hidden="true"><use href="#long"/></svg>
+    <div><p class="name">Mist</p><p class="hex">#E9EAE7</p><p class="rgb">233 234 231</p></div>
+  </div>
+  <div class="c sm" style="background:var(--gravel);color:#fff">
+    <svg style="height:84px;width:auto" viewBox="0 0 100 184" aria-hidden="true"><use href="#long"/></svg>
+    <div><p class="name">Gravel</p><p class="hex">#6B6762</p><p class="rgb">107 103 98</p></div>
+  </div>
+</section>
+<section class="pairs" aria-label="Contrast">
+  <div class="pair"><div class="chip" style="background:var(--pink)">Aa</div><div><b>5.65:1</b><span>Soil on pink<br>Any size</span></div></div>
+  <div class="pair"><div class="chip" style="background:var(--soil);color:var(--pink)">Aa</div><div><b>5.65:1</b><span>Pink on soil<br>Any size</span></div></div>
+  <div class="pair"><div class="chip" style="background:var(--soil);color:#fff">Aa</div><div><b>18.66:1</b><span>White on soil<br>Any size</span></div></div>
+  <div class="pair"><div class="chip" style="background:var(--mist);color:var(--gravel)">Aa</div><div><b>4.65:1</b><span>Gravel on mist<br>Any size</span></div></div>
+  <div class="pair"><div class="chip" style="background:#fff;color:var(--pink);box-shadow:inset 0 0 0 2px var(--mist)">Aa</div><div><b>3.31:1</b><span>Pink on white<br>24&nbsp;px and up</span></div></div>
+  <button class="btn" id="tokens" type="button">Copy tokens</button>
+</section>
+
+<section class="places" aria-label="Where the mark lives">
+  <div class="p p4">
+    <h2 class="h">Favicon</h2>
+    <div class="fav">
+      <div class="tabs">
+        <div class="tabbar l"><div><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#fav"/></svg><span translate="no">Fieldnote</span></div></div>
+        <div class="tabbar d"><div><svg viewBox="0 0 16 16" aria-hidden="true"><use href="#fav"/></svg><span translate="no">Fieldnote</span></div></div>
+        <p class="cap" style="margin-top:6px">True size, short stake on a pink tile, so it holds on light and dark tabs. Drawn on the pixel grid. This page's tab uses it.</p>
+      </div>
+      <svg class="grid16" viewBox="0 0 16 16" role="img" aria-label="The favicon at ten times size on its 16 pixel grid">
+        <use href="#fav"/>
+        <path d="M1 0V16M2 0V16M3 0V16M4 0V16M5 0V16M6 0V16M7 0V16M8 0V16M9 0V16M10 0V16M11 0V16M12 0V16M13 0V16M14 0V16M15 0V16M0 1H16M0 2H16M0 3H16M0 4H16M0 5H16M0 6H16M0 7H16M0 8H16M0 9H16M0 10H16M0 11H16M0 12H16M0 13H16M0 14H16M0 15H16" fill="none" stroke="#fff" stroke-opacity=".4" stroke-width=".04"/>
+      </svg>
+    </div>
+  </div>
+  <div class="p p4 mist">
+    <h2 class="h">App icon</h2>
+    <div class="icons">
+      <svg class="icon" style="width:164px;height:164px" viewBox="0 0 120 120" role="img" aria-label="App icon at 180 points scale"><use href="#icon"/></svg>
+      <svg class="icon" style="width:60px;height:60px" viewBox="0 0 120 120" role="img" aria-label="App icon at 60 pixels"><use href="#icon"/></svg>
+      <svg class="icon" style="width:40px;height:40px" viewBox="0 0 120 120" role="img" aria-label="App icon at 40 pixels"><use href="#icon"/></svg>
+      <svg class="icon" style="width:29px;height:29px" viewBox="0 0 120 120" role="img" aria-label="App icon at 29 pixels"><use href="#icon"/></svg>
+    </div>
+    <p class="cap" style="margin-top:14px">The first screen of this sheet, cropped by the system's mask. It's the only place the mark sits in a rounded square.</p>
+  </div>
+  <div class="p p4">
+    <h2 class="h">Avatar</h2>
+    <div class="icons">
+      <svg class="round" style="width:164px;height:164px" viewBox="0 0 120 120" role="img" aria-label="Avatar, large"><use href="#avatar"/></svg>
+      <svg class="round" style="width:64px;height:64px" viewBox="0 0 120 120" role="img" aria-label="Avatar, medium"><use href="#avatar"/></svg>
+      <svg class="round" style="width:32px;height:32px" viewBox="0 0 120 120" role="img" aria-label="Avatar, small"><use href="#avatar"/></svg>
+    </div>
+    <p class="cap" style="margin-top:14px">A smaller stake, so the flag's tip and the point both clear the circle.</p>
+  </div>
+
+  <div class="p p3 mist">
+    <h2 class="h">Email header</h2>
+    <div class="mailbox">
+      <svg class="mail-logo" viewBox="0 0 4944 998" role="img" aria-label="Fieldnote"><use href="#lockup"/></svg>
+      <strong>Your follow-up to the pricing call is ready</strong>
+      Ana sends the revised quote by Thursday. You book the security review next week.
+      <span class="mail-btn">Review and send</span>
+    </div>
+    <p class="cap" style="margin-top:14px">Lockup at 26&nbsp;px tall with alt text. Body in the system font, one action.</p>
+  </div>
+  <div class="p p3 soil">
+    <h2 class="h">In dark mode</h2>
+    <div class="mailbox dk">
+      <svg class="mail-logo" viewBox="0 0 4944 998" role="img" aria-label="Fieldnote"><use href="#lockup"/></svg>
+      <strong>Your follow-up to the pricing call is ready</strong>
+      Ana sends the revised quote by Thursday. You book the security review next week.
+      <span class="mail-btn">Review and send</span>
+    </div>
+    <p class="cap" style="margin-top:14px">A white logo file, swapped in by the dark mode media query.</p>
+  </div>
+  <div class="p p6">
+    <h2 class="h">Slide</h2>
+    <div class="slide">
+      <svg viewBox="0 0 640 360" role="img" aria-label="Slide with a pink field, dark ground and the stake crossing the line">
+        <rect width="640" height="264" fill="#FF3F8E"/><rect y="264" width="640" height="96" fill="#15120F"/>
+        <use href="#up" transform="translate(36 46.4) scale(1.6)" fill="#15120F"/>
+        <use href="#lo" transform="translate(36 46.4) scale(1.6)" fill="#FF3F8E"/>
+      </svg>
+      <h3 class="display">Who does what by&nbsp;Friday.</h3>
+      <p>Pricing call, Tuesday</p>
+    </div>
+  </div>
+</section>
+
+<section class="tv" aria-label="Type and voice">
+  <div class="type soil">
+    <p class="display np" translate="no">National Park</p>
+    <p class="cap">Display, ExtraBold, tracking &minus;0.02&nbsp;em, 24&nbsp;px and up. Drawn from the routed wooden signs of US national parks, which were cut to be read from a trail.</p>
+    <p class="ah" translate="no">Atkinson Hyperlegible Next</p>
+    <p class="cap">Text, Regular and Bold, everything under 24&nbsp;px. Drawn for the Braille Institute so letters that look alike can't be mistaken, which matters when the text is who owes what.</p>
+    <div class="glyphs" aria-hidden="true"><span>Il1</span><span>O0</span><span>rn m</span><span>16&nbsp;px</span><span>Thu 14:30</span></div>
+  </div>
+  <div class="voice pinkbg">
+    <div class="lines display">
+      <p>Who, what, by when. Then stop.</p>
+      <p>Sound like someone who was in the room.</p>
+      <p>Never praise the meeting.</p>
+    </div>
+    <div class="saying">
+      <div><span class="tag dark">Yes</span><span>Ana sends the revised quote by Thursday.</span></div>
+      <div><span class="tag dark">No</span><span>Great sync today! Excited to circle back on next steps.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="rules" aria-label="Do and don't">
+  <div class="rules-grid">
+    <div class="rule">
+      <div class="tile" style="background:var(--pink)">
+        <svg style="position:absolute;inset:0;width:100%;height:100%" viewBox="0 0 204 178" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <rect width="204" height="178" fill="#FF3F8E"/><rect y="124" width="204" height="54" fill="#15120F"/>
+          <use href="#up" transform="translate(66 15.2) scale(.8)" fill="#15120F"/><use href="#lo" transform="translate(66 15.2) scale(.8)" fill="#FF3F8E"/>
+        </svg>
+      </div>
+      <span class="tag">Do</span>
+      <p>Drive the stake through a ground line. Colors swap where it crosses.</p>
+    </div>
+    <div class="rule">
+      <div class="tile mist"><svg style="height:128px;width:auto" viewBox="0 0 100 184" aria-hidden="true"><use href="#long"/></svg></div>
+      <span class="tag">Do</span>
+      <p>Use one flat color on one flat surface. Soil or white, or soil on pink.</p>
+    </div>
+    <div class="rule">
+      <div class="tile mist"><div style="width:112px;height:112px;border-radius:26px;background:var(--pink);display:grid;place-items:center"><svg style="height:72px;width:auto;color:#fff" viewBox="0 0 100 136" aria-hidden="true"><use href="#short"/></svg></div></div>
+      <span class="tag dark">Don't</span>
+      <p>Don't box it in a rounded square. That's the app icon's job, and only its.</p>
+    </div>
+    <div class="rule">
+      <div class="tile mist">
+        <svg style="height:128px;width:auto;overflow:visible" viewBox="0 0 100 184" aria-hidden="true">
+          <defs><linearGradient id="bad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF3F8E"/><stop offset="1" stop-color="#6D4BFF"/></linearGradient></defs>
+          <path d="M0 0H100L62 32L86 64H28V136L14 184L0 136Z" fill="url(#bad)" style="filter:drop-shadow(0 8px 10px rgba(109,75,255,.55))"/>
+          <path d="M118 8c2 12 6 16 18 18-12 2-16 6-18 18-2-12-6-16-18-18 12-2 16-6 18-18Z" fill="#6D4BFF"/>
+        </svg>
+      </div>
+      <span class="tag dark">Don't</span>
+      <p>No gradients, glows or sparkles. Every notetaker has them already.</p>
+    </div>
+    <div class="rule">
+      <div class="tile" style="background:#fff;box-shadow:inset 0 0 0 2px var(--mist)"><p style="color:var(--pink);font-size:16px;margin:0;padding:0 16px;text-align:center">Your follow-up is ready to send.</p></div>
+      <span class="tag dark">Don't</span>
+      <p>No small pink text on white. It's 3.31:1, and it fails below 24&nbsp;px.</p>
+    </div>
+    <div class="rule">
+      <div class="tile" style="background:#C8A77E;background-image:repeating-linear-gradient(#0000 0 21px,#7a5f3e 21px 22px)"><svg style="height:128px;width:auto;color:#2c2318" viewBox="0 0 100 184" aria-hidden="true"><use href="#long"/></svg></div>
+      <span class="tag dark">Don't</span>
+      <p>No kraft paper, ruled lines or stitches. Field Notes memo books got there first.</p>
+    </div>
+  </div>
+</section>
+
+<section class="why" aria-label="How the mark was chosen">
+  <div>
+    <h2 class="display">Three ideas, in&nbsp;black.</h2>
+    <p class="note">Form first, color after. Each one starts from something the product does, and each one was tried at 16&nbsp;px.</p>
+  </div>
+  <div class="idea">
+    <div class="box"><svg viewBox="0 0 100 184" role="img" aria-label="Stake"><use href="#long"/></svg></div>
+    <span class="tag">Kept</span>
+    <b>Stake</b>
+    <p>It marks what was said and flags it for follow-up. Only a product called <span translate="no">Fieldnote</span> can claim all three readings.</p>
+  </div>
+  <div class="idea">
+    <div class="box"><svg style="height:150px" viewBox="0 0 100 100" role="img" aria-label="Furrow"><path fill="none" stroke="#15120F" stroke-width="14" d="M0 7H82a14.5 14.5 0 0 1 0 29H18a14.5 14.5 0 0 0 0 29H82a14.5 14.5 0 0 1 0 28H0"/></svg></div>
+    <span class="tag dark">Dropped</span>
+    <b>Furrow</b>
+    <p>Early Greek ran back and forth like an ox ploughing a field, so a furrow is a line of text. A good story, but it reads as an S.</p>
+  </div>
+  <div class="idea">
+    <div class="box"><svg style="height:150px" viewBox="0 0 100 98" role="img" aria-label="Turned level"><path d="M0 0H62V14H0ZM0 21H100V35H0ZM0 42H38V56H0ZM0 63H84V77H0ZM0 84H52V98H0Z"/></svg></div>
+    <span class="tag dark">Dropped</span>
+    <b>Turned level</b>
+    <p>A speech meter on its side becomes lines of writing. That's the product in one move, but it reads as the align-left icon.</p>
+  </div>
+  <div class="note">
+    <b>Thrown out first</b>
+    A kraft notebook, because it's the first thing anyone would draw. Then a field recorder panel with engraved caps: it sells the tape, and people pay for the email.
+  </div>
+  <div class="note">
+    <span class="tag">Open</span>
+    <b>Not cleared yet</b>
+    No trademark search has been run on the name or the shape. Field Notes memo books are the nearest neighbor we know of. Search before this ships.
+  </div>
+  <div class="note s2">
+    <b>What came from where</b>
+    Logobook: judge it in black, at one size. Logosystem: the mark alone on a full color tile, as in the color band. Brand New: a tag hanging under each panel, which became the notched flag on this sheet. Branding Style Guides: the hard color split with no gutter, as in type and voice.
+  </div>
+</section>
+</main>
+
+<footer>
+  <svg viewBox="0 0 4944 998" role="img" aria-label="Fieldnote"><use href="#lockup"/></svg>
+  <span>The logo tool and the tokens button above are everything you need. No files to request.</span>
+</footer>
+
+<script>
+(function(){
+  var COLORS={pink:'#FF3F8E',soil:'#15120F',white:'#FFFFFF'};
+  var INK={pink:'#15120F',soil:'#FFFFFF',white:'#15120F'};
+  var ZONE={pink:'rgba(21,18,15,.14)',soil:'rgba(255,255,255,.16)',white:'rgba(21,18,15,.08)'};
+  var PATHS={
+    long:{vb:[100,184],d:'M0 0H100L62 32L86 64H28V136L14 184L0 136Z'},
+    short:{vb:[100,136],d:'M0 0H100L62 32L86 64H30V100L15 136L0 100Z'},
+    word:{vb:[4231,755],d:'M172 750Q203 750 225 728Q247 706 247 675V355H322Q349 355 368 336Q387 317 387 290Q387 263 368 244Q349 225 322 225H247V179Q247 166 249 158Q251 150 259 150Q266 150 274.5 154.5Q283 159 295.5 164Q308 169 325 169Q356 169 375 149.5Q394 130 394 99Q394 65 373 44.5Q352 24 320 14.5Q288 5 256 5Q203 5 167.5 27Q132 49 114.5 84.5Q97 120 97 161V225H65Q38 225 19 244Q0 263 0 290Q0 317 19 336Q38 355 65 355H97V675Q97 706 119 728Q141 750 172 750ZM537 750Q568 750 590 727.5Q612 705 612 674V290Q612 259 590 237Q568 215 537 215Q506 215 484 237Q462 259 462 290V674Q462 705 484 727.5Q506 750 537 750ZM536 168Q572 168 594 146Q616 124 616 84Q616 44 594 22Q572 0 536 0Q502 0 480 22Q458 44 458 84Q458 124 480 146Q502 168 536 168ZM957 755Q1003 755 1043 745Q1083 735 1114 718Q1145 701 1162.5 679Q1180 657 1180 632Q1180 600 1160.5 582.5Q1141 565 1112 565Q1090 565 1076.5 573.5Q1063 582 1051 591Q1034 604 1017.5 612.5Q1001 621 975 621Q948 621 925 611Q902 601 885.5 580Q869 559 861 526H1110Q1154 526 1175.5 502.5Q1197 479 1197 437Q1197 400 1180.5 360.5Q1164 321 1132 287Q1100 253 1054.5 231.5Q1009 210 951 210Q874 210 818.5 247.5Q763 285 733.5 347.5Q704 410 704 484Q704 564 736.5 625Q769 686 826 720.5Q883 755 957 755ZM860 426Q868 382 892 362.5Q916 343 953 343Q989 343 1013.5 362.5Q1038 382 1045 426ZM1364 750Q1396 750 1417.5 728Q1439 706 1439 674V85Q1439 53 1417.5 31.5Q1396 10 1364 10Q1332 10 1310.5 31.5Q1289 53 1289 85V674Q1289 706 1310.5 728Q1332 750 1364 750ZM1757 755Q1801 755 1834.5 735.5Q1868 716 1890.5 686.5Q1892.7 683.6 1894.8 680.7Q1899.2 704.8 1914 723Q1936 750 1968 750Q2000 750 2021.5 728.5Q2043 707 2043 674V85Q2043 53 2021.5 31.5Q2000 10 1968 10Q1936 10 1914.5 31.5Q1893 53 1893 85V269.5Q1883.1 258.6 1872.5 250Q1848 230 1818.5 220Q1789 210 1753 210Q1691 210 1640.5 244Q1590 278 1560.5 338.5Q1531 399 1531 480Q1531 565 1560.5 627Q1590 689 1641 722Q1692 755 1757 755ZM1793 620Q1742 620 1714 584.5Q1686 549 1686 485Q1686 419 1714.5 382Q1743 345 1792 345Q1842 345 1869.5 382.5Q1897 420 1897 483Q1897 549 1867.5 584.5Q1838 620 1793 620ZM2240 750Q2272 750 2293.5 728.5Q2315 707 2315 675V455Q2315 428 2325.5 404Q2336 380 2357.5 365.5Q2379 351 2412 351Q2455 351 2477.5 378Q2500 405 2500 449V675Q2500 707 2521.5 728.5Q2543 750 2575 750Q2607 750 2628.5 728.5Q2650 707 2650 675V420Q2650 352 2626 305Q2602 258 2559.5 234Q2517 210 2463 210Q2402 210 2359.5 242Q2335.6 260 2315 288.2Q2314.3 258.3 2293 237Q2271 215 2240 215Q2208 215 2186.5 236.5Q2165 258 2165 290V675Q2165 707 2186.5 728.5Q2208 750 2240 750ZM2995 755Q3073 755 3131 719Q3189 683 3221 620.5Q3253 558 3253 481Q3253 405 3221 344Q3189 283 3131 246.5Q3073 210 2995 210Q2918 210 2859.5 246.5Q2801 283 2769 344Q2737 405 2737 481Q2737 558 2769 620.5Q2801 683 2859.5 719Q2918 755 2995 755ZM2995 618Q2946 618 2919 584Q2892 550 2892 481Q2892 415 2919 381Q2946 347 2995 347Q3044 347 3071 381Q3098 415 3098 481Q3098 550 3071 584Q3044 618 2995 618ZM3538 750Q3570 750 3601.5 740.5Q3633 731 3654 711Q3675 691 3675 660Q3675 628 3653 606Q3631 584 3600 584Q3586 584 3575 588.5Q3564 593 3556 598Q3548 603 3540 603Q3534 603 3531 598Q3528 593 3528 583V355H3617Q3644 355 3663 336Q3682 317 3682 290Q3682 263 3663 244Q3644 225 3617 225H3528V190Q3528 159 3506 137Q3484 115 3453 115Q3422 115 3400 137Q3378 159 3378 190V225H3366Q3339 225 3320 244Q3301 263 3301 290Q3301 317 3320 336Q3339 355 3366 355H3378V594Q3378 634 3396 670Q3414 706 3449.5 728Q3485 750 3538 750ZM3991 755Q4037 755 4077 745Q4117 735 4148 718Q4179 701 4196.5 679Q4214 657 4214 632Q4214 600 4194.5 582.5Q4175 565 4146 565Q4124 565 4110.5 573.5Q4097 582 4085 591Q4068 604 4051.5 612.5Q4035 621 4009 621Q3982 621 3959 611Q3936 601 3919.5 580Q3903 559 3895 526H4144Q4188 526 4209.5 502.5Q4231 479 4231 437Q4231 400 4214.5 360.5Q4198 321 4166 287Q4134 253 4088.5 231.5Q4043 210 3985 210Q3908 210 3852.5 247.5Q3797 285 3767.5 347.5Q3738 410 3738 484Q3738 564 3770.5 625Q3803 686 3860 720.5Q3917 755 3991 755ZM3894 426Q3902 382 3926 362.5Q3950 343 3987 343Q4023 343 4047.5 362.5Q4072 382 4079 426Z'},
+    lockup:{vb:[4944,998],d:'M0 10L536.8 10L332.8 181.8L461.6 353.5L150.3 353.5L150.3 740L75.1 997.6L0 740ZM884.8 750Q915.8 750 937.8 728Q959.8 706 959.8 675V355H1034.8Q1061.8 355 1080.8 336Q1099.8 317 1099.8 290Q1099.8 263 1080.8 244Q1061.8 225 1034.8 225H959.8V179Q959.8 166 961.8 158Q963.8 150 971.8 150Q978.8 150 987.3 154.5Q995.8 159 1008.3 164Q1020.8 169 1037.8 169Q1068.8 169 1087.8 149.5Q1106.8 130 1106.8 99Q1106.8 65 1085.8 44.5Q1064.8 24 1032.8 14.5Q1000.8 5 968.8 5Q915.8 5 880.3 27Q844.8 49 827.3 84.5Q809.8 120 809.8 161V225H777.8Q750.8 225 731.8 244Q712.8 263 712.8 290Q712.8 317 731.8 336Q750.8 355 777.8 355H809.8V675Q809.8 706 831.8 728Q853.8 750 884.8 750ZM1249.8 750Q1280.8 750 1302.8 727.5Q1324.8 705 1324.8 674V290Q1324.8 259 1302.8 237Q1280.8 215 1249.8 215Q1218.8 215 1196.8 237Q1174.8 259 1174.8 290V674Q1174.8 705 1196.8 727.5Q1218.8 750 1249.8 750ZM1248.8 168Q1284.8 168 1306.8 146Q1328.8 124 1328.8 84Q1328.8 44 1306.8 22Q1284.8 0 1248.8 0Q1214.8 0 1192.8 22Q1170.8 44 1170.8 84Q1170.8 124 1192.8 146Q1214.8 168 1248.8 168ZM1669.8 755Q1715.8 755 1755.8 745Q1795.8 735 1826.8 718Q1857.8 701 1875.3 679Q1892.8 657 1892.8 632Q1892.8 600 1873.3 582.5Q1853.8 565 1824.8 565Q1802.8 565 1789.3 573.5Q1775.8 582 1763.8 591Q1746.8 604 1730.3 612.5Q1713.8 621 1687.8 621Q1660.8 621 1637.8 611Q1614.8 601 1598.3 580Q1581.8 559 1573.8 526H1822.8Q1866.8 526 1888.3 502.5Q1909.8 479 1909.8 437Q1909.8 400 1893.3 360.5Q1876.8 321 1844.8 287Q1812.8 253 1767.3 231.5Q1721.8 210 1663.8 210Q1586.8 210 1531.3 247.5Q1475.8 285 1446.3 347.5Q1416.8 410 1416.8 484Q1416.8 564 1449.3 625Q1481.8 686 1538.8 720.5Q1595.8 755 1669.8 755ZM1572.8 426Q1580.8 382 1604.8 362.5Q1628.8 343 1665.8 343Q1701.8 343 1726.3 362.5Q1750.8 382 1757.8 426ZM2076.8 750Q2108.8 750 2130.3 728Q2151.8 706 2151.8 674V85Q2151.8 53 2130.3 31.5Q2108.8 10 2076.8 10Q2044.8 10 2023.3 31.5Q2001.8 53 2001.8 85V674Q2001.8 706 2023.3 728Q2044.8 750 2076.8 750ZM2469.8 755Q2513.8 755 2547.3 735.5Q2580.8 716 2603.3 686.5Q2605.5 683.6 2607.6 680.7Q2611.9 704.8 2626.8 723Q2648.8 750 2680.8 750Q2712.8 750 2734.3 728.5Q2755.8 707 2755.8 674V85Q2755.8 53 2734.3 31.5Q2712.8 10 2680.8 10Q2648.8 10 2627.3 31.5Q2605.8 53 2605.8 85V269.5Q2595.8 258.6 2585.3 250Q2560.8 230 2531.3 220Q2501.8 210 2465.8 210Q2403.8 210 2353.3 244Q2302.8 278 2273.3 338.5Q2243.8 399 2243.8 480Q2243.8 565 2273.3 627Q2302.8 689 2353.8 722Q2404.8 755 2469.8 755ZM2505.8 620Q2454.8 620 2426.8 584.5Q2398.8 549 2398.8 485Q2398.8 419 2427.3 382Q2455.8 345 2504.8 345Q2554.8 345 2582.3 382.5Q2609.8 420 2609.8 483Q2609.8 549 2580.3 584.5Q2550.8 620 2505.8 620ZM2952.8 750Q2984.8 750 3006.3 728.5Q3027.8 707 3027.8 675V455Q3027.8 428 3038.3 404Q3048.8 380 3070.3 365.5Q3091.8 351 3124.8 351Q3167.8 351 3190.3 378Q3212.8 405 3212.8 449V675Q3212.8 707 3234.3 728.5Q3255.8 750 3287.8 750Q3319.8 750 3341.3 728.5Q3362.8 707 3362.8 675V420Q3362.8 352 3338.8 305Q3314.8 258 3272.3 234Q3229.8 210 3175.8 210Q3114.8 210 3072.3 242Q3048.3 260 3027.7 288.2Q3027.1 258.3 3005.8 237Q2983.8 215 2952.8 215Q2920.8 215 2899.3 236.5Q2877.8 258 2877.8 290V675Q2877.8 707 2899.3 728.5Q2920.8 750 2952.8 750ZM3707.8 755Q3785.8 755 3843.8 719Q3901.8 683 3933.8 620.5Q3965.8 558 3965.8 481Q3965.8 405 3933.8 344Q3901.8 283 3843.8 246.5Q3785.8 210 3707.8 210Q3630.8 210 3572.3 246.5Q3513.8 283 3481.8 344Q3449.8 405 3449.8 481Q3449.8 558 3481.8 620.5Q3513.8 683 3572.3 719Q3630.8 755 3707.8 755ZM3707.8 618Q3658.8 618 3631.8 584Q3604.8 550 3604.8 481Q3604.8 415 3631.8 381Q3658.8 347 3707.8 347Q3756.8 347 3783.8 381Q3810.8 415 3810.8 481Q3810.8 550 3783.8 584Q3756.8 618 3707.8 618ZM4250.8 750Q4282.8 750 4314.3 740.5Q4345.8 731 4366.8 711Q4387.8 691 4387.8 660Q4387.8 628 4365.8 606Q4343.8 584 4312.8 584Q4298.8 584 4287.8 588.5Q4276.8 593 4268.8 598Q4260.8 603 4252.8 603Q4246.8 603 4243.8 598Q4240.8 593 4240.8 583V355H4329.8Q4356.8 355 4375.8 336Q4394.8 317 4394.8 290Q4394.8 263 4375.8 244Q4356.8 225 4329.8 225H4240.8V190Q4240.8 159 4218.8 137Q4196.8 115 4165.8 115Q4134.8 115 4112.8 137Q4090.8 159 4090.8 190V225H4078.8Q4051.8 225 4032.8 244Q4013.8 263 4013.8 290Q4013.8 317 4032.8 336Q4051.8 355 4078.8 355H4090.8V594Q4090.8 634 4108.8 670Q4126.8 706 4162.3 728Q4197.8 750 4250.8 750ZM4703.8 755Q4749.8 755 4789.8 745Q4829.8 735 4860.8 718Q4891.8 701 4909.3 679Q4926.8 657 4926.8 632Q4926.8 600 4907.3 582.5Q4887.8 565 4858.8 565Q4836.8 565 4823.3 573.5Q4809.8 582 4797.8 591Q4780.8 604 4764.3 612.5Q4747.8 621 4721.8 621Q4694.8 621 4671.8 611Q4648.8 601 4632.3 580Q4615.8 559 4607.8 526H4856.8Q4900.8 526 4922.3 502.5Q4943.8 479 4943.8 437Q4943.8 400 4927.3 360.5Q4910.8 321 4878.8 287Q4846.8 253 4801.3 231.5Q4755.8 210 4697.8 210Q4620.8 210 4565.3 247.5Q4509.8 285 4480.3 347.5Q4450.8 410 4450.8 484Q4450.8 564 4483.3 625Q4515.8 686 4572.8 720.5Q4629.8 755 4703.8 755ZM4606.8 426Q4614.8 382 4638.8 362.5Q4662.8 343 4699.8 343Q4735.8 343 4760.3 362.5Q4784.8 382 4791.8 426Z'}
+  };
+  var RANGE={lockup:[20,120],mark:[16,240],word:[14,110]};
+  var state={form:'lockup',surface:'pink',h:96};
+  var stage=document.getElementById('stage'),size=document.getElementById('size'),out=document.getElementById('sizeOut'),read=document.getElementById('readout');
+  var calm=window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function cut(){
+    if(state.form==='mark')return state.h<32?'short':'long';
+    return state.form==='word'?'word':'lockup';
+  }
+  function limit(){
+    var p=PATHS[state.form==='mark'?'long':state.form==='word'?'word':'lockup'],c=64/184,a=p.vb[0]/p.vb[1];
+    return Math.min(RANGE[state.form][1],Math.floor(stage.clientWidth/(a+2*c)),Math.floor(stage.clientHeight/(1+2*c)));
+  }
+  function fit(){
+    size.min=RANGE[state.form][0];size.max=limit();
+    state.h=Math.min(+size.max,Math.max(+size.min,state.h));size.value=state.h;
+  }
+  function clearSpace(){return Math.round(state.h*64/(cut()==='short'?136:184));}
+  function svg(attrs){
+    var p=PATHS[cut()],w=Math.round(state.h*p.vb[0]/p.vb[1]*100)/100;
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+p.vb[0]+' '+p.vb[1]+'" width="'+w+'" height="'+state.h+'" role="img" aria-label="Fieldnote"'+(attrs||'')+'><path fill="'+INK[state.surface]+'" d="'+p.d+'"/></svg>';
+  }
+  function layer(){
+    var l=document.createElement('div');l.className='layer';
+    l.style.background=COLORS[state.surface];
+    l.style.setProperty('--surface',COLORS[state.surface]);
+    l.style.setProperty('--ink',INK[state.surface]);
+    l.style.setProperty('--zone',ZONE[state.surface]);
+    l.style.setProperty('--c',clearSpace()+'px');
+    l.style.setProperty('--h',state.h+'px');
+    l.innerHTML='<div class="z"><div>'+svg()+'</div></div>';
+    return l;
+  }
+  function draw(wipe){
+    var next=layer(),old=stage.lastElementChild;
+    stage.appendChild(next);
+    if(!old)return;
+    if(!wipe||calm.matches||!next.animate){Array.prototype.slice.call(stage.children,0,-1).forEach(function(n){n.remove();});return;}
+    /* The one motion on the sheet: the new surface crosses the old one along the stake's angle, and the logo swaps color where the edge passes. */
+    next.animate({clipPath:['polygon(-30% 0,-30% 0,-60% 100%,-60% 100%)','polygon(-30% 0,130% 0,100% 100%,-60% 100%)']},{duration:700,easing:'cubic-bezier(.22,1,.36,1)'}).onfinish=function(){
+      Array.prototype.slice.call(stage.children,0,-1).forEach(function(n){if(n!==next)n.remove();});
+    };
+  }
+  function words(){
+    var c=cut(),name=c==='long'?'Long stake.':c==='short'?'Short stake.':c==='word'?'Wordmark.':'Long stake.';
+    read.innerHTML=name+' Clear space '+clearSpace()+'&nbsp;px. Smallest for this form '+RANGE[state.form][0]+'&nbsp;px.';
+    out.innerHTML=state.h+'&nbsp;px';
+  }
+  document.querySelectorAll('input[name=form]').forEach(function(r){r.addEventListener('change',function(){
+    state.form=r.value;fit();words();draw(false);
+  });});
+  document.querySelectorAll('input[name=surface]').forEach(function(r){r.addEventListener('change',function(){state.surface=r.value;words();draw(true);});});
+  size.addEventListener('input',function(){state.h=+size.value;words();draw(false);});
+
+  function flash(btn,msg){var t=btn.textContent;btn.textContent=msg;setTimeout(function(){btn.textContent=t;},1400);}
+  function copy(text,btn){
+    function legacy(){var a=document.createElement('textarea');a.value=text;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}a.remove();flash(btn,ok?'Copied':'Copy failed');}
+    if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){flash(btn,'Copied');},legacy);}else{legacy();}
+  }
+  document.getElementById('copy').addEventListener('click',function(){copy(svg(),this);});
+  document.getElementById('dl').addEventListener('click',function(){
+    var a=document.createElement('a'),url=URL.createObjectURL(new Blob([svg()],{type:'image/svg+xml'}));
+    a.href=url;a.download='fieldnote-'+cut()+'-'+state.surface+'-'+state.h+'.svg';document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(url);},1000);
+  });
+  document.getElementById('tokens').addEventListener('click',function(){
+    copy(':root{\n  --fieldnote-pink:#FF3F8E;\n  --fieldnote-soil:#15120F;\n  --fieldnote-white:#FFFFFF;\n  --fieldnote-mist:#E9EAE7;\n  --fieldnote-gravel:#6B6762;\n  --fieldnote-display:"National Park",sans-serif;\n  --fieldnote-text:"Atkinson Hyperlegible Next",sans-serif;\n  --fieldnote-clear-space:calc(64 / 184 * 1em);\n  --fieldnote-mark-min:16px;\n  --fieldnote-lockup-min:20px;\n}\n',this);
+  });
+  fit();words();draw(false);
+  window.addEventListener('resize',function(){fit();words();draw(false);});
+})();
+</script>
+</body>
+</html>

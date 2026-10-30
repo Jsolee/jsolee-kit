@@ -13,6 +13,8 @@ Pick by the section you are designing. Take 2-3 references, name what you borrow
 | Pricing pages | [pricingpages.design](https://pricingpages.design) |
 | OG / share images | [ogimage.gallery](https://www.ogimage.gallery) |
 | Transactional and marketing email | [reallygoodemails.com](https://reallygoodemails.com) |
+| Logos and marks | [logosystem.co](https://www.logosystem.co), [logobook.com](https://logobook.com) |
+| Rebrands and brand systems | [underconsideration.com/brandnew](https://www.underconsideration.com/brandnew), [brandingstyleguides.com](https://brandingstyleguides.com) |
 | Pitch decks | [deck.gallery](https://www.deck.gallery) |
 | Social media posts | [posts.design](https://posts.design) |
 | Ads | [adfolio.design](https://adfolio.design) |

@@ -1,0 +1,684 @@
+<!doctype html>
+<!--
+  Direction: "The name software can't spell."
+  Kept because of a true thing only Mara has: the ć in her surname, which software breaks,
+  and which is the whole argument for hiring a designer who starts with the cases a brief leaves out.
+  Thrown away: serif name on paper with a project list (the default), and a Figma-canvas portfolio
+  (any product designer could wear it).
+
+  Register: brand page. Color: #ff00ff with black, the color game engines paint when a texture is missing.
+  Type: Sofia Sans and Sofia Sans Extra Condensed, drawn by Lettersoup in Sofia, with a proper ć and ћ.
+  Move: her name fills the page and breaks on command. Working thing: the spelling control and the checklist.
+
+  References:
+  - Awwwards, "Ascension": condensed letters as the image, filling the frame. Used for the hero name.
+  - Awwwards, pixel icons tile: stickers stuck on the corners of a loud field. Used for the brief tags.
+  - Awwwards, Brandon Yasin: panels of unequal width. Used for the work layout.
+  - One Page Love, mappy: one saturated field with nothing competing. Used for hero and contact.
+  - One Page Love, Felix Haas: first-person prose as the design. Used for the about section.
+
+  Placeholder copy for Mara to replace: project names and stories, availability, the address
+  (mara@ilic.example uses a reserved domain on purpose). All figures inside the mockups are sample UI data.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mara Ilić, independent product designer</title>
+<meta name="description" content="Mara Ilić is an independent product designer who starts with the cases the brief left out.">
+<meta name="theme-color" content="#ff00ff">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f0f'/%3E%3Cpath d='M12 26 18 6h7l-8 20z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@400;700&family=Sofia+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --miss:#ff00ff;
+  --pad:clamp(16px,2.25vw,32px);
+  --display:'Sofia Sans Extra Condensed',Impact,'Arial Narrow',sans-serif;
+  --text:'Sofia Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --out:cubic-bezier(.22,1,.36,1);
+  --name-k:.4375;
+  --mail-k:.186;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:smooth}
+body{margin:0;background:#fff;color:#000;font:400 20px/1.4 var(--text)}
+h1,h2,h3,p,figure,fieldset,dl,dd{margin:0;padding:0;border:0}
+h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:.92;text-wrap:balance}
+p{text-wrap:pretty}
+a{color:inherit;text-underline-offset:.16em;text-decoration-thickness:.08em}
+:focus-visible{outline:3px solid currentColor;outline-offset:3px}
+.hero :focus-visible,.skip:focus-visible{outline-color:#000}
+.list :focus-visible{outline-color:#fff}
+::selection{background:#000;color:var(--miss)}
+section[id],article[id],footer[id]{scroll-margin-top:24px}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.skip{position:absolute;left:var(--pad);top:8px;z-index:9;padding:10px 14px;background:#000;color:var(--miss);transform:translateY(-200%);transition:transform .2s var(--out)}
+.skip:focus{transform:none}
+.lift{display:inline-block;transition:transform .25s var(--out)}
+.lift:active{transform:scale(.97)}
+@media (hover:hover){.lift:hover{transform:translateY(-2px)}}
+.btn{padding:12px 20px;min-height:48px;font-weight:700;text-decoration:none;touch-action:manipulation;background:#000;color:var(--miss)}
+
+.cy{-webkit-locale:'ru';font-language-override:'RUS'}
+
+/* Hero */
+.hero{background:var(--miss);padding:0 var(--pad) 22px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:24px;padding:10px 0}
+.top ul{display:flex;gap:28px;list-style:none;margin:0;padding:0}
+.top a{display:inline-block;padding:10px 0;text-decoration:none}
+.name{margin:8px 0 6px;height:.72em;display:flex;align-items:flex-end;font:700 calc((100vw - 2*var(--pad))*var(--name-k))/.72 var(--display);letter-spacing:-.02em;white-space:nowrap}
+#name{display:inline-block;margin-left:-.034em}
+#name .roll{display:inline-block;animation:roll .55s var(--out) both}
+@keyframes roll{from{opacity:0;transform:translateY(.16em)}to{opacity:1;transform:none}}
+.breaker-top{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-bottom:10px}
+.try{display:flex;align-items:center;gap:14px}
+.try label{font-weight:700}
+.try input{width:300px;min-height:44px;padding:8px 12px;border:0;border-radius:0;background:#fff;color:#000;font:inherit;touch-action:manipulation}
+.try input::placeholder{color:#55555c}
+.try input:focus-visible{outline-color:#000}
+.note{font-size:18px}
+.spell{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:4px}
+.spell button{appearance:none;border:0;border-radius:0;background:rgba(0,0,0,.09);color:#000;padding:10px 12px 12px;min-height:76px;text-align:left;font:inherit;cursor:pointer;touch-action:manipulation;transition:transform .25s var(--out)}
+.spell button:active{transform:scale(.97)}
+@media (hover:hover){.spell button:hover{transform:translateY(-2px)}}
+.spell button[aria-pressed=true]{background:#000;color:var(--miss)}
+.spell small{display:block;font-size:15px;line-height:1.2;margin-bottom:5px}
+.spell span{display:block;font:700 30px/1 var(--display);overflow-wrap:anywhere}
+.pitch{display:grid;grid-template-columns:7fr 5fr;gap:48px;padding-top:24px;align-items:start}
+.pitch h2{font-size:clamp(40px,4.1vw,60px)}
+.pitch p{max-width:34em;font-size:19px;line-height:1.34}
+.pitch-go{display:flex;align-items:center;gap:24px;margin-top:12px;flex-wrap:wrap}
+.pitch-go a:not(.btn){padding:10px 0}
+.check{height:64px;background:repeating-conic-gradient(#000 0 25%,var(--miss) 0 50%) 0 0/64px 64px}
+
+/* Work */
+.work{padding:112px var(--pad) 128px}
+.work>h2{font-size:clamp(44px,6.1vw,88px);margin-bottom:104px}
+mark{display:inline-block;background:var(--miss);color:#000;line-height:.92;padding:.05em .12em .09em;margin-top:.04em}
+.project{margin-bottom:120px}
+.p-head{display:grid;grid-template-columns:1fr minmax(0,460px);align-items:end;gap:32px;margin-bottom:26px}
+.p-head h3,.side h3{font-size:clamp(72px,11.2vw,160px);line-height:.86;padding-bottom:.1em}
+.p-case{max-width:38em;margin-top:24px}
+.panel{padding:52px 40px 40px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+figure{position:relative;min-width:0}
+.tag{position:absolute;z-index:2;top:-24px;left:-12px;padding:5px 10px;background:#fff;color:#000;font:700 17px/1.2 var(--text)}
+.tag.miss{background:var(--miss);transform:rotate(-1.5deg)}
+.ui{font:400 14px/1.3 var(--text);font-variant-numeric:tabular-nums}
+.ui b{font-weight:700}
+.mark{outline:2px solid var(--miss);outline-offset:3px}
+
+/* Smena */
+.dark{background:#0a0d11}
+.smena{display:grid;grid-template-columns:238px minmax(0,1fr);height:456px;background:#171c23;color:#e7ebef;border-radius:8px;overflow:hidden}
+.drivers{padding:16px 0 14px;display:flex;flex-direction:column;gap:2px}
+.drivers footer{margin-top:auto;padding:10px 16px 0;font-size:13px;color:#8e99a5}
+.drivers footer b{color:#e7ebef;font-weight:400}
+.drivers header{display:flex;justify-content:space-between;padding:0 16px 10px;font-size:15px}
+.drivers header span{color:#8e99a5}
+.drv{display:grid;grid-template-columns:10px 1fr;gap:10px;padding:9px 16px}
+.drv i{width:10px;height:10px;margin-top:4px;border-radius:50%;background:#4cdd9c}
+.drv small{display:block;font-size:13px;color:#8e99a5}
+.drv.lost{margin:6px 8px;padding:10px 8px;background:#242b34}
+.drv.lost i{background:none;border:2px dashed #ffb84d}
+.drv.lost small{color:#ffb84d}
+.drv.lost .more{color:#c6ced6;margin-top:6px;font-size:13px}
+.drv.lost .acts{display:flex;gap:6px;margin-top:9px}
+.drv.lost .acts span{padding:5px 9px;border-radius:5px;background:#e7ebef;color:#171c23;font-size:13px;font-weight:700;white-space:nowrap}
+.drv.lost .acts span+span{background:none;color:#e7ebef;box-shadow:inset 0 0 0 1px rgba(255,255,255,.28)}
+.map{display:block;width:100%;height:100%;background:#10151a}
+
+/* Recept and Plata */
+.twin{display:grid;grid-template-columns:5fr 7fr;gap:32px;margin-bottom:120px}
+.twin .p-head{grid-template-columns:1fr;align-items:start;gap:0;align-content:start}
+.twin .project{margin:0;display:flex;flex-direction:column;min-width:0}
+.twin .panel{flex:1}
+.green{background:#0d4f3e;padding-left:28px;padding-right:28px}
+.phones{gap:14px}
+.phone{height:100%;padding:18px 16px;background:#fff;border-radius:22px;color:#10231d;box-shadow:0 8px 40px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.phone .top-line{display:flex;justify-content:space-between;font-size:13px;color:#5a6d66;margin-bottom:20px}
+.phone h4{margin:0 0 6px;font:700 25px/1.05 var(--text);letter-spacing:-.02em}
+.phone p{color:#46574f;margin-bottom:14px}
+.meds{display:grid;gap:0;margin-bottom:14px}
+.meds div{display:flex;justify-content:space-between;gap:8px;padding:9px 0;box-shadow:inset 0 -1px 0 rgba(0,0,0,.08)}
+.meds em{font-style:normal;color:#0c7a5e;white-space:nowrap}
+.meds em.out{color:#b3430f}
+.code{margin:2px 0 14px}
+.code span{display:block;color:#46574f}
+.code b{display:block;font:700 44px/1.05 var(--text);letter-spacing:.04em}
+.cta{margin-top:auto;padding:12px;border-radius:10px;background:#0d4f3e;color:#fff;text-align:center;font-weight:700}
+.choices{display:grid;gap:7px;margin:0 -4px 12px;padding:4px}
+.choices b{display:block;margin-bottom:1px}
+.choices div{display:grid;grid-template-columns:14px 1fr;gap:8px;line-height:1.22}
+.choices i{width:14px;height:14px;margin-top:1px;border-radius:50%;box-shadow:inset 0 0 0 1.5px #7a8a84}
+.choices i.on{box-shadow:inset 0 0 0 4px #0d4f3e}
+.ice{background:#d9e3ec;display:flex;flex-direction:column;gap:48px}
+.ice figure{flex:1}
+.pay{height:100%;padding:8px 18px 10px;background:#fff;border-radius:8px;color:#17212b;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.pay .r{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,2.2fr) 66px 66px 72px;gap:12px;padding:13px 0;align-items:start;box-shadow:inset 0 -1px 0 rgba(0,0,0,.07)}
+.pay .r:last-child{box-shadow:none}
+.pay .h{color:#62707e;font-size:13px;padding:8px 0}
+.pay .n{text-align:right}
+.pay em{font-style:normal;color:#147a4b}
+.pay em.ask{color:#b3430f;font-weight:700}
+.pay .lead{color:#62707e}
+
+/* Knjiga */
+.solo{display:grid;grid-template-columns:4fr 8fr;gap:32px;margin:0}
+.side{display:flex;flex-direction:column}
+
+.side .p-case{margin-top:auto;padding-top:24px}
+.tang{background:#ff6a13}
+.knj{height:100%;min-height:400px;padding:16px 18px 18px;background:#fff;border-radius:8px;color:#1a1d33;box-shadow:0 8px 40px rgba(0,0,0,.08);display:flex;flex-direction:column}
+.knj nav{display:flex;gap:14px;color:#6a6d82;margin-bottom:18px}
+.knj nav b{color:#1a1d33;margin-right:auto}
+.knj h4{margin:0;font:700 26px/1.1 var(--text);letter-spacing:-.02em}
+.knj .sub{color:#6a6d82}
+.bars{display:flex;align-items:flex-end;gap:5px;height:104px;margin:14px 0}
+.bars i{flex:1;background:#1a1d33;border-radius:2px 2px 0 0}
+.bars.ghost i{height:18px;background:none;box-shadow:inset 0 0 0 1px rgba(26,29,51,.22)}
+.inv div{display:flex;justify-content:space-between;padding:7px 0;box-shadow:inset 0 -1px 0 rgba(0,0,0,.07)}
+.inv div:last-child{box-shadow:none}
+.first{margin-top:auto}
+.first p{margin-bottom:10px;color:#3e415a}
+.first .go{display:grid;gap:7px}
+.first .go span{padding:10px 12px;border-radius:7px;background:#1a1d33;color:#fff;font-weight:700;text-align:center}
+.first .go span+span{background:none;color:#1a1d33;box-shadow:inset 0 0 0 1px rgba(26,29,51,.25)}
+
+/* Checklist */
+.list{background:#000;color:#fff;padding:64px var(--pad) 72px}
+.list-top{display:flex;justify-content:space-between;align-items:baseline;gap:24px;margin-bottom:32px}
+.list-top h2{font:400 clamp(24px,2.5vw,36px)/1.1 var(--text);letter-spacing:-.02em}
+.wall{display:flex;flex-wrap:wrap;column-gap:.34em;row-gap:.06em;font:700 clamp(52px,8.75vw,126px)/.98 var(--display);letter-spacing:-.02em}
+.wall label{cursor:pointer;touch-action:manipulation;position:relative;display:block;transition:transform .25s var(--out)}
+.wall label:active{transform:scale(.985)}
+@media (hover:hover){.wall label:hover{transform:translateY(-3px)}}
+.wall input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer}
+.wall span{display:inline-block}
+.wall span::before{content:'';display:inline-block;width:.2em;height:.2em;margin-right:.09em;vertical-align:.46em;box-shadow:inset 0 0 0 .028em currentColor}
+.wall input:checked+span{color:var(--miss);text-decoration:line-through;text-decoration-thickness:.055em}
+.wall input:checked+span::before{background:currentColor}
+.wall input:focus-visible+span{outline:3px solid currentColor;outline-offset:2px}
+.tally{display:flex;justify-content:space-between;align-items:center;gap:32px;margin-top:44px;flex-wrap:wrap}
+.tally p{font:400 clamp(24px,2.5vw,36px)/1.15 var(--text);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tally .btn{background:var(--miss);color:#000}
+
+/* About */
+.about{padding:128px var(--pad) 136px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:56px 32px;align-items:end}
+.about h2{font-size:clamp(84px,14.4vw,208px);line-height:.86;white-space:nowrap}
+.about .say{max-width:24em;padding-bottom:.9em}
+.prose{grid-column:1 / -1;display:grid;grid-template-columns:7fr 5fr;gap:32px;align-items:start}
+.prose>p{font-size:clamp(24px,2.5vw,36px);line-height:1.18;letter-spacing:-.02em;max-width:24em}
+dl{display:grid;gap:22px}
+dt{font-weight:700}
+
+/* Contact */
+.contact{background:var(--miss);padding:44px var(--pad) 36px}
+.contact .lead{font-size:clamp(24px,2.5vw,36px);line-height:1.18;letter-spacing:-.02em;margin-bottom:10px}
+.mail{display:block;font:700 calc((100vw - 2*var(--pad))*var(--mail-k))/.86 var(--display);letter-spacing:-.02em;text-decoration:none;white-space:nowrap}
+.foot{display:grid;grid-template-columns:7fr 5fr;gap:32px;margin-top:28px;font-size:18px}
+.foot p{max-width:34em}
+
+@media (max-width:1000px){
+  .spell{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .pitch,.pair,.twin,.solo,.about,.prose,.foot,.p-head{grid-template-columns:minmax(0,1fr)}
+  .about h2{white-space:normal}
+  .about .say{padding-bottom:0}
+  .work>h2 br{display:none}
+  .twin .p-head{min-height:0}
+  .twin .project+.project{margin-top:88px}
+  .breaker-top{flex-direction:column;align-items:flex-start}
+  .top{flex-direction:column;align-items:flex-start;gap:0}
+  .panel{padding:40px 20px 24px}
+  .pair{gap:40px}
+  .smena{grid-template-columns:minmax(0,1fr);height:auto}
+  .smena .map{height:280px}
+  .pay .r{grid-template-columns:minmax(0,1.5fr) minmax(0,1.4fr) 58px}
+  .pay .r>:nth-child(4),.pay .r>:nth-child(5){display:none}
+  .work>h2{margin-bottom:72px}
+}
+@media (max-width:560px){
+  .spell{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .try{flex-direction:column;align-items:flex-start;gap:6px;width:100%}
+  .try input{width:100%}
+  .top ul{gap:18px;flex-wrap:wrap}
+  .phone{min-height:0}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .lift,.spell button,.wall label,.skip{transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#work">Skip to the work</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="city" viewBox="0 0 440 400">
+    <path d="M-20 60C80 110 120 180 190 232S330 330 470 352" fill="none" stroke="#1b2c3a" stroke-width="30"/>
+    <g fill="none" stroke="#2a333d" stroke-width="2.5">
+      <path d="M0 40 440 120M0 130 440 190M0 244 440 304M40 0l70 400M160 0l50 400M290 0l20 400M380 0l-20 400M0 340l200-60M220 110 440 30M100 200l200-40M60 70l90 80M330 290l70-20M250 400l40-110"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="hero">
+  <nav class="top" aria-label="Main">
+    <span>Independent product designer, free from January</span>
+    <ul>
+      <li><a class="lift" href="#work">Work</a></li>
+      <li><a class="lift" href="#checklist">Checklist</a></li>
+      <li><a class="lift" href="#about">About</a></li>
+      <li><a class="lift" href="#contact">Write to me</a></li>
+    </ul>
+  </nav>
+
+  <h1 class="name" translate="no" aria-label="Mara Ilić"><span id="name" aria-hidden="true">Mara Ilić</span></h1>
+
+  <div class="breaker">
+    <div class="breaker-top">
+      <p class="note" id="note" aria-live="polite">How software has spelled it. Press one, or see what it does to yours.</p>
+      <form class="try" id="try" autocomplete="off">
+        <label for="yours">Try your own name</label>
+        <input id="yours" type="text" placeholder="Stays in this tab" spellcheck="false" autocapitalize="words" maxlength="60">
+      </form>
+    </div>
+    <div class="spell" role="group" aria-label="Ways software has spelled the name">
+      <button type="button" data-kind="right" aria-pressed="true"><small>Spelled right</small><span translate="no">Mara Ilić</span></button>
+      <button type="button" data-kind="strip" aria-pressed="false"><small>Accent dropped</small><span translate="no">Mara Ilic</span></button>
+      <button type="button" data-kind="encoding" aria-pressed="false"><small>Wrong encoding</small><span translate="no">Mara IliÄ‡</span></button>
+      <button type="button" data-kind="unknown" aria-pressed="false"><small>Unknown character</small><span translate="no">Mara Ili?</span></button>
+      <button type="button" data-kind="escaped" aria-pressed="false"><small>Escaped twice</small><span translate="no">Mara Ili&amp;#263;</span></button>
+      <button type="button" data-kind="ticket" aria-pressed="false"><small>Airline ticket</small><span translate="no">ILIC/MARA</span></button>
+      <button type="button" data-kind="short" aria-pressed="false"><small>Field too short</small><span translate="no">Mara Il</span></button>
+      <button type="button" data-kind="cyrillic" aria-pressed="false"><small>Also right</small><span lang="sr-Cyrl" class="cy" translate="no">Мара Илић</span></button>
+    </div>
+    <p class="sr" role="status" id="status"></p>
+  </div>
+
+  <div class="pitch">
+    <h2>Most software can’t spell my name. I’m a product designer, so I take it personally.</h2>
+    <div>
+      <p>I work with one team at a time, and I start with what the brief left out: the driver who drops off the map, the half-filled prescription, the surname that won’t fit the column.</p>
+      <div class="pitch-go">
+        <a class="btn lift" href="#work">See the work</a>
+        <a class="lift" href="mailto:mara@ilic.example">Write to me</a>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="check" aria-hidden="true"></div>
+
+<main>
+<section class="work" id="work" aria-labelledby="work-title">
+  <h2 id="work-title">Four products, each shown twice:<br> the screen in the brief, and <mark>the one that wasn’t.</mark></h2>
+
+  <article class="project" id="smena">
+    <header class="p-head">
+      <h3 translate="no">Smena</h3>
+      <p>Control room software for a regional parcel courier. Research on the night shift, flows, interface, design system.</p>
+    </header>
+    <div class="panel dark pair">
+      <figure>
+        <figcaption class="tag">In the brief</figcaption>
+        <div class="ui smena" role="img" aria-label="Dispatch board with four vans on the map, all on time.">
+          <div class="drivers">
+            <header><b>Night shift</b><span>4 vans</span></header>
+            <div class="drv"><i></i><div>Jelena M.<small>7 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Stefan R.<small>9 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Nikola J.<small>6 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Ivana K.<small>5 stops, on time</small></div></div>
+            <footer><b>27&nbsp;parcels out</b>, all accounted for</footer>
+          </div>
+          <svg class="map" viewBox="0 0 440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <use href="#city"/>
+            <g fill="none" stroke="#4cdd9c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M60 70l70 15 20 65 85-10 65-20"/>
+              <path d="M320 40l-5 90 25 70-40 70-90 20"/>
+              <path d="M90 370l30-70 70-30 10-70-60-30"/>
+              <path d="M400 360l-60-20-10-50 70-20"/>
+            </g>
+            <g fill="#4cdd9c" stroke="#10151a" stroke-width="3">
+              <circle cx="235" cy="140" r="8"/><circle cx="340" cy="200" r="8"/><circle cx="190" cy="270" r="8"/><circle cx="330" cy="290" r="8"/>
+            </g>
+          </svg>
+        </div>
+      </figure>
+      <figure>
+        <figcaption class="tag miss">Not in the brief</figcaption>
+        <div class="ui smena" role="img" aria-label="The same board when one driver's phone has lost signal. His position is drawn as a dashed circle labelled as a guess, and the list shows what he carries and two actions.">
+          <div class="drivers">
+            <header><b>Night shift</b><span>4 vans</span></header>
+            <div class="drv"><i></i><div>Jelena M.<small>7 stops, on time</small></div></div>
+            <div class="drv"><i></i><div>Stefan R.<small>9 stops, on time</small></div></div>
+            <div class="drv lost mark"><i></i><div>Nikola J.<small>No signal for 14&nbsp;min</small>
+              <div class="more">Last seen at Autokomanda, 01:12. 6&nbsp;parcels aboard, 2&nbsp;urgent.</div>
+              <div class="acts"><span>Call Nikola</span><span>Move 2</span></div>
+            </div></div>
+            <div class="drv"><i></i><div>Ivana K.<small>5 stops, on time</small></div></div>
+            <footer><b>27&nbsp;parcels out</b>, 6 unaccounted for</footer>
+          </div>
+          <svg class="map" viewBox="0 0 440 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <use href="#city"/>
+            <g fill="none" stroke="#4cdd9c" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+              <path d="M60 70l70 15 20 65 85-10 65-20"/>
+              <path d="M320 40l-5 90 25 70-40 70-90 20"/>
+              <path d="M400 360l-60-20-10-50 70-20"/>
+            </g>
+            <path d="M90 370l30-70 70-30" fill="none" stroke="#6f7a85" stroke-width="3" stroke-linecap="round"/>
+            <path d="M190 270l10-70-60-30" fill="none" stroke="#6f7a85" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/>
+            <g fill="#4cdd9c" stroke="#10151a" stroke-width="3">
+              <circle cx="235" cy="140" r="8"/><circle cx="340" cy="200" r="8"/><circle cx="330" cy="290" r="8"/>
+            </g>
+            <circle cx="190" cy="270" r="50" fill="#ffb84d" fill-opacity=".1" stroke="#ffb84d" stroke-width="2" stroke-dasharray="6 6"/>
+            <circle cx="190" cy="270" r="6" fill="#10151a" stroke="#ffb84d" stroke-width="2"/>
+            <text x="190" y="340" text-anchor="middle" fill="#ffb84d" font-family="Sofia Sans,sans-serif" font-size="15" font-weight="700">Position is a guess</text>
+          </svg>
+        </div>
+      </figure>
+    </div>
+    <p class="p-case">When a driver’s phone went dark, the old board kept a confident green dot at the last known position. Now it says the position is a guess, shows what’s aboard, and puts the two things a dispatcher can do right next to it.</p>
+  </article>
+
+  <div class="twin">
+    <article class="project" id="recept">
+      <header class="p-head">
+        <h3 translate="no">Recept</h3>
+        <p>Repeat prescriptions for a pharmacy chain. Research, app design, prototype.</p>
+      </header>
+      <div class="panel green pair phones">
+        <figure>
+          <figcaption class="tag">In the brief</figcaption>
+          <div class="ui phone" role="img" aria-label="Phone screen saying all three medicines are ready to collect, with a collection code.">
+            <div class="top-line"><span>Recept</span><span>18:40</span></div>
+            <h4>Ready to collect</h4>
+            <p>All three are waiting at Cara Dušana&nbsp;12.</p>
+            <div class="meds">
+              <div><span>Metformin</span><em>Ready</em></div>
+              <div><span>Ramipril</span><em>Ready</em></div>
+              <div><span>Atorvastatin</span><em>Ready</em></div>
+            </div>
+            <div class="code"><span>Collection code</span><b>4719</b></div>
+            <div class="cta">Open until 20:00</div>
+          </div>
+        </figure>
+        <figure>
+          <figcaption class="tag miss">Not in the brief</figcaption>
+          <div class="ui phone" role="img" aria-label="Phone screen saying two of three medicines are ready, with three choices for what to do about the one that is out of stock.">
+            <div class="top-line"><span>Recept</span><span>18:40</span></div>
+            <h4>Two of three are ready</h4>
+            <p>Atorvastatin ran out at Cara Dušana&nbsp;12.</p>
+            <div class="meds">
+              <div><span>Metformin</span><em>Ready</em></div>
+              <div><span>Ramipril</span><em>Ready</em></div>
+              <div><span>Atorvastatin</span><em class="out">Out here</em></div>
+            </div>
+            <div class="choices mark">
+              <div><i class="on"></i><span>Take two now, one on Thursday</span></div>
+              <div><i></i><span>All three at Vračar, 900&nbsp;m away</span></div>
+              <div><i></i><span>Wait and take all on Thursday</span></div>
+            </div>
+            <div class="cta">Confirm</div>
+          </div>
+        </figure>
+      </div>
+      <p class="p-case">The brief had two states, ready and not ready. Someone on daily medication needs a third: what can I collect tonight?</p>
+    </article>
+
+    <article class="project" id="plata">
+      <header class="p-head">
+        <h3 translate="no">Plata</h3>
+        <p>Payroll for small firms. Interface, design system, handoff to engineering.</p>
+      </header>
+      <div class="panel ice">
+        <figure>
+          <figcaption class="tag">In the brief</figcaption>
+          <div class="ui pay" role="img" aria-label="Payroll table with three people and short names, all ready.">
+            <div class="r h"><span>Name</span><span>Role</span><span class="n">Gross</span><span class="n">Net</span><span class="n">Status</span></div>
+            <div class="r"><span>Ana Petrović</span><span>Developer</span><span class="n">€2,400</span><span class="n">€1,720</span><span class="n"><em>Ready</em></span></div>
+            <div class="r"><span>Luka Ristić</span><span>Support</span><span class="n">€1,650</span><span class="n">€1,210</span><span class="n"><em>Ready</em></span></div>
+            <div class="r"><span>Mina Savić</span><span>Designer</span><span class="n">€2,100</span><span class="n">€1,520</span><span class="n"><em>Ready</em></span></div>
+          </div>
+        </figure>
+        <figure>
+          <figcaption class="tag miss">Not in the brief</figcaption>
+          <div class="ui pay" role="img" aria-label="The same table with a long double-barrelled surname shown in full, someone who left mid-month, and an advance to repay, with the last two flagged for a check.">
+            <div class="r h"><span>Name</span><span>Role</span><span class="n">Gross</span><span class="n">Net</span><span class="n">Status</span></div>
+            <div class="r"><span class="mark">Aleksandra Stojanović-Vukčević</span><span>Head of operations</span><span class="n">€3,150</span><span class="n">€2,240</span><span class="n"><em>Ready</em></span></div>
+            <div class="r"><span>Luka Ristić</span><span class="lead">Left on the 12th, paid 12 of 31&nbsp;days</span><span class="n">€640</span><span class="n">€470</span><span class="n"><em class="ask">Check</em></span></div>
+            <div class="r"><span>Mina Savić</span><span class="lead">Advance to repay, €200</span><span class="n">€2,100</span><span class="n">€1,320</span><span class="n"><em class="ask">Check</em></span></div>
+          </div>
+        </figure>
+      </div>
+      <p class="p-case">Real payrolls hold double-barrelled surnames and people who left on the 12th. The table never cuts a name off, and it stops to ask about whatever it can’t work out alone.</p>
+    </article>
+  </div>
+
+  <article class="project solo" id="knjiga">
+    <div class="side">
+      <h3 translate="no">Knjiga</h3>
+      <p>Bookkeeping for freelancers. Onboarding and first run.</p>
+      <p class="p-case">Day one is the only screen every customer sees, and the brief didn’t have it. Instead of sample data that looks like someone else’s business, the empty account offers two ways in.</p>
+    </div>
+    <div class="panel tang pair">
+      <figure>
+        <figcaption class="tag">In the brief</figcaption>
+        <div class="ui knj" role="img" aria-label="Bookkeeping dashboard for a busy year with a bar chart and a list of invoices.">
+          <nav><b>Knjiga</b><span>Invoices</span><span>Expenses</span></nav>
+          <h4>€48,210</h4>
+          <div class="sub">Invoiced this year</div>
+          <div class="bars"><i style="height:42%"></i><i style="height:58%"></i><i style="height:36%"></i><i style="height:70%"></i><i style="height:64%"></i><i style="height:88%"></i><i style="height:52%"></i><i style="height:76%"></i><i style="height:100%"></i><i style="height:61%"></i><i style="height:82%"></i><i style="height:47%"></i></div>
+          <div class="inv">
+            <div><span>Studio Kalem</span><span>€3,200</span></div>
+            <div><span>Dunav Tours</span><span>€1,450</span></div>
+            <div><span>Pekara 21</span><span>€680</span></div>
+          </div>
+        </div>
+      </figure>
+      <figure>
+        <figcaption class="tag miss">Not in the brief</figcaption>
+        <div class="ui knj" role="img" aria-label="The same dashboard on day one, with empty outlined bars and two actions: bring last year's spreadsheet or send a first invoice.">
+          <nav><b>Knjiga</b><span>Invoices</span><span>Expenses</span></nav>
+          <h4>Nothing yet</h4>
+          <div class="sub">Invoiced this year</div>
+          <div class="bars ghost"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <div class="first">
+            <p>This chart will be drawn from your own numbers. Where would you like to start?</p>
+            <div class="go mark"><span>Bring last year’s spreadsheet</span><span>Send a first invoice</span></div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </article>
+</section>
+
+<section class="list" id="checklist" aria-labelledby="list-title">
+  <div class="list-top">
+    <h2 id="list-title">What I ask of every screen.</h2>
+    <p>Tick what your product already handles.</p>
+  </div>
+  <fieldset class="wall">
+    <legend class="sr">Cases your product handles</legend>
+    <label><input type="checkbox" checked><span>Happy path</span></label>
+    <label><input type="checkbox"><span>Empty</span></label>
+    <label><input type="checkbox"><span>First time</span></label>
+    <label><input type="checkbox"><span>Thousandth time</span></label>
+    <label><input type="checkbox"><span>Loading</span></label>
+    <label><input type="checkbox"><span>Slow</span></label>
+    <label><input type="checkbox"><span>Offline</span></label>
+    <label><input type="checkbox"><span>Failed</span></label>
+    <label><input type="checkbox"><span>Half done</span></label>
+    <label><input type="checkbox"><span>Too long</span></label>
+    <label><input type="checkbox"><span>Too many</span></label>
+    <label><input type="checkbox"><span>Just one</span></label>
+    <label><input type="checkbox"><span>Expired</span></label>
+    <label><input type="checkbox"><span>Undo</span></label>
+    <label><input type="checkbox"><span>Someone else changed it</span></label>
+    <label><input type="checkbox"><span>Not in English</span></label>
+    <label><input type="checkbox"><span>Keyboard only</span></label>
+    <label><input type="checkbox"><span>Screen reader</span></label>
+    <label><input type="checkbox"><span>Big text</span></label>
+  </fieldset>
+  <div class="tally">
+    <p id="tally" role="status">1 of 19 handled. The other 18 are where I’d start.</p>
+    <a class="btn lift" id="send" href="mailto:mara@ilic.example">Send me the 18</a>
+  </div>
+</section>
+
+<section class="about" id="about" aria-labelledby="about-title">
+  <h2 id="about-title">Say it EE-litch.</h2>
+  <p class="say">The ć is a soft ch. I can also write my name as <span lang="sr-Cyrl" class="cy" translate="no">Мара&nbsp;Илић</span>, which no form has accepted either.</p>
+  <div class="prose">
+    <p>I’ve spent my working life inside product teams and went independent to stay close to the work. I take one client at a time, join your standup and your Slack, and work in whatever your engineers already open. You get the same person from the first messy doc to the last handoff note.</p>
+    <dl>
+      <div><dt>Good fit</dt><dd>A product people use every day and a team that ships often. Or one neglected corner of something bigger.</dd></div>
+      <div><dt>What I do</dt><dd>User research, flows, interface design, design systems, prototypes in code.</dd></div>
+      <div><dt>What I don’t</dt><dd>Logos, pitch decks, or redesigns where I can’t talk to a single user.</dd></div>
+    </dl>
+  </div>
+</section>
+</main>
+
+<div class="check" aria-hidden="true"></div>
+<footer class="contact" id="contact">
+  <p class="lead">Free from January. Tell me the case your product handles worst.</p>
+  <a class="mail lift" href="mailto:mara@ilic.example" translate="no">mara@ilic.example</a>
+  <div class="foot">
+    <p>There’s no ć in the address. Email still can’t be trusted with it.</p>
+    <p>Set in Sofia Sans, drawn by Lettersoup in Sofia, with a proper ć and ћ. The pink and black check is what game engines paint when a texture goes missing.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const MARA = 'Mara Ilić';
+  const NAME_K = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--name-k'));
+  const SIDE_BEARINGS = .044;
+  const h1 = document.querySelector('.name');
+  const out = document.getElementById('name');
+  const buttons = [...document.querySelectorAll('.spell button')];
+  const status = document.getElementById('status');
+  const note = document.getElementById('note');
+  const field = document.getElementById('yours');
+  const noteDefault = note.textContent;
+
+  const folded = {đ:'d',Đ:'D',ł:'l',Ł:'L',ø:'o',Ø:'O',ß:'ss',æ:'ae',Æ:'AE',œ:'oe',Œ:'OE',ı:'i',þ:'th',Þ:'Th',ð:'d',Ð:'D'};
+  const strip = s => s.normalize('NFD').replace(/\p{M}/gu, '').replace(/[đĐłŁøØßæÆœŒıþÞðÐ]/g, c => folded[c]);
+  const cyr = {a:'а',b:'б',c:'ц',č:'ч',ć:'ћ',d:'д',dž:'џ',đ:'ђ',e:'е',f:'ф',g:'г',h:'х',i:'и',j:'ј',k:'к',l:'л',lj:'љ',m:'м',n:'н',nj:'њ',o:'о',p:'п',q:'к',r:'р',s:'с',š:'ш',t:'т',u:'у',v:'в',w:'в',x:'кс',y:'и',z:'з',ž:'ж'};
+  const spellings = {
+    right: s => s,
+    strip,
+    encoding: s => new TextDecoder('windows-1252').decode(new TextEncoder().encode(s)),
+    unknown: s => s.replace(/[^\x00-\x7f]/gu, '?'),
+    escaped: s => s.replace(/[^\x00-\x7f]/gu, c => `&#${c.codePointAt(0)};`),
+    ticket: s => {
+      const parts = strip(s).trim().split(/\s+/);
+      const last = parts.pop();
+      return (parts.length ? `${last}/${parts.join(' ')}` : last).toUpperCase();
+    },
+    short: s => [...s].slice(0, 7).join(''),
+    cyrillic: s => [...s].map(c => /[čćđšžČĆĐŠŽ]/.test(c) ? c : strip(c)).join('').replace(/dž|lj|nj|./gisu, m => {
+      const c = cyr[m.toLowerCase()];
+      if (!c) return m;
+      return m[0] !== m[0].toLowerCase() ? c[0].toUpperCase() + c.slice(1) : c;
+    }),
+  };
+
+  const ruler = document.createElement('canvas').getContext('2d');
+  let source = MARA;
+  let kind = 'right';
+  let shown = MARA;
+
+  // Keeps any spelling inside the name's box: wide ones shrink, and ones with descenders (р, ‡) lift off the row below.
+  function fit() {
+    const size = h1.clientWidth * NAME_K;
+    h1.style.fontSize = size + 'px';
+    out.style.fontSize = '1em';
+    ruler.font = `700 100px ${getComputedStyle(h1).fontFamily}`;
+    const ink = ruler.measureText(shown);
+    const rise = ink.actualBoundingBoxAscent / 100;
+    const drop = Math.max(0, ink.actualBoundingBoxDescent / 100 - .02);
+    const ratio = Math.min(
+      1,
+      h1.clientWidth * (1 + SIDE_BEARINGS * NAME_K) / out.getBoundingClientRect().width,
+      h1.clientHeight / ((rise + drop) * size),
+    );
+    out.style.fontSize = ratio + 'em';
+    out.style.transform = drop ? `translateY(${-drop * size * ratio}px)` : '';
+  }
+
+  function paint(next, animate) {
+    const before = [...shown];
+    const after = [...next];
+    let same = 0;
+    while (same < before.length && same < after.length && before[same] === after[same]) same++;
+    shown = next;
+    out.textContent = next;
+    out.classList.toggle('cy', kind === 'cyrillic');
+    fit();
+    if (!animate || same === after.length || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Only the letters that changed roll in. Whole text comes back afterwards so kerning is restored.
+    out.textContent = after.slice(0, same).join('');
+    const glyphs = after.slice(same).map((c, i) => {
+      const glyph = document.createElement('span');
+      glyph.className = 'roll';
+      glyph.textContent = c === ' ' ? '\u00a0' : c;
+      glyph.style.animationDelay = i * 26 + 'ms';
+      return glyph;
+    });
+    out.append(...glyphs);
+    glyphs.at(-1).addEventListener('animationend', () => { if (shown === next) out.textContent = next; }, { once: true });
+  }
+
+  function refreshCells() {
+    buttons.forEach(b => {
+      b.querySelector('span').textContent = spellings[b.dataset.kind](source);
+    });
+    buttons.find(b => b.dataset.kind === 'cyrillic').querySelector('small').textContent = source === MARA ? 'Also right' : 'In Cyrillic';
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => {
+    kind = b.dataset.kind;
+    buttons.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    const text = spellings[kind](source);
+    paint(text, true);
+    status.textContent = `${b.querySelector('small').textContent}: ${text}`;
+  }));
+
+  field.addEventListener('input', () => {
+    source = field.value.trim() || MARA;
+    refreshCells();
+    paint(spellings[kind](source), false);
+    note.textContent = source !== MARA && !/[^\x00-\x7f]/.test(source)
+      ? 'Your name has had an easy life. Try a friend’s.'
+      : noteDefault;
+  });
+  document.getElementById('try').addEventListener('submit', e => e.preventDefault());
+
+  fit();
+  addEventListener('resize', fit);
+  document.fonts?.ready.then(fit);
+
+  const boxes = [...document.querySelectorAll('.wall input')];
+  const tally = document.getElementById('tally');
+  const send = document.getElementById('send');
+  function count() {
+    const left = boxes.filter(b => !b.checked).map(b => b.nextElementSibling.textContent);
+    const done = boxes.length - left.length;
+    const n = left.length;
+    tally.textContent = n === 0
+      ? `${done} of ${done} handled. You don’t need me. Write anyway?`
+      : `${done} of ${boxes.length} handled. ${n === 1 ? 'The other one is' : `The other ${n} are`} where I’d start.`;
+    send.textContent = n === 0 ? 'Say hello' : `Send me the ${n === 1 ? 'one' : n}`;
+    const body = n ? `Hi Mara,\n\nOur product doesn't handle these yet:\n\n${left.map(x => `- ${x}`).join('\n')}\n` : 'Hi Mara,\n';
+    send.href = `mailto:mara@ilic.example?subject=${encodeURIComponent('What our product doesn\'t handle yet')}&body=${encodeURIComponent(body)}`;
+  }
+  boxes.forEach(b => b.addEventListener('change', count));
+  count();
+})();
+</script>
+</body>
+</html>

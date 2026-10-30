@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fieldnote brand sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sheet:#FFFDF3;--legal:#F7DC4A;--ink:#12162A;--ballpoint:#2B46B0;--rule:#A9C1E6;--record:#E2361C;--muted:#565B70;
+  --serif:"Newsreader","Iowan Old Style",Georgia,serif;
+  --mono:"DM Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--sheet)}
+body{color:var(--ink);font-family:var(--serif);min-width:1280px;-webkit-font-smoothing:antialiased}
+symbol{overflow:visible}
+ol{list-style:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.page{max-width:1440px;margin:0 auto}
+
+/* The pad's binding, with its tear-off perforation */
+.binding{position:relative;z-index:1;height:36px;display:flex;align-items:center;gap:16px;padding:0 36px 0 60px;background:var(--ink);color:var(--sheet);font:400 11px/15px var(--mono)}
+.binding::after{content:"";position:absolute;left:0;right:0;top:100%;height:3px;background:repeating-linear-gradient(90deg,var(--ink) 0 5px,transparent 5px 11px)}
+.binding svg{display:block}
+.binding .r{margin-left:auto}
+
+.sheet{display:grid;grid-template-columns:420px minmax(0,1fr);min-height:max(864px,calc(100vh - 36px))}
+
+/* The red double margin of a legal pad */
+.margin{position:absolute;top:0;bottom:0;width:5px;border:solid var(--record);border-width:0 1px;pointer-events:none}
+
+/* Cover: every edge of the F and every baseline sits on a 28px rule (1u) */
+.cover{position:relative;background-color:var(--legal);background-image:linear-gradient(to bottom,transparent 27px,rgba(43,70,176,.3) 27px);background-size:100% 28px}
+.cover svg{display:block;position:relative}
+.cover .margin{left:38px}
+.cover text{fill:var(--ink)}
+.wm{font-family:var(--serif);font-weight:500;font-variation-settings:"opsz" 48;fill:currentColor}
+.tag{font:italic 400 29px var(--serif)}
+.say{font:400 17.5px var(--serif)}
+
+/* Pad: a transcript. Time and topic in the margin, content to the right */
+.pad{position:relative;display:flex;flex-direction:column}
+.pad .margin{left:116px}
+.row{display:grid;grid-template-columns:116px minmax(0,1fr);border-bottom:1px solid var(--rule)}
+.gutter{padding:14px 8px 14px 20px}
+.body{padding:14px 36px 14px 33px}
+.time{display:block;font:400 11px/16px var(--mono);color:var(--ballpoint)}
+h2{font:500 20px/24px var(--serif);margin-top:2px}
+.note{font:400 11px/15px var(--mono);color:var(--muted);margin-top:6px}
+
+/* Mark */
+.r1{display:grid;grid-template-columns:206px 161px minmax(0,1fr);gap:20px}
+.r1>svg{display:block}
+.dim{font:400 31px var(--mono);fill:var(--ballpoint);text-anchor:middle}
+.halo{paint-order:stroke;stroke:var(--sheet);stroke-width:8px;stroke-linejoin:round}
+.legend dt{font:500 15px/20px var(--serif)}
+.legend dd{font:400 11px/15px var(--mono);color:var(--muted);margin-bottom:8px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:99px 99px;gap:8px}
+.tile{position:relative;display:grid;place-items:center;padding-bottom:18px}
+.tile svg{display:block}
+.cs{outline:1px dashed rgba(43,70,176,.55);outline-offset:10px}
+.cap{position:absolute;left:10px;bottom:7px;font:400 11px/15px var(--mono)}
+
+/* Colour */
+.colour .gutter,.colour .body{padding-top:12px;padding-bottom:12px}
+.strip{display:grid;grid-template-columns:190fr 185fr 150fr 110fr 100fr 100fr}
+.chip{height:54px;padding:0 8px 6px;display:flex;align-items:flex-end;font:400 11px/15px var(--mono)}
+.sw b{display:block;font:500 16px/20px var(--serif);margin-top:7px}
+.sw code{display:block;font:400 11px/15px var(--mono)}
+.sw p{font:400 11px/15px var(--mono);color:var(--muted);padding-right:10px}
+
+/* Lower half */
+.bottom{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 400px}
+.left{display:flex;flex-direction:column}
+.left .body{padding-right:24px}
+.left .row:last-child{flex:1;border-bottom:0}
+
+/* Type */
+.t-serif{font:400 42px/48px var(--serif);letter-spacing:-.01em}
+.t-mono{font:400 16px/24px var(--mono);margin-top:14px}
+.t-mono span{color:var(--ballpoint)}
+.meta{font:400 11px/15px var(--mono);color:var(--muted);margin-top:4px}
+.scale{font:400 11px/15px var(--mono);margin-top:12px;padding-top:8px;border-top:1px solid var(--rule)}
+
+/* Voice */
+.lead{font:400 22px/28px var(--serif);letter-spacing:-.005em}
+.sayno{display:grid;grid-template-columns:1fr 1fr;gap:5px 20px;margin-top:14px;font:400 15.5px/22px var(--serif)}
+.sayno h3{font:400 11px/15px var(--mono);color:var(--muted)}
+.no{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+
+/* In use */
+.use{border-left:1px solid var(--rule);padding:14px 24px 14px 20px;display:flex;flex-direction:column}
+.usehead{display:flex;align-items:baseline;gap:10px}
+.usehead h2{margin:0}
+.usehead .note{margin:0 0 0 auto}
+.icons{display:flex;align-items:flex-end;gap:12px;margin-top:10px}
+.icons svg{display:block}
+.ic{display:grid;place-items:center;background:var(--legal);color:var(--ink)}
+.i64{width:64px;height:64px;border-radius:14px}
+.i40{width:40px;height:40px;border-radius:9px}
+.i24{width:24px;height:24px;border-radius:5px}
+.icons p{flex:1;align-self:center;margin-left:4px;font:400 11px/15px var(--mono);color:var(--muted)}
+
+.mail{flex:1;margin-top:14px;display:flex;flex-direction:column;border:1px solid var(--ink);border-radius:4px;padding:12px 14px 10px}
+.f{display:grid;grid-template-columns:54px minmax(0,1fr);align-items:baseline}
+.f span{font:400 11px/15px var(--mono);color:var(--muted)}
+.f p{font:400 14px/20px var(--serif)}
+.f p.subj{font:500 16px/24px var(--serif)}
+.text{margin:8px 0 10px;padding-top:9px;border-top:1px solid var(--rule);font:400 15px/22px var(--serif)}
+.items{margin:5px 0}
+.items li{display:grid;grid-template-columns:16px minmax(0,1fr) auto;column-gap:4px;align-items:baseline}
+.items i{font:400 11px/15px var(--mono);color:var(--muted)}
+.items time{font:400 11px/15px var(--mono);color:var(--ballpoint)}
+.sign{margin-top:6px}
+mark{background:var(--legal);color:inherit;padding:0 2px}
+.act{margin-top:auto;display:flex;align-items:center;gap:6px;padding-top:9px;border-top:1px solid var(--rule)}
+.btn{font:500 14px/26px var(--serif);padding:0 13px;border-radius:3px;border:1px solid var(--ink)}
+.send{background:var(--ink);color:var(--sheet)}
+.src{margin-left:auto;font:400 11px/15px var(--mono);color:var(--muted)}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="m" viewBox="8 4 48 56">
+    <path fill="currentColor" d="M8 4H56V16H20V24H44V36H20V60H8Z"/>
+    <circle cx="36" cy="52" r="8.25" fill="var(--dot,#E2361C)"/>
+  </symbol>
+  <symbol id="lockup" viewBox="0 0 177 36">
+    <use href="#m" width="29.14" height="34"/>
+    <text class="wm" x="38.5" y="34" font-size="36" textLength="136.8">Fieldnote</text>
+  </symbol>
+  <symbol id="wordmark" viewBox="0 0 162 42">
+    <text class="wm" x="0" y="36" font-size="40" textLength="152">Fieldnote</text>
+    <circle cx="157.4" cy="32.6" r="3.4" fill="var(--dot,#E2361C)"/>
+  </symbol>
+</svg>
+
+<div class="page">
+  <h1 class="sr">Fieldnote brand sheet</h1>
+
+  <header class="binding">
+    <svg width="88" height="23" role="img" aria-label="Fieldnote wordmark"><use href="#wordmark"/></svg>
+    <span>Brand sheet 1.0</span>
+    <span class="r">Two typefaces. Six colours. One dot.</span>
+  </header>
+
+  <main class="sheet">
+
+    <section class="cover" aria-label="Logo">
+      <div class="margin"></div>
+      <svg width="420" height="864" viewBox="0 0 420 864" role="img" aria-label="Fieldnote stacked logo: a square-cut F with a red dot where its third line would end, above the word Fieldnote. Tagline: Meeting over. Email written. The dot starts as a record light and ends as a full stop. The F is a margin and two lines of notes. It listens, then it finishes the sentence.">
+        <use href="#m" x="60" y="84" width="336" height="392" style="color:var(--ink)"/>
+        <text class="wm" x="57.5" y="587" font-size="89" textLength="340">Fieldnote</text>
+        <text class="tag" x="60" y="643" textLength="336">Meeting over. Email written.</text>
+        <text class="say" x="60" y="699">The dot starts as a record light and ends</text>
+        <text class="say" x="60" y="727">as a full stop. The F is a margin and two</text>
+        <text class="say" x="60" y="755">lines of notes. It listens, then it</text>
+        <text class="say" x="60" y="783">finishes the sentence.</text>
+      </svg>
+    </section>
+
+    <div class="pad">
+      <div class="margin"></div>
+
+      <section class="row">
+        <div class="gutter">
+          <span class="time">00:02</span>
+          <h2>The mark.</h2>
+          <p class="note">u = 1/14 of mark height.</p>
+        </div>
+        <div class="body r1">
+          <svg width="206" height="206" viewBox="0 0 640 640" role="img" aria-label="Construction of the mark on a 16 by 16 unit grid. Stem 14u tall and 3u wide. Top arm 12u long, second arm 9u long, both 3u thick. Dot 4u across. All gaps 2u.">
+            <defs>
+              <pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0H0V40" fill="none" stroke="#A9C1E6" stroke-width="2"/>
+              </pattern>
+            </defs>
+            <rect width="640" height="640" fill="url(#g)"/>
+            <rect x="1" y="1" width="638" height="638" fill="none" stroke="#A9C1E6" stroke-width="2"/>
+            <path d="M0 160H640M0 360H640M0 600H640" stroke="#2B46B0" stroke-width="2.5" opacity=".55"/>
+            <path d="M68 0V640M80 0V640" stroke="#E2361C" stroke-width="2.5"/>
+            <path d="M80 40H560V160H200V240H440V360H200V600H80Z" fill="#F7DC4A" stroke="#12162A" stroke-width="4"/>
+            <circle cx="360" cy="520" r="82.5" fill="#E2361C"/>
+            <text class="dim" x="320" y="111">12u × 3u</text>
+            <text class="dim" x="320" y="311">9u × 3u</text>
+            <text class="dim" transform="translate(151 320) rotate(-90)">14u</text>
+            <text class="dim halo" x="320" y="211">2u</text>
+            <text class="dim halo" x="360" y="411">2u</text>
+            <text class="dim halo" x="240" y="531">2u</text>
+            <text class="dim halo" x="486" y="531">4u</text>
+          </svg>
+
+          <dl class="legend">
+            <dt>Stem</dt><dd>The page margin.</dd>
+            <dt>Arms</dt><dd>Two lines of notes.</dd>
+            <dt>Dot</dt><dd>Record light, then full stop. Spend one per view.</dd>
+            <dt>Gaps</dt><dd>2u, everywhere.</dd>
+          </dl>
+
+          <div class="tiles">
+            <div class="tile" style="background:var(--sheet);color:var(--ink);box-shadow:inset 0 0 0 1px var(--rule)">
+              <svg class="cs" width="177" height="36" role="img" aria-label="Primary horizontal logo"><use href="#lockup"/></svg>
+              <span class="cap">Primary. Clear space: 1 dot.</span>
+            </div>
+            <div class="tile" style="background:var(--ink);color:var(--sheet)">
+              <svg width="177" height="36" role="img" aria-label="Logo reversed on Ink"><use href="#lockup"/></svg>
+              <span class="cap">Reversed on Ink.</span>
+            </div>
+            <div class="tile" style="background:var(--legal);color:var(--ink)">
+              <svg width="177" height="36" role="img" aria-label="Logo on Legal yellow"><use href="#lockup"/></svg>
+              <span class="cap">On Legal.</span>
+            </div>
+            <div class="tile" style="background:var(--ballpoint);color:var(--sheet);--dot:#FFFDF3">
+              <svg width="177" height="36" role="img" aria-label="One-colour logo"><use href="#lockup"/></svg>
+              <span class="cap">One colour. Dot included.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row colour">
+        <div class="gutter">
+          <span class="time">06:15</span>
+          <h2>Colour.</h2>
+          <p class="note">Widths show share of use.</p>
+        </div>
+        <div class="body">
+          <div class="strip">
+            <div class="sw">
+              <div class="chip" style="background:var(--sheet);box-shadow:inset 0 0 0 1px var(--rule)">Ink 17.5:1</div>
+              <b>Sheet</b><code>#FFFDF3</code>
+              <p>Ground for pages and email.</p>
+            </div>
+            <div class="sw">
+              <div class="chip" style="background:var(--legal)">Ink 13.0:1</div>
+              <b>Legal</b><code>#F7DC4A</code>
+              <p>Covers, app icon, highlighter.</p>
+            </div>
+            <div class="sw">
+              <div class="chip" style="background:var(--ink);color:var(--sheet)">Sheet 17.5:1</div>
+              <b>Ink</b><code>#12162A</code>
+              <p>Text and the mark.</p>
+            </div>
+            <div class="sw">
+              <div class="chip" style="background:var(--ballpoint);color:var(--sheet)">Sheet 7.9:1</div>
+              <b>Ballpoint</b><code>#2B46B0</code>
+              <p>Links and timestamps.</p>
+            </div>
+            <div class="sw">
+              <div class="chip" style="background:var(--rule)"></div>
+              <b>Rule</b><code>#A9C1E6</code>
+              <p>Hairlines only.</p>
+            </div>
+            <div class="sw">
+              <div class="chip" style="background:var(--record)"></div>
+              <b>Record</b><code>#E2361C</code>
+              <p>Dot, margin. Never text.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="bottom">
+        <div class="left">
+          <section class="row">
+            <div class="gutter">
+              <span class="time">11:40</span>
+              <h2>Type.</h2>
+              <p class="note">Two faces, two jobs.</p>
+            </div>
+            <div class="body">
+              <p class="t-serif">Here's where we landed.</p>
+              <p class="meta">Newsreader. What it writes: emails, headlines, summaries. 400 and 500.</p>
+              <p class="t-mono"><span>14:22</span>&nbsp;&nbsp;Priya&nbsp;&nbsp;Annual moves to $480.</p>
+              <p class="meta">DM Mono. What it hears: timestamps, speakers, labels, captions. 400.</p>
+              <p class="scale">Display 56/60. Title 24/30. Body 16/24. Label 11/15.</p>
+            </div>
+          </section>
+
+          <section class="row">
+            <div class="gutter">
+              <span class="time">18:03</span>
+              <h2>Voice.</h2>
+              <p class="note">How it reads.</p>
+            </div>
+            <div class="body">
+              <p class="lead">Plain, short, finished. Every sentence gets a full stop. None gets an exclamation mark.</p>
+              <div class="sayno">
+                <h3>Say</h3><h3>Not</h3>
+                <p>Here's what we agreed.</p><p class="no">Unlock AI-powered insights!</p>
+                <p>Tom sends the form by Friday.</p><p class="no">Action items captured!</p>
+                <p>Anything wrong? Just reply.</p><p class="no">Please verify AI output.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <section class="use">
+          <div class="usehead">
+            <span class="time">32:04</span>
+            <h2>In use.</h2>
+            <p class="note">Draft ready 38 s after the call.</p>
+          </div>
+
+          <div class="icons">
+            <div class="ic i64"><svg width="34.3" height="40" role="img" aria-label="App icon, 64 pixels"><use href="#m"/></svg></div>
+            <div class="ic i40"><svg width="21.4" height="25" role="img" aria-label="App icon, 40 pixels"><use href="#m"/></svg></div>
+            <div class="ic i24"><svg width="13" height="15" role="img" aria-label="App icon, 24 pixels"><use href="#m"/></svg></div>
+            <svg width="13.7" height="16" role="img" aria-label="Bare mark, 16 pixels" style="color:var(--ink)"><use href="#m"/></svg>
+            <p>On Legal, always. Under 24 px the mark drops its tile. Never under 16 px.</p>
+          </div>
+
+          <article class="mail" aria-label="Example follow-up email written by Fieldnote">
+            <div class="f"><span>To</span><p>Priya Raman, Tom Okafor</p></div>
+            <div class="f"><span>Subject</span><p class="subj">Pricing call: what we agreed</p></div>
+            <div class="text">
+              <p>Hi Priya, Tom,</p>
+              <p>Thanks for today. Here's where we landed:</p>
+              <ol class="items">
+                <li><i>1</i><span>Annual plan moves to <mark>$480 from 1 March</mark>.</span><time>14:22</time></li>
+                <li><i>2</i><span>Tom sends the order form by Friday.</span><time>22:05</time></li>
+                <li><i>3</i><span>We review renewals on the 14th.</span><time>29:47</time></li>
+              </ol>
+              <p>Anything wrong? Just reply.</p>
+              <p class="sign">Mara</p>
+            </div>
+            <div class="act">
+              <span class="btn send">Send</span>
+              <span class="btn">Edit</span>
+              <span class="src">Each line cites the call.</span>
+            </div>
+          </article>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
