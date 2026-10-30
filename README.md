@@ -16,6 +16,7 @@
 
 <p align="center">
   <a href="#quick-start"><b>Quick start</b></a> ·
+  <a href="#does-it-make-a-difference">Examples</a> ·
   <a href="#the-workflow">Workflow</a> ·
   <a href="#house-rules">House rules</a> ·
   <a href="#ship-checklist">Checklist</a> ·
@@ -28,11 +29,21 @@
 
 <br>
 
-Models got good at landing pages. They still drift to the same tells: a pill that says "New" above the headline, two buttons where one would do, four accent colors, em dashes in every other line, nothing you'd remember. Each one is small. Together they're why a page feels generated.
+Models got good at landing pages. They still drift to the same tells: a pill that says "New" above the headline, two buttons where one would do, four accent colors, em dashes all over the copy, nothing you'd remember. Each one is small. Together they're why a page feels generated.
 
 **jsolee-kit is how I catch them.** It's the skill I load for frontend work in Claude Code: a six-step workflow, eleven house rules, a ship checklist, 19 reference sites sorted by the section you're designing, and a map of the 31 skills I actually use, each linked to its source. It also ships the mod I built to watch Claude's subagents work. [Here's the difference it makes](#does-it-make-a-difference) on the same prompt.
 
 It's opinionated on purpose. Fork it and make the rules yours.
+
+<a href="assets/demo.mp4">
+  <img alt="24-second demo: the same prompt built with and without the kit, then the comunitat crabs" src="assets/demo.jpg" width="100%">
+</a>
+<p align="center"><sub>▶ <a href="assets/demo.mp4">Watch the 24-second demo</a>, with sound</sub></p>
+
+<a href="#does-it-make-a-difference">
+  <img alt="Four pages Claude built with the kit: a landing, a pricing page, a dashboard and a portfolio" src="assets/gallery.png" width="100%">
+</a>
+<p align="center"><sub>Four pages Claude built with the kit, one prompt each. <a href="#does-it-make-a-difference">See them next to the same prompt without it.</a></sub></p>
 
 <br>
 
@@ -82,6 +93,81 @@ Everyone who clones the repo gets the same rules, without installing anything.
 
 <br>
 
+## Does it make a difference?
+
+Four prompts, same model (Claude Opus 5.5), one run each, nothing cherry-picked. The pages on the left are good: today's models don't ship the indigo gradient anymore. What the kit changes is what a page leads with and what it leaves out. Every page is in [`examples/`](examples), so open them and judge for yourself.
+
+### A landing page
+
+<p align="center">
+  <img alt="Fieldnote landing page built without skills on the left and with jsolee-kit on the right" src="assets/before-after.png" width="100%">
+</p>
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| Above the headline | a "NEW" pill | nothing |
+| Hero actions | two buttons | one button and a text link |
+| Color | red underline, green, yellow and pink tags | one committed yellow |
+| Em dashes in the copy | 6 | 0 |
+| Something to remember | a polished app mockup | the same mockup, with each transcript line wired to the email point it became |
+
+### A pricing page
+
+<p align="center">
+  <img alt="Relay pricing page built without skills on the left and with jsolee-kit on the right" src="assets/compare-pricing.png" width="100%">
+</p>
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| Leads with | "Pay for the texts that arrive" and a request log | "Know the price before you send" and a working calculator: type a message, see its segments and what it costs per plan |
+| Proof | a row of numbers the page can't back up (99.99% uptime, 190+ countries) | no proof row |
+| Plan badge | a "Best for production" pill | no badge |
+| Em dashes in the copy | 12 | 0 |
+
+### A dashboard
+
+<p align="center">
+  <img alt="Ledger dashboard built without skills on the left and with jsolee-kit on the right" src="assets/compare-dashboard.png" width="100%">
+</p>
+
+The closest of the four: both are clean, and neither has an em dash.
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| Top of the screen | four KPI cards with sparklines | one sum: gross sales − refunds = net sales |
+| What to do next | three refund requests, in a card | a "Needs you" panel: 7 orders to pack, 2 refund requests, 4 mugs running out, each with its button |
+| Status | colored pills | dots, in one accent plus red |
+
+### A portfolio
+
+<p align="center">
+  <img alt="Mara Ilić portfolio built without skills on the left and with jsolee-kit on the right" src="assets/compare-portfolio.png" width="100%">
+</p>
+
+| | No skills | With jsolee-kit |
+|---|---|---|
+| Headline | serif and italics, with two decorated underlines | one plain sentence |
+| Above the fold | three stats and a row of client logos | the work itself: the first project's dispatch board |
+| Em dashes in the copy | 25 | 0 |
+
+**What it costs:** across the four pairs, the runs with the kit used about 1.7× the tokens and 1.8× the time: they read the rules, load design skills and take more passes (41 to 75 tool calls against 2 to 10).
+
+<details>
+<summary><b>The prompts</b></summary>
+
+```text
+Build a landing page for Fieldnote, an app that records your meetings and writes the follow-up email for you.
+Build a pricing page for Relay, an API for sending transactional SMS. Three plans.
+Build the main dashboard screen for Ledger, an app where a small online shop owner sees revenue, orders and refunds.
+Build a personal portfolio site for Mara Ilić, an independent product designer.
+```
+
+Every run got the same constraints: one self-contained HTML file, Tailwind and Google Fonts from a CDN, no images, everything visible on load. The runs on the left were told not to use skills. The runs on the right were told to read the jsolee-kit skill and its references and follow its workflow, house rules and checklist, and could load the design skills it maps. All of them were told not to browse the web.
+
+</details>
+
+<br>
+
 ## What's inside
 
 ```text
@@ -92,7 +178,7 @@ jsolee-kit/
 │       ├── inspiration.md       19 reference sites, sorted by section
 │       └── skills.md            every skill and plugin I use, with its source repo
 ├── plugins/comunitat/           the mod: subagents drawn as crabs, plus a map of the repo
-├── examples/fieldnote/          the same landing built with and without the kit
+├── examples/                    four pages, each built with and without the kit
 ├── install.sh                   the kit and the 31 skills, in one go
 └── .claude-plugin/              the marketplace behind /plugin install
 ```
@@ -150,37 +236,6 @@ In practice:
 +   Your invoices, sent before lunch</h1>
 + <div className="rounded-2xl border border-black/[0.04] bg-white shadow-[0_1px_3px_rgba(0,0,0,.03)]">
 ```
-
-### Does it make a difference?
-
-<p align="center">
-  <img alt="The same Fieldnote landing page built twice: without skills on the left, with jsolee-kit on the right" src="assets/before-after.png" width="100%">
-</p>
-
-Same one-line prompt, same model (Claude Opus 5.5), one run each, nothing cherry-picked. The left page is good: today's models don't ship the indigo gradient anymore. What the kit changes are the details people feel without naming:
-
-| | No skills | With jsolee-kit |
-|---|---|---|
-| Above the headline | a "NEW" pill | nothing |
-| Hero actions | two buttons | one button and a text link |
-| Color | red underline, green, yellow and pink tags | one committed yellow |
-| Em dashes in the copy | 7 | 0 |
-| Something to remember | a polished app mockup | the same mockup, with each transcript line wired to the email point it became |
-
-Both pages are in [`examples/fieldnote/`](examples/fieldnote). Open them and judge for yourself.
-
-<details>
-<summary><b>The prompt</b></summary>
-
-```text
-Build a landing page for Fieldnote, an app that records your meetings and writes
-the follow-up email for you. One self-contained HTML file. You may load Tailwind
-and Google Fonts from a CDN; no other external assets and no images.
-```
-
-The kit run also got: "Before designing, read the jsolee-kit skill and its references, and follow its workflow, house rules and pre-ship checklist."
-
-</details>
 
 <br>
 

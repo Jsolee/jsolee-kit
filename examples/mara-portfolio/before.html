@@ -1,0 +1,897 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mara Ilić — Independent Product Designer</title>
+<meta name="description" content="Mara Ilić is an independent product designer in Belgrade who designs calm software for complicated work in health, finance and logistics.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Geist:wght@300..700&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F3EFE6;
+  --paper-2:#EAE4D6;
+  --card:#FAF8F3;
+  --ink:#191816;
+  --ink-2:#4A463F;
+  --ink-3:#6D675D;
+  --rule:#DCD4C5;
+  --rule-2:#C5BCAA;
+  --accent:#CF4520;
+  --accent-on-dark:#EC6B43;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+svg{display:block}
+::selection{background:var(--accent);color:#fff}
+
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 64px}
+.g12{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px}
+.label{font-family:var(--mono);font-size:11.5px;font-weight:400;line-height:1.4;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.sv-mono{font-family:var(--mono);font-size:10px;letter-spacing:.06em}
+.sv-serif{font-family:var(--serif)}
+.sv-sans{font-family:var(--sans)}
+
+/* ---------- Header ---------- */
+.head{display:flex;align-items:center;justify-content:space-between;height:84px;border-bottom:1px solid var(--rule)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:30px;height:30px;flex:none}
+.brand-name{font-family:var(--serif);font-size:21px;font-weight:450;letter-spacing:-.015em;line-height:1}
+.brand-role{margin-left:2px;padding-left:12px;border-left:1px solid var(--rule-2);font-size:13px;line-height:1;color:var(--ink-3)}
+.nav{display:flex;gap:40px}
+.nav a{display:inline-flex;align-items:baseline;gap:7px;font-size:14.5px;color:var(--ink-2);transition:color .2s}
+.nav a:hover{color:var(--ink)}
+.nav a span{font-family:var(--mono);font-size:10.5px;color:var(--ink-3)}
+.head-end{display:flex;align-items:center;gap:22px}
+.status{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;color:var(--ink-2)}
+.dot{width:7px;height:7px;flex:none;border-radius:50%;background:#3C8A57;box-shadow:0 0 0 4px rgba(60,138,87,.16)}
+.btn{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 20px;border-radius:999px;font-size:14.5px;font-weight:500;line-height:1;white-space:nowrap;transition:background-color .2s,border-color .2s,transform .2s}
+.btn svg{width:14px;height:14px}
+.btn:active{transform:scale(.98)}
+.btn-ink{background:var(--ink);color:var(--paper)}
+.btn-ink:hover{background:#000}
+.btn-line{border:1px solid var(--rule-2);color:var(--ink)}
+.btn-line:hover{border-color:var(--ink)}
+
+/* ---------- Hero ---------- */
+.hero{padding-top:40px}
+.hero-meta{display:flex;justify-content:space-between;gap:24px}
+.display{margin-top:80px;font-family:var(--serif);font-weight:340;font-size:clamp(52px,8.2vw,118px);line-height:1;letter-spacing:-.038em}
+.display .ln{display:block}
+.display em{font-style:italic;font-weight:300}
+.u-calm{text-decoration-line:underline;text-decoration-style:solid;text-decoration-color:var(--accent);text-decoration-thickness:4px;text-underline-offset:14px}
+.u-wavy{text-decoration-line:underline;text-decoration-style:wavy;text-decoration-color:var(--accent);text-decoration-thickness:3px;text-underline-offset:18px;text-decoration-skip-ink:none}
+.hero-foot{margin-top:80px;align-items:end}
+.intro{grid-column:1 / span 5}
+.lede{font-size:21px;line-height:1.5;letter-spacing:-.005em;color:var(--ink-2)}
+.lede b{font-weight:500;color:var(--ink)}
+.actions{display:flex;gap:12px;margin-top:32px}
+.stats{grid-column:7 / span 6;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:24px}
+.stat{padding-top:18px;border-top:1px solid var(--ink)}
+.stat b{display:block;font-family:var(--serif);font-weight:340;font-size:64px;line-height:.95;letter-spacing:-.035em}
+.stat sup{position:relative;top:.12em;margin-left:2px;font-size:.42em;font-weight:400;vertical-align:top;color:var(--accent)}
+.stat span{display:block;max-width:22ch;margin-top:14px;font-size:14px;line-height:1.45;color:var(--ink-2)}
+
+.clients{display:flex;align-items:center;gap:48px;margin-top:96px;padding:24px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.clients .label{flex:none;width:136px}
+.logos{flex:1;display:flex;align-items:center;justify-content:space-between;color:#3B3832}
+.logo{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;opacity:.85}
+.lo-halden{font-family:var(--serif);font-style:italic;font-size:24px;font-weight:400;letter-spacing:-.01em}
+.lo-ledgerly{font-size:14px;font-weight:600;letter-spacing:.24em}
+.lo-field{font-family:var(--mono);font-size:17px;letter-spacing:-.02em}
+.lo-parcel{font-size:21px;font-weight:700;letter-spacing:-.045em}
+.lo-ostra{font-family:var(--serif);font-size:19px;font-weight:600;letter-spacing:.08em}
+.lo-ostra small{margin-left:5px;font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.02em;opacity:.7}
+.lo-north{font-size:21px;font-weight:300;letter-spacing:.01em}
+
+/* ---------- Sections ---------- */
+.section{padding-top:144px}
+.sec-head{align-items:start;margin-bottom:48px;padding-top:22px;border-top:1px solid var(--ink)}
+.sec-head .label{grid-column:1 / span 3;padding-top:12px}
+.sec-head h2{grid-column:4 / span 6;font-family:var(--serif);font-weight:340;font-size:60px;line-height:1;letter-spacing:-.035em}
+.sec-head h2 em{font-style:italic;font-weight:300}
+.sec-head .aside{grid-column:10 / span 3;justify-self:end;max-width:30ch;padding-top:12px;font-size:15px;line-height:1.5;text-align:right;color:var(--ink-2)}
+
+/* ---------- Work ---------- */
+.work{row-gap:80px}
+.proj{min-width:0}
+.c7{grid-column:span 7}
+.c5{grid-column:span 5}
+.thumb{position:relative;overflow:hidden;border-radius:8px;isolation:isolate}
+.h-a{height:500px}
+.h-b{height:440px}
+.pmeta{padding-top:22px}
+.pm-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.pm-top h3{font-family:var(--serif);font-weight:400;font-size:30px;line-height:1.1;letter-spacing:-.02em}
+.pm-top h3 span{font-style:italic;font-weight:300;color:var(--ink-3)}
+.pmeta > p{max-width:56ch;margin-top:8px;font-size:16px;color:var(--ink-2)}
+.pm-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:18px;padding-top:14px;border-top:1px solid var(--rule)}
+.result{font-size:14.5px;color:var(--ink-2)}
+.result b{margin-right:6px;font-family:var(--serif);font-size:21px;font-weight:450;letter-spacing:-.01em;color:var(--accent)}
+.tags{display:flex;gap:6px}
+.tags span{padding:5px 10px;border:1px solid var(--rule-2);border-radius:999px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-2)}
+
+/* Thumb: Halden */
+.t-halden{background:radial-gradient(120% 90% at 0% 0%,rgba(255,255,255,.38),transparent 60%),#CBD6C0}
+.hw{position:absolute;left:44px;top:52px;width:790px;height:520px;overflow:hidden;border-radius:12px;background:#FBFAF6;color:#1E2B23;font-size:12px;line-height:1.4;box-shadow:0 0 0 1px rgba(30,56,41,.10),0 40px 80px -32px rgba(30,56,41,.55)}
+.hw-bar{display:flex;align-items:center;gap:6px;height:36px;padding:0 14px;background:#F3F1EA;border-bottom:1px solid #E7E3D9}
+.hw-bar i{width:9px;height:9px;border-radius:50%;background:#D8D3C7}
+.hw-url{margin-left:16px;padding:3px 10px;border-radius:6px;background:#E9E6DD;font-family:var(--mono);font-size:10.5px;color:#7F7A6F}
+.hw-body{display:flex;height:calc(100% - 36px)}
+.hw-side{flex:none;display:flex;flex-direction:column;align-items:center;gap:12px;width:52px;padding-top:18px;border-right:1px solid #ECE8DF}
+.hw-side b{width:22px;height:22px;border-radius:6px;background:#E7E3D9}
+.hw-side b:first-child{background:#24493A}
+.hw-main{flex:1;min-width:0;padding:18px 22px 0}
+.hw-top{display:flex;align-items:center;gap:14px}
+.hw-title{margin-right:auto}
+.hw-title small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A8578}
+.hw-title strong{display:block;font-family:var(--serif);font-weight:400;font-size:22px;line-height:1.15;letter-spacing:-.02em}
+.seg{display:flex;padding:3px;border-radius:8px;background:#EEEBE3;font-size:11px;color:#6F6A5F}
+.seg span{padding:4px 12px;border-radius:6px}
+.seg .on{background:#fff;color:#1E2B23;box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.hw-new{padding:7px 12px;border-radius:7px;background:#24493A;color:#F2F0E8;font-size:11px;font-weight:500}
+.cal-head{display:grid;grid-template-columns:40px repeat(5,minmax(0,1fr));margin-top:18px;padding-bottom:9px;border-bottom:1px solid #E7E3D9;font-size:10.5px;color:#8A8578}
+.cal-head span{display:flex;align-items:center;gap:6px;padding-left:8px}
+.cal-head b{font-size:13px;font-weight:500;color:#1E2B23}
+.cal-head .today b{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#24493A;color:#fff;font-size:11.5px}
+.cal{position:relative;display:grid;grid-template-columns:40px repeat(5,minmax(0,1fr));height:400px;background:repeating-linear-gradient(to bottom,transparent 0 47px,#EFEBE2 47px 48px)}
+.cal-t{font-family:var(--mono);font-size:9.5px;color:#A39D90}
+.cal-t span{display:block;height:48px;padding-top:5px}
+.cal-c{position:relative;border-left:1px solid #EFEBE2}
+.ev{position:absolute;left:4px;right:5px;padding:6px 8px 6px 10px;overflow:hidden;border-radius:6px;font-size:10px;line-height:1.3}
+.ev b{display:block;font-size:11px;font-weight:500}
+.ev span{opacity:.72}
+.ev-g{background:#DCE7D4;color:#1D3A2B;box-shadow:inset 3px 0 0 #2F5A43}
+.ev-c{background:#F1DFCF;color:#5B2F18;box-shadow:inset 3px 0 0 #B3653B}
+.ev-s{background:#ECE8DD;color:#4B4639;box-shadow:inset 3px 0 0 #A79D84}
+.ev-sel{outline:2px solid var(--accent);outline-offset:1px}
+.now{position:absolute;z-index:2;left:40px;right:0;top:178px;border-top:1.5px solid var(--accent)}
+.now::before{content:"";position:absolute;left:-4px;top:-4.5px;width:7px;height:7px;border-radius:50%;background:var(--accent)}
+.pop{position:absolute;z-index:3;left:63.2%;top:96px;width:190px;padding:14px;border-radius:10px;background:#fff;box-shadow:0 0 0 1px rgba(30,43,35,.08),0 18px 40px -12px rgba(30,43,35,.38)}
+.pop::before{content:"";position:absolute;left:-6px;top:56px;width:12px;height:12px;background:#fff;transform:rotate(45deg);box-shadow:-1px 1px 0 rgba(30,43,35,.08)}
+.pop small{position:relative;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#8A8578}
+.pop strong{display:block;margin-top:4px;font-family:var(--serif);font-weight:400;font-size:18px;letter-spacing:-.01em}
+.pop p{margin-top:4px;font-size:11px;line-height:1.45;color:#6F6A5F}
+.pop-a{display:flex;gap:6px;margin-top:12px}
+.pop-a span{flex:1;padding:7px 0;border:1px solid #E2DED3;border-radius:7px;font-size:11px;font-weight:500;text-align:center}
+.pop-a .on{background:#24493A;border-color:#24493A;color:#fff}
+
+/* Thumb: Ledgerly */
+.t-ledger{background:#1B1C19;color:#ECE9E1}
+.t-ledger::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:28px 28px;-webkit-mask-image:radial-gradient(100% 70% at 50% 0%,#000,transparent);mask-image:radial-gradient(100% 70% at 50% 0%,#000,transparent)}
+.lp{position:absolute;left:40px;right:40px;top:44px;bottom:-24px;padding:22px 22px 0;border-radius:12px;background:#252621;box-shadow:0 0 0 1px rgba(255,255,255,.07),0 40px 80px -30px rgba(0,0,0,.6)}
+.lp-top{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8E8B82}
+.lp-top span:last-child{padding:3px 8px;border:1px solid rgba(255,255,255,.12);border-radius:999px;color:#C9C6BC}
+.lp-amt{margin-top:14px;font-size:38px;font-weight:500;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:#F4F1EA}
+.lp-amt span{color:#77746C}
+.lp-sub{margin-top:8px;font-size:12px;color:#9C998F}
+.bar{display:flex;gap:2px;height:6px;margin-top:18px;overflow:hidden;border-radius:999px;background:rgba(255,255,255,.07)}
+.bar i{display:block;height:100%}
+.legend{display:flex;gap:16px;margin-top:10px;font-family:var(--mono);font-size:10px;color:#9C998F}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:6px;height:6px;border-radius:50%}
+.lt{margin-top:22px;font-size:11.5px}
+.lt-r{display:grid;grid-template-columns:48px minmax(0,1fr) 92px 74px;column-gap:10px;align-items:center;height:38px;border-top:1px solid rgba(255,255,255,.07)}
+.lt-h{height:28px;border-top:0;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#77746C}
+.lt-r .d{font-family:var(--mono);font-size:10.5px;color:#8E8B82}
+.lt-r .n{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;color:#DEDBD2}
+.lt-r .a{text-align:right;font-variant-numeric:tabular-nums;color:#ECE9E1}
+.lt-r .s{justify-self:end}
+.lt-h .a,.lt-h .s{color:#77746C}
+.chip{display:inline-block;padding:3px 7px;border-radius:999px;font-family:var(--mono);font-size:9px;line-height:1.3;letter-spacing:.06em;text-transform:uppercase}
+.ok{background:rgba(141,224,170,.13);color:#93E2B0}
+.rv{background:rgba(242,193,96,.15);color:#F1C56E}
+.ms{background:rgba(240,128,98,.15);color:#F49B80}
+.rule-card{position:absolute;z-index:2;right:22px;bottom:26px;width:236px;padding:14px 16px;border-radius:10px;background:#F3EFE6;color:#191816;box-shadow:0 24px 50px -16px rgba(0,0,0,.75)}
+.rc-top{display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:#6D675D}
+.toggle{position:relative;width:28px;height:16px;border-radius:999px;background:#2F7A4F}
+.toggle::after{content:"";position:absolute;right:2px;top:2px;width:12px;height:12px;border-radius:50%;background:#fff}
+.rule-card p{margin-top:8px;font-size:13px;font-weight:500;line-height:1.4}
+.rule-card small{display:block;margin-top:6px;font-size:11px;color:#6D675D}
+
+/* Thumb: Fieldnote */
+.t-field{background:#EDD796}
+.t-field::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgba(90,70,20,.16) 1px,transparent 1.3px);background-size:18px 18px}
+.theme{position:absolute;left:32px;top:30px;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 12px;border-radius:999px;background:#1F1D17;color:#F3EFE6;font-size:12.5px}
+.theme i{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.theme em{font-family:var(--serif);font-size:15px;font-style:italic}
+.theme span{margin-left:2px;font-family:var(--mono);font-size:10px;color:#A9A497}
+.note{position:absolute;width:212px;padding:14px 16px 12px;border-radius:6px;background:#FFFCF3;color:#26231C;box-shadow:0 1px 0 rgba(0,0,0,.04),0 14px 30px -14px rgba(80,60,10,.5)}
+.note q{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.32;letter-spacing:-.01em}
+.note mark{padding:0 1px;background:linear-gradient(transparent 58%,#F7B79C 58%);color:inherit}
+.note-m{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:9px;border-top:1px dashed #E3DCC8;font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:#7D776A}
+.note-m b{padding:2px 6px;border-radius:4px;background:#F1EBD8;font-weight:500;color:#5E584A}
+.n1{left:32px;top:96px;transform:rotate(-2.2deg)}
+.n2{left:272px;top:80px;transform:rotate(2deg)}
+.n3{left:52px;top:270px;transform:rotate(1.4deg)}
+.n4{left:288px;top:256px;transform:rotate(-2.8deg)}
+.cursor{position:absolute;z-index:3;left:238px;top:224px}
+.cursor span{position:absolute;left:14px;top:17px;padding:3px 8px;border-radius:4px 999px 999px 999px;background:var(--accent);color:#fff;font-size:11px;font-weight:500;white-space:nowrap}
+
+/* Thumb: Parcel */
+.t-parcel{background:radial-gradient(70% 90% at 35% 100%,rgba(255,255,255,.35),transparent 70%),#C9D2E1}
+.phone{position:absolute;width:212px;height:440px;padding:8px;border-radius:40px;background:#16171B;box-shadow:inset 0 0 0 1.5px #2C2E35,0 40px 60px -28px rgba(20,32,64,.6)}
+.scr{position:relative;width:100%;height:100%;overflow:hidden;border-radius:32px;background:#F7F6F2;color:#16171B}
+.island{position:absolute;z-index:4;top:9px;left:50%;width:60px;height:18px;margin-left:-30px;border-radius:999px;background:#16171B}
+.sb{position:absolute;z-index:3;top:11px;left:22px;right:18px;display:flex;align-items:center;justify-content:space-between;font-size:10.5px;font-weight:600}
+.sb-r{display:inline-flex;align-items:center;gap:4px;font-size:9px}
+.batt{position:relative;display:inline-block;width:18px;height:9px;border:1px solid currentColor;border-radius:2.5px}
+.batt::after{content:"";position:absolute;left:1px;top:1px;bottom:1px;width:10px;border-radius:1px;background:currentColor}
+.ph1{left:60px;top:-34px}
+.ph2{left:300px;top:62px}
+.map{position:absolute;inset:0;width:100%;height:100%}
+.eta{position:absolute;z-index:3;top:40px;left:10px;right:10px;display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:12px;background:#16171B;color:#fff;font-size:10.5px;line-height:1.3}
+.eta svg{flex:none;width:18px;height:18px}
+.eta b{display:block;font-size:13px;font-weight:600}
+.eta span{color:#A8AAB3}
+.sheet{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:10px 14px 20px;border-radius:20px 20px 0 0;background:#fff;box-shadow:0 -10px 30px -10px rgba(0,0,0,.18)}
+.grab{width:32px;height:4px;margin:0 auto 10px;border-radius:999px;background:#DDDCD6}
+.sheet small{font-family:var(--mono);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#7A7C85}
+.sheet strong{display:block;margin-top:3px;font-size:15px;font-weight:600;letter-spacing:-.01em}
+.sheet p{margin-top:2px;font-size:11px;color:#6B6D75}
+.swipe{position:relative;display:flex;align-items:center;justify-content:center;height:46px;margin-top:12px;border-radius:14px;background:var(--accent);color:#fff;font-size:12.5px;font-weight:600}
+.swipe i{position:absolute;left:5px;top:5px;display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.22)}
+.swipe svg{width:14px;height:14px}
+.list{position:absolute;inset:0;padding:44px 14px 0}
+.list h4{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.prog{display:flex;justify-content:space-between;margin-top:4px;font-size:10.5px;color:#6B6D75}
+.pbar{height:5px;margin-top:8px;overflow:hidden;border-radius:999px;background:#E3E2DC}
+.pbar i{display:block;width:61%;height:100%;background:#16171B}
+.stops{margin-top:8px}
+.stop{display:flex;align-items:center;gap:10px;height:50px;border-bottom:1px solid #E8E7E1}
+.ck{flex:none;display:grid;place-items:center;width:22px;height:22px;border:1.5px solid #C9C8C1;border-radius:50%}
+.done .ck{background:#16171B;border-color:#16171B}
+.cur .ck{border:2px solid var(--accent);box-shadow:0 0 0 4px rgba(207,69,32,.15)}
+.cur .ck::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.stop div{flex:1;min-width:0}
+.stop b{display:block;overflow:hidden;font-size:12px;font-weight:600;white-space:nowrap;text-overflow:ellipsis}
+.done b{font-weight:500;color:#8D8F97}
+.stop div span{display:block;font-size:10px;color:#7A7C85}
+.cur div span{color:var(--accent);font-weight:500}
+.stop em{font-family:var(--mono);font-size:10px;font-style:normal;color:#7A7C85}
+.spec{position:absolute;left:556px;width:170px;color:#16171B}
+.spec::before{content:"";position:absolute;left:-46px;top:15px;width:38px;border-top:1px solid #16171B}
+.spec::after{content:"";position:absolute;left:-50px;top:12px;width:7px;height:7px;border-radius:50%;background:#16171B}
+.spec b{display:block;font-family:var(--serif);font-size:30px;font-weight:400;line-height:1;letter-spacing:-.02em}
+.spec span{display:block;margin-top:7px;font-size:12.5px;line-height:1.4;color:#3D4250}
+.s1{top:100px}
+.s2{top:206px}
+.s3{top:312px}
+
+/* ---------- About ---------- */
+.about{align-items:start}
+.about-fig{grid-column:1 / span 6}
+.fig{overflow:hidden;border-radius:8px;background:var(--paper-2)}
+.fig svg{width:100%;height:auto}
+.fig-cap{display:flex;gap:16px;margin-top:14px;font-size:14px;color:var(--ink-2)}
+.fig-cap .label{flex:none;padding-top:2px}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:44px}
+.principles li{padding-top:14px;border-top:1px solid var(--rule-2)}
+.principles b{display:block;margin-top:8px;font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.2;letter-spacing:-.015em}
+.principles p{margin-top:8px;font-size:14px;line-height:1.5;color:var(--ink-2)}
+.about-copy{grid-column:8 / span 5}
+.about-lead{font-family:var(--serif);font-size:30px;font-weight:340;line-height:1.28;letter-spacing:-.02em}
+.about-lead em{font-style:italic}
+.about-body{margin-top:22px;font-size:16.5px;line-height:1.65;color:var(--ink-2)}
+.about-body + .about-body{margin-top:16px}
+.xp{margin-top:44px;border-bottom:1px solid var(--rule)}
+.xp-h{display:flex;justify-content:space-between;margin-top:44px;padding-bottom:12px}
+.xp div{display:grid;grid-template-columns:118px minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid var(--rule)}
+.xp dt{font-family:var(--mono);font-size:12px;font-variant-numeric:tabular-nums;color:var(--ink-3)}
+.xp dd{font-size:15.5px}
+.xp dd span{color:var(--ink-3)}
+.xp .city{font-size:14px;color:var(--ink-3)}
+
+/* ---------- Services ---------- */
+.svcs{align-items:stretch}
+.svc{grid-column:span 4;display:flex;flex-direction:column;min-height:520px;padding:32px;border:1px solid var(--rule);border-radius:8px;background:var(--card)}
+.svc-dark{border-color:var(--ink);background:var(--ink);color:var(--paper)}
+.svc-top{display:flex;align-items:center;justify-content:space-between}
+.svc-top > span:last-child{display:flex;gap:6px}
+.pill{padding:5px 10px;border:1px solid var(--rule-2);border-radius:999px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.svc-dark .label{color:rgba(243,239,230,.6)}
+.svc-dark .pill{border-color:rgba(243,239,230,.25);color:rgba(243,239,230,.85)}
+.svc-dark .pill.hot{border-color:var(--accent);background:var(--accent);color:#fff}
+.svc h3{margin-top:56px;font-family:var(--serif);font-size:38px;font-weight:350;line-height:1.05;letter-spacing:-.03em}
+.svc > p{margin-top:14px;font-size:15.5px;line-height:1.6;color:var(--ink-2)}
+.svc-dark > p{color:rgba(243,239,230,.74)}
+.svc ul{margin-top:26px}
+.svc li{display:flex;gap:12px;padding:10px 0;border-top:1px solid var(--rule);font-size:14.5px}
+.svc-dark li{border-color:rgba(243,239,230,.14)}
+.svc li::before{content:"";flex:none;width:10px;height:1px;margin-top:11px;background:var(--accent)}
+.price{display:flex;align-items:flex-end;justify-content:space-between;margin-top:auto;padding-top:36px}
+.price b{display:block;margin-top:4px;font-family:var(--serif);font-size:34px;font-weight:400;line-height:1;letter-spacing:-.025em}
+.price > span{font-size:13px;color:var(--ink-3)}
+.svc-dark .price > span{color:rgba(243,239,230,.6)}
+
+.process{margin-top:88px}
+.process-h{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px}
+.process-h h3{font-family:var(--serif);font-size:28px;font-weight:400;letter-spacing:-.02em}
+.steps{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:24px}
+.steps::before{content:"";position:absolute;left:0;right:0;top:15px;border-top:1px dashed var(--rule-2)}
+.step{position:relative}
+.step-n{position:relative;display:inline-grid;place-items:center;width:31px;height:31px;border:1px solid var(--ink);border-radius:50%;background:var(--paper);font-family:var(--mono);font-size:11px}
+.step:last-child .step-n{background:var(--ink);color:var(--paper)}
+.step .label{display:block;margin-top:20px}
+.step b{display:block;margin-top:6px;font-size:17px;font-weight:500;letter-spacing:-.01em}
+.step p{max-width:28ch;margin-top:6px;font-size:14px;line-height:1.55;color:var(--ink-2)}
+
+/* ---------- Quotes ---------- */
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+.quote{padding:4px 64px 4px 0}
+.quote + .quote{padding:4px 0 4px 64px;border-left:1px solid var(--rule)}
+.qmark{display:block;height:46px;font-family:var(--serif);font-size:96px;line-height:.9;color:var(--accent)}
+.quote blockquote{font-family:var(--serif);font-size:29px;font-weight:340;line-height:1.3;letter-spacing:-.02em}
+.quote figcaption{display:flex;align-items:center;gap:14px;margin-top:36px}
+.avatar{display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:50%;font-family:var(--serif);font-size:16px;font-style:italic}
+.quote figcaption b{display:block;font-size:15px;font-weight:500}
+.quote figcaption span{display:block;font-size:13.5px;color:var(--ink-3)}
+
+/* ---------- Contact ---------- */
+.contact{margin-top:160px;padding:96px 0 40px;background:var(--ink);color:var(--paper)}
+.c-top{display:flex;align-items:center;justify-content:space-between;padding-bottom:22px;border-bottom:1px solid rgba(243,239,230,.18)}
+.contact .label{color:rgba(243,239,230,.6)}
+.contact .status{color:rgba(243,239,230,.85)}
+.c-title{margin-top:80px;font-family:var(--serif);font-size:clamp(48px,7.2vw,104px);font-weight:320;line-height:1;letter-spacing:-.04em}
+.c-title em{font-style:italic;font-weight:300;color:var(--accent-on-dark)}
+.c-grid{margin-top:80px;align-items:end}
+.c-mail{grid-column:1 / span 7;justify-self:start;display:inline-flex;align-items:center;gap:20px;padding-bottom:10px;border-bottom:2px solid var(--accent-on-dark);font-family:var(--serif);font-size:48px;font-weight:340;line-height:1.1;letter-spacing:-.025em}
+.c-mail svg{width:34px;height:34px;transition:transform .25s}
+.c-mail:hover svg{transform:translate(4px,-4px)}
+.c-facts{grid-column:9 / span 4}
+.c-facts div{display:grid;grid-template-columns:116px minmax(0,1fr);gap:16px;padding:12px 0;border-top:1px solid rgba(243,239,230,.16);font-size:14.5px}
+.c-facts dt{padding-top:3px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(243,239,230,.55)}
+.c-facts dd{color:rgba(243,239,230,.92)}
+.c-foot{display:flex;align-items:center;justify-content:space-between;gap:24px;margin-top:128px;padding-top:24px;border-top:1px solid rgba(243,239,230,.18);font-size:13.5px;color:rgba(243,239,230,.6)}
+.socials{display:flex;gap:28px}
+.socials a,.totop{display:inline-flex;align-items:center;gap:6px;color:rgba(243,239,230,.88);transition:color .2s}
+.socials a:hover,.totop:hover{color:#fff}
+.socials svg,.totop svg{width:12px;height:12px}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1180px){
+  .wrap{padding:0 40px}
+  .nav{display:none}
+  .intro,.stats{grid-column:1 / -1}
+  .stats{margin-top:56px}
+  .c7,.c5{grid-column:1 / -1}
+  .sec-head .label,.sec-head h2,.sec-head .aside{grid-column:1 / -1}
+  .sec-head h2{margin-top:16px;font-size:48px}
+  .sec-head .aside{justify-self:start;margin-top:8px;text-align:left}
+  .about-fig,.about-copy{grid-column:1 / -1}
+  .about-copy{margin-top:64px}
+  .svc{grid-column:1 / -1;min-height:0}
+  .svcs{row-gap:16px}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:36px}
+  .steps::before{display:none}
+  .quotes{grid-template-columns:1fr}
+  .quote,.quote + .quote{padding:32px 0;border-left:0}
+  .quote + .quote{border-top:1px solid var(--rule)}
+  .c-mail,.c-facts{grid-column:1 / -1}
+  .c-facts{margin-top:56px}
+}
+@media (max-width:720px){
+  .wrap{padding:0 16px}
+  .brand-role,.head-end .status{display:none}
+  .hero-meta{flex-direction:column;gap:6px}
+  .display{margin-top:48px}
+  .u-calm{text-underline-offset:8px;text-decoration-thickness:3px}
+  .u-wavy{text-underline-offset:10px;text-decoration-thickness:2px}
+  .actions{flex-wrap:wrap}
+  .stats{grid-template-columns:1fr;row-gap:28px}
+  .clients{flex-direction:column;align-items:flex-start;gap:20px}
+  .logos{flex-wrap:wrap;justify-content:flex-start;gap:16px 28px}
+  .section{padding-top:104px}
+  .sec-head h2{font-size:38px}
+  .h-a,.h-b{height:400px}
+  .pm-foot{flex-direction:column;align-items:flex-start}
+  .principles{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr}
+  .quote blockquote{font-size:23px}
+  .c-mail{font-size:26px;gap:12px}
+  .c-mail svg{width:22px;height:22px}
+  .c-foot{flex-direction:column;align-items:flex-start}
+  .socials{flex-wrap:wrap;gap:16px 24px}
+}
+</style>
+</head>
+<body>
+
+<header class="wrap">
+  <div class="head">
+    <a class="brand" href="#top" aria-label="Mara Ilić, back to top">
+      <svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true"><circle cx="15" cy="15" r="14.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 12.5c2.3-3 4.7-3 7 0s4.7 3 7 0" fill="none" stroke="#CF4520" stroke-width="1.7" stroke-linecap="round"/><path d="M8 18.5h14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <span class="brand-name">Mara Ilić</span>
+      <span class="brand-role">Independent product designer</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work"><span>01</span>Work</a>
+      <a href="#about"><span>02</span>About</a>
+      <a href="#services"><span>03</span>Services</a>
+      <a href="#contact"><span>04</span>Contact</a>
+    </nav>
+    <div class="head-end">
+      <span class="status"><i class="dot"></i>Booking from Feb 2027</span>
+      <a class="btn btn-ink" href="#contact">Start a project <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="wrap hero" aria-labelledby="hero-title">
+    <div class="hero-meta">
+      <span class="label">Selected work, 2016 — 2026</span>
+      <span class="label">Belgrade, Serbia · 44.8° N 20.4° E</span>
+      <span class="label">Now: Halden (contract) until Jan 2027</span>
+    </div>
+
+    <h1 class="display" id="hero-title">
+      <span class="ln">I design <span class="u-calm"><em>calm</em></span> software</span>
+      <span class="ln">for <span class="u-wavy">complicated</span> work.</span>
+    </h1>
+
+    <div class="g12 hero-foot">
+      <div class="intro">
+        <p class="lede">Independent product designer for founders and product teams building <b>dense, high-stakes tools</b> — clinical scheduling, financial operations, logistics. I make them quieter, faster to learn and harder to get wrong.</p>
+        <div class="actions">
+          <a class="btn btn-ink" href="#work">See selected work <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3v10M4 9l4 4 4-4"/></svg></a>
+          <a class="btn btn-line" href="mailto:mara@ilic.studio">mara@ilic.studio</a>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><b>12</b><span>Years designing software, the last five independent</span></div>
+        <div class="stat"><b>40<sup>+</sup></b><span>Products and major features shipped to production</span></div>
+        <div class="stat"><b>6</b><span>Design systems built and handed to in-house teams</span></div>
+      </div>
+    </div>
+
+    <div class="clients">
+      <span class="label">Selected clients</span>
+      <div class="logos" aria-label="Client list">
+        <span class="logo lo-halden"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M3 16V9a6 6 0 0 1 12 0v7" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Halden</span>
+        <span class="logo lo-ledgerly"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><rect x="1" y="2" width="14" height="3" fill="currentColor"/><rect x="1" y="7" width="10" height="3" fill="currentColor"/><rect x="1" y="12" width="6" height="3" fill="currentColor"/></svg>LEDGERLY</span>
+        <span class="logo lo-field"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg>fieldnote</span>
+        <span class="logo lo-parcel"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 1.5 16.5 9 9 16.5 1.5 9z" fill="currentColor"/></svg>Parcel</span>
+        <span class="logo lo-ostra">OSTRA<small>bank</small></span>
+        <span class="logo lo-north"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="7.5" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M4 14 14 4" stroke="currentColor" stroke-width="1.3"/></svg>Northwind</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section class="wrap section" id="work" aria-labelledby="work-title">
+    <div class="g12 sec-head">
+      <span class="label">01 — Selected work</span>
+      <h2 id="work-title">Selected work, <em>2022–2026</em></h2>
+      <p class="aside">Four of fourteen recent projects. Full case studies on request — most are under NDA.</p>
+    </div>
+
+    <div class="g12 work">
+
+      <!-- Halden -->
+      <article class="proj c7">
+        <div class="thumb h-a t-halden" role="img" aria-label="Halden weekly clinic schedule with a booking popover">
+          <div class="hw">
+            <div class="hw-bar"><i></i><i></i><i></i><span class="hw-url">app.halden.health/schedule</span></div>
+            <div class="hw-body">
+              <div class="hw-side"><b></b><b></b><b></b><b></b><b></b></div>
+              <div class="hw-main">
+                <div class="hw-top">
+                  <div class="hw-title"><small>October 2026 · Vesterbro clinic</small><strong>Week 42</strong></div>
+                  <div class="seg"><span>Day</span><span class="on">Week</span><span>Month</span></div>
+                  <span class="hw-new">+ New booking</span>
+                </div>
+                <div class="cal-head">
+                  <span></span>
+                  <span>Mon <b>13</b></span>
+                  <span class="today">Tue <b>14</b></span>
+                  <span>Wed <b>15</b></span>
+                  <span>Thu <b>16</b></span>
+                  <span>Fri <b>17</b></span>
+                </div>
+                <div class="cal">
+                  <div class="cal-t"><span>08</span><span>09</span><span>10</span><span>11</span><span>12</span><span>13</span><span>14</span><span>15</span></div>
+                  <div class="cal-c">
+                    <div class="ev ev-g" style="top:24px;height:44px"><b>Initial consult</b><span>08:30 · M. Kovač</span></div>
+                    <div class="ev ev-c" style="top:96px;height:58px"><b>Vaccinations</b><span>10:00 · Walk-in</span></div>
+                    <div class="ev ev-s" style="top:216px;height:40px"><b>Admin</b><span>12:30</span></div>
+                  </div>
+                  <div class="cal-c">
+                    <div class="ev ev-s" style="top:2px;height:34px"><b>Team huddle</b></div>
+                    <div class="ev ev-g" style="top:60px;height:62px"><b>Physiotherapy</b><span>09:15 · L. Berg</span></div>
+                    <div class="ev ev-g" style="top:192px;height:44px"><b>Check-up</b><span>12:00 · D. Nikolić</span></div>
+                  </div>
+                  <div class="cal-c">
+                    <div class="ev ev-g" style="top:26px;height:40px"><b>Blood test</b><span>08:30 · R. Novak</span></div>
+                    <div class="ev ev-c" style="top:84px;height:44px"><b>Nurse visit</b><span>09:45 · Home</span></div>
+                    <div class="ev ev-g ev-sel" style="top:144px;height:30px"><b>Follow-up · 11:00</b></div>
+                    <div class="ev ev-s" style="top:240px;height:44px"><b>Supervision</b><span>13:00</span></div>
+                  </div>
+                  <div class="cal-c">
+                    <div class="ev ev-c" style="top:48px;height:70px"><b>Group session</b><span>09:00 · 6 patients</span></div>
+                    <div class="ev ev-g" style="top:216px;height:44px"><b>Initial consult</b><span>12:30 · J. Horvat</span></div>
+                  </div>
+                  <div class="cal-c">
+                    <div class="ev ev-g" style="top:4px;height:44px"><b>Check-up</b><span>08:05 · T. Berisha</span></div>
+                    <div class="ev ev-s" style="top:120px;height:36px"><b>Admin</b></div>
+                    <div class="ev ev-c" style="top:264px;height:44px"><b>Vaccinations</b><span>13:30</span></div>
+                  </div>
+                  <div class="now"></div>
+                  <div class="pop">
+                    <small>Follow-up · 30 min</small>
+                    <strong>Ana Petrović</strong>
+                    <p>Wed 15 Oct · 11:00–11:30<br>Room 3 · Dr. Jovanović</p>
+                    <div class="pop-a"><span>Move</span><span class="on">Confirm</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pmeta">
+          <div class="pm-top"><h3>Halden <span>— clinic scheduling</span></h3><span class="label">2025 — 26</span></div>
+          <p>Rebuilt booking and patient flow for 120 community clinics across Denmark and Sweden. Product strategy, UX and a new design system.</p>
+          <div class="pm-foot">
+            <span class="result"><b>−38%</b>time to book an appointment</span>
+            <span class="tags"><span>Health</span><span>Web app</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Ledgerly -->
+      <article class="proj c5">
+        <div class="thumb h-a t-ledger" role="img" aria-label="Ledgerly reconciliation dashboard with match status table">
+          <div class="lp">
+            <div class="lp-top"><span>Q3 2026 close · Reconciliation</span><span>Day 2 of 2</span></div>
+            <div class="lp-amt">€4,218,906<span>.40</span></div>
+            <div class="lp-sub">1,284 of 1,307 transactions matched automatically</div>
+            <div class="bar"><i style="width:94%;background:#8DE0AA"></i><i style="width:4%;background:#F2C160"></i><i style="width:2%;background:#F08062"></i></div>
+            <div class="legend"><span><i style="background:#8DE0AA"></i>Matched 1,284</span><span><i style="background:#F2C160"></i>Review 17</span><span><i style="background:#F08062"></i>Missing 6</span></div>
+            <div class="lt">
+              <div class="lt-r lt-h"><span>Date</span><span>Counterparty</span><span class="a">Amount</span><span class="s">Status</span></div>
+              <div class="lt-r"><span class="d">28 Sep</span><span class="n">Kestrel payout</span><span class="a">18,240.00</span><span class="s"><i class="chip ok">Matched</i></span></div>
+              <div class="lt-r"><span class="d">28 Sep</span><span class="n">Nordhaus Cloud</span><span class="a">−1,129.31</span><span class="s"><i class="chip ok">Matched</i></span></div>
+              <div class="lt-r"><span class="d">29 Sep</span><span class="n">Atlas Freight GmbH</span><span class="a">−12,400.00</span><span class="s"><i class="chip rv">Review</i></span></div>
+              <div class="lt-r"><span class="d">29 Sep</span><span class="n">Payroll — September</span><span class="a">−86,512.77</span><span class="s"><i class="chip ok">Matched</i></span></div>
+              <div class="lt-r"><span class="d">30 Sep</span><span class="n">Ref. 4471 (unknown)</span><span class="a">2,050.00</span><span class="s"><i class="chip ms">Missing</i></span></div>
+            </div>
+          </div>
+          <div class="rule-card">
+            <div class="rc-top"><span>Auto-match rule</span><span class="toggle"></span></div>
+            <p>Match within ±€0.50 FX variance</p>
+            <small>Applied to 212 transactions this close</small>
+          </div>
+        </div>
+        <div class="pmeta">
+          <div class="pm-top"><h3>Ledgerly <span>— month-end close</span></h3><span class="label">2024</span></div>
+          <p>Designed the 0→1 product for a fintech that helps mid-size finance teams reconcile thousands of transactions in hours, not days.</p>
+          <div class="pm-foot">
+            <span class="result"><b>6 → 2</b>days to close the books</span>
+            <span class="tags"><span>Fintech</span><span>0 → 1</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Fieldnote -->
+      <article class="proj c5">
+        <div class="thumb h-b t-field" role="img" aria-label="Fieldnote research board with clustered interview quotes">
+          <div class="theme"><i></i><em>Onboarding friction</em><span>14 notes</span></div>
+          <div class="note n1"><q>I didn’t know which invite was the real one, so I <mark>ignored both</mark>.</q><div class="note-m"><span>P07 · Ops manager</span><b>Invites</b></div></div>
+          <div class="note n2"><q>Setup asked for things I <mark>didn’t have yet</mark>.</q><div class="note-m"><span>P03 · Founder</span><b>Setup</b></div></div>
+          <div class="note n3"><q>In the end I gave up and <mark>asked on Slack</mark>.</q><div class="note-m"><span>P11 · Analyst</span><b>Help</b></div></div>
+          <div class="note n4"><q>The checklist felt like <mark>homework</mark>.</q><div class="note-m"><span>P05 · Team lead</span><b>Setup</b></div></div>
+          <div class="cursor">
+            <svg width="18" height="20" viewBox="0 0 18 20" aria-hidden="true"><path d="M2 1.5v15.5l4.3-4.1 2.9 6.2 2.6-1.2-2.9-6.1H15z" fill="#CF4520" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            <span>Mara</span>
+          </div>
+        </div>
+        <div class="pmeta">
+          <div class="pm-top"><h3>Fieldnote <span>— research repository</span></h3><span class="label">2023</span></div>
+          <p>Turned a pile of interview notes into a searchable synthesis tool that product teams actually come back to.</p>
+          <div class="pm-foot">
+            <span class="result"><b>3×</b>more insights reused in roadmaps</span>
+            <span class="tags"><span>SaaS</span><span>Research</span></span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Parcel -->
+      <article class="proj c7">
+        <div class="thumb h-b t-parcel" role="img" aria-label="Parcel driver app: navigation map and today's route list on two phones">
+          <div class="phone ph1">
+            <div class="scr">
+              <div class="island"></div>
+              <svg class="map" viewBox="0 0 196 424" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+                <rect width="196" height="424" fill="#E8EBE3"/>
+                <g fill="#DCE1D6">
+                  <rect x="6" y="6" width="30" height="80" rx="4"/><rect x="48" y="6" width="52" height="80" rx="4"/><rect x="112" y="6" width="44" height="80" rx="4"/><rect x="172" y="6" width="24" height="80" rx="4"/>
+                  <rect x="6" y="98" width="30" height="78" rx="4"/><rect x="48" y="98" width="52" height="78" rx="4"/><rect x="172" y="98" width="24" height="78" rx="4"/>
+                  <rect x="6" y="188" width="30" height="58" rx="4"/><rect x="48" y="188" width="52" height="58" rx="4"/><rect x="112" y="188" width="44" height="58" rx="4"/><rect x="172" y="188" width="24" height="58" rx="4"/>
+                  <rect x="6" y="258" width="30" height="36" rx="4"/><rect x="48" y="258" width="52" height="36" rx="4"/><rect x="112" y="258" width="44" height="36" rx="4"/><rect x="172" y="258" width="24" height="36" rx="4"/>
+                </g>
+                <rect x="112" y="98" width="44" height="78" rx="4" fill="#CADABE"/>
+                <path d="M0 312c40-14 80 12 120-2s56-10 76-4v34c-20-6-40-6-76 4s-80-12-120 2z" fill="#BFCFE2"/>
+                <g fill="none" stroke="#fff" stroke-width="8" stroke-linecap="round">
+                  <path d="M42 0v424M106 0v424M164 0v300M0 92h196M0 182h196M0 252h196"/>
+                </g>
+                <path d="M42 252V182H106" fill="none" stroke="#16171B" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+                <path d="M106 182V92H164" fill="none" stroke="#16171B" stroke-width="3.5" stroke-dasharray="1 7" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="42" cy="222" r="8" fill="#16171B"/>
+                <path d="M38.6 222.2l2.3 2.3 4.4-4.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="164" cy="222" r="8" fill="#fff" stroke="#16171B" stroke-width="1.5"/>
+                <text x="164" y="225" text-anchor="middle" class="sv-sans" font-size="8" font-weight="600" fill="#16171B">13</text>
+                <circle cx="164" cy="92" r="20" fill="#CF4520" fill-opacity=".16"/>
+                <circle cx="164" cy="92" r="11" fill="#CF4520" stroke="#fff" stroke-width="2.5"/>
+                <text x="164" y="95.5" text-anchor="middle" class="sv-sans" font-size="9.5" font-weight="700" fill="#fff">12</text>
+                <circle cx="106" cy="182" r="13" fill="#2F6BD8" fill-opacity=".16"/>
+                <circle cx="106" cy="182" r="6" fill="#2F6BD8" stroke="#fff" stroke-width="2.5"/>
+              </svg>
+              <div class="eta">
+                <svg viewBox="0 0 18 18" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16V8.5a2.5 2.5 0 0 1 2.5-2.5H14M11 3l3 3-3 3"/></svg>
+                <div><b>400 m</b><span>then right on Kralja Petra</span></div>
+              </div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <small>Stop 12 of 18 · 3 min</small>
+                <strong>Kralja Petra 12</strong>
+                <p>2 parcels · Leave with concierge</p>
+                <div class="swipe"><i><svg viewBox="0 0 16 16" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i>Swipe to arrive</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone ph2">
+            <div class="scr">
+              <div class="island"></div>
+              <div class="sb"><span>14:32</span><span class="sb-r">5G<span class="batt"></span></span></div>
+              <div class="list">
+                <h4>Today’s route</h4>
+                <div class="prog"><span>11 of 18 delivered</span><span>ETA 17:40</span></div>
+                <div class="pbar"><i></i></div>
+                <ul class="stops">
+                  <li class="stop done"><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2l2 2L8 3" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Cara Dušana 8</b><span>Delivered 13:58</span></div><em>#9</em></li>
+                  <li class="stop done"><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2l2 2L8 3" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Gospodar Jevremova 41</b><span>Delivered 14:09</span></div><em>#10</em></li>
+                  <li class="stop done"><span class="ck"><svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 5.2l2 2L8 3" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Dobračina 15</b><span>Delivered 14:21</span></div><em>#11</em></li>
+                  <li class="stop cur"><span class="ck"></span><div><b>Kralja Petra 12</b><span>Arriving · 3 min</span></div><em>#12</em></li>
+                  <li class="stop"><span class="ck"></span><div><b>Studentski trg 5</b><span>Around 14:48</span></div><em>#13</em></li>
+                  <li class="stop"><span class="ck"></span><div><b>Vasina 22</b><span>Around 15:02</span></div><em>#14</em></li>
+                  <li class="stop"><span class="ck"></span><div><b>Knez Mihailova 30</b><span>Around 15:15</span></div><em>#15</em></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="spec s1"><b>56 pt</b><span>Tap targets that work with gloves on</span></div>
+          <div class="spec s2"><b>AAA</b><span>Contrast that holds up in direct sun</span></div>
+          <div class="spec s3"><b>Offline</b><span>Routes cached for underground garages</span></div>
+        </div>
+        <div class="pmeta">
+          <div class="pm-top"><h3>Parcel <span>— courier app</span></h3><span class="label">2022 — 23</span></div>
+          <p>A one-handed route app for same-day couriers in five European cities, designed on the bike and in the van.</p>
+          <div class="pm-foot">
+            <span class="result"><b>−21%</b>failed deliveries in six months</span>
+            <span class="tags"><span>Mobile</span><span>Logistics</span></span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="wrap section" id="about" aria-labelledby="about-title">
+    <div class="g12 sec-head">
+      <span class="label">02 — About</span>
+      <h2 id="about-title">Structure first, <em>surface second.</em></h2>
+      <p class="aside">Architect by training. Product designer by trade.</p>
+    </div>
+
+    <div class="g12 about">
+      <div class="about-fig">
+        <figure>
+          <div class="fig">
+            <svg viewBox="0 0 644 420" role="img" aria-label="A booking confirmation card annotated with redline spacing measurements">
+              <defs>
+                <pattern id="dots" width="16" height="16" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#CBC2AF"/></pattern>
+              </defs>
+              <rect width="644" height="420" fill="#EAE4D6"/>
+              <rect width="644" height="420" fill="url(#dots)"/>
+              <text x="24" y="34" class="sv-mono" fill="#6D675D">BOOKING / CONFIRM — V3</text>
+              <text x="620" y="34" text-anchor="end" class="sv-mono" fill="#6D675D">4 PT GRID · REDLINES</text>
+
+              <!-- component -->
+              <rect x="152" y="104" width="340" height="214" rx="14" fill="#FBF9F4" stroke="#D9D1C1"/>
+              <text x="176" y="146" class="sv-serif" font-size="20" fill="#191816" letter-spacing="-0.3">Confirm booking</text>
+              <text x="176" y="166" class="sv-sans" font-size="12.5" fill="#6D675D">Wed 15 Oct · 11:00–11:30 · Room 3</text>
+              <rect x="176" y="182" width="292" height="48" rx="8" fill="#fff" stroke="#D9D1C1"/>
+              <circle cx="199" cy="206" r="12" fill="#DCE7D4"/>
+              <text x="199" y="209.5" text-anchor="middle" class="sv-sans" font-size="9.5" font-weight="600" fill="#1D3A2B">AP</text>
+              <text x="220" y="210.5" class="sv-sans" font-size="13.5" fill="#191816">Ana Petrović</text>
+              <text x="452" y="210.5" text-anchor="end" class="sv-sans" font-size="12.5" fill="#6D675D" text-decoration="underline">Change</text>
+              <rect x="176" y="246" width="104" height="48" rx="8" fill="none" stroke="#C5BCAA"/>
+              <text x="228" y="274.5" text-anchor="middle" class="sv-sans" font-size="13.5" fill="#191816">Cancel</text>
+              <rect x="292" y="246" width="176" height="48" rx="8" fill="#191816"/>
+              <text x="380" y="274.5" text-anchor="middle" class="sv-sans" font-size="13.5" font-weight="500" fill="#F3EFE6">Confirm</text>
+
+              <!-- redlines -->
+              <g stroke="#CF4520" stroke-width="1" fill="none">
+                <path d="M152 80H492M152 74v12M492 74v12"/>
+                <path d="M152 86v18M492 86v18" stroke-dasharray="2 3" opacity=".55"/>
+                <path d="M152 346h24M152 340v12M176 340v12"/>
+                <path d="M152 320v20M176 296v44" stroke-dasharray="2 3" opacity=".55"/>
+                <path d="M516 230v16M510 230h12M510 246h12"/>
+                <path d="M470 230h40M470 246h40" stroke-dasharray="2 3" opacity=".55"/>
+                <path d="M128 246v48M122 246h12M122 294h12"/>
+                <path d="M134 246h40M134 294h40" stroke-dasharray="2 3" opacity=".55"/>
+                <rect x="286" y="240" width="188" height="60" rx="11" stroke-dasharray="3 3"/>
+              </g>
+              <g class="sv-mono" font-size="10" fill="#fff" text-anchor="middle">
+                <rect x="304" y="72" width="36" height="16" rx="3" fill="#CF4520"/><text x="322" y="83.5">340</text>
+                <rect x="150" y="356" width="28" height="16" rx="3" fill="#CF4520"/><text x="164" y="367.5">24</text>
+                <rect x="528" y="230" width="28" height="16" rx="3" fill="#CF4520"/><text x="542" y="241.5">16</text>
+                <rect x="88" y="262" width="28" height="16" rx="3" fill="#CF4520"/><text x="102" y="273.5">48</text>
+              </g>
+
+              <!-- cursor -->
+              <path d="M444 258v19l4.6-4.4 3.3 7 2.8-1.3-3.2-6.9h6.6z" fill="#F3EFE6" stroke="#191816" stroke-width="1.2" stroke-linejoin="round"/>
+
+              <!-- comment -->
+              <path d="M398 346l10-12 10 12z" fill="#191816"/>
+              <rect x="380" y="346" width="240" height="56" rx="10" fill="#191816"/>
+              <circle cx="402" cy="374" r="12" fill="#CF4520"/>
+              <text x="402" y="377.5" text-anchor="middle" class="sv-sans" font-size="9.5" font-weight="600" fill="#fff">MI</text>
+              <text x="424" y="370" class="sv-sans" font-size="13" font-weight="500" fill="#F3EFE6">Primary action on the right.</text>
+              <text x="424" y="388" class="sv-sans" font-size="12" fill="#A8A296">Targets ≥ 44 pt, even on desktop.</text>
+            </svg>
+          </div>
+          <figcaption class="fig-cap"><span class="label">Fig. 1</span><span>A booking confirmation from Halden, redlined for handoff. Specs are part of the design, not an afterthought.</span></figcaption>
+        </figure>
+
+        <ol class="principles">
+          <li><span class="label">Principle 01</span><b>Fewer, clearer decisions</b><p>Every screen should make the next step obvious — and the wrong one hard.</p></li>
+          <li><span class="label">Principle 02</span><b>Design the edge cases first</b><p>The happy path is easy. Trust is built on the error states.</p></li>
+          <li><span class="label">Principle 03</span><b>Ship, then listen</b><p>A tested prototype beats a perfect deck. Real use beats both.</p></li>
+        </ol>
+      </div>
+
+      <div class="about-copy">
+        <p class="about-lead">I studied architecture, then spent twelve years inside product teams. The lesson that stuck: most software doesn’t need <em>more</em> features. It needs fewer, clearer decisions.</p>
+        <p class="about-body">Today I work with two or three teams a year, usually on the unglamorous screens that carry the most weight — the schedule a nurse opens forty times a shift, the reconciliation table a controller stares at on the last day of the quarter.</p>
+        <p class="about-body">I run my own research, write my own specs and stay close to engineering until things ship. You get one senior person, not a pitch team and a hand-off.</p>
+
+        <div class="xp-h"><span class="label">Experience</span></div>
+        <dl class="xp" style="margin-top:0">
+          <div><dt>2021 — Now</dt><dd>Independent product designer</dd><dd class="city">Belgrade</dd></div>
+          <div><dt>2018 — 2021</dt><dd>Design lead <span>· Halden</span></dd><dd class="city">Copenhagen</dd></div>
+          <div><dt>2016 — 2018</dt><dd>Senior product designer <span>· Ostra Bank</span></dd><dd class="city">Vienna</dd></div>
+          <div><dt>2014 — 2016</dt><dd>Product designer <span>· Northwind</span></dd><dd class="city">Berlin</dd></div>
+          <div><dt>2008 — 2014</dt><dd>MArch <span>· University of Belgrade</span></dd><dd class="city">Belgrade</dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="wrap section" id="services" aria-labelledby="services-title">
+    <div class="g12 sec-head">
+      <span class="label">03 — Services</span>
+      <h2 id="services-title">Three ways to <em>work together</em></h2>
+      <p class="aside">Fixed scope, fixed fee, agreed up front. Invoiced in EUR or USD.</p>
+    </div>
+
+    <div class="g12 svcs">
+      <div class="svc">
+        <div class="svc-top"><span class="label">01</span><span><span class="pill">2–3 weeks</span></span></div>
+        <h3>Product sprint</h3>
+        <p>One hard flow, untangled. We go from interviews to a tested prototype and a plan your team can actually build.</p>
+        <ul>
+          <li>User and stakeholder interviews</li>
+          <li>Flow mapping and concepts</li>
+          <li>Clickable prototype, tested with users</li>
+          <li>Build-ready specs and handoff</li>
+        </ul>
+        <div class="price"><div><span class="label">From</span><b>€14,000</b></div><span>fixed fee</span></div>
+      </div>
+
+      <div class="svc svc-dark">
+        <div class="svc-top"><span class="label">02</span><span><span class="pill hot">Most booked</span><span class="pill">3–6 months</span></span></div>
+        <h3>Embedded design lead</h3>
+        <p>I join your team three or four days a week as the senior designer you haven’t hired yet — shaping the roadmap and shipping alongside engineering.</p>
+        <ul>
+          <li>Discovery and roadmap with product</li>
+          <li>Hands-on design, weekly releases</li>
+          <li>Crits, reviews and design QA</li>
+          <li>Hiring help and mentoring</li>
+        </ul>
+        <div class="price"><div><span class="label">From</span><b>€11,000</b></div><span>per month</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-top"><span class="label">03</span><span><span class="pill">10 days</span></span></div>
+        <h3>Design system audit</h3>
+        <p>A clear-eyed look at your components, tokens and patterns, with a prioritised plan for what to fix first and what to leave alone.</p>
+        <ul>
+          <li>Inventory of design and code components</li>
+          <li>Accessibility and consistency review</li>
+          <li>Token and naming recommendations</li>
+          <li>Prioritised 90-day plan</li>
+        </ul>
+        <div class="price"><div><span class="label">From</span><b>€8,000</b></div><span>fixed fee</span></div>
+      </div>
+    </div>
+
+    <div class="process">
+      <div class="process-h"><h3>How a sprint usually runs</h3><span class="label">Three weeks, kickoff to handoff</span></div>
+      <ol class="steps">
+        <li class="step"><span class="step-n">1</span><span class="label">Week 1</span><b>Listen</b><p>Interviews with users, support and sales. I read the tickets nobody reads.</p></li>
+        <li class="step"><span class="step-n">2</span><span class="label">Week 1</span><b>Map</b><p>Flows, edge cases and the decisions hidden inside them, on one wall.</p></li>
+        <li class="step"><span class="step-n">3</span><span class="label">Week 2</span><b>Sketch</b><p>Many rough options, quickly. We pick a direction together.</p></li>
+        <li class="step"><span class="step-n">4</span><span class="label">Week 2 – 3</span><b>Prototype</b><p>A realistic prototype, tested with five to eight real users.</p></li>
+        <li class="step"><span class="step-n">5</span><span class="label">Week 3</span><b>Hand off</b><p>Specs, components and a short walkthrough per flow. On call for two weeks after.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="wrap section" aria-labelledby="words-title">
+    <div class="g12 sec-head">
+      <span class="label">Kind words</span>
+      <h2 id="words-title">What clients say <em>a year later</em></h2>
+      <p class="aside">References happily shared on request.</p>
+    </div>
+    <div class="quotes">
+      <figure class="quote">
+        <span class="qmark" aria-hidden="true">“</span>
+        <blockquote>Mara made a genuinely messy problem look obvious in hindsight. A year on, our clinic staff still haven’t asked for a single training session.</blockquote>
+        <figcaption><span class="avatar" style="background:#CBD6C0;color:#1D3A2B">SL</span><div><b>Sofie Lindqvist</b><span>Head of Clinical Operations, Halden</span></div></figcaption>
+      </figure>
+      <figure class="quote">
+        <span class="qmark" aria-hidden="true">“</span>
+        <blockquote>She shipped more in eight weeks than our last agency did in a year — and at the end, our engineers asked whether she could stay.</blockquote>
+        <figcaption><span class="avatar" style="background:#252621;color:#F3EFE6">TR</span><div><b>Tomás Reyes</b><span>CTO and co-founder, Ledgerly</span></div></figcaption>
+      </figure>
+    </div>
+  </section>
+
+</main>
+
+<!-- Contact -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div class="c-top">
+      <span class="label">04 — Contact</span>
+      <span class="status"><i class="dot"></i>Two project slots open from February 2027</span>
+    </div>
+    <h2 class="c-title" id="contact-title">Got something complicated?<br><em>Let’s make it calm.</em></h2>
+    <div class="g12 c-grid">
+      <a class="c-mail" href="mailto:mara@ilic.studio">mara@ilic.studio <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12 12 4M5.5 4H12v6.5"/></svg></a>
+      <dl class="c-facts">
+        <div><dt>Replies</dt><dd>Within one working day</dd></div>
+        <div><dt>Based in</dt><dd>Belgrade, CET — overlaps with US mornings</dd></div>
+        <div><dt>Languages</dt><dd>English, Serbian, German</dd></div>
+      </dl>
+    </div>
+    <footer class="c-foot">
+      <span>© 2026 Mara Ilić. No cookies, no tracking, no stock photos.</span>
+      <nav class="socials" aria-label="Elsewhere">
+        <a href="#">LinkedIn <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+        <a href="#">Read.cv <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+        <a href="#">Are.na <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+        <a href="#">Dribbble <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+      </nav>
+      <a class="totop" href="#top">Back to top <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 13V3M4 7l4-4 4 4"/></svg></a>
+    </footer>
+  </div>
+</section>
+
+</body>
+</html>

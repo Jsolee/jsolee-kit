@@ -1,0 +1,1287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mara Ilić, product designer</title>
+<meta name="description" content="Mara Ilić is an independent product designer in Belgrade who designs software for people who use it all day: dispatch boards, clinic calendars, inspection apps and design systems.">
+<meta name="theme-color" content="#f5f7f2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --paper: oklch(0.972 0.007 125);
+  --paper-sunk: oklch(0.948 0.009 125);
+  --ink: oklch(0.235 0.018 165);
+  --ink-2: oklch(0.44 0.016 165);
+  --ink-3: oklch(0.52 0.014 165);
+  --hair: oklch(0.235 0.018 165 / 0.09);
+  --hair-2: oklch(0.235 0.018 165 / 0.16);
+
+  --mat: oklch(0.45 0.082 166);
+  --mat-line: oklch(0.97 0.03 150 / 0.09);
+  --mat-line-2: oklch(0.97 0.03 150 / 0.17);
+  --on-mat: oklch(0.975 0.01 140);
+  --on-mat-2: oklch(0.89 0.035 155);
+  --on-mat-hair: oklch(0.975 0.01 140 / 0.18);
+
+  --accent: var(--mat);
+  --accent-press: oklch(0.4 0.08 166);
+
+  --ui-bg: oklch(0.993 0.002 120);
+  --ui-sunk: oklch(0.966 0.004 120);
+  --ui-line: oklch(0.25 0.012 165 / 0.09);
+  --ui-ink: oklch(0.25 0.012 165);
+  --ui-ink-2: oklch(0.48 0.01 165);
+  --ui-ink-3: oklch(0.62 0.008 165);
+  --tomato: oklch(0.63 0.17 33);
+  --blue: oklch(0.54 0.11 250);
+  --ochre: oklch(0.74 0.13 78);
+  --red: oklch(0.57 0.18 27);
+
+  --ease-smooth: cubic-bezier(0.25, 0.4, 0.25, 1);
+  --ease-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.03);
+  --shadow-lift: 0 8px 40px rgba(0, 0, 0, 0.08);
+
+  --gutter: clamp(16px, 5vw, 72px);
+  --mat-inset: clamp(0px, 1.7vw, 24px);
+  --wrap: 1296px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 400;
+  overflow-x: clip;
+}
+h1, h2, h3, p, dl, dd, ol, ul { margin: 0; }
+ol, ul { padding: 0; list-style: none; }
+h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+p { text-wrap: pretty; }
+a { color: inherit; }
+kbd { font: inherit; }
+::selection { background: oklch(0.85 0.07 166); color: var(--ink); }
+
+.wrap { width: min(100% - 2 * var(--gutter), var(--wrap)); margin-inline: auto; }
+.mat .wrap { width: min(100% - 2 * (var(--gutter) - var(--mat-inset)), var(--wrap)); }
+[hidden] { display: none !important; }
+.grid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: 24px; }
+.tnum { font-variant-numeric: tabular-nums; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+[id] { scroll-margin-top: 24px; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.mat :focus-visible { outline-color: var(--on-mat); }
+
+.skip {
+  position: absolute; left: 16px; top: -100px; z-index: 10;
+  background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 10px;
+  text-decoration: none; font-weight: 500;
+}
+.skip:focus-visible { top: 16px; }
+
+/* Links and buttons */
+.link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hair-2);
+  text-underline-offset: 0.22em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .link:hover { text-decoration-color: currentColor; }
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 46px; padding: 0 20px;
+  border-radius: 10px; border: 0;
+  font: inherit; font-size: 16px; font-weight: 500; line-height: 1;
+  text-decoration: none; cursor: pointer;
+  transition-property: transform, background-color, border-color;
+  transition-duration: 200ms;
+  transition-timing-function: var(--ease-expo);
+  touch-action: manipulation;
+}
+.btn svg { flex: none; }
+.btn-primary { background: var(--accent); color: var(--on-mat); }
+.btn-mat {
+  height: 40px; padding: 0 16px; font-size: 15px;
+  background: transparent; color: var(--on-mat);
+  border: 1px solid var(--on-mat-hair);
+}
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn-mat:hover { border-color: oklch(0.975 0.01 140 / 0.4); }
+}
+.btn:active { transform: translateY(0) scale(0.97); transition-duration: 120ms; }
+.btn-primary:active { background: var(--accent-press); }
+
+/* Header */
+.site-head { padding-top: 28px; }
+.site-head .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 44px; }
+.wordmark { font-weight: 500; font-size: 18px; letter-spacing: -0.015em; text-decoration: none; }
+.site-nav ul { display: flex; gap: 4px; }
+.site-nav a {
+  display: inline-flex; align-items: center; height: 40px; padding: 0 12px; border-radius: 8px;
+  color: var(--ink-2); text-decoration: none; font-size: 16px;
+  transition: color 200ms ease, background-color 200ms ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover { color: var(--ink); background: var(--paper-sunk); }
+}
+
+/* Hero */
+.hero { padding: clamp(56px, 7vw, 104px) 0 clamp(40px, 4.4vw, 64px); }
+.hero .grid { align-items: end; row-gap: 32px; }
+.hero h1 {
+  grid-column: 1 / 9;
+  font-size: clamp(44px, 5.5vw, 79px);
+  line-height: 1.02;
+  letter-spacing: -0.038em;
+}
+.hero-aside { grid-column: 9 / 13; padding-bottom: 6px; }
+.status { display: flex; align-items: center; gap: 10px; font-size: 15px; color: var(--ink-2); margin-bottom: 14px; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px oklch(0.45 0.082 166 / 0.14); }
+.hero-aside p.lede { font-size: 17px; line-height: 1.55; color: var(--ink-2); max-width: 42ch; }
+.hero-aside p.lede strong { font-weight: 500; color: var(--ink); }
+.hero-cta { display: flex; align-items: center; gap: 22px; margin-top: 26px; flex-wrap: wrap; }
+
+/* Cutting mat */
+.mat {
+  position: relative;
+  margin-inline: var(--mat-inset);
+  border-radius: 18px;
+  background-color: var(--mat);
+  background-image:
+    linear-gradient(to right, var(--mat-line-2) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--mat-line-2) 1px, transparent 1px),
+    linear-gradient(to right, var(--mat-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--mat-line) 1px, transparent 1px);
+  background-size: 240px 240px, 240px 240px, 48px 48px, 48px 48px;
+  background-position: calc(50% - 528px) 47px, calc(50% - 528px) 47px, 50% 47px, 50% 47px;
+  color: var(--on-mat);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+.ruler {
+  position: relative; height: 47px;
+  border-bottom: 1px solid var(--mat-line-2);
+  background-image:
+    linear-gradient(to right, oklch(0.97 0.03 150 / 0.55) 1px, transparent 1px),
+    linear-gradient(to right, oklch(0.97 0.03 150 / 0.4) 1px, transparent 1px),
+    linear-gradient(to right, oklch(0.97 0.03 150 / 0.28) 1px, transparent 1px);
+  background-size: 48px 14px, 24px 9px, 6px 5px;
+  background-position: 50% 100%, 50% 100%, 50% 100%;
+  background-repeat: repeat-x;
+}
+.ruler .wrap { position: relative; height: 100%; }
+.ruler span {
+  position: absolute; bottom: 15px; left: calc(var(--i) * 48px);
+  transform: translateX(-50%);
+  font-size: 11px; line-height: 1; color: oklch(0.97 0.03 150 / 0.62);
+  font-variant-numeric: tabular-nums;
+}
+.angles { position: absolute; pointer-events: none; color: oklch(0.97 0.03 150 / 0.22); }
+.angles text { fill: oklch(0.97 0.03 150 / 0.5); }
+.angles.br { right: 0; bottom: 0; -webkit-mask-image: radial-gradient(circle 220px at 100% 100%, #000 45%, transparent); mask-image: radial-gradient(circle 220px at 100% 100%, #000 45%, transparent); }
+.angles.tr { right: 0; top: 0; -webkit-mask-image: radial-gradient(circle 320px at 100% 0, #000 45%, transparent); mask-image: radial-gradient(circle 320px at 100% 0, #000 45%, transparent); }
+
+/* Work */
+.work-intro { display: flex; justify-content: space-between; align-items: baseline; gap: 24px; padding: 40px 0 36px; }
+.work-intro h2 { font-size: 17px; font-weight: 500; letter-spacing: -0.005em; }
+.work-intro p { font-size: 15px; color: var(--on-mat-2); }
+
+.proj-feature { align-items: end; }
+.proj-feature .shot { grid-column: 1 / 10; }
+.proj-feature .proj-cap { grid-column: 10 / 13; padding-bottom: 4px; }
+
+.proj-row { margin-top: 128px; align-items: start; }
+.stack { display: flex; flex-direction: column; gap: 128px; min-width: 0; }
+.stack-l { grid-column: 1 / 8; }
+.stack-r { grid-column: 8 / 13; padding-top: 80px; }
+
+.proj-cap .num { display: block; font-size: 14px; color: var(--on-mat-2); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
+.proj-cap h3 { font-size: 30px; line-height: 1.1; letter-spacing: -0.028em; }
+.proj-cap .what { font-size: 17px; line-height: 1.4; margin-top: 6px; color: var(--on-mat); }
+.proj-cap .meta { font-size: 14px; color: var(--on-mat-2); margin-top: 10px; }
+.proj-cap .desc { font-size: 15px; line-height: 1.6; color: var(--on-mat-2); margin-top: 18px; max-width: 48ch; }
+.proj-cap .demo-note { font-size: 14px; line-height: 1.5; color: var(--on-mat-2); margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--on-mat-hair); }
+.proj-cap .btn-mat { margin-top: 14px; }
+
+.cap-below { margin-top: 26px; display: grid; grid-template-columns: auto 1fr; column-gap: 18px; }
+.cap-below .num { margin: 7px 0 0; }
+.cap-below h3 { font-size: 24px; }
+.cap-below .desc { margin-top: 12px; }
+
+.others h3 { font-size: 24px; line-height: 1.1; letter-spacing: -0.024em; }
+.others .sub { font-size: 15px; color: var(--on-mat-2); margin-top: 8px; }
+.others ol { margin-top: 28px; border-top: 1px solid var(--on-mat-hair); }
+.others li {
+  display: grid; grid-template-columns: 56px 76px 1fr; gap: 14px;
+  padding: 16px 0 17px; border-bottom: 1px solid var(--on-mat-hair);
+  font-size: 15px; line-height: 1.5;
+}
+.others li .y { color: var(--on-mat-2); font-variant-numeric: tabular-nums; }
+.others li .n { font-weight: 500; }
+.others li .d { color: var(--on-mat-2); }
+
+.work-end { height: 136px; }
+
+/* Drawn interfaces (shared) */
+.fit { width: var(--w); transform-origin: 0 0; }
+.ui {
+  position: relative;
+  width: var(--w);
+  background: var(--ui-bg);
+  color: var(--ui-ink);
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), var(--shadow-lift);
+  font-size: 12px; line-height: 1.35;
+  overflow: hidden;
+  user-select: none;
+}
+.ui p { text-wrap: nowrap; }
+.ui b { font-weight: 500; }
+.ui-top {
+  height: 46px; display: flex; align-items: center; gap: 14px;
+  padding: 0 14px; border-bottom: 1px solid var(--ui-line);
+}
+.ui-top > * { flex: none; white-space: nowrap; }
+.ui-brand { display: flex; align-items: center; gap: 8px; font-weight: 500; font-size: 13px; letter-spacing: -0.01em; }
+.ui-crumbs { color: var(--ui-ink-2); display: flex; gap: 6px; }
+.ui-crumbs span { color: var(--ui-ink-3); }
+.ui-search {
+  margin-left: auto; width: 268px; height: 30px; border-radius: 8px; background: var(--ui-sunk);
+  display: flex; align-items: center; gap: 8px; padding: 0 6px 0 10px; color: var(--ui-ink-3);
+}
+.ui-search kbd, .ui kbd.k {
+  margin-left: auto; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 5px;
+  background: var(--ui-bg); box-shadow: 0 0 0 1px var(--ui-line), 0 1px 0 var(--ui-line);
+  display: inline-grid; place-items: center; font-size: 11px; color: var(--ui-ink-2);
+}
+.ui-avatar {
+  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  background: oklch(0.9 0.04 33); color: oklch(0.42 0.1 33); font-size: 11px; font-weight: 500;
+}
+.ui-seg { display: flex; padding: 2px; border-radius: 8px; background: var(--ui-sunk); }
+.ui-seg span { height: 26px; padding: 0 12px; display: grid; place-items: center; border-radius: 6px; color: var(--ui-ink-2); }
+.ui-seg span.on { background: var(--ui-bg); color: var(--ui-ink); box-shadow: 0 0 0 1px var(--ui-line), 0 1px 2px rgba(0,0,0,.05); }
+
+/* Ruta */
+.ruta-body { display: grid; grid-template-columns: 52px 1fr; }
+.ui-rail { border-right: 1px solid var(--ui-line); padding: 12px 0; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--ui-ink-2); }
+.ui-rail span { width: 34px; height: 34px; display: grid; place-items: center; border-radius: 8px; }
+.ui-rail span.on { background: var(--ui-sunk); color: var(--ui-ink); }
+.ui-rail span.sp { margin-top: auto; }
+.ruta-main { padding: 14px 16px 16px; }
+.ruta-head { display: flex; align-items: center; gap: 18px; margin-bottom: 14px; }
+.ui-sub { color: var(--ui-ink-2); font-size: 11.5px; }
+.ui-title { font-size: 17px; font-weight: 500; letter-spacing: -0.02em; margin-top: 1px; }
+.ruta-stats { display: flex; gap: 6px; margin-left: auto; }
+.ruta-stats > span {
+  height: 28px; padding: 0 10px; border-radius: 7px; display: inline-flex; align-items: center; gap: 5px;
+  box-shadow: inset 0 0 0 1px var(--ui-line); color: var(--ui-ink-2);
+}
+.ruta-stats b { color: var(--ui-ink); font-variant-numeric: tabular-nums; }
+.ruta-stats .warn i { width: 6px; height: 6px; border-radius: 50%; background: var(--tomato); }
+.swap { display: inline-grid; }
+.swap em { grid-area: 1 / 1; font-style: normal; }
+.swap .b { opacity: 0; }
+
+.ruta-lanes { position: relative; display: grid; grid-template-columns: repeat(4, 150px) 1fr; gap: 12px; height: 404px; }
+.lane { background: var(--ui-sunk); border-radius: 9px; padding: 8px; display: flex; flex-direction: column; gap: 8px; }
+.lane-h { height: 46px; padding: 3px 3px 0; }
+.lane-n { display: flex; align-items: center; gap: 6px; font-weight: 500; font-size: 12.5px; }
+.lane-n i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+.lane-n .count {
+  margin-left: auto; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; font-size: 11px;
+  display: inline-grid; place-items: center; background: oklch(0.63 0.17 33 / 0.14); color: oklch(0.5 0.15 33);
+}
+.lane-v { color: var(--ui-ink-2); font-size: 11.5px; margin-top: 2px; }
+.capbar { height: 4px; border-radius: 2px; background: oklch(0.25 0.012 165 / 0.08); margin-top: 7px; overflow: hidden; }
+.capbar b { display: block; height: 100%; border-radius: 2px; background: var(--c); transform-origin: 0 50%; transform: scaleX(var(--f)); }
+.lane-cards { display: flex; flex-direction: column; gap: 6px; }
+.card {
+  position: relative; height: 62px; border-radius: 7px; background: var(--ui-bg);
+  box-shadow: 0 0 0 1px var(--ui-line), 0 1px 2px rgba(0, 0, 0, 0.03);
+  padding: 8px 9px;
+}
+.card .c1 { display: flex; justify-content: space-between; }
+.card .c1 b { font-size: 12px; }
+.card .c1 span { color: var(--ui-ink-3); font-size: 11px; }
+.card .c2 { margin-top: 3px; overflow: hidden; text-overflow: ellipsis; }
+.card .c3 { margin-top: 2px; color: var(--ui-ink-2); font-size: 11px; }
+.card .due { color: oklch(0.52 0.16 33); }
+.slot {
+  height: 62px; border-radius: 7px; border: 1.5px dashed oklch(0.25 0.012 165 / 0.2);
+  display: grid; place-items: center; color: var(--ui-ink-3); font-size: 11px;
+}
+.slot.target { border-color: oklch(0.63 0.17 33 / 0.55); color: oklch(0.52 0.16 33); background: oklch(0.63 0.17 33 / 0.05); }
+.ghost-wrap { position: relative; }
+.ghost-wrap .slot { position: absolute; inset: 0; }
+.mapbox { position: relative; border-radius: 9px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--ui-line); }
+.mapbox svg { display: block; }
+.map-zoom { position: absolute; right: 8px; top: 8px; display: grid; border-radius: 7px; background: var(--ui-bg); box-shadow: 0 0 0 1px var(--ui-line), 0 1px 3px rgba(0,0,0,.06); }
+.map-zoom span { width: 26px; height: 26px; display: grid; place-items: center; color: var(--ui-ink-2); font-size: 14px; }
+.map-zoom span + span { border-top: 1px solid var(--ui-line); }
+.map-key {
+  position: absolute; left: 8px; right: 8px; bottom: 8px; padding: 8px 10px; border-radius: 8px;
+  background: var(--ui-bg); box-shadow: 0 0 0 1px var(--ui-line), 0 2px 8px rgba(0,0,0,.06);
+  display: grid; gap: 4px; font-size: 11px;
+}
+.map-key p { display: flex; align-items: center; gap: 6px; }
+.map-key i { width: 10px; height: 3px; border-radius: 2px; background: var(--c); }
+.map-key span { margin-left: auto; color: var(--ui-ink-2); }
+
+.cursor { position: absolute; left: 92px; top: 156px; width: 20px; height: 22px; z-index: 3; transform: translate(706px, 144px); }
+.drag { z-index: 2; }
+.drag::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.14), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+.demo .drag { animation: drag 10s var(--ease-smooth) infinite; }
+.demo .drag::after { animation: lift 10s var(--ease-smooth) infinite; }
+.demo .cursor { animation: cursor 10s var(--ease-smooth) infinite; }
+.demo .ghost-wrap .slot { opacity: 0; animation: ghost 10s var(--ease-smooth) infinite; }
+.demo .slot.target { opacity: 0; animation: target 10s var(--ease-smooth) infinite; }
+.demo .swap .a { animation: swap-a 10s var(--ease-smooth) infinite; }
+.demo .swap .b { animation: swap-b 10s var(--ease-smooth) infinite; }
+.demo .capbar .grow { animation: grow 10s var(--ease-expo) infinite; }
+.demo .newstop { opacity: 0; animation: newstop 10s var(--ease-smooth) infinite; }
+.demo.paused *, .demo.paused *::after { animation-play-state: paused !important; }
+
+@keyframes drag {
+  0%, 22% { transform: translate(0, 0) rotate(0) scale(1); opacity: 1; }
+  26% { transform: translate(0, -3px) rotate(-1.5deg) scale(1.03); }
+  44% { transform: translate(486px, 133px) rotate(-1.5deg) scale(1.03); }
+  47%, 86% { transform: translate(486px, 136px) rotate(0) scale(1); opacity: 1; }
+  89% { transform: translate(486px, 136px); opacity: 0; }
+  90% { transform: translate(0, 0); opacity: 0; }
+  95%, 100% { transform: translate(0, 0); opacity: 1; }
+}
+@keyframes lift {
+  0%, 22% { opacity: 0; }
+  26%, 44% { opacity: 1; }
+  48%, 100% { opacity: 0; }
+}
+@keyframes cursor {
+  0%, 8% { transform: translate(706px, 144px) scale(1); }
+  22% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(0, 0) scale(0.9); }
+  44% { transform: translate(486px, 136px) scale(0.9); }
+  47% { transform: translate(486px, 136px) scale(1); }
+  58%, 100% { transform: translate(706px, 144px) scale(1); }
+}
+@keyframes ghost {
+  0%, 23% { opacity: 0; }
+  27%, 45% { opacity: 1; }
+  49%, 100% { opacity: 0; }
+}
+@keyframes target {
+  0%, 25% { opacity: 0; }
+  30%, 44% { opacity: 1; }
+  47%, 100% { opacity: 0; }
+}
+@keyframes swap-a {
+  0%, 46% { opacity: 1; }
+  48%, 89% { opacity: 0; }
+  91%, 100% { opacity: 1; }
+}
+@keyframes swap-b {
+  0%, 46% { opacity: 0; }
+  48%, 89% { opacity: 1; }
+  91%, 100% { opacity: 0; }
+}
+@keyframes grow {
+  0%, 46% { transform: scaleX(0.38); }
+  54%, 88% { transform: scaleX(0.57); }
+  92%, 100% { transform: scaleX(0.38); }
+}
+@keyframes newstop {
+  0%, 48% { opacity: 0; }
+  54%, 87% { opacity: 1; }
+  90%, 100% { opacity: 0; }
+}
+
+/* Halden */
+.hal-top .ui-brand i { width: 18px; height: 18px; border-radius: 5px; background: var(--blue); display: grid; place-items: center; color: white; font-style: normal; font-size: 10px; }
+.hal-loc { height: 28px; padding: 0 10px; border-radius: 7px; box-shadow: inset 0 0 0 1px var(--ui-line); display: inline-flex; align-items: center; gap: 6px; color: var(--ui-ink-2); }
+.hal-date { display: flex; align-items: center; gap: 4px; margin-left: 10px; }
+.hal-date span.arr { width: 24px; height: 24px; display: grid; place-items: center; border-radius: 6px; color: var(--ui-ink-2); }
+.hal-date b { font-size: 13px; padding: 0 4px; }
+.hal-today { height: 26px; padding: 0 9px; border-radius: 6px; box-shadow: inset 0 0 0 1px var(--ui-line); display: grid; place-items: center; color: var(--ui-ink-2); margin-left: 4px; }
+.hal-new { margin-left: auto; height: 30px; padding: 0 6px 0 11px; border-radius: 8px; background: var(--blue); color: white; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
+.hal-new kbd { width: 18px; height: 18px; border-radius: 4px; background: oklch(1 0 0 / 0.18); display: grid; place-items: center; font-size: 10.5px; }
+
+.hal-cols { display: grid; grid-template-columns: 54px repeat(4, 1fr); }
+.hal-head { height: 42px; border-bottom: 1px solid var(--ui-line); display: flex; align-items: center; gap: 8px; padding: 0 10px; border-left: 1px solid var(--ui-line); }
+.hal-head:first-child { border-left: 0; }
+.hal-head .av { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-size: 10px; font-weight: 500; background: var(--bg); color: var(--fg); }
+.hal-head span.load { margin-left: auto; color: var(--ui-ink-3); font-size: 11px; font-variant-numeric: tabular-nums; }
+.hal-body { position: relative; height: 336px; }
+.hal-times { position: relative; }
+.hal-times span { position: absolute; right: 8px; transform: translateY(-50%); color: var(--ui-ink-3); font-size: 10.5px; }
+.hal-col {
+  position: relative; border-left: 1px solid var(--ui-line);
+  background-image: linear-gradient(to bottom, var(--ui-line) 1px, transparent 1px);
+  background-size: 100% 56px;
+}
+.ev {
+  position: absolute; left: 4px; right: 4px;
+  top: calc(var(--s) * 56px / 60 + 2px);
+  height: calc(var(--d) * 56px / 60 - 3px);
+  border-radius: 6px; padding: 5px 7px;
+  background: oklch(0.94 0.03 250); box-shadow: inset 0 0 0 1px oklch(0.54 0.11 250 / 0.22);
+  color: oklch(0.32 0.06 250); font-size: 11px; line-height: 1.3; overflow: hidden;
+}
+.ev b { display: block; font-size: 11.5px; }
+.ev span { color: oklch(0.45 0.06 250); }
+.ev.first { background: var(--ui-bg); box-shadow: inset 0 0 0 1px oklch(0.54 0.11 250 / 0.45); }
+.ev.sel { background: var(--blue); color: white; box-shadow: 0 0 0 2px var(--ui-bg), 0 0 0 4px oklch(0.54 0.11 250 / 0.35); }
+.ev.sel span { color: oklch(1 0 0 / 0.8); }
+.ev.off {
+  background: repeating-linear-gradient(135deg, oklch(0.25 0.012 165 / 0.05) 0 6px, transparent 6px 12px);
+  box-shadow: inset 0 0 0 1px var(--ui-line); color: var(--ui-ink-3);
+}
+.ev.prop { background: oklch(0.54 0.11 250 / 0.06); box-shadow: none; outline: 1.5px dashed oklch(0.54 0.11 250 / 0.7); outline-offset: -1.5px; }
+.ev.s span { display: none; }
+.hal-now { position: absolute; left: 54px; right: 0; top: calc(160 * 56px / 60); height: 0; border-top: 1.5px solid var(--red); }
+.hal-now::before { content: ""; position: absolute; left: -4px; top: -4.75px; width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+.hal-now span { position: absolute; left: -50px; top: -8px; background: var(--red); color: white; font-size: 10px; padding: 1px 4px; border-radius: 4px; }
+.hal-pop {
+  position: absolute; right: 12px; top: 8px; width: 262px; border-radius: 10px; background: var(--ui-bg);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 12px 32px rgba(0, 0, 0, 0.12); overflow: hidden;
+}
+.hal-pop .in { height: 38px; display: flex; align-items: center; gap: 8px; padding: 0 10px; border-bottom: 1px solid var(--ui-line); font-size: 12.5px; }
+.hal-pop .in .caret { width: 1.5px; height: 15px; background: var(--blue); margin-left: -6px; }
+.hal-pop li { display: flex; align-items: center; gap: 8px; padding: 7px 10px; }
+.hal-pop li.on { background: oklch(0.54 0.11 250 / 0.08); }
+.hal-pop li small { display: block; color: var(--ui-ink-2); font-size: 10.5px; }
+.hal-pop li .tag { margin-left: auto; font-size: 10.5px; color: var(--ui-ink-3); }
+.hal-pop ul { padding: 4px 0; }
+.hal-pop .foot { display: flex; align-items: center; gap: 6px; padding: 8px 10px; border-top: 1px solid var(--ui-line); background: var(--ui-sunk); color: var(--ui-ink-2); font-size: 11px; }
+.hal-pop .foot kbd.k { margin-left: 0; }
+.hal-keys { height: 38px; border-top: 1px solid var(--ui-line); background: var(--ui-sunk); display: flex; align-items: center; gap: 18px; padding: 0 14px; color: var(--ui-ink-2); font-size: 11px; }
+.hal-keys > span { display: inline-flex; align-items: center; gap: 6px; }
+.hal-keys kbd.k { margin-left: 0; }
+
+/* Okvir phones */
+.phones { display: flex; gap: 24px; align-items: flex-start; }
+.phone {
+  width: 238px; height: 488px; border-radius: 40px; padding: 7px; flex: none;
+  background: oklch(0.22 0.012 165);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.2), inset 0 0 0 1px oklch(1 0 0 / 0.08), var(--shadow-lift);
+}
+.phone + .phone { margin-top: 56px; }
+.screen {
+  position: relative; height: 100%; border-radius: 33px; background: var(--ui-bg); overflow: hidden;
+  color: var(--ui-ink); font-size: 12px; line-height: 1.35;
+}
+.screen p { text-wrap: nowrap; }
+.screen b { font-weight: 500; }
+.sbar { height: 40px; display: flex; align-items: center; justify-content: space-between; padding: 0 18px 0 26px; font-size: 12px; font-weight: 500; }
+.sbar .isl { position: absolute; left: 50%; top: 9px; width: 70px; height: 21px; border-radius: 11px; background: oklch(0.22 0.012 165); transform: translateX(-50%); }
+.sbar .sig { display: inline-flex; align-items: center; gap: 4px; color: var(--ui-ink-2); font-weight: 400; font-size: 10.5px; }
+.pnav { display: flex; justify-content: space-between; align-items: center; padding: 4px 16px 0; color: var(--ui-ink-2); font-size: 12px; }
+.pnav .back { display: inline-flex; align-items: center; gap: 2px; color: oklch(0.52 0.12 70); font-weight: 500; }
+.ptitle { padding: 8px 16px 0; font-size: 19px; font-weight: 500; letter-spacing: -0.02em; }
+.offline { margin: 10px 12px 6px; padding: 8px 10px; border-radius: 10px; background: oklch(0.74 0.13 78 / 0.16); color: oklch(0.42 0.08 70); display: flex; align-items: center; gap: 7px; font-size: 11px; }
+.offline i { width: 6px; height: 6px; border-radius: 50%; background: var(--ochre); }
+.checks li { display: flex; align-items: center; justify-content: space-between; gap: 8px; height: 43px; margin: 0 16px; border-bottom: 1px solid var(--ui-line); }
+.checks li small { display: block; color: var(--ui-ink-3); font-size: 10.5px; }
+.chip { height: 22px; padding: 0 8px; border-radius: 6px; display: inline-flex; align-items: center; gap: 4px; font-size: 10.5px; font-weight: 500; flex: none; }
+.chip.pass { background: oklch(0.45 0.082 166 / 0.1); color: oklch(0.38 0.07 166); }
+.chip.fail { background: oklch(0.57 0.18 27 / 0.12); color: oklch(0.48 0.16 27); }
+.chip.todo { box-shadow: inset 0 0 0 1px var(--ui-line); color: var(--ui-ink-3); font-weight: 400; }
+.checks li.cur { margin: 0 8px; padding: 0 8px; border-radius: 10px; background: var(--ui-sunk); border-bottom-color: transparent; }
+.pbtn { position: absolute; left: 12px; right: 12px; bottom: 26px; height: 42px; border-radius: 13px; background: var(--ui-ink); color: var(--ui-bg); display: grid; place-items: center; font-weight: 500; font-size: 12.5px; }
+.pbtn.alt { background: var(--ochre); color: oklch(0.25 0.04 70); }
+.home { position: absolute; left: 50%; bottom: 8px; width: 84px; height: 4px; border-radius: 2px; background: var(--ui-ink); transform: translateX(-50%); opacity: 0.85; }
+.photo { margin: 10px 12px 0; border-radius: 12px; overflow: hidden; }
+.photo svg { display: block; }
+.pfield { margin: 12px 12px 0; }
+.pfield label { display: block; font-size: 10.5px; color: var(--ui-ink-2); margin-bottom: 5px; }
+.pfield .box { border-radius: 10px; box-shadow: inset 0 0 0 1px var(--ui-line); padding: 8px 10px; font-size: 11.5px; line-height: 1.4; white-space: normal; }
+.ptags { display: flex; gap: 6px; margin: 10px 12px 0; }
+.ptags span { height: 22px; padding: 0 8px; border-radius: 6px; background: var(--ui-sunk); display: grid; place-items: center; font-size: 10.5px; color: var(--ui-ink-2); }
+
+/* Tessel */
+.tes-top .ui-brand i { width: 18px; height: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.tes-top .ui-brand i b { background: var(--ui-ink); border-radius: 2px; }
+.tes-top .ui-brand i b:nth-child(2), .tes-top .ui-brand i b:nth-child(3) { opacity: 0.35; }
+.tes-tabs { display: flex; gap: 2px; margin-left: 12px; }
+.tes-tabs span { height: 28px; padding: 0 10px; display: grid; place-items: center; color: var(--ui-ink-2); border-radius: 7px; }
+.tes-tabs span.on { color: var(--ui-ink); background: var(--ui-sunk); }
+.tes-ver { margin-left: auto; color: var(--ui-ink-3); }
+.tes-body { display: grid; grid-template-columns: 1fr 1fr; }
+.tes-sec { padding: 14px 16px 16px; }
+.tes-sec + .tes-sec { border-left: 1px solid var(--ui-line); }
+.tes-label { font-size: 10.5px; color: var(--ui-ink-3); margin-bottom: 10px; display: flex; justify-content: space-between; }
+.sw { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px 8px; }
+.sw div i { display: block; height: 40px; border-radius: 8px; background: var(--c); box-shadow: inset 0 0 0 1px rgba(0,0,0,.06); }
+.sw div p { font-size: 10.5px; margin-top: 5px; }
+.sw div small { display: block; color: var(--ui-ink-3); font-size: 10px; font-variant-numeric: tabular-nums; }
+.typescale { margin-top: 18px; border-top: 1px solid var(--ui-line); padding-top: 14px; }
+.typescale .aa { font-size: 46px; line-height: 1; letter-spacing: -0.04em; font-weight: 500; }
+.typescale ul { margin-top: 12px; display: grid; gap: 7px; }
+.typescale li { display: flex; justify-content: space-between; align-items: baseline; }
+.typescale li span { color: var(--ui-ink-3); font-size: 10.5px; font-variant-numeric: tabular-nums; }
+.tbtns { display: flex; gap: 6px; flex-wrap: wrap; }
+.tbtn { height: 30px; padding: 0 11px; border-radius: 8px; display: grid; place-items: center; font-weight: 500; font-size: 11.5px; }
+.tbtn.p { background: var(--ui-ink); color: var(--ui-bg); }
+.tbtn.s { box-shadow: inset 0 0 0 1px oklch(0.25 0.012 165 / 0.16); }
+.tbtn.d { background: var(--ui-sunk); color: var(--ui-ink-3); }
+.tfield { margin-top: 16px; }
+.tfield label { display: block; font-size: 11px; font-weight: 500; margin-bottom: 5px; }
+.tfield .in { height: 32px; border-radius: 8px; box-shadow: inset 0 0 0 1.5px var(--red); padding: 0 10px; display: flex; align-items: center; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.tfield .err { color: oklch(0.5 0.17 27); font-size: 10.5px; margin-top: 5px; display: flex; align-items: center; gap: 5px; }
+.tbadges { margin-top: 16px; display: grid; gap: 0; border-radius: 9px; box-shadow: inset 0 0 0 1px var(--ui-line); overflow: hidden; }
+.tbadges p { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; }
+.tbadges p + p { border-top: 1px solid var(--ui-line); }
+.tbadges p span.amt { margin-left: auto; }
+.badge { height: 20px; padding: 0 7px; border-radius: 5px; display: inline-grid; place-items: center; font-size: 10.5px; font-weight: 500; }
+.badge.paid { background: oklch(0.45 0.082 166 / 0.12); color: oklch(0.38 0.07 166); }
+.badge.due { background: var(--ui-sunk); color: var(--ui-ink-2); }
+.badge.late { background: oklch(0.57 0.18 27 / 0.12); color: oklch(0.48 0.16 27); }
+.tswitch { margin-top: 16px; display: flex; align-items: center; gap: 8px; font-size: 11.5px; }
+.tswitch i { width: 30px; height: 18px; border-radius: 9px; background: var(--ui-ink); position: relative; }
+.tswitch i::after { content: ""; position: absolute; right: 2px; top: 2px; width: 14px; height: 14px; border-radius: 50%; background: var(--ui-bg); }
+
+/* Approach */
+.approach { padding: clamp(96px, 10vw, 152px) 0 clamp(88px, 9vw, 136px); }
+.approach-head { align-items: end; row-gap: 20px; }
+.approach-head h2 { grid-column: 1 / 7; font-size: clamp(34px, 3.4vw, 48px); line-height: 1.05; letter-spacing: -0.032em; }
+.approach-head p { grid-column: 8 / 12; color: var(--ink-2); max-width: 46ch; }
+.plan { margin-top: 64px; }
+.plan-row { align-items: center; border-top: 1px solid var(--hair); }
+.plan-row:last-child { border-bottom: 1px solid var(--hair); }
+.plan-label { grid-column: 1 / 5; padding: 22px 0 24px; }
+.plan-label h3 { font-size: 19px; letter-spacing: -0.012em; display: flex; align-items: baseline; gap: 12px; }
+.plan-label h3 span { font-size: 14px; font-weight: 400; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.plan-label p { font-size: 15px; color: var(--ink-2); margin-top: 6px; max-width: 44ch; line-height: 1.5; }
+.track {
+  grid-column: 5 / 13; align-self: stretch;
+  display: grid; grid-template-columns: repeat(12, 1fr); align-items: center;
+  background-image: linear-gradient(to right, var(--hair) 1px, transparent 1px);
+  background-size: calc(100% / 12) 100%;
+  box-shadow: inset -1px 0 0 var(--hair);
+}
+.bar { grid-row: 1; height: 30px; border-radius: 7px; background: var(--accent); margin: 0 3px; }
+.bar.slices { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; background: none; }
+.bar.slices i { background: var(--accent); border-radius: 6px; }
+.bar.out { background: transparent; box-shadow: inset 0 0 0 1.5px var(--accent); }
+.plan-ruler { align-items: end; }
+.plan-ruler .plan-label { padding: 0 0 12px; font-size: 14px; color: var(--ink-2); display: flex; align-items: center; gap: 10px; }
+.diamond { width: 8px; height: 8px; background: var(--accent); transform: rotate(45deg); flex: none; }
+.plan-ruler .track {
+  position: relative; height: 44px; align-items: end; background-image: none; box-shadow: none;
+}
+.plan-ruler .track span { grid-row: 1; padding: 0 0 12px 8px; font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.plan-ruler .track span:first-child::before { content: "Week "; }
+.plan-ruler .track .d { position: absolute; bottom: -4px; transform: translateX(-50%) rotate(45deg); left: calc(var(--i) * 100% / 12); width: 8px; height: 8px; background: var(--accent); z-index: 1; }
+
+/* About */
+.about { padding: 0 0 clamp(96px, 10vw, 152px); }
+.about .grid { row-gap: 24px; }
+.about-label { grid-column: 1 / 3; font-size: 15px; color: var(--ink-3); padding-top: 9px; }
+.about-text { grid-column: 3 / 11; }
+.about-text p.big { font-size: clamp(24px, 2.25vw, 32px); line-height: 1.35; letter-spacing: -0.018em; }
+.about-text p.small { margin-top: 24px; color: var(--ink-2); max-width: 60ch; }
+.facts { grid-column: 3 / 13; margin-top: 56px; border-top: 1px solid var(--hair); }
+.facts div { display: grid; grid-template-columns: 2fr 8fr; column-gap: 24px; padding: 18px 0 19px; border-bottom: 1px solid var(--hair); }
+.facts dt { color: var(--ink-3); font-size: 15px; padding-top: 2px; }
+.facts dd { font-size: 17px; }
+
+/* Contact */
+.contact { padding: 104px 0 96px; }
+.contact .grid { row-gap: 32px; align-items: end; }
+.contact h2 { grid-column: 1 / 9; font-size: 19px; font-weight: 400; color: var(--on-mat-2); letter-spacing: -0.005em; }
+.mail-row { grid-column: 1 / 13; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+.mail {
+  font-size: clamp(40px, 6.6vw, 96px); line-height: 1; letter-spacing: -0.045em; font-weight: 500;
+  color: var(--on-mat); text-decoration: none; display: inline-block;
+  transition: transform 250ms var(--ease-expo);
+}
+@media (hover: hover) and (pointer: fine) {
+  .mail:hover { transform: translateY(-2px); }
+}
+.contact-foot { grid-column: 1 / 13; display: flex; justify-content: space-between; gap: 24px 48px; flex-wrap: wrap; padding-top: 28px; border-top: 1px solid var(--on-mat-hair); }
+.contact-foot p { color: var(--on-mat-2); font-size: 16px; max-width: 54ch; }
+.contact-foot p.time { color: var(--on-mat); }
+
+/* Footer */
+.site-foot { padding: 28px 0 36px; font-size: 14px; color: var(--ink-3); }
+.site-foot .wrap { display: flex; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.site-foot a { color: var(--ink-2); }
+
+/* Responsive */
+@media (max-width: 1100px) {
+  .hero h1 { grid-column: 1 / 13; }
+  .hero-aside { grid-column: 1 / 9; }
+  .proj-feature .shot { grid-column: 1 / 13; }
+  .proj-feature .proj-cap { grid-column: 1 / 9; margin-top: 28px; }
+  .proj-row { margin-top: 96px; row-gap: 96px; }
+  .stack { gap: 96px; }
+  .stack-l, .stack-r { grid-column: 1 / 13; padding-top: 0; }
+  .approach-head h2, .approach-head p { grid-column: 1 / 13; }
+  .plan-label { grid-column: 1 / 13; padding-bottom: 12px; }
+  .track { grid-column: 1 / 13; height: 44px; }
+  .plan-ruler .plan-label { padding-bottom: 8px; }
+  .about-label, .about-text, .facts { grid-column: 1 / 13; }
+}
+@media (max-width: 720px) {
+  body { font-size: 16px; }
+  .grid { column-gap: 16px; }
+  .site-nav { display: none; }
+  .hero-aside { grid-column: 1 / 13; }
+  .proj-feature .proj-cap { grid-column: 1 / 13; }
+  .work-intro { flex-direction: column; gap: 4px; }
+  .phones { gap: 14px; }
+  .others li { grid-template-columns: 48px 1fr; }
+  .others li .d { grid-column: 2; }
+  .facts div { grid-template-columns: 1fr; row-gap: 4px; }
+  :root { --mat-inset: 0px; }
+  .mat { border-radius: 0; }
+  .plan-ruler .track span:first-child::before { content: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .demo *, .demo *::after { animation: none !important; }
+  .demo .cursor { display: none; }
+  .demo .ghost-wrap .slot, .demo .slot.target { opacity: 0; }
+  .pause { display: none; }
+  .btn, .mail { transition: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="wordmark" href="#top" translate="no" id="top">Mara Ilić</a>
+    <nav class="site-nav" aria-label="Main">
+      <ul>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#approach">Approach</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap grid">
+      <h1 id="hero-title">I design software for people who use it all day.</h1>
+      <div class="hero-aside">
+        <p class="status"><i aria-hidden="true"></i>Booking projects from January&nbsp;2027</p>
+        <p class="lede">I’m <strong translate="no">Mara Ilić</strong>, an independent product designer in Belgrade. I work on the tools that run a business: dispatch boards, clinic calendars, inspection apps and the design systems under them.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="mailto:hello@marailic.com?subject=New%20project">
+            Start a project
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="link" href="#work">See the work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mat" id="work" aria-labelledby="work-title">
+    <div class="ruler" aria-hidden="true">
+      <div class="wrap">
+        <span style="--i:0">0</span><span style="--i:1">1</span><span style="--i:2">2</span><span style="--i:3">3</span><span style="--i:4">4</span><span style="--i:5">5</span><span style="--i:6">6</span><span style="--i:7">7</span><span style="--i:8">8</span><span style="--i:9">9</span><span style="--i:10">10</span><span style="--i:11">11</span><span style="--i:12">12</span><span style="--i:13">13</span><span style="--i:14">14</span><span style="--i:15">15</span><span style="--i:16">16</span><span style="--i:17">17</span><span style="--i:18">18</span><span style="--i:19">19</span><span style="--i:20">20</span><span style="--i:21">21</span><span style="--i:22">22</span><span style="--i:23">23</span><span style="--i:24">24</span><span style="--i:25">25</span><span style="--i:26">26</span><span style="--i:27">27</span>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="work-intro">
+        <h2 id="work-title">Selected work, 2021 to 2026</h2>
+        <p>Every screen below is redrawn from the shipped product, with client data swapped out.</p>
+      </div>
+
+      <!-- 01 Ruta -->
+      <article class="grid proj-feature" aria-labelledby="ruta-title">
+        <div class="shot">
+          <div class="fit" data-fit style="--w:960px">
+            <div class="ui demo" id="ruta-demo" style="--w:960px" role="img" aria-label="Ruta dispatch board. Four lanes of delivery orders, one for unassigned orders and one for each driver, next to a map of Novi Sad with each driver's route. An order is dragged from Unassigned onto Ana K.'s cargo bike lane and her capacity bar fills.">
+              <div class="ui-top">
+                <div class="ui-brand" translate="no">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="4" cy="13.5" r="2.5" fill="currentColor"/><circle cx="14" cy="4.5" r="2.5" fill="var(--tomato)"/><path d="M4 11C4 6 14 12 14 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  Ruta
+                </div>
+                <div class="ui-crumbs">Dispatch <span>/</span> Novi Sad</div>
+                <div class="ui-search">
+                  <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="4.8" stroke="currentColor" stroke-width="1.6"/><path d="m10.6 10.6 3.4 3.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                  Find an order, street or driver <kbd>/</kbd>
+                </div>
+                <div class="ui-avatar">DJ</div>
+              </div>
+              <div class="ruta-body">
+                <div class="ui-rail">
+                  <span class="on"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2.5" y="3" width="3.5" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="7.25" y="3" width="3.5" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="3" width="3.5" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                  <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 4.5 6.5 3l5 1.5 4-1.5v10.5l-4 1.5-5-1.5-4 1.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M6.5 3v10.5M11.5 4.5V15" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                  <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="6" r="3" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 15.5c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                  <span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="6.25" stroke="currentColor" stroke-width="1.5"/><path d="M9 5.5V9l2.5 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>
+                  <span class="sp"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 5h12M3 9h12M3 13h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="6" cy="5" r="1.6" fill="var(--ui-bg)" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="9" r="1.6" fill="var(--ui-bg)" stroke="currentColor" stroke-width="1.5"/><circle cx="7.5" cy="13" r="1.6" fill="var(--ui-bg)" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                </div>
+                <div class="ruta-main">
+                  <div class="ruta-head">
+                    <div>
+                      <p class="ui-sub">Thursday 14 November</p>
+                      <p class="ui-title">Morning wave</p>
+                    </div>
+                    <div class="ruta-stats">
+                      <span><b>84</b> orders</span>
+                      <span><b>9</b> drivers</span>
+                      <span class="warn"><i></i><b class="swap"><em class="a">2</em><em class="b">1</em></b> unassigned</span>
+                    </div>
+                    <div class="ui-seg"><span class="on">Board</span><span>Map</span></div>
+                  </div>
+                  <div class="ruta-lanes">
+                    <div class="lane">
+                      <div class="lane-h">
+                        <p class="lane-n">Unassigned <span class="count swap"><em class="a">2</em><em class="b">1</em></span></p>
+                        <p class="lane-v">Sorted by due time</p>
+                      </div>
+                      <div class="lane-cards">
+                        <div class="card"><p class="c1"><b class="due">Due 10:30</b><span>#4476</span></p><p class="c2">Zmaj Jovina 12</p><p class="c3">2 bags</p></div>
+                        <div class="ghost-wrap">
+                          <div class="slot"></div>
+                          <div class="card drag"><p class="c1"><b class="due">Due 10:15</b><span>#4478</span></p><p class="c2">Bul. cara Lazara 88</p><p class="c3">5 bags, 1 chilled</p></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lane" style="--c:var(--blue)">
+                      <div class="lane-h">
+                        <p class="lane-n"><i></i>Jelena P.</p>
+                        <p class="lane-v">Van 4 · 5 stops</p>
+                        <div class="capbar"><b style="--f:.82"></b></div>
+                      </div>
+                      <div class="lane-cards">
+                        <div class="card"><p class="c1"><b>09:20</b><span>#4452</span></p><p class="c2">Futoška 33</p><p class="c3">3 bags</p></div>
+                        <div class="card"><p class="c1"><b>09:35</b><span>#4455</span></p><p class="c2">Laze Telečkog 5</p><p class="c3">1 bag</p></div>
+                        <div class="card"><p class="c1"><b>09:50</b><span>#4459</span></p><p class="c2">Dunavska 17</p><p class="c3">4 bags</p></div>
+                        <div class="card"><p class="c1"><b>10:05</b><span>#4461</span></p><p class="c2">Njegoševa 2</p><p class="c3">2 bags</p></div>
+                        <div class="card"><p class="c1"><b>10:20</b><span>#4463</span></p><p class="c2">Jevrejska 21</p><p class="c3">6 bags, 2 chilled</p></div>
+                      </div>
+                    </div>
+                    <div class="lane" style="--c:var(--ochre)">
+                      <div class="lane-h">
+                        <p class="lane-n"><i></i>Marko S.</p>
+                        <p class="lane-v">Van 2 · 4 stops</p>
+                        <div class="capbar"><b style="--f:.64"></b></div>
+                      </div>
+                      <div class="lane-cards">
+                        <div class="card"><p class="c1"><b>09:25</b><span>#4453</span></p><p class="c2">Kisačka 40</p><p class="c3">2 bags</p></div>
+                        <div class="card"><p class="c1"><b>09:45</b><span>#4457</span></p><p class="c2">Temerinska 9</p><p class="c3">3 bags</p></div>
+                        <div class="card"><p class="c1"><b>10:10</b><span>#4462</span></p><p class="c2">Rumenačka 118</p><p class="c3">5 bags</p></div>
+                        <div class="card"><p class="c1"><b>10:35</b><span>#4468</span></p><p class="c2">Sentandrejski put 3</p><p class="c3">1 bag</p></div>
+                      </div>
+                    </div>
+                    <div class="lane" style="--c:var(--tomato)">
+                      <div class="lane-h">
+                        <p class="lane-n"><i></i>Ana K.</p>
+                        <p class="lane-v">Cargo bike 7 · <span class="swap"><em class="a">3</em><em class="b">4</em></span> stops</p>
+                        <div class="capbar"><b class="grow" style="--f:.38"></b></div>
+                      </div>
+                      <div class="lane-cards">
+                        <div class="card"><p class="c1"><b>09:30</b><span>#4454</span></p><p class="c2">Bul. oslobođenja 46</p><p class="c3">2 bags</p></div>
+                        <div class="card"><p class="c1"><b>09:55</b><span>#4460</span></p><p class="c2">Narodnog fronta 12</p><p class="c3">1 bag</p></div>
+                        <div class="card"><p class="c1"><b>10:15</b><span>#4466</span></p><p class="c2">Šafarikova 7</p><p class="c3">3 bags</p></div>
+                        <div class="slot target">Drop to assign</div>
+                      </div>
+                    </div>
+                    <div class="mapbox">
+                      <svg width="224" height="404" viewBox="0 0 224 404" fill="none">
+                        <rect width="224" height="404" fill="oklch(0.958 0.012 125)"/>
+                        <rect x="16" y="54" width="58" height="42" rx="7" fill="oklch(0.92 0.045 145)"/>
+                        <rect x="150" y="150" width="54" height="34" rx="7" fill="oklch(0.92 0.045 145)"/>
+                        <path d="M-20 352 C 40 316, 110 372, 244 318" stroke="oklch(0.87 0.045 230)" stroke-width="40" stroke-linecap="round"/>
+                        <g stroke="white" stroke-linecap="round">
+                          <path d="M-4 128 L228 100" stroke-width="6"/>
+                          <path d="M-4 236 L228 214" stroke-width="6"/>
+                          <path d="M92 -4 L112 330" stroke-width="6"/>
+                          <path d="M176 -4 L150 300" stroke-width="4"/>
+                          <path d="M-4 40 L228 22 M-4 178 L228 156 M40 -4 L56 330 M-4 286 L130 274" stroke-width="2.5"/>
+                        </g>
+                        <path d="M40 250 L70 204 L60 156 L102 132 L124 86 L150 60" stroke="var(--blue)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        <path d="M40 250 L112 238 L152 192 L192 170 L200 118" stroke="var(--ochre)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        <path d="M40 250 L86 278 L128 268 L164 246" stroke="var(--tomato)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+                        <g fill="white" stroke-width="2">
+                          <circle cx="70" cy="204" r="3.5" stroke="var(--blue)"/><circle cx="60" cy="156" r="3.5" stroke="var(--blue)"/><circle cx="102" cy="132" r="3.5" stroke="var(--blue)"/><circle cx="124" cy="86" r="3.5" stroke="var(--blue)"/><circle cx="150" cy="60" r="3.5" stroke="var(--blue)"/>
+                          <circle cx="112" cy="238" r="3.5" stroke="var(--ochre)"/><circle cx="152" cy="192" r="3.5" stroke="var(--ochre)"/><circle cx="192" cy="170" r="3.5" stroke="var(--ochre)"/><circle cx="200" cy="118" r="3.5" stroke="var(--ochre)"/>
+                          <circle cx="86" cy="278" r="3.5" stroke="var(--tomato)"/><circle cx="128" cy="268" r="3.5" stroke="var(--tomato)"/><circle cx="164" cy="246" r="3.5" stroke="var(--tomato)"/>
+                        </g>
+                        <g class="newstop">
+                          <path d="M164 246 L196 226" stroke="var(--tomato)" stroke-width="2.5" stroke-dasharray="4 4" stroke-linecap="round"/>
+                          <circle cx="196" cy="226" r="5.5" fill="var(--tomato)" stroke="white" stroke-width="2"/>
+                        </g>
+                        <rect x="34" y="244" width="12" height="12" rx="3" fill="var(--ui-ink)"/>
+                        <text x="44" y="70" font-size="9" fill="oklch(0.5 0.04 145)" font-family="inherit" transform="translate(-14 10)">Liman park</text>
+                        <text x="150" y="350" font-size="9.5" fill="oklch(0.5 0.05 230)" font-family="inherit" font-style="italic">Dunav</text>
+                        <text x="30" y="248" font-size="9" fill="var(--ui-ink-2)" font-family="inherit" text-anchor="end">Depot</text>
+                      </svg>
+                      <div class="map-zoom"><span>+</span><span>−</span></div>
+                      <div class="map-key">
+                        <p style="--c:var(--blue)"><i></i>Jelena <span>58 min</span></p>
+                        <p style="--c:var(--ochre)"><i></i>Marko <span>71 min</span></p>
+                        <p style="--c:var(--tomato)"><i></i>Ana <span class="swap"><em class="a">34 min</em><em class="b">46 min</em></span></p>
+                      </div>
+                    </div>
+                    <svg class="cursor" viewBox="0 0 20 22" aria-hidden="true"><path d="M2 1.5v16.2l4.3-4.1 3 6.7 2.9-1.3-3-6.6h6z" fill="var(--ui-ink)" stroke="white" stroke-width="1.4" stroke-linejoin="round"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proj-cap">
+          <span class="num">01</span>
+          <h3 id="ruta-title" translate="no">Ruta</h3>
+          <p class="what">Dispatch board for a grocery delivery fleet</p>
+          <p class="meta">Novi Sad, 2025 · Lead designer, 5&nbsp;months</p>
+          <p class="desc">Dispatchers ran the morning wave from three browser tabs and a whiteboard. I rebuilt the board around drivers instead of orders, so moving a delivery is one drag and the vehicle’s load updates while you do it.</p>
+          <p class="demo-note">The board replays one assignment: an urgent order goes to Ana’s cargo bike, her load bar fills and her route grows on the map.</p>
+          <button class="btn btn-mat pause" type="button" aria-controls="ruta-demo">
+            <svg class="i-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="8.4" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>
+            <svg class="i-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true" hidden><path d="M4.5 2.8v8.4a.6.6 0 0 0 .9.5l6.6-4.2a.6.6 0 0 0 0-1L5.4 2.3a.6.6 0 0 0-.9.5z" fill="currentColor"/></svg>
+            <span>Pause the loop</span>
+          </button>
+        </div>
+      </article>
+
+      <div class="grid proj-row">
+       <div class="stack stack-l">
+        <!-- 02 Halden -->
+        <article class="halden" aria-labelledby="halden-title">
+          <div class="fit" data-fit style="--w:744px">
+            <div class="ui" style="--w:744px" role="img" aria-label="Halden Fysio booking calendar for one clinic day. Four therapists in columns, appointments from 08:00 to 15:00, a current-time line at 10:40, and a keyboard patient search proposing a 12:00 slot with Mira.">
+              <div class="ui-top hal-top">
+                <div class="ui-brand" translate="no"><i>H</i>Halden Fysio</div>
+                <span class="hal-loc">Grünerløkka <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="m2.5 4 2.5 2.5L7.5 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <div class="hal-date">
+                  <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M7.5 2.5 4 6l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <b>Tuesday 12 November</b>
+                  <span class="arr"><svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M4.5 2.5 8 6 4.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                  <span class="hal-today">Today</span>
+                </div>
+                <span class="hal-new">New booking <kbd>N</kbd></span>
+              </div>
+              <div class="hal-cols">
+                <div class="hal-head"></div>
+                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.04 250);--fg:oklch(0.42 0.1 250)">IH</span>Ingrid H.<span class="load">6</span></div>
+                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.05 78);--fg:oklch(0.45 0.09 70)">SV</span>Sander V.<span class="load">5</span></div>
+                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.04 166);--fg:oklch(0.4 0.08 166)">ML</span>Mira L.<span class="load">5</span></div>
+                <div class="hal-head"><span class="av" style="--bg:oklch(0.92 0.04 33);--fg:oklch(0.45 0.12 33)">TR</span>Tobias R.<span class="load">4</span></div>
+              </div>
+              <div class="hal-cols hal-body">
+                <div class="hal-times">
+                  <span style="top:56px">09:00</span><span style="top:112px">10:00</span><span style="top:168px">11:00</span><span style="top:224px">12:00</span><span style="top:280px">13:00</span>
+                </div>
+                <div class="hal-col">
+                  <div class="ev" style="--s:0;--d:45"><b>S. Dahl</b><span>Ankle · 45 min</span></div>
+                  <div class="ev first" style="--s:60;--d:60"><b>O. Lund</b><span>First visit · 60 min</span></div>
+                  <div class="ev" style="--s:135;--d:45"><b>M. Haugen</b><span>Shoulder</span></div>
+                  <div class="ev off" style="--s:195;--d:30"><b>Lunch</b></div>
+                  <div class="ev" style="--s:240;--d:45"><b>E. Moe</b><span>Lower back</span></div>
+                  <div class="ev" style="--s:300;--d:45"><b>R. Aas</b><span>Knee rehab</span></div>
+                </div>
+                <div class="hal-col">
+                  <div class="ev" style="--s:30;--d:60"><b>A. Strand</b><span>Post-op knee · 60 min</span></div>
+                  <div class="ev sel" style="--s:105;--d:45"><b>J. Vik</b><span>Neck · checked in</span></div>
+                  <div class="ev" style="--s:180;--d:45"><b>I. Holm</b><span>Running gait</span></div>
+                  <div class="ev off" style="--s:240;--d:30"><b>Lunch</b></div>
+                  <div class="ev" style="--s:285;--d:50"><b>Back class</b><span>Group of 6</span></div>
+                </div>
+                <div class="hal-col">
+                  <div class="ev s" style="--s:0;--d:30"><b>L. Bakke</b><span>Follow-up</span></div>
+                  <div class="ev" style="--s:45;--d:45"><b>H. Ruud</b><span>Hip</span></div>
+                  <div class="ev" style="--s:120;--d:60"><b>P. Eide</b><span>Shoulder · 60 min</span></div>
+                  <div class="ev off" style="--s:195;--d:30"><b>Lunch</b></div>
+                  <div class="ev prop" style="--s:240;--d:45"><b>K. Berg</b><span>Knee rehab · new</span></div>
+                  <div class="ev first" style="--s:300;--d:45"><b>N. Lie</b><span>First visit</span></div>
+                </div>
+                <div class="hal-col">
+                  <div class="ev" style="--s:60;--d:45"><b>B. Foss</b><span>Ankle</span></div>
+                  <div class="ev" style="--s:120;--d:60"><b>G. Lunde</b><span>Sports injury</span></div>
+                  <div class="ev" style="--s:240;--d:45"><b>S. Hauge</b><span>Knee</span></div>
+                  <div class="ev" style="--s:300;--d:45"><b>F. Myhre</b><span>Back</span></div>
+                </div>
+                <div class="hal-now"><span>10:40</span></div>
+                <div class="hal-pop">
+                  <div class="in">
+                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="4.8" stroke="var(--ui-ink-2)" stroke-width="1.6"/><path d="m10.6 10.6 3.4 3.4" stroke="var(--ui-ink-2)" stroke-width="1.6" stroke-linecap="round"/></svg>
+                    berg<i class="caret"></i>
+                  </div>
+                  <ul>
+                    <li class="on"><div><b>Kari Berg</b><small>Born 1961 · Knee rehab</small></div><span class="tag">12:00 Mira</span></li>
+                    <li><div><b>Kristian Bergene</b><small>Born 1988 · Shoulder</small></div><span class="tag">13:15 Ingrid</span></li>
+                    <li><div><b>Sofie Berglund</b><small>Born 2003 · First visit</small></div><span class="tag">14:00 Tobias</span></li>
+                  </ul>
+                  <div class="foot"><kbd class="k">↵</kbd> Book first free slot <kbd class="k" style="margin-left:auto">Tab</kbd> Next</div>
+                </div>
+              </div>
+              <div class="hal-keys">
+                <span><kbd class="k">N</kbd> New booking</span>
+                <span><kbd class="k">/</kbd> Find patient</span>
+                <span><kbd class="k">←</kbd><kbd class="k">→</kbd> Change day</span>
+                <span><kbd class="k">Space</kbd> Check in</span>
+                <span style="margin-left:auto">Ingrid has a gap at 13:15</span>
+              </div>
+            </div>
+          </div>
+          <div class="proj-cap cap-below">
+            <span class="num">02</span>
+            <div>
+              <h3 id="halden-title" translate="no">Halden Fysio</h3>
+              <p class="what">Booking calendar for physiotherapy clinics</p>
+              <p class="meta">Oslo, 2024 · Sole designer</p>
+              <p class="desc">Receptionists book patients while they are still on the phone. The new calendar runs from the keyboard: find the patient, take the first free slot, confirm, and never reach for the mouse.</p>
+            </div>
+          </div>
+        </article>
+
+        <!-- 04 Tessel -->
+        <article class="tessel" aria-labelledby="tessel-title">
+          <div class="fit" data-fit style="--w:526px">
+            <div class="ui" style="--w:526px" role="img" aria-label="Tessel design system foundations page with colour tokens, a type scale, buttons in three states, an IBAN field showing an error, and invoice status badges.">
+              <div class="ui-top tes-top">
+                <div class="ui-brand" translate="no"><i><b></b><b></b><b></b><b></b></i>Tessel</div>
+                <div class="tes-tabs"><span class="on">Foundations</span><span>Components</span><span>Patterns</span></div>
+                <span class="tes-ver">v2.3</span>
+              </div>
+              <div class="tes-body">
+                <div class="tes-sec">
+                  <p class="tes-label"><span>Colour</span><span>6 of 18</span></p>
+                  <div class="sw">
+                    <div><i style="--c:oklch(0.25 0.012 165)"></i><p>ink</p><small>#1F2523</small></div>
+                    <div><i style="--c:oklch(0.48 0.01 165)"></i><p>ink-muted</p><small>#5E6662</small></div>
+                    <div><i style="--c:oklch(0.966 0.004 120)"></i><p>surface</p><small>#F2F3EF</small></div>
+                    <div><i style="--c:oklch(0.45 0.082 166)"></i><p>paid</p><small>#1E6B54</small></div>
+                    <div><i style="--c:oklch(0.74 0.13 78)"></i><p>pending</p><small>#D9A441</small></div>
+                    <div><i style="--c:oklch(0.57 0.18 27)"></i><p>overdue</p><small>#C8432F</small></div>
+                  </div>
+                  <div class="typescale">
+                    <p class="tes-label"><span>Type</span><span>Size / line</span></p>
+                    <p class="aa">Aa</p>
+                    <ul>
+                      <li><b style="font-size:15px">Display</b><span>32 / 36</span></li>
+                      <li><b style="font-size:13px">Title</b><span>20 / 28</span></li>
+                      <li><span style="color:var(--ui-ink);font-size:12px">Body</span><span>15 / 22</span></li>
+                      <li><span style="color:var(--ui-ink-2);font-size:11px">Caption</span><span>13 / 18</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="tes-sec">
+                  <p class="tes-label"><span>Buttons</span><span>Default, secondary, disabled</span></p>
+                  <div class="tbtns"><span class="tbtn p">Send invoice</span><span class="tbtn s">Save draft</span><span class="tbtn d">Send</span></div>
+                  <div class="tfield">
+                    <label>IBAN</label>
+                    <p class="in">RS35 2600 0560 1001</p>
+                    <p class="err"><svg width="11" height="11" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5.2" stroke="currentColor" stroke-width="1.3"/><path d="M6 3.4v3.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="6" cy="8.5" r=".8" fill="currentColor"/></svg>Serbian IBANs have 22 characters. This one has 18.</p>
+                  </div>
+                  <div class="tbadges">
+                    <p><span class="badge paid">Paid</span>INV-0412<span class="amt">€1,240.00</span></p>
+                    <p><span class="badge due">Due in 3 days</span>INV-0419<span class="amt">€386.50</span></p>
+                    <p><span class="badge late">Overdue</span>INV-0397<span class="amt">€2,075.00</span></p>
+                  </div>
+                  <p class="tswitch"><i></i>Remind client automatically</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="proj-cap cap-below">
+            <span class="num">04</span>
+            <div>
+              <h3 id="tessel-title" translate="no">Tessel</h3>
+              <p class="what">Design system for an invoicing product</p>
+              <p class="meta">Remote, 2022 to 2023 · Design system lead</p>
+              <p class="desc">A small set of components the engineers could use without asking me. Every one shipped with its empty, loading and error states already drawn.</p>
+            </div>
+          </div>
+        </article>
+       </div>
+       <div class="stack stack-r">
+        <!-- 03 Okvir -->
+        <article class="okvir" aria-labelledby="okvir-title">
+          <div class="fit" data-fit style="--w:500px">
+            <div class="phones" style="width:500px" role="img" aria-label="Okvir inspection app on two phones. The first shows a stairwell checklist working offline with pass and fail results. The second shows a photo of the stairwell with the broken emergency light circled and a note attached to the checklist item.">
+              <div class="phone">
+                <div class="screen">
+                  <div class="sbar"><span>10:52</span><i class="isl"></i><span class="sig">No signal</span></div>
+                  <div class="pnav"><span class="back"><svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M7 1.5 2.5 6 7 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Block C</span><span class="tnum">14 of 22</span></div>
+                  <p class="ptitle">Stair 3, level −1</p>
+                  <p class="offline"><i></i>Offline. Saved on this phone.</p>
+                  <ul class="checks">
+                    <li><p>Handrail height<small>900 to 1000 mm</small></p><span class="chip pass">Pass</span></li>
+                    <li><p>Tread depth<small>At least 280 mm</small></p><span class="chip pass">Pass</span></li>
+                    <li><p>Riser height</p><span class="chip pass">Pass</span></li>
+                    <li><p>Emergency lighting<small>1 photo, 1 note</small></p><span class="chip fail">Fail</span></li>
+                    <li class="cur"><p><b>Fire door closes</b><small>Release and watch it latch</small></p><span class="chip todo">To check</span></li>
+                    <li><p>Exit signage</p><span class="chip todo">To check</span></li>
+                  </ul>
+                  <div class="pbtn">Mark fire door</div>
+                  <i class="home"></i>
+                </div>
+              </div>
+              <div class="phone">
+                <div class="screen">
+                  <div class="sbar"><span>10:49</span><i class="isl"></i><span class="sig">No signal</span></div>
+                  <div class="pnav"><span class="back"><svg width="10" height="12" viewBox="0 0 10 12" fill="none"><path d="M7 1.5 2.5 6 7 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Item 4</span><span>Retake</span></div>
+                  <div class="photo">
+                    <svg width="200" height="186" viewBox="0 0 200 186" fill="none">
+                      <defs>
+                        <linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5d625f"/><stop offset="1" stop-color="#2f3331"/></linearGradient>
+                        <radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></radialGradient>
+                      </defs>
+                      <rect width="200" height="186" fill="url(#wall)"/>
+                      <path d="M0 186V160h36v-26h34v-26h34V82h34V56h34V30h28v156z" fill="#7b817d"/>
+                      <path d="M0 160h36M36 134h34M70 108h34M104 82h34M138 56h34M172 30h28" stroke="#a3a9a5" stroke-width="2.5"/>
+                      <path d="M36 160v26M70 134v52M104 108v78M138 82v104M172 56v130" stroke="#5f6561" stroke-width="1"/>
+                      <path d="M-4 118 L204 -40" stroke="#b9bfbb" stroke-width="3"/>
+                      <path d="M30 96v16M80 58v16M130 20v16" stroke="#9aa09c" stroke-width="2"/>
+                      <rect x="20" y="22" width="40" height="17" rx="4" fill="#8e9490"/>
+                      <rect x="25" y="26" width="30" height="9" rx="2.5" fill="#6b716d"/>
+                      <rect width="200" height="186" fill="url(#vig)"/>
+                      <circle cx="40" cy="30.5" r="25" stroke="var(--ochre)" stroke-width="2.5"/>
+                      <circle cx="63" cy="12" r="9" fill="var(--ochre)"/>
+                      <text x="63" y="15.5" text-anchor="middle" font-size="10" font-weight="500" fill="oklch(0.25 0.04 70)" font-family="inherit">1</text>
+                    </svg>
+                  </div>
+                  <div class="pfield">
+                    <label>Note for item 4, emergency lighting</label>
+                    <p class="box">Light at the landing does not come on. Test button pressed twice, no response.</p>
+                  </div>
+                  <div class="ptags"><span>Electrical</span><span>Before handover</span></div>
+                  <div class="pbtn alt">Attach to item 4</div>
+                  <i class="home"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="proj-cap cap-below">
+            <span class="num">03</span>
+            <div>
+              <h3 id="okvir-title" translate="no">Okvir</h3>
+              <p class="what">Inspection app for building surveyors</p>
+              <p class="meta">Ljubljana, 2023 · Product and interaction design</p>
+              <p class="desc">Surveyors work in basements and stairwells with no signal. Everything saves to the phone first, and every photo attaches to the checklist item it proves.</p>
+            </div>
+          </div>
+        </article>
+        <section class="others" aria-labelledby="others-title">
+          <h3 id="others-title">Smaller projects</h3>
+          <p class="sub">Audits, single features and things that took a few weeks.</p>
+          <ol>
+            <li><span class="y">2024</span><span class="n" translate="no">Trg</span><span class="d">Stock counts for a café group, done one-handed in the walk-in fridge.</span></li>
+            <li><span class="y">2023</span><span class="n" translate="no">Pazi</span><span class="d">Onboarding for a payroll app in Zagreb. Fewer fields, asked in a better order.</span></li>
+            <li><span class="y">2022</span><span class="n" translate="no">Hvat</span><span class="d">Booking and memberships for three climbing gyms that share members.</span></li>
+            <li><span class="y">2021</span><span class="n" translate="no">Slog</span><span class="d">A two-week audit of the internal tools at a freight forwarder.</span></li>
+            <li><span class="y">Spring</span><span class="n">Teaching</span><span class="d">An interface design workshop for final-year students in Belgrade.</span></li>
+          </ol>
+        </section>
+       </div>
+      </div>
+    </div>
+    <svg class="angles br" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1">
+        <path d="M900 900 L0 380.4"/>
+        <path d="M900 900 L0 0"/>
+        <path d="M900 900 L380.4 0"/>
+      </g>
+      <g fill="currentColor" font-size="10" font-family="inherit">
+        <text x="788.9" y="832.4" transform="rotate(30 788.9 832.4)">30°</text>
+        <text x="810.2" y="805.9" transform="rotate(45 810.2 805.9)">45°</text>
+        <text x="837.6" y="785.9" transform="rotate(60 837.6 785.9)">60°</text>
+      </g>
+    </svg>
+    <div class="work-end"></div>
+  </section>
+
+  <section class="approach" id="approach" aria-labelledby="approach-title">
+    <div class="wrap">
+      <div class="grid approach-head">
+        <h2 id="approach-title">How a project usually runs</h2>
+        <p>Most projects take ten to fourteen weeks. I work inside your tools, and there is something you can click every Friday, so nobody waits a month to see where it’s going.</p>
+      </div>
+
+      <div class="plan" role="list">
+        <div class="grid plan-ruler" aria-hidden="true">
+          <p class="plan-label"><i class="diamond"></i>A clickable build every Friday</p>
+          <div class="track">
+            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span><span>11</span><span>12</span>
+            <i class="d" style="--i:2"></i><i class="d" style="--i:3"></i><i class="d" style="--i:4"></i><i class="d" style="--i:5"></i><i class="d" style="--i:6"></i><i class="d" style="--i:7"></i><i class="d" style="--i:8"></i><i class="d" style="--i:9"></i><i class="d" style="--i:10"></i><i class="d" style="--i:11"></i><i class="d" style="--i:12"></i>
+          </div>
+        </div>
+        <div class="grid plan-row" role="listitem">
+          <div class="plan-label">
+            <h3>Sit in <span>Weeks 1 to 2</span></h3>
+            <p>I watch the people who use the tool do their actual work, on calls or on site, and write down every workaround.</p>
+          </div>
+          <div class="track" aria-hidden="true"><i class="bar" style="grid-column:1 / 3"></i></div>
+        </div>
+        <div class="grid plan-row" role="listitem">
+          <div class="plan-label">
+            <h3>Map <span>Weeks 2 to 3</span></h3>
+            <p>One page with every screen, state and handoff. Disagreements come up here, while they are still cheap.</p>
+          </div>
+          <div class="track" aria-hidden="true"><i class="bar" style="grid-column:2 / 4"></i></div>
+        </div>
+        <div class="grid plan-row" role="listitem">
+          <div class="plan-label">
+            <h3>Prototype <span>Weeks 3 to 6</span></h3>
+            <p>Clickable prototypes with real data, tested with the same people from week one.</p>
+          </div>
+          <div class="track" aria-hidden="true"><i class="bar" style="grid-column:3 / 7"></i></div>
+        </div>
+        <div class="grid plan-row" role="listitem">
+          <div class="plan-label">
+            <h3>Ship in slices <span>Weeks 6 to 12</span></h3>
+            <p>I pair with your engineers and review builds, not files. Something reaches real users every week.</p>
+          </div>
+          <div class="track" aria-hidden="true"><i class="bar slices" style="grid-column:6 / 13"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></i></div>
+        </div>
+        <div class="grid plan-row" role="listitem">
+          <div class="plan-label">
+            <h3>Hand over <span>Weeks 11 to 12</span></h3>
+            <p>Components, states and the reasons behind each decision, written down so the next change doesn’t need me.</p>
+          </div>
+          <div class="track" aria-hidden="true"><i class="bar out" style="grid-column:11 / 13"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about" aria-labelledby="about-title">
+    <div class="wrap grid">
+      <h2 class="about-label" id="about-title">About</h2>
+      <div class="about-text">
+        <p class="big">Before going independent in 2019 I spent six years in‑house, first at a logistics software company in Novi Sad, then at a payments startup in Berlin. Both taught me the same thing: the people who use a product all day know exactly where it hurts, and they are rarely in the room when it gets designed.</p>
+        <p class="small">So I bring them in. I sit with dispatchers, receptionists and surveyors before I open a design file, and I keep showing them work until it ships.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Based in</dt><dd>Belgrade, on Central European Time. Mornings overlap with London, afternoons with New York.</dd></div>
+        <div><dt>Languages</dt><dd>Serbian, English, German</dd></div>
+        <div><dt>Works with</dt><dd>Founders, product leads and engineering teams of 3 to 40&nbsp;people</dd></div>
+        <div><dt>Engagements</dt><dd>A fixed-scope project, or two to four days a week on retainer</dd></div>
+        <div><dt>Not a fit for</dt><dd>Brand identity, marketing sites and logos. I’ll gladly point you to people who do them well.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="mat contact" id="contact" aria-labelledby="contact-title">
+    <div class="wrap grid">
+      <h2 id="contact-title">Taking on one new project from January&nbsp;2027.</h2>
+      <div class="mail-row">
+        <a class="mail" href="mailto:hello@marailic.com" translate="no">hello@marailic.com</a>
+        <button class="btn btn-mat copy" type="button" data-email="hello@marailic.com">
+          <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.25" y="5.25" width="8.5" height="8.5" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 3.25A1.5 1.5 0 0 0 9 2.25H4A1.75 1.75 0 0 0 2.25 4v5c0 .7.4 1.2 1 1.45" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>Copy address</span>
+        </button>
+        <span class="sr-only" aria-live="polite" id="copy-status"></span>
+      </div>
+      <div class="contact-foot">
+        <p>Tell me what the product does, who uses it and what isn’t working. I reply within two working days.</p>
+        <p class="time" id="local-time">Belgrade, Central European Time</p>
+      </div>
+    </div>
+    <svg class="angles tr" width="900" height="900" viewBox="0 0 900 900" fill="none" aria-hidden="true">
+      <g stroke="currentColor" stroke-width="1">
+        <path d="M900 0 L0 900"/>
+        <path d="M900 0 L380.4 900"/>
+      </g>
+      <g fill="currentColor" font-size="10" font-family="inherit">
+        <text x="805.9" y="89.9" transform="rotate(-45 805.9 89.9)">45°</text>
+        <text x="832.4" y="111.1" transform="rotate(-60 832.4 111.1)">60°</text>
+      </g>
+    </svg>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>© 2026 <span translate="no">Mara Ilić</span>. Belgrade, Serbia.</p>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script>
+(() => {
+  // Scale drawn interfaces down to fit narrow containers; never up.
+  const fits = [...document.querySelectorAll('[data-fit]')];
+  const fit = () => fits.forEach((el) => {
+    const w = parseFloat(el.style.getPropertyValue('--w'));
+    const avail = el.parentElement.clientWidth;
+    el.style.zoom = avail < w ? (avail / w).toFixed(4) : '';
+  });
+  if ('ResizeObserver' in window) {
+    const ro = new ResizeObserver(fit);
+    fits.forEach((el) => ro.observe(el.parentElement));
+  }
+  fit();
+
+  // Pause control for the looping demo (WCAG 2.2.2).
+  const demo = document.getElementById('ruta-demo');
+  const pause = document.querySelector('.pause');
+  if (demo && pause) {
+    pause.addEventListener('click', () => {
+      const paused = demo.classList.toggle('paused');
+      pause.querySelector('span').textContent = paused ? 'Play the loop' : 'Pause the loop';
+      pause.querySelector('.i-pause').toggleAttribute('hidden', paused);
+      pause.querySelector('.i-play').toggleAttribute('hidden', !paused);
+    });
+  }
+
+  // Copy email.
+  const copy = document.querySelector('.copy');
+  const status = document.getElementById('copy-status');
+  if (copy) {
+    let t;
+    copy.addEventListener('click', async () => {
+      const label = copy.querySelector('span');
+      try {
+        await navigator.clipboard.writeText(copy.dataset.email);
+        label.textContent = 'Copied';
+        status.textContent = 'Email address copied';
+      } catch {
+        label.textContent = 'Address selected';
+        const r = document.createRange();
+        r.selectNodeContents(document.querySelector('.mail'));
+        const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+      }
+      clearTimeout(t);
+      t = setTimeout(() => { label.textContent = 'Copy address'; status.textContent = ''; }, 2200);
+    });
+  }
+
+  // Local time in Belgrade.
+  const time = document.getElementById('local-time');
+  if (time) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Belgrade', hour: '2-digit', minute: '2-digit' });
+    const tick = () => { time.textContent = `It’s ${fmt.format(new Date())} in Belgrade right now`; };
+    tick();
+    setInterval(tick, 30000);
+  }
+})();
+</script>
+</body>
+</html>
