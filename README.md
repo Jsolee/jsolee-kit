@@ -35,8 +35,10 @@ Ask Claude Code for six different things and you get one look: a warm off-white 
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
-<img alt="24-second demo: the same prompt built with and without the kit, then the comunitat crabs" src="assets/demo.gif" width="100%">
-<p align="center"><sub>Silent preview. <a href="https://github.com/Jsolee/jsolee-kit/raw/main/assets/demo.mp4">Download the video with sound</a>.</sub></p>
+<a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.1.0/demo.mp4">
+  <img alt="Preview of the demo film: the same prompts built without the kit and with it, including a pricing page you can type into and a portfolio that breaks your name" src="assets/demo.gif" width="100%">
+</a>
+<p align="center"><sub>A 15-second silent preview. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.1.0/demo.mp4"><b>Download the full 66-second film, with sound</b></a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
   <img alt="The same six prompts: without skills, six cream pages with serif headlines; with jsolee-kit, six pages that look nothing alike" src="assets/six-looks.png" width="100%">
@@ -633,7 +635,7 @@ Keep `SKILL.md` short: if it grows past 100 lines, the extra goes into `referenc
 
 ## Credits
 
-The skills this kit points to belong to their authors: [Paul Bakaus](https://github.com/pbakaus/impeccable), [Leonxlnx](https://github.com/Leonxlnx/taste-skill), [Emil Kowalski](https://github.com/emilkowalski/skills), [nextlevelbuilder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [GreenSock](https://github.com/greensock/gsap-skills), [HeyGen](https://github.com/heygen-com/hyperframes), [Vercel](https://github.com/vercel-labs/agent-skills), [Resend](https://github.com/resend/resend-skills), [affaan-m](https://github.com/affaan-m/ECC), [obra](https://github.com/obra/superpowers), [zarazhangrui](https://github.com/zarazhangrui/frontend-slides), [Jeffallan](https://github.com/Jeffallan/claude-skills), [glittercowboy](https://github.com/glittercowboy/taches-cc-resources), [kepano](https://github.com/kepano/obsidian-skills) and [Anthropic](https://github.com/anthropics/skills). comunitat's pixel crab and its costumes come from [savvy-progress](https://github.com/JohnnyVizz/claude-kit) by johnnyvizz (MIT; the notice is in [`crab.ts`](plugins/comunitat/hooks/crab.ts)).
+The skills this kit points to belong to their authors: [Paul Bakaus](https://github.com/pbakaus/impeccable), [Leonxlnx](https://github.com/Leonxlnx/taste-skill), [Emil Kowalski](https://github.com/emilkowalski/skills), [nextlevelbuilder](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill), [GreenSock](https://github.com/greensock/gsap-skills), [HeyGen](https://github.com/heygen-com/hyperframes), [Vercel](https://github.com/vercel-labs/agent-skills), [Resend](https://github.com/resend/resend-skills), [affaan-m](https://github.com/affaan-m/ECC), [obra](https://github.com/obra/superpowers), [zarazhangrui](https://github.com/zarazhangrui/frontend-slides), [Jeffallan](https://github.com/Jeffallan/claude-skills), [glittercowboy](https://github.com/glittercowboy/taches-cc-resources), [kepano](https://github.com/kepano/obsidian-skills) and [Anthropic](https://github.com/anthropics/skills). comunitat's pixel crab and its costumes come from [savvy-progress](https://github.com/JohnnyVizz/claude-kit) by johnnyvizz (MIT; the notice is in [`crab.ts`](plugins/comunitat/hooks/crab.ts)). The demo film uses "Happy Beats / Business Moves Vol. 1" from [ende.app](https://ende.app/en) and sound effects by [Kenney](https://kenney.nl) (CC0).
 
 <br>
 
