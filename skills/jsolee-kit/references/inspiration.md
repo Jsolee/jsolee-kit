@@ -7,13 +7,20 @@ Pick by the section you are designing. Take 2-3 references, name what you borrow
 | Section | Site |
 |---|---|
 | Whole landing pages | [land-book.com](https://land-book.com), [onepagelove.com](https://onepagelove.com), [awwwards.com](https://www.awwwards.com) (Sites of the Day) |
+| Dark sites | [dark.design](https://www.dark.design) |
+| Across websites, brands and motion | [coolest.design](https://coolest.design) |
 | Hero sections | [supahero.io](https://supahero.io) |
 | Navbars | [navbar.gallery](https://www.navbar.gallery) |
+| Calls to action | [cta.gallery](https://www.cta.gallery) |
+| Footers | [footer.design](https://www.footer.design) |
 | Testimonials, social proof | [socialproofexamples.com](https://socialproofexamples.com) |
 | Pricing pages | [pricingpages.design](https://pricingpages.design) |
+| Product flows: onboarding, checkout, settings | [pageflows.com](https://pageflows.com) (recordings of real apps, paid) |
+| Interface components | [collectui.com](https://collectui.com) (use for one component, not a whole style) |
 | OG / share images | [ogimage.gallery](https://www.ogimage.gallery) |
 | Transactional and marketing email | [reallygoodemails.com](https://reallygoodemails.com) |
 | Logos and marks | [logosystem.co](https://www.logosystem.co), [logobook.com](https://logobook.com) |
+| The typeface behind a logo | [fontinlogo.com](https://www.fontinlogo.com) (check its Verified or Closest label) |
 | Rebrands and brand systems | [underconsideration.com/brandnew](https://www.underconsideration.com/brandnew), [brandingstyleguides.com](https://brandingstyleguides.com) |
 | Pitch decks | [deck.gallery](https://www.deck.gallery) |
 | Social media posts | [posts.design](https://posts.design) |

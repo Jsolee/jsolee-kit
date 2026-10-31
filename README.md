@@ -9,7 +9,7 @@
   <a href="https://github.com/Jsolee/jsolee-kit/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Jsolee/jsolee-kit?style=flat-square&labelColor=0E0E0E&color=E5482D"></a>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-skill_%2B_mods-F2EEE6?style=flat-square&labelColor=0E0E0E">
   <img alt="38 skills" src="https://img.shields.io/badge/skills-38-F2EEE6?style=flat-square&labelColor=0E0E0E">
-  <img alt="23 references" src="https://img.shields.io/badge/references-23-F2EEE6?style=flat-square&labelColor=0E0E0E">
+  <img alt="30 references" src="https://img.shields.io/badge/references-30-F2EEE6?style=flat-square&labelColor=0E0E0E">
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-F2EEE6?style=flat-square&labelColor=0E0E0E"></a>
   <a href="#contributing"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-F2EEE6?style=flat-square&labelColor=0E0E0E"></a>
 </p>
@@ -31,14 +31,14 @@
 
 Ask Claude Code for six different things and you get one look: a warm off-white page, a serif headline with a phrase in italics, tiny mono captions, a vermilion accent, Geist. It's good. It's also what everyone else's agent shipped this morning.
 
-**jsolee-kit is how I get out of it.** It's the skill I load for design work in Claude Code: a workflow that throws away the first idea, rules against today's default look, a ship checklist, 23 reference sites sorted by section, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work.
+**jsolee-kit is how I get out of it.** It's the skill I load for design work in Claude Code: a workflow that throws away the first idea, rules against today's default look, a ship checklist, 30 reference sites sorted by section, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work.
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
-<a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.1.0/demo.mp4">
+<a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.2.0/demo.mp4">
   <img alt="Preview of the demo film: the same prompts built without the kit and with it, including a pricing page you can type into and a portfolio that breaks your name" src="assets/demo.gif" width="100%">
 </a>
-<p align="center"><sub>A 15-second silent preview. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.1.0/demo.mp4"><b>Download the full 66-second film, with sound</b></a>.</sub></p>
+<p align="center"><sub>A 15-second silent preview. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.2.0/demo.mp4"><b>Download the full 80-second film, with sound</b></a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
   <img alt="The same six prompts: without skills, six cream pages with serif headlines; with jsolee-kit, six pages that look nothing alike" src="assets/six-looks.png" width="100%">
@@ -215,7 +215,7 @@ jsolee-kit/
 ├── skills/jsolee-kit/
 │   ├── SKILL.md                 workflow, skill map, house rules, ship checklist, motion tokens
 │   └── references/
-│       ├── inspiration.md       23 reference sites, sorted by section
+│       ├── inspiration.md       30 reference sites, sorted by section
 │       ├── email.md             how to build emails that survive real inboxes
 │       ├── brand.md             from a name to a logo and a one-page brand system
 │       └── skills.md            every skill and plugin it points to, with its source repo
@@ -354,13 +354,20 @@ Pick by the section you're designing. Open two or three, write down what you're 
 | Section | Where | What to take from it |
 |---|---|---|
 | Whole landings | [land-book](https://land-book.com) · [One Page Love](https://onepagelove.com) · [Awwwards](https://www.awwwards.com) | Section order, pacing, how much fits above the fold |
+| Dark sites | [dark.design](https://www.dark.design) | How depth and hierarchy work without a white page |
+| Across disciplines | [Coolest Design](https://coolest.design) | Ideas from brands, motion and product, not just other websites |
 | Heroes | [supahero.io](https://supahero.io) | Headline length, how the product shows in the first screen |
 | Navbars | [navbar.gallery](https://www.navbar.gallery) | Scroll states, mobile menus, where the CTA sits |
+| CTAs | [CTA.gallery](https://www.cta.gallery) | The last ask: buttons, forms, modals and what they say |
+| Footers | [Footer](https://www.footer.design) | Footers treated as a design moment, by style |
 | Social proof | [socialproofexamples.com](https://socialproofexamples.com) | Real quotes with faces, roles and numbers |
 | Pricing | [pricingpages.design](https://pricingpages.design) | Plan naming, the comparison table, the annual toggle |
+| Product flows | [Page Flows](https://pageflows.com) (paid) | Recordings of real onboarding, checkout and settings flows, step by step |
+| Interface components | [Collect UI](https://collectui.com) | One component at a time: treat it as a starting point, not a style to copy |
 | Share images | [ogimage.gallery](https://www.ogimage.gallery) | OG cards that still read at 600 px |
 | Email | [reallygoodemails.com](https://reallygoodemails.com) | Transactional and lifecycle emails, filtered by type |
 | Logos | [Logo System](https://www.logosystem.co) · [Logobook](https://logobook.com) | Marks by shape and idea, in one color |
+| Logo type | [Font In Logo](https://www.fontinlogo.com) | The typeface behind a mark; check whether it's labeled Verified, Modified or just the closest |
 | Brand systems | [Brand New](https://www.underconsideration.com/brandnew) · [Branding Style Guides](https://brandingstyleguides.com) | Rebrands explained, and how real guidelines are organized |
 | Decks | [deck.gallery](https://www.deck.gallery) | One idea per slide |
 | Social posts | [posts.design](https://posts.design) | Carousel and post layouts |
