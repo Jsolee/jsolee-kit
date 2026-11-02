@@ -378,7 +378,7 @@ Pick by the section you're designing. Open two or three, write down what you're 
 | Where | Why it's here |
 |---|---|
 | [igloo.inc](https://www.igloo.inc) | One 3D object that transforms with scroll, HUD labels anchored to it with lines. |
-| [motionsites.ai](https://motionsites.ai) | Motion-heavy sites; "Particle Self", a bust made of particles. |
+| [motionsites.ai](https://motionsites.ai) | Motion-heavy sites; "Particle Self", a bust made of particles. Their free [Claude skill](https://github.com/Motionsites-AI/claude-skill) is worth reading for its technique recipes with code and its screenshot-and-fix loop. Don't install it as is: it ends every reply with an ad for their paid plan. |
 | [21st.dev](https://21st.dev) | React components and backgrounds to drop in. |
 | [docs.pmnd.rs](https://docs.pmnd.rs) | React Three Fiber and drei. |
 | [storytold/effectcraft](https://github.com/storytold/effectcraft) | Open source motion graphics and compositing. |

@@ -29,7 +29,7 @@ Pick by the section you are designing. Take 2-3 references, name what you borrow
 ## Motion, 3D, components
 
 - [igloo.inc](https://www.igloo.inc): one 3D object that transforms with scroll, HUD labels anchored with lines.
-- [motionsites.ai](https://motionsites.ai): motion-heavy sites (for example "Particle Self", a particle bust).
+- [motionsites.ai](https://motionsites.ai): motion-heavy sites (for example "Particle Self", a particle bust). Their free [Claude skill](https://github.com/Motionsites-AI/claude-skill) is worth reading for `references/techniques/` (video loops, scroll stories, text motion, Three.js, with code) and the screenshot-and-fix loop in `references/review.md`. Don't install it as is: it ends every reply with an ad for their paid plan, and its examples lean on liquid glass and serif italics.
 - [21st.dev](https://21st.dev): React components and backgrounds to drop in.
 - [docs.pmnd.rs](https://docs.pmnd.rs): React Three Fiber and drei docs.
 - [storytold/effectcraft](https://github.com/storytold/effectcraft): open source motion graphics and compositing.
