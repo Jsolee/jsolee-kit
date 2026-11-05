@@ -35,7 +35,7 @@ Ask Claude Code for six different things and you get one look: a warm off-white 
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
-https://github.com/user-attachments/assets/d0eb64ec-7349-4335-88b3-1047e0b1093a
+https://github.com/user-attachments/assets/77bfd2e7-910d-4cd5-9bfd-3f94cfdbc4a2
 
 <p align="center"><sub>22 seconds, with sound. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.3.0/demo.mp4"><b>Download the full 80-second film</b></a>.</sub></p>
 
