@@ -66,7 +66,7 @@ p{text-wrap:pretty}
 svg{display:block;fill:currentColor}
 a{color:inherit}
 .display{font-family:var(--display);font-weight:800;letter-spacing:-.02em;line-height:1.02}
-.h{font:800 30px/1.08 var(--display);letter-spacing:-.02em}
+.h{font:800 30px/1.08 var(--display);letter-spacing:0}
 .cap{font-size:17px;line-height:1.38}
 .skip{position:absolute;left:12px;top:-60px;z-index:9;background:var(--soil);color:var(--white);padding:10px 16px;font-weight:700}
 .skip:focus{top:12px}
@@ -85,7 +85,7 @@ a{color:inherit}
 .ground p{font-size:21px;line-height:1.36}
 .reads{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
 .reads svg{height:96px;width:auto;margin-bottom:12px}
-.reads b{display:block;font:800 24px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:4px}
+.reads b{display:block;font:800 24px/1.1 var(--display);letter-spacing:0;margin-bottom:4px}
 .reads span{font-size:16px;line-height:1.34;display:block}
 
 /* Parts and the logo tool */
@@ -146,8 +146,8 @@ input[type=range]::-moz-range-thumb{width:16px;height:28px;background:var(--pink
 .c{padding:36px 22px 30px;display:flex;flex-direction:column;justify-content:space-between;min-width:0}
 .c:first-child{padding-left:var(--pad);padding-right:40px}
 .c-top{display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
-.c .name{font:800 30px/1.08 var(--display);letter-spacing:-.02em}
-.c .hex{font:800 22px/1.2 var(--display);letter-spacing:-.01em;margin-top:6px}
+.c .name{font:800 30px/1.08 var(--display);letter-spacing:0}
+.c .hex{font:800 22px/1.2 var(--display);letter-spacing:0;margin-top:6px}
 .c .rgb{font-size:15px;margin-top:2px}
 .c.big .name{font-size:58px}
 .c.big .hex{font-size:40px;margin-top:10px}
@@ -161,7 +161,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:28px;background:var(--pink
 .pairs{display:grid;grid-template-columns:repeat(5,1fr) auto;gap:0 28px;padding:30px var(--pad);align-items:center}
 .pair{display:flex;gap:14px;align-items:center}
 .chip{flex:none;width:64px;height:64px;display:grid;place-items:center;font:800 28px/1 var(--display)}
-.pair b{display:block;font:800 26px/1 var(--display);letter-spacing:-.01em}
+.pair b{display:block;font:800 26px/1 var(--display);letter-spacing:0}
 .pair span{display:block;font-size:15px;line-height:1.25;margin-top:4px}
 
 /* Places the mark has to live */
@@ -201,7 +201,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:28px;background:var(--pink
 .tv{display:grid;grid-template-columns:7fr 5fr}
 .type{padding:40px var(--pad) 44px}
 .type .np{font-size:128px;line-height:.98;margin:0 0 14px -5px;white-space:nowrap}
-.type .ah{font:700 44px/1.08 var(--text);letter-spacing:-.015em;margin:34px 0 12px}
+.type .ah{font:700 44px/1.08 var(--text);letter-spacing:0;margin:34px 0 12px}
 .type .cap{max-width:620px}
 .glyphs{font-size:44px;line-height:1;font-weight:400;display:flex;gap:30px;margin-top:20px;color:var(--pink);white-space:nowrap}
 .voice{padding:40px var(--pad) 44px;display:flex;flex-direction:column;justify-content:space-between;gap:34px}
@@ -222,10 +222,10 @@ input[type=range]::-moz-range-thumb{width:16px;height:28px;background:var(--pink
 .why h2{font-size:48px;margin-bottom:12px}
 .idea svg{height:168px;width:auto}
 .idea .box{height:182px;display:flex;align-items:flex-end;margin-bottom:14px}
-.idea b{display:block;font:800 26px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:4px}
+.idea b{display:block;font:800 26px/1.1 var(--display);letter-spacing:0;margin-bottom:4px}
 .idea p{font-size:16px;line-height:1.34}
 .note{font-size:16px;line-height:1.36}
-.note b{display:block;font:800 26px/1.1 var(--display);letter-spacing:-.02em;margin-bottom:6px}
+.note b{display:block;font:800 26px/1.1 var(--display);letter-spacing:0;margin-bottom:6px}
 .note .tag{margin-bottom:8px}
 .s2{grid-column:span 2}
 footer{background:var(--soil);color:var(--white);padding:26px var(--pad);display:flex;justify-content:space-between;align-items:center;font-size:16px}
@@ -309,12 +309,12 @@ footer svg{height:30px;width:auto}
     <use href="#word" x="212" y="443.62" width="1180" height="210.56" fill="#15120F"/>
   </svg>
   <div class="hero-top">
-    <p class="kicker"><span translate="no">Fieldnote</span> brand sheet, version 1. October 2026.</p>
-    <h1 class="display">Records the meeting.<br>Writes the follow-up.</h1>
+    <p class="kicker"><span translate="no">Fieldnote</span> brand sheet, version 1, October 2026</p>
+    <h1 class="display">Records the meeting,<br>writes the follow-up</h1>
   </div>
   <div class="ground">
     <div>
-      <h2 class="display">An F, a flag and a&nbsp;stake.</h2>
+      <h2 class="display">An F, a flag and a&nbsp;stake</h2>
       <p><span translate="no">Fieldnote</span> goes into the meeting, marks what was agreed and comes back with the email.</p>
     </div>
     <div class="reads">
@@ -374,7 +374,7 @@ footer svg{height:30px;width:auto}
 
   <div class="tool" id="tool">
     <div class="tool-head">
-      <h2 class="display">Take the logo.</h2>
+      <h2 class="display">Take the logo</h2>
       <p>Pick a form, a surface and a height. The cut and the clear space follow this sheet, and the SVG is yours.</p>
     </div>
     <div class="stage" id="stage">
@@ -511,7 +511,7 @@ footer svg{height:30px;width:auto}
         <use href="#up" transform="translate(36 46.4) scale(1.6)" fill="#15120F"/>
         <use href="#lo" transform="translate(36 46.4) scale(1.6)" fill="#FF3F8E"/>
       </svg>
-      <h3 class="display">Who does what by&nbsp;Friday.</h3>
+      <h3 class="display">Who does what by&nbsp;Friday</h3>
       <p>Pricing call, Tuesday</p>
     </div>
   </div>
@@ -586,7 +586,7 @@ footer svg{height:30px;width:auto}
 
 <section class="why" aria-label="How the mark was chosen">
   <div>
-    <h2 class="display">Three ideas, in&nbsp;black.</h2>
+    <h2 class="display">Three ideas, in&nbsp;black</h2>
     <p class="note">Form first, color after. Each one starts from something the product does, and each one was tried at 16&nbsp;px.</p>
   </div>
   <div class="idea">

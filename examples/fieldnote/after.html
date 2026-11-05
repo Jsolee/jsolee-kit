@@ -117,7 +117,7 @@
 
   /* Said and sent */
   .cols { position: relative; display: grid; grid-template-columns: 5fr 7fr; gap: 72px; margin-top: 30px; padding-bottom: 96px; }
-  .col-label { margin-bottom: 14px; font: 400 44px/1 var(--display); letter-spacing: -0.02em; text-transform: uppercase; }
+  .col-label { margin-bottom: 14px; font: 400 44px/1 var(--display); letter-spacing: 0; text-transform: uppercase; }
   .said li { display: grid; grid-template-columns: 50px 58px minmax(0, 1fr); gap: 0 10px; margin-inline: -10px; padding: 7px 10px; border-radius: 5px; font-size: 16.5px; line-height: 1.38; transition-property: opacity, background-color, color; transition-duration: 300ms; transition-timing-function: var(--smooth); }
   .said li.off { opacity: 0.62; }
   .said time { font-variant-numeric: tabular-nums; }
@@ -158,7 +158,7 @@
   .talk { font-size: clamp(18px, 1.46vw, 24px); line-height: 1.62; }
   .talk b { color: var(--pink); margin-right: 0.15em; }
   .talk mark { background: var(--pink); color: var(--ink); padding: 0.08em 0.3em; border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
-  .coda { clear: both; margin-top: 64px; color: var(--pink); font: 400 clamp(36px, 7.5vw, 136px)/1 var(--display); letter-spacing: -0.02em; text-transform: uppercase; white-space: nowrap; }
+  .coda { clear: both; margin-top: 64px; color: var(--pink); font: 400 clamp(36px, 7.2vw, 130px)/1 var(--display); letter-spacing: 0; text-transform: uppercase; white-space: nowrap; }
 
   /* Four boxes */
   .how { background: var(--sheet); padding-block: 96px 40px; }
@@ -185,7 +185,7 @@
   .qs ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px; }
   .qs li:nth-child(2) { margin-top: 72px; }
   .qs li:nth-child(3) { margin-top: 144px; }
-  .qs h3 { font: 400 clamp(38px, 3.9vw, 72px)/1 var(--display); letter-spacing: -0.015em; margin-bottom: 14px; }
+  .qs h3 { font: 400 clamp(38px, 3.9vw, 72px)/1 var(--display); letter-spacing: 0; margin-bottom: 14px; }
   .qs p { font-size: 19px; line-height: 1.48; max-width: 38ch; }
 
   /* Send it to yourself */
@@ -277,7 +277,7 @@
     <div class="wrap">
       <h1 class="poster display" id="hero-title">
         <span>While you were talking,</span>
-        <span>we wrote the follow-up.</span>
+        <span>we wrote the follow-up</span>
       </h1>
 
       <div class="lede">
@@ -349,7 +349,7 @@
 
           <article class="sheet mail" aria-label="The follow-up email Fieldnote drafted">
             <div class="mail-head">
-              <p class="status" id="status" role="status">Draft ready. Read it, then send it.</p>
+              <p class="status" id="status" role="status">Draft ready: read it, then send it</p>
               <dl>
                 <div><dt>To</dt><dd translate="no">Ruth Adeyemi, Tomás Vidal</dd></div>
                 <div><dt>Subject</dt><dd><span translate="no">Larkfield</span> site: new dates, and who's doing what</dd></div>
@@ -386,15 +386,15 @@
 
   <section class="wall" id="left-out" aria-labelledby="wall-title">
     <div class="wrap">
-      <h2 class="display" id="wall-title"><span>32&nbsp;minutes</span><span>of talk.</span><span>Five lines</span><span>worth sending.</span></h2>
+      <h2 class="display" id="wall-title"><span>32&nbsp;minutes</span><span>of talk,</span><span>five lines</span><span>worth sending</span></h2>
       <p class="talk"><b translate="no">Tomás</b> Sorry, I'm on the train. Can you hear me? Okay. Okay, good. <b translate="no">Ruth</b> We can hear you. We can also hear the train. <b translate="no">Nadia</b> Afternoon, both. Should we wait for anyone else? <b translate="no">Ruth</b> No, it's just us. <b translate="no">Nadia</b> Great. Let's start with photos, because everything sort of hangs off that. <b translate="no">Ruth</b> Right, so, the photos are the problem. Our photographer's away, so <mark>realistically the ninth</mark>. Is the ninth awful? <b translate="no">Nadia</b> It's not awful. It's not great. <b translate="no">Tomás</b> The old photos aren't, they're not terrible. <b translate="no">Ruth</b> <span translate="no">Tomás</span>. They're terrible. <b translate="no">Tomás</b> The croissant one is fine. <b translate="no">Ruth</b> The croissant one has a thumb in it. <b translate="no">Nadia</b> Okay. If photos slide, launch slides. Could we say the seventeenth? <b translate="no">Tomás</b> Hang on, tunnel. Sorry, what did I miss? <b translate="no">Nadia</b> The seventeenth, for launch. <b translate="no">Tomás</b> <mark>Seventeenth works.</mark> It just has to be before the sale. <b translate="no">Ruth</b> It is before the sale. <b translate="no">Tomás</b> Then it works. <b translate="no">Nadia</b> Lovely. What else, what else. Copy. We have most of it, except. <b translate="no">Tomás</b> Who's doing the allergen copy? Is that us? <b translate="no">Ruth</b> That's me. <mark>I'll send it Friday. No, Monday.</mark> I've got the supplier on Friday and they always, you know. <b translate="no">Nadia</b> Monday's fine. Sorry, someone's at the door, one sec. <b translate="no">Ruth</b> Is that your dog? <b translate="no">Nadia</b> That's my dog. Okay, I'm back. Where were we? <b translate="no">Tomás</b> Homepage. <b translate="no">Ruth</b> Were we? <b translate="no">Tomás</b> I thought we were. <b translate="no">Nadia</b> We can be. <mark>I'll send two homepage options by Wednesday</mark> and you pick one. <b translate="no">Ruth</b> Not three? <b translate="no">Nadia</b> Not three. Three is how we ended up here last time. <b translate="no">Ruth</b> Fair. While I think of it, can we <mark>drop the gift card page</mark> for now? Bring it back in January. Nobody's asked for it, and I don't want to write the terms. <b translate="no">Tomás</b> Does anyone ever ask for it? <b translate="no">Ruth</b> My mum. <b translate="no">Nadia</b> Out for now, then. I think that's everything. <b translate="no">Tomás</b> Anyway. How was Lisbon? <b translate="no">Nadia</b> Oh, Lisbon was great. We did the tram, the one everyone does. <b translate="no">Ruth</b> Did you go to the place I told you about? <b translate="no">Nadia</b> We tried. It was shut.</p>
-      <p class="coda">The train, the dog and Lisbon stay out of it.</p>
+      <p class="coda">The train, the dog and Lisbon stay out of it</p>
     </div>
   </section>
 
   <section class="how" id="how" aria-labelledby="how-title">
     <div class="wrap">
-      <h2 class="display" id="how-title">Four boxes. We tick three.</h2>
+      <h2 class="display" id="how-title">Four boxes, we tick three</h2>
       <ol>
         <li class="row">
           <svg class="bigbox" viewBox="0 0 48 48" aria-hidden="true"><path pathLength="1" d="M11 25l9 9 17-20"/></svg>
@@ -443,7 +443,7 @@
 
   <section class="get" id="get" aria-labelledby="get-title">
     <div class="wrap">
-      <h2 class="display" id="get-title"><span>Your next meeting</span><span>is the demo.</span></h2>
+      <h2 class="display" id="get-title"><span>Your next meeting</span><span>is the demo</span></h2>
       <div class="get-grid">
         <p class="pitch">Leave it running on your next call. If the email it writes is wrong, you've lost nothing: you haven't sent it.</p>
         <!-- Wire to the signup endpoint before launch; the submit handler below only shows the confirmation. -->
@@ -540,7 +540,7 @@
     }
   }
 
-  const READY = 'Draft ready. Read it, then send it.';
+  const READY = 'Draft ready: read it, then send it';
   const fmt = s => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
 
   const say = text => { if (status.textContent !== text) status.textContent = text; };
