@@ -35,9 +35,9 @@ Ask Claude Code for six different things and you get one look: a warm off-white 
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
-https://github.com/user-attachments/assets/d0eb64ec-7349-4335-88b3-1047e0b1093a
+https://github.com/user-attachments/assets/77bfd2e7-910d-4cd5-9bfd-3f94cfdbc4a2
 
-<p align="center"><sub>22 seconds, with sound. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.2.0/demo.mp4"><b>Download the full 80-second film</b></a>.</sub></p>
+<p align="center"><sub>22 seconds, with sound. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.3.0/demo.mp4"><b>Download the full 80-second film</b></a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
   <img alt="The same six prompts: without skills, six cream pages with serif headlines; with jsolee-kit, six pages that look nothing alike" src="assets/six-looks.png" width="100%">
@@ -94,7 +94,7 @@ Everyone who clones the repo gets the same rules, without installing anything.
 
 ## Does it make a difference?
 
-Six prompts, same model (Claude Opus 5.5), one run per side, every result published. Every page is in [`examples/`](examples): open them, they work.
+Six prompts, same model (Claude Opus 5.5), one run per side, every result published. Every page is in [`examples/`](examples): open them, they work. After the [20 slop signals](skills/jsolee-kit/references/slop.md) came out, I edited the kit pages by hand for three of them: no full stop at the end of a title, no negative tracking under 48 px, and mono only for the email's figures. Nothing else changed, and the no-skills pages are untouched.
 
 **Look at the left column first.** Nobody asked for this look, and it keeps showing up: Geist in four of the five pages, a warm off-white in four, a serif headline in four, mono captions in all five. Each page is good. Together they're a uniform.
 
@@ -106,7 +106,7 @@ Six prompts, same model (Claude Opus 5.5), one run per side, every result publis
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Headline | "The meeting ends. The follow-up is already written." | "While you were talking, we wrote the follow-up." |
+| Headline | "The meeting ends. The follow-up is already written." | "While you were talking, we wrote the follow-up" |
 | The move | a serif on cream, with a hand-drawn underline | a salmon field and capitals as wide as the screen |
 | The product | a picture of the app | a recording you can scrub, and the email writes itself as it plays |
 | Type | Geist, Newsreader | League Gothic, Libre Franklin |
@@ -120,7 +120,7 @@ Six prompts, same model (Claude Opus 5.5), one run per side, every result publis
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Headline | "Pay for the texts that arrive." | "What this text costs." |
+| Headline | "Pay for the texts that arrive." | "What this text costs" |
 | The move | a request log in a card | the page is a phone's LCD: prices in dot matrix |
 | The product | a static example | type on the screen or drag the volume, and every price on the page follows |
 | Proof | numbers the page can't back up (99.99% uptime) | none |
@@ -148,7 +148,7 @@ This is the loudest of the six, and the one I'd turn down first: someone has to 
 
 | | No skills | With jsolee-kit |
 |---|---|---|
-| Headline | "I design calm software for complicated work." | "Most software can't spell my name. I'm a product designer, so I take it personally." |
+| Headline | "I design calm software for complicated work." | "Most software can't spell my name, so I take it personally" |
 | The move | serif and italics, two decorated underlines | her name, as big as the screen, on magenta |
 | The product | three stats and a row of client logos | type your own name and watch software mangle it (`Joan SolÃ©`) |
 | Em dashes in the copy | 25 | 0 |
@@ -156,13 +156,13 @@ This is the loudest of the six, and the one I'd turn down first: someone has to 
 ### An email
 
 <p align="center">
-  <img alt="Ledger weekly email without skills on the left, a cream card with a serif; with jsolee-kit on the right, a mint receipt in monospace" src="assets/compare-email.png" width="100%">
+  <img alt="Ledger weekly email without skills on the left, a cream card with a serif; with jsolee-kit on the right, a mint receipt with its figures in monospace" src="assets/compare-email.png" width="100%">
 </p>
 
 | | No skills | With jsolee-kit |
 |---|---|---|
 | Opens with | a greeting, then the number | sales minus refunds, then the total, like a receipt |
-| The move | a cream card and a serif | mint and monospace: it reads like a ledger |
+| The move | a cream card and a serif | mint, with the figures in monospace: it reads like a ledger |
 | Actions | a button and a second link | one button |
 | Length | 1,865 px | 1,258 px |
 
@@ -217,6 +217,7 @@ jsolee-kit/
 │       ├── inspiration.md       30 reference sites, sorted by section
 │       ├── email.md             how to build emails that survive real inboxes
 │       ├── brand.md             from a name to a logo and a one-page brand system
+│       ├── slop.md              the 20 slop signals step 06 checks for
 │       └── skills.md            every skill and plugin it points to, with its source repo
 ├── plugins/comunitat/           the mod: subagents drawn as crabs, plus a map of the repo
 ├── examples/                    six projects, each built with and without the kit
@@ -242,7 +243,7 @@ jsolee-kit/
 | **03 Build** | Real product, real data, real copy. Stack skills for the code. | `react-patterns`, `prisma-patterns`, `react-native-patterns` |
 | **04 Motion** | One signature moment, not everything moving. GSAP for scroll and timelines, Motion for component state. | `gsap-scrolltrigger`, `motion-patterns` |
 | **05 Polish** | Hit areas, focus states, optical alignment, text wrapping, the details people feel and can't name. | `emil-design-eng`, `make-interfaces-feel-better`, `web-design-guidelines` |
-| **06 Audit** | Accessibility, a copy pass that removes sentences that sound like AI, and every claim checked against the product. | `impeccable` audit, `frontend-a11y` |
+| **06 Audit** | Accessibility, a copy pass that removes sentences that sound like AI, every claim checked against the product, and the [20 slop signals](skills/jsolee-kit/references/slop.md). | `impeccable` audit, `frontend-a11y` |
 
 <br>
 
@@ -256,6 +257,7 @@ jsolee-kit/
 - Nav, headline left, blurb right, an app mockup in a card below.
 - Geist, Geist Mono, Inter, Newsreader, Fraunces, Instrument Serif, DM Mono, Schibsted Grotesk, Space Grotesk.
 - The usual escape is a default too: a flat yellow field with a black grotesk.
+- Its newer ornaments: dithered or halftone images, ASCII art, a rounded tile behind every icon, mesh-gradient backgrounds.
 
 **Then, commit.** Make it obvious from across the room:
 
@@ -269,15 +271,19 @@ jsolee-kit/
 |---|---|
 | Gradient text, buttons that blend two brand colors | One solid color. Emphasis comes from weight and size. |
 | Glassmorphism as the default surface | Solid surfaces. `backdrop-filter` only for legibility over a busy image. |
-| SaaS pill eyebrows (`bg-color/8` + `border-color/18`) | A small editorial kicker, or nothing. |
+| SaaS pill eyebrows (`bg-color/8` + `border-color/18`) | Nothing. Most headings don't need a label above them. |
 | Colored shadows (`shadow-indigo-200`) | `0 1px 3px rgba(0,0,0,.03)` on cards, `0 8px 40px rgba(0,0,0,.08)` when elevated. |
 | Cards inside cards, colored side stripes | One surface level. Hierarchy comes from spacing. |
 | `rounded-[2.5rem]` bubbles, `rounded-full` cards | `rounded-2xl` cards, `rounded-xl` buttons, `rounded-lg` small parts. |
 | Bouncy, elastic easing | Ease-out exponential: `cubic-bezier(0.22, 1, 0.36, 1)`. |
 | Indigo-only palette, radial blobs behind every hero | A neutral base and one committed accent per surface. |
-| `font-black` on UI text, bold descriptions | One family, two weights, headings at `-0.02em` to `-0.04em`. |
+| `font-black` on UI text, bold descriptions | One family, two weights. Tracking 0 below 48 px, `-0.01em` to `-0.02em` on display type. |
 | Hover that swaps colors | Hover that lifts: `-translate-y-0.5`. |
 | Em dashes in UI copy | Commas, colons and periods. |
+| One color at `/5`, `/10`, `/20` for every border and fill | A small named palette in solid colors. Space before borders. |
+| A period at the end of every heading | No period on headings, buttons or labels. |
+
+**And the 20 slop signals** that went around in November 2026, from tags and pills to periods in titles. Step 06 checks every page against them: [`slop.md`](skills/jsolee-kit/references/slop.md).
 
 In practice:
 
@@ -287,10 +293,9 @@ In practice:
 - <h1 className="bg-gradient-to-r from-indigo-500 to-purple-500 bg-clip-text
 -   text-6xl font-black text-transparent">Supercharge your workflow</h1>
 - <div className="rounded-[2.5rem] bg-white/10 backdrop-blur-xl shadow-2xl shadow-indigo-200">
-+ <p className="font-mono text-xs text-neutral-500">Now in beta</p>
-+ <h1 className="text-6xl font-semibold tracking-[-0.04em] text-neutral-950">
++ <h1 className="text-6xl font-semibold tracking-[-0.02em] text-neutral-950">
 +   Your invoices, sent before lunch</h1>
-+ <div className="rounded-2xl border border-black/[0.04] bg-white shadow-[0_1px_3px_rgba(0,0,0,.03)]">
++ <div className="rounded-2xl bg-white shadow-[0_1px_3px_rgba(0,0,0,.03)]">
 ```
 
 <br>

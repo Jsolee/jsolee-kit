@@ -90,7 +90,7 @@ h1, h2 { font: inherit; }
 
 /* Top row */
 .top { position: absolute; z-index: 2; top: 0; left: var(--margin); right: calc(var(--roll) + var(--roll-gap) + 16px); display: flex; align-items: center; height: 68px; }
-.mark { font: 600 30px/30px var(--display); letter-spacing: -.02em; padding-bottom: 1px; border-bottom: 6px double currentColor; }
+.mark { font: 600 30px/30px var(--display); letter-spacing: 0; padding-bottom: 1px; border-bottom: 6px double currentColor; }
 .nav { display: flex; gap: 24px; margin-left: 44px; }
 .nav a { padding: 12px 0; color: var(--ink-soft); transition: transform .2s var(--smooth); }
 .nav a:hover { transform: translateY(-2px); }
@@ -108,7 +108,7 @@ h1, h2 { font: inherit; }
 .fig-rev > * { grid-column: 1; }
 .fig-orders > * { grid-column: 2; }
 .note { font-weight: 400; color: var(--ink-soft); margin-left: 8px; }
-.hero { grid-row: 2; font: 600 184px/150px var(--display); letter-spacing: -.025em; margin-left: -4px; }
+.hero { grid-row: 2; font: 600 184px/150px var(--display); letter-spacing: -.02em; margin-left: -4px; }
 .orders-row { grid-row: 2; display: flex; align-items: baseline; gap: 20px; min-width: 0; }
 .second { font: 600 96px/96px var(--display); letter-spacing: -.02em; margin-left: -2px; }
 .spark { flex: 1; min-width: 0; height: 60px; overflow: visible; display: block; }
@@ -162,7 +162,7 @@ h1, h2 { font: inherit; }
 .ref-figure { font: 600 96px/80px var(--display); letter-spacing: -.02em; margin: 2px 0 16px -2px; }
 .ref-note, .ask span { font-size: 14px; text-wrap: pretty; }
 .bottom-line { display: flex; justify-content: space-between; align-items: baseline; margin-top: 6px; padding: 3px 0 2px; border-top: 1px solid var(--ink); border-bottom: 6px double var(--ink); font-size: 14px; }
-.bottom-line strong { font: 600 22px/24px var(--display); letter-spacing: -.01em; }
+.bottom-line strong { font: 600 22px/24px var(--display); letter-spacing: 0; }
 
 .waiting h2 { margin-bottom: 8px; }
 .ask { display: grid; grid-template-columns: 138px 1fr auto; align-items: center; column-gap: 16px; min-height: 48px; font-size: 14px; line-height: 19px; }
@@ -180,7 +180,7 @@ h1, h2 { font: inherit; }
 /* The till roll */
 .roll { position: absolute; top: 0; bottom: 0; right: var(--roll-gap); width: var(--roll); display: flex; flex-direction: column; background: var(--paper); color: var(--ink); scroll-margin-top: 24px; }
 .roll-head { flex: none; padding: 21px 20px 12px; }
-.roll-head h2 { font: 600 22px/24px var(--display); letter-spacing: -.01em; }
+.roll-head h2 { font: 600 22px/24px var(--display); letter-spacing: 0; }
 .roll-head p { font-size: 14px; color: var(--paper-soft); }
 .roll-head .pack { color: var(--ink); margin-top: 10px; }
 .entries { flex: 1 1 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: none; padding: 0 20px; font-variant-numeric: tabular-nums; }
@@ -198,7 +198,7 @@ h1, h2 { font: inherit; }
 .totals dd { margin: 0; }
 .totals .sum { margin-top: 6px; padding: 5px 0 3px; border-top: 1px solid var(--ink); border-bottom: 6px double var(--ink); align-items: baseline; }
 .totals .sum dt { font-weight: 600; }
-.totals .sum dd { font: 600 30px/32px var(--display); letter-spacing: -.01em; }
+.totals .sum dd { font: 600 30px/32px var(--display); letter-spacing: 0; }
 
 @media (max-width: 1360px) {
   :root { --roll: 300px; --roll-gap: 24px; }

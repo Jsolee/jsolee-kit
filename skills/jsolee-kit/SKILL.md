@@ -14,7 +14,7 @@ How we build interfaces: direction first, real references, one signature moment,
 3. **Build** with the stack skills (see map below).
 4. **One signature motion moment**, not everything moving. GSAP for scroll and timelines, Motion for component state. Honor `prefers-reduced-motion`; anything looping more than 5 s gets a pause control (WCAG 2.2.2).
 5. **Polish** with `emil-design-eng` and `make-interfaces-feel-better`, then the `web-design-guidelines` checklist.
-6. **Audit**: `impeccable` audit, `frontend-a11y`, and a copy pass that removes phrases that sound like AI.
+6. **Audit**: `impeccable` audit, `frontend-a11y`, a copy pass that removes phrases that sound like AI, then the 20 signals in [references/slop.md](references/slop.md).
 
 ## Skill map
 
@@ -49,6 +49,7 @@ Left alone, today's models converge on one look. If your work could wear it, sta
 - Nav, headline left, blurb right, an app mockup in a card below.
 - Geist, Geist Mono, Inter, Newsreader, Fraunces, Instrument Serif, DM Mono, Schibsted Grotesk, Space Grotesk.
 - The usual escape is a default too: a flat yellow field with a black grotesk.
+- Its newer ornaments: dithered or halftone images, ASCII art, a rounded tile behind every icon, mesh-gradient backgrounds.
 
 ## Commit
 
@@ -62,15 +63,16 @@ Make it obvious from across the room:
 
 - No gradient text, no gradient buttons mixing two brand colors.
 - No glassmorphism or `backdrop-filter` as decoration; only for legibility over busy backgrounds.
-- No SaaS pill eyebrows (`bg-color/8` + `border-color/18`); use a small editorial kicker or nothing.
+- No pills or tags around words that aren't controls. No eyebrow above every heading; SaaS pill eyebrows (`bg-color/8` + `border-color/18`) least of all.
 - No colored shadows. Cards `0 1px 3px rgba(0,0,0,0.03)`, elevated `0 8px 40px rgba(0,0,0,0.08)`.
 - No nested cards, no colored side-stripe borders, no `rounded-full` cards or `rounded-[2.5rem]` bubbles.
 - No bouncy or elastic easing. Ease-out exponential only.
 - No indigo-only palette, no decorative radial-gradient blobs on every hero.
-- No `font-black` / `font-extrabold` on UI text, no bold descriptions. One family, two weights; headings with negative tracking (`-0.02em` to `-0.04em`).
-- One accent for interactive elements. Borders almost invisible (`black/[0.04]`, `black/[0.08]` on hover).
+- No `font-black` / `font-extrabold` on UI text, no bold descriptions. One family, two weights. Tracking 0 below 48 px; display type `-0.01em` to `-0.02em`.
+- One accent for interactive elements, and a small named palette in solid colors, not opacity ladders. Group with space before borders and dividers; when a border is needed, one solid neutral.
 - Hover lifts (`-translate-y-0.5`) instead of color swaps. No uppercase button labels.
-- No em dashes in UI copy.
+- No em dashes in UI copy. No period at the end of headings, buttons or labels. No all-caps subtitles.
+- Mono only for code and figures. Section numbers only for real steps.
 
 ## Before shipping a landing
 
