@@ -38,6 +38,9 @@ What the kit points to and where it comes from. `install.sh` installs the core s
 | motion-advanced | affaan-m/ECC | Drag, gestures, SVG drawing, `useAnimate` |
 | ★ hyperframes, hyperframes-cli | [heygen-com/hyperframes](https://github.com/heygen-com/hyperframes) | HTML rendered to video |
 | remotion-video-creation | affaan-m/ECC | Video in React with Remotion |
+| lemo-opuscar | [lemomo-ai/lemo-opuscar](https://github.com/lemomo-ai/lemo-opuscar) | 66 film styles made in code (watercolor, ukiyo-e, satellite briefing, documentary), narrated and scored, with no video model. A plugin: `claude plugin marketplace add lemomo-ai/lemo-opuscar`, then `claude plugin install lemo-opuscar@lemolab`. It keeps its library in `~/lemo-opuscar` and updates it from GitHub on every run |
+| onetake | [feitangyuan/onetake](https://github.com/feitangyuan/onetake) | Launch films and feature demos in one continuous take, with a script that fails any beat that just replaces the last. **Noncommercial licence**: a film for a client or a business needs onetake Pro. Install: `git clone https://github.com/feitangyuan/onetake ~/.claude/skills/onetake` |
+| gbro-collage-broll | [pyang5166/gbro-collage-broll](https://github.com/pyang5166/gbro-collage-broll) | 5-second halftone paper-collage B-roll for vertical reels, approved in three steps: the idea in words, a still, then the video. Built for Codex: the still needs Codex's `image_gen` and the video a billed `GEMINI_API_KEY`. Docs in Chinese |
 
 ## Stack
 

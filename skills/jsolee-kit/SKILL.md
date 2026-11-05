@@ -30,7 +30,8 @@ How we build interfaces: direction first, real references, one signature moment,
 | React / Next.js code and perf | `react-patterns`, `vercel-react-best-practices` |
 | Prisma schema and queries | `prisma-patterns` |
 | Expo / React Native | `react-native-patterns` |
-| Launch video or motion piece from HTML | `hyperframes` |
+| Launch video or motion piece from HTML | `hyperframes`; `onetake` for one continuous take (noncommercial licence: say so before using it for a business) |
+| Short film in a ready-made style | `lemo-opuscar` (plugin) |
 | Slide deck in the browser | `frontend-slides` |
 | Emails: transactional, lifecycle, launches | [references/email.md](references/email.md), then `react-email`, `email-best-practices`, `resend` |
 | Logo and brand identity | [references/brand.md](references/brand.md), then `brand`, `design`, `banner-design`, `ios-icon-gen` |
