@@ -35,10 +35,9 @@ Ask Claude Code for six different things and you get one look: a warm off-white 
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
-<a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.2.0/demo.mp4">
-  <img alt="Preview of the demo film: the same prompts built without the kit and with it, including a pricing page you can type into and a portfolio that breaks your name" src="assets/demo.gif" width="100%">
-</a>
-<p align="center"><sub>A 15-second silent preview. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.2.0/demo.mp4"><b>Download the full 80-second film, with sound</b></a>.</sub></p>
+https://github.com/user-attachments/assets/d0eb64ec-7349-4335-88b3-1047e0b1093a
+
+<p align="center"><sub>22 seconds, with sound. <a href="https://github.com/Jsolee/jsolee-kit/releases/download/v1.2.0/demo.mp4"><b>Download the full 80-second film</b></a>.</sub></p>
 
 <a href="#does-it-make-a-difference">
   <img alt="The same six prompts: without skills, six cream pages with serif headlines; with jsolee-kit, six pages that look nothing alike" src="assets/six-looks.png" width="100%">
