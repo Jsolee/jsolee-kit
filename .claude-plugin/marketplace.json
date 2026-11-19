@@ -2,13 +2,13 @@
   "name": "jsolee-kit",
   "owner": { "name": "Joan Solé" },
   "metadata": {
-    "description": "Joan Solé's Claude Code kit: the jsolee-kit skill and the comunitat mod."
+    "description": "Joan Solé's Claude Code kit: the jsolee-kit and manim-explainer-video skills, and the comunitat mod."
   },
   "plugins": [
     {
       "name": "jsolee-kit",
       "source": "./",
-      "description": "Skill: workflow, house rules against the AI-made look, inspiration galleries and a map of which skill to use when."
+      "description": "Skills: workflow, house rules against the AI-made look, inspiration galleries and a map of which skill to use when; plus manim-explainer-video for narrated 3Blue1Brown-style explainers."
     },
     {
       "name": "comunitat",

@@ -31,6 +31,7 @@ How we build interfaces: direction first, real references, one signature moment,
 | Prisma schema and queries | `prisma-patterns` |
 | Expo / React Native | `react-native-patterns` |
 | Launch video or motion piece from HTML | `hyperframes`; `onetake` for one continuous take (noncommercial licence: say so before using it for a business) |
+| Narrated explainer on any topic, 3Blue1Brown style (6 to 20 min) | `manim-explainer-video` (ships with this kit; needs Manim, MacTeX and an ElevenLabs key) |
 | Short film in a ready-made style | `lemo-opuscar` (plugin) |
 | Slide deck in the browser | `frontend-slides` |
 | Emails: transactional, lifecycle, launches | [references/email.md](references/email.md), then `react-email`, `email-best-practices`, `resend` |

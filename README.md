@@ -56,7 +56,7 @@ Pick one. All three take under a minute.
 npx skills add Jsolee/jsolee-kit --skill jsolee-kit -g -a claude-code
 ```
 
-**2 · The skill plus the 38 skills it points to**: impeccable, taste, Emil Kowalski's design engineering, the official GSAP skills, Vercel's guidelines, Resend's email skills, logo and brand skills, React / Prisma / Expo patterns from ECC, superpowers…
+**2 · Both skills of the kit plus the 38 they point to**: impeccable, taste, Emil Kowalski's design engineering, the official GSAP skills, Vercel's guidelines, Resend's email skills, logo and brand skills, React / Prisma / Expo patterns from ECC, superpowers…
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/Jsolee/jsolee-kit/main/install.sh | bash
@@ -219,9 +219,12 @@ jsolee-kit/
 │       ├── brand.md             from a name to a logo and a one-page brand system
 │       ├── slop.md              the 20 slop signals step 06 checks for
 │       └── skills.md            every skill and plugin it points to, with its source repo
+├── skills/manim-explainer-video/
+│   ├── SKILL.md                 narrated Manim explainers, from the first question to the YouTube upload
+│   └── kit/                     scenes, narration, render and packaging scripts, copied into each project
 ├── plugins/comunitat/           the mod: subagents drawn as crabs, plus a map of the repo
 ├── examples/                    six projects, each built with and without the kit
-├── install.sh                   the kit and the 38 skills, in one go
+├── install.sh                   both skills and the 38 they point to, in one go
 └── .claude-plugin/              the marketplace behind /plugin install
 ```
 
@@ -421,6 +424,7 @@ When you need something, this is the skill to reach for.
 | Prisma schemas and queries | `prisma-patterns` ([ECC](https://github.com/affaan-m/ECC)) |
 | Expo and React Native | `react-native-patterns` ([ECC](https://github.com/affaan-m/ECC)) |
 | A launch video from HTML | [`hyperframes`](https://github.com/heygen-com/hyperframes); [`onetake`](https://github.com/feitangyuan/onetake) for one continuous take (noncommercial licence) |
+| A narrated explainer on any topic, 3Blue1Brown style | [`manim-explainer-video`](skills/manim-explainer-video/SKILL.md), in this repo |
 | A short film in a ready-made style | [`lemo-opuscar`](https://github.com/lemomo-ai/lemo-opuscar) |
 | A slide deck in the browser | [`frontend-slides`](https://github.com/zarazhangrui/frontend-slides) |
 | An email: transactional, lifecycle, launch | [`email.md`](skills/jsolee-kit/references/email.md), then [`react-email`, `email-best-practices`, `resend`](https://github.com/resend/resend-skills) |
@@ -472,6 +476,7 @@ When you need something, this is the skill to reach for.
 | lemo-opuscar | [lemomo-ai/lemo-opuscar](https://github.com/lemomo-ai/lemo-opuscar) | 66 film styles made in code (watercolor, ukiyo-e, satellite briefing, documentary), narrated and scored, with no video model. A plugin: `claude plugin marketplace add lemomo-ai/lemo-opuscar`, then `claude plugin install lemo-opuscar@lemolab`. It keeps its library in `~/lemo-opuscar` and updates it from GitHub on every run |
 | onetake | [feitangyuan/onetake](https://github.com/feitangyuan/onetake) | Launch films and feature demos in one continuous take, with a script that fails any beat that just replaces the last. **Noncommercial licence**: a film for a client or a business needs onetake Pro. Install: `git clone https://github.com/feitangyuan/onetake ~/.claude/skills/onetake` |
 | gbro-collage-broll | [pyang5166/gbro-collage-broll](https://github.com/pyang5166/gbro-collage-broll) | 5-second halftone paper-collage B-roll for vertical reels, approved in three steps: the idea in words, a still, then the video. Built for Codex: the still needs Codex's `image_gen` and the video a billed `GEMINI_API_KEY`. Docs in Chinese |
+| ★ manim-explainer-video | this repo | Narrated 3Blue1Brown-style explainers on any topic, 6 to 20 minutes: storyboard, Manim scenes in 2D and 3D, ElevenLabs narration synced word by word, 4K render and a YouTube package |
 
 **Stack**
 
@@ -588,6 +593,11 @@ tell me what you take from each, and make it work in Outlook, in dark mode and w
 ```text
 Use jsolee-kit to design a logo for this product. Three ideas in black first, test the best
 one at 16 px, then write the one-page brand system into DESIGN.md.
+```
+
+```text
+Make a 10-minute explainer on how public-key cryptography works, for undergraduates.
+Use manim-explainer-video and start with the grilling session.
 ```
 
 ```text
