@@ -6,7 +6,7 @@ set -euo pipefail
 add() { npx -y skills@latest add "$@" -g -a claude-code -y; }
 
 # The kit itself (workflow, house rules, inspiration sites)
-add Jsolee/jsolee-kit --skill jsolee-kit
+add Jsolee/jsolee-kit --skill jsolee-kit --skill manim-explainer-video
 
 # Design and UI
 add pbakaus/impeccable --skill impeccable

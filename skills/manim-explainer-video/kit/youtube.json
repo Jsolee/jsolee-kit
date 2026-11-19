@@ -1,0 +1,17 @@
+{
+  "title": "Search keywords first, under about 70 characters",
+  "alt_titles": ["An alternative title", "Another alternative title"],
+  "hook": "WHY DOES|*THIS* WORK?",
+  "subtitle": "The key theorem or method",
+  "motif": "curve",
+  "accent": "yellow",
+  "badge": "SUBJECT",
+  "intro": "Two to four keyword-rich sentences that name the concepts and results the video covers and who it is for.",
+  "chapters": ["Example in 2D: a point that moves", "Example in 3D: a surface that rises"],
+  "keywords": ["main topic", "key theorem", "key method"],
+  "extra_tags": ["explained", "university lecture"],
+  "hashtags": ["Topic", "Subject", "Math"],
+  "prerequisites": "What the viewer should already know.",
+  "references": ["Author, Title, Journal or Publisher (Year)."],
+  "disclosure": "Narration generated with ElevenLabs; animations made with Manim (Python). Subtitles (CC) available."
+}
