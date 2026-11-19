@@ -11,7 +11,7 @@ How we build interfaces: direction first, real references, one signature moment,
 
 1. **Direction before code.** Read `PRODUCT.md` / `DESIGN.md` if the repo has them. Write three directions that differ in type, color and layout, each from something true about this product. Throw away the first one you thought of: it's the default. Keep the one a competitor couldn't wear and name it in one line. Then fix the register (brand page vs product UI), one committed color, a type pair. Use `impeccable` (shape, critique) or `design-taste-frontend` (variance / motion / density dials).
 2. **Pull 2-3 references per section** from [references/inspiration.md](references/inspiration.md). Say what you take from each one (layout, rhythm, type, motion). Never copy a page.
-3. **Build** with the stack skills (see map below).
+3. **Build** with the stack skills (see map below). For a component, background or texture, check the libraries in [references/inspiration.md](references/inspiration.md) before drawing it from scratch.
 4. **One signature motion moment**, not everything moving. GSAP for scroll and timelines, Motion for component state. Honor `prefers-reduced-motion`; anything looping more than 5 s gets a pause control (WCAG 2.2.2).
 5. **Polish** with `emil-design-eng` and `make-interfaces-feel-better`, then the `web-design-guidelines` checklist.
 6. **Audit**: `impeccable` audit, `frontend-a11y`, a copy pass that removes phrases that sound like AI, then the 20 signals in [references/slop.md](references/slop.md).
