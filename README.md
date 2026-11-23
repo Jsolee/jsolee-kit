@@ -9,7 +9,7 @@
   <a href="https://github.com/Jsolee/jsolee-kit/stargazers"><img alt="Stars" src="https://img.shields.io/github/stars/Jsolee/jsolee-kit?style=flat-square&labelColor=0E0E0E&color=E5482D"></a>
   <img alt="Claude Code" src="https://img.shields.io/badge/Claude_Code-skill_%2B_mods-F2EEE6?style=flat-square&labelColor=0E0E0E">
   <img alt="38 skills" src="https://img.shields.io/badge/skills-38-F2EEE6?style=flat-square&labelColor=0E0E0E">
-  <img alt="35 references" src="https://img.shields.io/badge/references-35-F2EEE6?style=flat-square&labelColor=0E0E0E">
+  <img alt="42 references" src="https://img.shields.io/badge/references-42-F2EEE6?style=flat-square&labelColor=0E0E0E">
   <a href="LICENSE"><img alt="MIT" src="https://img.shields.io/badge/license-MIT-F2EEE6?style=flat-square&labelColor=0E0E0E"></a>
   <a href="#contributing"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-F2EEE6?style=flat-square&labelColor=0E0E0E"></a>
 </p>
@@ -31,7 +31,7 @@
 
 Ask Claude Code for six different things and you get one look: a warm off-white page, a serif headline with a phrase in italics, tiny mono captions, a vermilion accent, Geist. It's good. It's also what everyone else's agent shipped this morning.
 
-**jsolee-kit is how I get out of it.** It's the skill I load for design work in Claude Code: a workflow that throws away the first idea, rules against today's default look, a ship checklist, 35 reference sites and libraries sorted by section, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work.
+**jsolee-kit is how I get out of it.** It's the skill I load for design work in Claude Code: a workflow that throws away the first idea, rules against today's default look, a ship checklist, 42 reference sites and libraries sorted by section, guides for emails and for logo and brand work, and a map of the 38 skills it points to, each linked to its source. It also ships the mod I built to watch Claude's subagents work.
 
 It's opinionated on purpose. Fork it and make the rules yours.
 
@@ -214,7 +214,7 @@ jsolee-kit/
 ├── skills/jsolee-kit/
 │   ├── SKILL.md                 workflow, skill map, house rules, ship checklist, motion tokens
 │   └── references/
-│       ├── inspiration.md       35 reference sites and libraries, sorted by section
+│       ├── inspiration.md       42 reference sites and libraries, sorted by section
 │       ├── email.md             how to build emails that survive real inboxes
 │       ├── brand.md             from a name to a logo and a one-page brand system
 │       ├── slop.md              the 20 slop signals step 06 checks for
@@ -360,10 +360,10 @@ Pick by the section you're designing. Open two or three, write down what you're 
 
 | Section | Where | What to take from it |
 |---|---|---|
-| Whole landings | [land-book](https://land-book.com) · [One Page Love](https://onepagelove.com) · [Awwwards](https://www.awwwards.com) | Section order, pacing, how much fits above the fold |
+| Whole landings | [land-book](https://land-book.com) · [One Page Love](https://onepagelove.com) · [Awwwards](https://www.awwwards.com) · [Landdding](https://landdding.com) | Section order, pacing, how much fits above the fold |
 | Dark sites | [dark.design](https://www.dark.design) | How depth and hierarchy work without a white page |
-| Across disciplines | [Coolest Design](https://coolest.design) | Ideas from brands, motion and product, not just other websites |
-| Heroes | [supahero.io](https://supahero.io) | Headline length, how the product shows in the first screen |
+| Across disciplines | [Coolest Design](https://coolest.design) · [Recent](https://recent.design) | Ideas from brands, motion and product, not just other websites; Recent adds launch videos, OG images and app icons |
+| Heroes | [supahero.io](https://supahero.io) · [Header Design](https://header.design) | Headline length, how the product shows in the first screen; Header Design sells prompts for animated heroes, so change the direction before you paste one |
 | Navbars | [navbar.gallery](https://www.navbar.gallery) | Scroll states, mobile menus, where the CTA sits |
 | CTAs | [CTA.gallery](https://www.cta.gallery) | The last ask: buttons, forms, modals and what they say |
 | Footers | [Footer](https://www.footer.design) | Footers treated as a design moment, by style |
@@ -387,6 +387,7 @@ Pick by the section you're designing. Open two or three, write down what you're 
 | [igloo.inc](https://www.igloo.inc) | One 3D object that transforms with scroll, HUD labels anchored to it with lines. |
 | [motionsites.ai](https://motionsites.ai) | Motion-heavy sites; "Particle Self", a bust made of particles. Their free [Claude skill](https://github.com/Motionsites-AI/claude-skill) is worth reading for its technique recipes with code and its screenshot-and-fix loop. Don't install it as is: it ends every reply with an ad for their paid plan. |
 | [docs.pmnd.rs](https://docs.pmnd.rs) | React Three Fiber and drei. |
+| [transitions.dev](https://transitions.dev) | Essential UI transitions for web apps, to copy or to use through its [skill](https://github.com/Jakubantalik/transitions.dev). Free and paid. |
 | [storytold/effectcraft](https://github.com/storytold/effectcraft) | Open source motion graphics and compositing. |
 | [awesome-opus5-5-videos](https://github.com/yihui-dev/awesome-opus5-5-videos) | Code-rendered videos and the prompts behind them. The best ones are Three.js with shaders, canvas effects and long, iterated prompts. |
 
@@ -401,6 +402,9 @@ Take one component, background or texture into a page you've already designed. D
 | [Bencho](https://bencho.dev) | Interactive React components and micro-interactions, live, to explore and tweak before you take them. |
 | [HorizonX](https://horizonx.so) | Animated shader backgrounds, textures, mockups, Figma UI kits and React components, with an MCP server. Free and paid. |
 | [Grainient](https://grainient.supply) | Gradients, animated gradients, grainy textures and a shader tool. Free and paid. Use one as the signature moment, not behind every section. |
+| [Aceternity UI](https://ui.aceternity.com) | 200+ copy-paste React components, blocks and templates with Tailwind and Motion. Free and paid. Many effects (aurora, spotlight, background beams, glowing borders) are the gradient-and-glow look the house rules ban: take the mechanics, not the look. |
+| [ObsidianUI](https://obsidianui.dev) | Open source React and Tailwind components, blocks and landing templates. |
+| [Jiro](https://jiro.build) | 1,500+ real designs, each with a prompt and its source code. Free and paid. |
 | [uberdesigner](https://uberdesigner.ai) | Website templates and UI components, each with a prompt for Claude, Codex or Cursor, the project and a Figma file. Free prompts with an account. A template is everyone's starting point: change the direction before you ship. |
 
 **Guidelines**: [Vercel Web Interface Guidelines](https://vercel.com/design/guidelines), the checklist behind step 05.
